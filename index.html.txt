@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="PROXITI | Security & Infrastructure. Suporte e infraestrutura de TI, redes, hardening de sistemas, segurança da informação e expansão técnica em cibersegurança para PMEs e profissionais."
+    >
+
+    <meta
+        name="author"
+        content="Humberto Mennella"
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:title"
+        content="PROXITI | Security & Infrastructure"
+    >
+
+    <meta
+        property="og:description"
+        content="Suporte e infraestrutura de TI, redes, hardening de sistemas, segurança da informação e cibersegurança."
+    >
+
+    <meta
+        property="og:locale"
+        content="pt_BR"
+    >
+
+    <title>
+        PROXITI | Security &amp; Infrastructure
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 82px;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080b10;
+            color: #e8edf3;
+            font-family: "Inter", sans-serif;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        img,
+        svg {
+            display: block;
+        }
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        :root {
+            --bg: #080b10;
+            --surface: #0f141c;
+            --surface-2: #111821;
+            --surface-3: #0b0f15;
+            --border: #202a35;
+            --border-soft: #18212b;
+
+            --text: #e8edf3;
+            --text-soft: #9aa8b8;
+            --text-muted: #718093;
+
+            --accent: #00b4d8;
+            --accent-soft: rgba(0, 180, 216, 0.10);
+            --accent-border: rgba(0, 180, 216, 0.40);
+
+            --max-width: 1280px;
+        }
+
+        /* =========================================================
+           BASE
+        ========================================================= */
+
+        .container {
+            width: min(
+                calc(100% - 48px),
+                var(--max-width)
+            );
+
+            margin-inline: auto;
+        }
+
+        .mono {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-bottom: 18px;
+
+            color: var(--accent);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 26px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 46px;
+        }
+
+        .section-heading h2 {
+            color: var(--text);
+            font-size: clamp(
+                2rem,
+                4vw,
+                3.15rem
+            );
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 18px;
+        }
+
+        .section-heading p {
+            max-width: 720px;
+            color: var(--text-soft);
+            font-size: 1rem;
+        }
+
+        section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 1000;
+
+            height: 72px;
+
+            background: rgba(
+                8,
+                11,
+                16,
+                0.88
+            );
+
+            border-bottom: 1px solid var(--border-soft);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .nav-inner {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 32px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--accent);
+
+            background: var(--accent-soft);
+
+            border: 1px solid var(--accent-border);
+            border-radius: 8px;
+        }
+
+        .brand-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .brand-text strong {
+            display: block;
+
+            color: var(--text);
+
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: 0.10em;
+        }
+
+        .brand-text span {
+            display: block;
+
+            margin-top: -3px;
+
+            color: var(--text-muted);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.13em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            color: var(--text-soft);
+
+            font-size: 0.88rem;
+            font-weight: 600;
+
+            transition:
+                color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+
+            width: 0;
+            height: 1px;
+
+            background: var(--accent);
+
+            transition:
+                width 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 720px;
+
+            display: flex;
+            align-items: center;
+
+            padding-top: 150px;
+            padding-bottom: 110px;
+
+            border-top: 0;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(0, 180, 216, 0.06),
+                    transparent 35%
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+
+            color: var(--text);
+
+            font-size: clamp(
+                2.8rem,
+                7vw,
+                5.6rem
+            );
+
+            line-height: 1.1;
+
+            letter-spacing: -0.065em;
+
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            max-width: 780px;
+
+            color: var(--text-soft);
+
+            font-size: clamp(
+                1rem,
+                2vw,
+                1.2rem
+            );
+
+            line-height: 1.8;
+
+            margin-bottom: 38px;
+        }
+
+        .responsibility {
+            max-width: 820px;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+
+            padding: 18px 20px;
+
+            background: var(--accent-soft);
+
+            border: 1px solid var(--accent-border);
+            border-left: 2px solid var(--accent);
+
+            border-radius: 6px;
+        }
+
+        .responsibility-icon {
+            flex-shrink: 0;
+
+            width: 24px;
+            height: 24px;
+
+            color: var(--accent);
+        }
+
+        .responsibility p {
+            color: #b9c7d5;
+
+            font-size: 0.86rem;
+            line-height: 1.65;
+        }
+
+        .responsibility strong {
+            color: var(--text);
+        }
+
+        /* =========================================================
+           REGULATÓRIO
+        ========================================================= */
+
+        .regulatory-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .regulatory-card {
+            min-height: 260px;
+
+            padding: 30px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            transition:
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .regulatory-card:hover {
+            border-color: var(--accent-border);
+            transform: translateY(-2px);
+        }
+
+        .card-number {
+            margin-bottom: 25px;
+
+            color: var(--accent);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+        }
+
+        .regulatory-card h3 {
+            margin-bottom: 12px;
+
+            font-size: 1.05rem;
+        }
+
+        .regulatory-card p {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           SERVIÇOS
+        ========================================================= */
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .service-card {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+
+            gap: 22px;
+
+            padding: 28px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+        }
+
+        .service-icon {
+            width: 46px;
+            height: 46px;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--accent);
+
+            background: var(--accent-soft);
+
+            border: 1px solid var(--accent-border);
+
+            border-radius: 7px;
+        }
+
+        .service-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 8px;
+
+            font-size: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-soft);
+
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           DIFERENCIAL
+        ========================================================= */
+
+        .comparison {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: var(--surface);
+        }
+
+        .comparison-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: 0;
+        }
+
+        .comparison-cell {
+            padding: 27px 30px;
+        }
+
+        .comparison-cell:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        .comparison-cell h3 {
+            margin-bottom: 8px;
+
+            font-size: 0.95rem;
+        }
+
+        .comparison-cell p {
+            color: var(--text-soft);
+
+            font-size: 0.87rem;
+        }
+
+        .comparison-cell.proxiti {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(
+                        0,
+                        180,
+                        216,
+                        0.055
+                    ),
+                    transparent
+                );
+        }
+
+        .comparison-cell.proxiti h3 {
+            color: var(--accent);
+        }
+
+        /* =========================================================
+           SOBRE / PERFIL
+        ========================================================= */
+
+        .about-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.1fr)
+                minmax(340px, 0.9fr);
+
+            align-items: start;
+
+            gap: 28px;
+        }
+
+        .about-main,
+        .about-side {
+            min-width: 0;
+        }
+
+        .about-main {
+            padding: 34px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+        }
+
+        .about-main > p {
+            color: var(--text-soft);
+
+            font-size: 0.98rem;
+            line-height: 1.8;
+
+            margin-bottom: 32px;
+        }
+
+        .areas-title {
+            margin-bottom: 15px;
+
+            color: var(--text);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .areas-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 8px;
+        }
+
+        .area-item {
+            padding: 11px 14px;
+
+            color: #b7c4d2;
+
+            background: var(--surface-2);
+
+            border: 1px solid var(--border);
+
+            border-left: 2px solid
+                rgba(
+                    0,
+                    180,
+                    216,
+                    0.55
+                );
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+        }
+
+        .principle-quote {
+            margin-top: 28px;
+
+            padding: 28px 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(
+                        0,
+                        180,
+                        216,
+                        0.09
+                    ),
+                    rgba(
+                        15,
+                        20,
+                        28,
+                        0.9
+                    )
+                );
+
+            border: 1px solid var(--border);
+
+            border-left: 2px solid var(--accent);
+
+            border-radius: 8px;
+        }
+
+        .principle-quote::before {
+            content: "“";
+
+            display: block;
+
+            height: 22px;
+
+            color: var(--accent);
+
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            line-height: 0.8;
+        }
+
+        .principle-quote p {
+            color: var(--text);
+
+            font-size: clamp(
+                1.2rem,
+                2vw,
+                1.55rem
+            );
+
+            font-weight: 600;
+            line-height: 1.45;
+
+            letter-spacing: -0.02em;
+        }
+
+        /* =========================================================
+           COLUNA DIREITA
+        ========================================================= */
+
+        .study-card-list {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .study-card {
+            padding: 22px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            transition: border-color 0.2s ease;
+        }
+
+        .study-card:hover {
+            border-color: var(--accent-border);
+        }
+
+        .study-card h3 {
+            margin-bottom: 8px;
+
+            color: var(--text);
+
+            font-size: 0.98rem;
+
+            font-weight: 700;
+        }
+
+        .study-card p {
+            color: var(--text-soft);
+
+            font-size: 0.84rem;
+
+            line-height: 1.6;
+        }
+
+        .apri-box {
+            padding: 26px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+        }
+
+        .apri-box h3 {
+            margin-bottom: 10px;
+
+            font-size: 1.1rem;
+        }
+
+        .apri-box p {
+            color: var(--text-soft);
+
+            font-size: 0.86rem;
+
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           CONTATO
+        ========================================================= */
+
+        .contact-section {
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        .contact-intro {
+            max-width: 760px;
+
+            margin-bottom: 34px;
+        }
+
+        .contact-intro h2 {
+            margin-bottom: 15px;
+
+            color: var(--text);
+
+            font-size: clamp(
+                2rem,
+                4vw,
+                3.5rem
+            );
+
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+        }
+
+        .contact-intro p {
+            color: var(--text-soft);
+
+            font-size: 0.95rem;
+        }
+
+        .contact-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+
+            gap: 14px;
+        }
+
+        .contact-card {
+            min-height: 100px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px 20px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-border);
+
+            background:
+                rgba(
+                    0,
+                    180,
+                    216,
+                    0.05
+                );
+        }
+
+        .contact-icon {
+            flex-shrink: 0;
+
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--accent);
+
+            background: var(--accent-soft);
+
+            border: 1px solid var(--accent-border);
+
+            border-radius: 7px;
+        }
+
+        .contact-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-info {
+            min-width: 0;
+        }
+
+        .contact-info strong {
+            display: block;
+
+            margin-bottom: 2px;
+
+            color: var(--text);
+
+            font-size: 0.88rem;
+        }
+
+        .contact-info span {
+            display: block;
+
+            overflow: hidden;
+
+            color: var(--text-soft);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.68rem;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .contact-arrow {
+            margin-left: auto;
+
+            color: var(--accent);
+
+            font-size: 1.15rem;
+        }
+
+        .confidentiality {
+            max-width: 900px;
+
+            margin-top: 18px;
+
+            padding: 16px 20px;
+
+            background: var(--accent-soft);
+
+            border-left: 2px solid var(--accent);
+        }
+
+        .confidentiality p {
+            color: var(--text-soft);
+
+            font-size: 0.78rem;
+        }
+
+        .confidentiality strong {
+            color: var(--text);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 25px 0;
+
+            background: #06080c;
+
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .footer-inner {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            color: var(--accent);
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+
+            font-size: 0.7rem;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .nav-links {
+                gap: 18px;
+            }
+
+            .nav-links a {
+                font-size: 0.78rem;
+            }
+
+            .about-layout {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .contact-card {
+                min-height: 84px;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .container {
+                width: min(
+                    calc(100% - 32px),
+                    var(--max-width)
+                );
+            }
+
+            section {
+                padding: 75px 0;
+            }
+
+            .navbar {
+                height: 64px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+
+                padding-top: 125px;
+                padding-bottom: 80px;
+            }
+
+            .hero h1 {
+                font-size: clamp(
+                    2.7rem,
+                    13vw,
+                    4.4rem
+                );
+            }
+
+            .regulatory-grid,
+            .services-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .comparison-cell:first-child {
+                border-right: 0;
+
+                border-bottom: 1px solid
+                    var(--border);
+            }
+
+            .about-main {
+                padding: 25px;
+            }
+
+            .areas-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 520px) {
+
+            .container {
+                width: min(
+                    calc(100% - 24px),
+                    var(--max-width)
+                );
+            }
+
+            .brand-text span {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.65rem;
+            }
+
+            .hero-description {
+                font-size: 0.94rem;
+            }
+
+            .responsibility {
+                padding: 15px;
+            }
+
+            .service-card {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .regulatory-card,
+            .service-card,
+            .study-card,
+            .apri-box {
+                padding: 23px;
+            }
+
+            .principle-quote {
+                padding: 24px;
+            }
+
+            .principle-quote p {
+                font-size: 1.15rem;
+            }
+
+            .contact-card {
+                padding: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="container nav-inner">
+
+            <a
+                href="#inicio"
+                class="brand"
+                aria-label="PROXITI - início"
+            >
+
+                <span class="brand-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M12 3 20 6v5c0 5.2-3.3 8.8-8 10-4.7-1.2-8-4.8-8-10V6l8-3Z"
+                        />
+
+                        <path
+                            d="m9.5 12 1.7 1.7 3.5-3.7"
+                        />
+                    </svg>
+
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>PROXITI</strong>
+
+                    <span>
+                        SECURITY &amp; INFRASTRUCTURE
+                    </span>
+
+                </span>
+
+            </a>
+
+            <nav aria-label="Navegação principal">
+
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="#regulatorio">
+                            Marco Regulatório
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#engenharia">
+                            Engenharia &amp; Defesa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#apri">
+                            Diferencial APRI
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#sobre">
+                            Sobre
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contato">
+                            Contato
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section
+            id="inicio"
+            class="hero"
+        >
+
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        Security &amp; Infrastructure
+                    </div>
+
+                    <h1>
+                        Arquitetura de Cibersegurança,
+                        Infraestrutura Enxuta e
+                        <span>Conformidade Legal.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Proteção de ativos digitais, hardening de
+                        estações e servidores, infraestrutura de TI,
+                        redes e segurança da informação, com expansão
+                        contínua para fundamentos e práticas de
+                        cibersegurança.
+                    </p>
+
+                    <div class="responsibility">
+
+                        <svg
+                            class="responsibility-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M12 3 20 6v5c0 5.2-3.3 8.8-8 10-4.7-1.2-8-4.8-8-10V6l8-3Z"
+                            />
+
+                            <path
+                                d="M12 8v4"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="15.5"
+                                r=".7"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+                        </svg>
+
+                        <p>
+                            <strong>
+                                Responsabilidade e autorização:
+                            </strong>
+
+                            operações de auditoria, análise de
+                            perímetro e avaliações técnicas são
+                            realizadas exclusivamente mediante
+                            autorização expressa, definição de escopo
+                            e respaldo contratual adequado.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="regulatorio">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="eyebrow">
+                        Governança &amp; Conformidade
+                    </div>
+
+                    <h2>
+                        Segurança técnica precisa de contexto jurídico.
+                    </h2>
+
+                    <p>
+                        A atuação da PROXITI considera os limites
+                        legais aplicáveis à segurança da informação,
+                        privacidade e tratamento de dados no contexto
+                        brasileiro.
+                    </p>
+
+                </div>
+
+
+                <div class="regulatory-grid">
+
+                    <article class="regulatory-card">
+
+                        <div class="card-number">
+                            01 / LGPD
+                        </div>
+
+                        <h3>
+                            Lei Geral de Proteção de Dados
+                        </h3>
+
+                        <p>
+                            Consideração dos princípios de proteção de
+                            dados, segurança, prevenção e
+                            responsabilidade aplicáveis ao tratamento
+                            de informações pessoais e aos controles de
+                            segurança da organização.
+                        </p>
+
+                    </article>
+
+
+                    <article class="regulatory-card">
+
+                        <div class="card-number">
+                            02 / MARCO CIVIL
+                        </div>
+
+                        <h3>
+                            Marco Civil da Internet
+                        </h3>
+
+                        <p>
+                            Análise dos aspectos relacionados à
+                            privacidade, proteção de dados e guarda de
+                            registros, conforme a natureza do ambiente
+                            e as obrigações aplicáveis ao negócio.
+                        </p>
+
+                    </article>
+
+
+                    <article class="regulatory-card">
+
+                        <div class="card-number">
+                            03 / RESPONSABILIDADE
+                        </div>
+
+                        <h3>
+                            Segurança com autorização
+                        </h3>
+
+                        <p>
+                            Avaliações técnicas e análises de segurança
+                            devem ocorrer dentro de escopo autorizado,
+                            com definição clara de responsabilidades,
+                            confidencialidade e limites operacionais.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="engenharia">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="eyebrow">
+                        Engenharia &amp; Defesa
+                    </div>
+
+                    <h2>
+                        Infraestrutura preparada para resistir,
+                        operar e continuar.
+                    </h2>
+
+                    <p>
+                        A abordagem parte da redução da superfície de
+                        ataque, do controle da infraestrutura e da
+                        aplicação de boas práticas de segurança
+                        operacional.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <article class="service-card">
+
+                        <div class="service-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <rect
+                                    x="4"
+                                    y="3"
+                                    width="16"
+                                    height="18"
+                                    rx="2"
+                                />
+
+                                <path
+                                    d="M8 7h8M8 11h8M8 15h5"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Hardening de Estações &amp; Servidores
+                            </h3>
+
+                            <p>
+                                Aplicação de princípios de privilégio
+                                mínimo, redução de componentes
+                                desnecessários, configuração segura de
+                                sistemas Windows e Linux e isolamento
+                                adequado de ambientes.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3"
+                                />
+
+                                <path
+                                    d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Engenharia de Redes &amp; Perímetro
+                            </h3>
+
+                            <p>
+                                Organização e segmentação de redes,
+                                configuração segura de equipamentos,
+                                controle de tráfego e aplicação de
+                                princípios de defesa em profundidade.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 3v12"
+                                />
+
+                                <path
+                                    d="m8 11 4 4 4-4"
+                                />
+
+                                <path
+                                    d="M5 19h14"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Continuidade &amp; Backup 3-2-1
+                            </h3>
+
+                            <p>
+                                Estratégias de backup com múltiplas
+                                cópias e meios distintos, incluindo
+                                armazenamento local, mídia isolada e
+                                recursos externos, acompanhadas por
+                                testes periódicos de restauração.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="service-card">
+
+                        <div class="service-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 3a7 7 0 0 0-7 7v3"
+                                />
+
+                                <path
+                                    d="M19 13v-3a7 7 0 0 0-7-7"
+                                />
+
+                                <path
+                                    d="M5 13h3v5H5zM16 13h3v5h-3z"
+                                />
+
+                                <path
+                                    d="M8 19h8"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Defesa Humana &amp; Boas Práticas
+                            </h3>
+
+                            <p>
+                                Orientação sobre engenharia social,
+                                autenticação multifator, gestão segura
+                                de credenciais e redução de riscos
+                                associados ao comportamento humano.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="apri">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="eyebrow">
+                        Método &amp; Operação
+                    </div>
+
+                    <h2>
+                        Tecnologia sem processo produz ruído.
+                    </h2>
+
+                    <p>
+                        A PROXITI busca combinar análise técnica,
+                        documentação, contexto operacional e
+                        responsabilidade na execução.
+                    </p>
+
+                </div>
+
+
+                <div class="comparison">
+
+                    <div class="comparison-row">
+
+                        <div class="comparison-cell">
+
+                            <h3>
+                                Abordagem tradicional
+                            </h3>
+
+                            <p>
+                                Execução técnica sem documentação
+                                adequada ou definição clara de escopo e
+                                responsabilidade.
+                            </p>
+
+                        </div>
+
+                        <div class="comparison-cell proxiti">
+
+                            <h3>
+                                PROXITI
+                            </h3>
+
+                            <p>
+                                Processos definidos, escopo claro,
+                                confidencialidade e execução técnica
+                                orientada ao contexto do ambiente.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="comparison-row">
+
+                        <div class="comparison-cell">
+
+                            <h3>
+                                Instalação excessiva
+                            </h3>
+
+                            <p>
+                                Ambientes carregados de softwares,
+                                serviços desnecessários e componentes
+                                que aumentam a complexidade operacional.
+                            </p>
+
+                        </div>
+
+                        <div class="comparison-cell proxiti">
+
+                            <h3>
+                                Clean Environment
+                            </h3>
+
+                            <p>
+                                Ambientes enxutos, controlados,
+                                documentados e orientados à redução de
+                                superfície de ataque.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="comparison-row">
+
+                        <div class="comparison-cell">
+
+                            <h3>
+                                Diagnóstico genérico
+                            </h3>
+
+                            <p>
+                                Resultados automatizados sem considerar
+                                o impacto real sobre o negócio.
+                            </p>
+
+                        </div>
+
+                        <div class="comparison-cell proxiti">
+
+                            <h3>
+                                Análise contextual
+                            </h3>
+
+                            <p>
+                                Avaliação técnica interpretada de acordo
+                                com o ambiente, os riscos e as
+                                necessidades operacionais.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SOBRE
+        ====================================================== -->
+
+        <section id="sobre">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="eyebrow">
+                        Sobre a PROXITI
+                    </div>
+
+                    <h2>
+                        Experiência prática em infraestrutura,
+                        segurança e tecnologia.
+                    </h2>
+
+                </div>
+
+
+                <div class="about-layout">
+
+
+                    <!-- COLUNA ESQUERDA -->
+
+                    <div class="about-main">
+
+                        <p>
+                            Profissional de Tecnologia da Informação com
+                            atuação em suporte técnico, infraestrutura,
+                            redes, administração de sistemas e hardening de
+                            ambientes Windows e Linux, com direcionamento
+                            profissional para Segurança da Informação e expansão
+                            contínua dos estudos em Cibersegurança.
+                        </p>
+
+
+                        <div class="areas-title">
+                            Áreas de atuação
+                        </div>
+
+
+                        <div class="areas-grid">
+
+                            <div class="area-item">
+                                Suporte Técnico de TI
+                            </div>
+
+                            <div class="area-item">
+                                Infraestrutura de TI
+                            </div>
+
+                            <div class="area-item">
+                                Redes e Segurança de Infraestrutura
+                            </div>
+
+                            <div class="area-item">
+                                Hardening de Sistemas
+                            </div>
+
+                            <div class="area-item">
+                                Segurança da Informação
+                            </div>
+
+                            <div class="area-item">
+                                Cibersegurança
+                            </div>
+
+                        </div>
+
+
+                        <blockquote class="principle-quote">
+
+                            <p>
+                                A verdadeira segurança da informação exige
+                                mais do que tecnologia: exige conformidade
+                                jurídica, conduta ética e controle sobre a
+                                infraestrutura.
+                            </p>
+
+                        </blockquote>
+
+                    </div>
+
+
+                    <!-- COLUNA DIREITA -->
+
+                    <div class="about-side">
+
+                        <div class="study-card-list">
+
+                            <article class="study-card">
+                                <h3>Formação Técnica</h3>
+                                <p>
+                                    Formação técnica complementar em
+                                    Tecnologia da Informação, Segurança da
+                                    Informação, Cibersegurança, Infraestrutura,
+                                    Cloud e áreas relacionadas.
+                                </p>
+                            </article>
+
+                            <article class="study-card">
+                                <h3>Segurança da Informação</h3>
+                                <p>
+                                    Estudos voltados à proteção de ativos,
+                                    controles de segurança, riscos e defesa de
+                                    ambientes.
+                                </p>
+                            </article>
+
+                            <article class="study-card">
+                                <h3>Cibersegurança</h3>
+                                <p>
+                                    Expansão dos estudos para fundamentos,
+                                    práticas defensivas e segurança de
+                                    ambientes.
+                                </p>
+                            </article>
+
+                            <article class="study-card">
+                                <h3>Infraestrutura e Sistemas</h3>
+                                <p>
+                                    Aprofundamento contínuo em Linux, Windows,
+                                    redes, hardening e administração de
+                                    ambientes.
+                                </p>
+                            </article>
+
+                            <article class="study-card">
+                                <h3>Cloud e Tecnologias Emergentes</h3>
+                                <p>
+                                    Estudos complementares em computação em
+                                    nuvem e Inteligência Artificial.
+                                </p>
+                            </article>
+
+                        </div>
+
+
+                        <div class="apri-box">
+
+                            <h3>Modelo APRI</h3>
+
+                            <p>
+                                A PROXITI desenvolve o modelo conceitual APRI,
+                                voltado à Análise de Perímetro e Risco de
+                                Infraestrutura, como estrutura conceitual para
+                                organização da análise técnica, identificação
+                                de riscos e compreensão do ambiente antes da
+                                tomada de decisões.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section
+            id="contato"
+            class="contact-section"
+        >
+
+            <div class="container">
+
+                <div class="contact-intro">
+
+                    <div class="eyebrow">
+                        Canal de contato
+                    </div>
+
+                    <h2>
+                        Vamos conversar sobre o seu ambiente de TI.
+                    </h2>
+
+                    <p>
+                        O primeiro contato é destinado à compreensão
+                        do cenário, das necessidades e do escopo
+                        técnico. A partir dessas informações, é
+                        possível avaliar a viabilidade da atuação e
+                        definir os próximos passos.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-grid">
+
+
+                    <a
+                        class="contact-card"
+                        href="https://wa.me/5541988235598"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <span class="contact-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"
+                                />
+
+                                <path
+                                    d="M8.5 9.5c.2 1.7 1.3 3 3 3.8"
+                                />
+
+                            </svg>
+
+                        </span>
+
+                        <span class="contact-info">
+
+                            <strong>
+                                WhatsApp
+                            </strong>
+
+                            <span>
+                                (41) 98823-5598
+                            </span>
+
+                        </span>
+
+                        <span class="contact-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        class="contact-card"
+                        href="mailto:humberto.mennella@gmail.com"
+                    >
+
+                        <span class="contact-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <rect
+                                    x="3"
+                                    y="5"
+                                    width="18"
+                                    height="14"
+                                    rx="2"
+                                />
+
+                                <path
+                                    d="m4 7 8 6 8-6"
+                                />
+
+                            </svg>
+
+                        </span>
+
+                        <span class="contact-info">
+
+                            <strong>
+                                E-mail
+                            </strong>
+
+                            <span>
+                                humberto.mennella@gmail.com
+                            </span>
+
+                        </span>
+
+                        <span class="contact-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        class="contact-card"
+                        href="https://www.linkedin.com/in/humbertomennella"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <span class="contact-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                aria-hidden="true"
+                            >
+                                <rect
+                                    x="4"
+                                    y="4"
+                                    width="16"
+                                    height="16"
+                                    rx="2"
+                                />
+
+                                <path
+                                    d="M8 10v6M8 7.5v.1M12 16v-6M12 13a3 3 0 0 1 6 0v3"
+                                />
+
+                            </svg>
+
+                        </span>
+
+                        <span class="contact-info">
+
+                            <strong>
+                                LinkedIn
+                            </strong>
+
+                            <span>
+                                linkedin.com/in/humbertomennella
+                            </span>
+
+                        </span>
+
+                        <span class="contact-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="confidentiality">
+
+                    <p>
+                        <strong>
+                            Confidencialidade:
+                        </strong>
+
+                        Informações técnicas sensíveis e detalhes da
+                        infraestrutura devem ser compartilhados
+                        somente após a definição do escopo e, quando
+                        necessário, mediante Termo de
+                        Confidencialidade (NDA).
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="container footer-inner">
+
+            <div class="footer-brand">
+                PROXITI / SECURITY &amp; INFRASTRUCTURE
+            </div>
+
+            <div class="footer-copy">
+                © 2026 PROXITI. Curitiba, Paraná, Brasil.
+                Todos os direitos reservados.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "PROXITI",
+        "description": "Suporte e infraestrutura de TI, redes, hardening de sistemas, segurança da informação e cibersegurança.",
+        "areaServed": {
+            "@type": "City",
+            "name": "Curitiba"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Curitiba",
+            "addressRegion": "PR",
+            "addressCountry": "BR"
+        },
+        "telephone": "+55 41 98823-5598",
+        "email": "humberto.mennella@gmail.com",
+        "url": "https://www.linkedin.com/in/humbertomennella"
+    }
+    </script>
+
+</body>
+</html>
