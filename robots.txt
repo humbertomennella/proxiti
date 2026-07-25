@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://proxiti.com.br/sitemap.xml
