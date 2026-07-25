@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Configurações de Segurança no Head (Meta CSP & Security) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon Oficial PROXITI -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <!-- Metadados de SEO Técnico -->
     <meta name="description" content="PROXITI: Suporte técnico, manutenção de computadores, Wi-Fi, redes, consultoria em TI e segurança digital para pessoas, residências e micro e pequenas empresas em Curitiba-PR.">
     <meta name="author" content="PROXITI">
@@ -64,7 +76,6 @@
             box-sizing: border-box;
         }
 
-        /* Rolagem nativa suave com compensação para o menu fixo */
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 100px;
@@ -1211,7 +1222,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT SIMPLIFICADO (APENAS MENU MOBILE E MODAL) -->
+    <!-- JAVASCRIPT SIMPLIFICADO -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
@@ -1227,7 +1238,6 @@
 
         menuToggle.addEventListener('click', toggleMenu);
 
-        // Ao clicar em qualquer link no celular, fecha a gaveta do menu
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (mainNav.classList.contains('active')) {
@@ -1236,7 +1246,6 @@
             });
         });
 
-        // MODAL DE TERMOS
         const modal = document.getElementById("termos");
         const openTerms = document.getElementById("openTerms");
         const closeTerms = document.getElementById("closeTerms");
