@@ -67,7 +67,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px;
         }
 
         body {
@@ -287,7 +286,7 @@
             align-items: center;
             justify-content: center;
             min-height: 52px;
-            padding: 0 24px;
+            padding: 0 28px;
             border-radius: 8px;
             border: 1px solid transparent;
             font-size: 0.95rem;
@@ -452,7 +451,7 @@
         }
 
         /* =========================================================
-           CIBERSEGURANÇA E LGPD
+           CIBERSEGURANÇA E SEÇÃO LGPD
         ========================================================= */
 
         .security-layout {
@@ -500,6 +499,7 @@
             line-height: 1.65;
         }
 
+        /* BLOCO LGPD EXPLICITO NO CORPO DA PÁGINA */
         .lgpd-section {
             background: var(--bg-soft);
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -507,7 +507,7 @@
         }
 
         .trust-box {
-            padding: 28px;
+            padding: 32px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
@@ -535,11 +535,13 @@
             padding: 20px;
             border: 1px solid var(--border);
             border-radius: 10px;
+            background: var(--bg);
         }
 
         .trust-item h3 {
             margin-bottom: 8px;
             font-size: 0.98rem;
+            color: var(--text);
         }
 
         .trust-item p {
@@ -549,7 +551,7 @@
         }
 
         /* =========================================================
-           DIFERENCIAIS E CTA
+           DIFERENCIAIS E CTA CENTRALIZADO
         ========================================================= */
 
         .difference-grid {
@@ -582,11 +584,15 @@
         }
 
         .cta-box {
-            padding: 36px 24px;
+            padding: 48px 24px;
             text-align: center;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .cta-box h2 {
@@ -598,16 +604,16 @@
 
         .cta-box p {
             max-width: 680px;
-            margin: 0 auto 28px;
+            margin: 0 auto 32px;
             color: var(--text-muted);
             line-height: 1.7;
         }
 
-        .cta-actions {
+        .cta-actions-centered {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
             justify-content: center;
+            align-items: center;
+            width: 100%;
         }
 
         /* =========================================================
@@ -759,18 +765,14 @@
             line-height: 1.7;
         }
 
-        /* =========================================================
-           BREAKPOINTS RESPONSIVOS (DESKTOP)
-        ========================================================= */
-
         @media (min-width: 640px) {
-            .hero-actions, .cta-actions {
+            .hero-actions {
                 flex-direction: row;
                 justify-content: flex-start;
             }
 
             .btn {
-                min-width: 190px;
+                min-width: 220px;
             }
 
             .entry-grid, .security-list {
@@ -782,7 +784,7 @@
             }
 
             .cta-box {
-                padding: 48px 32px;
+                padding: 56px 32px;
             }
         }
 
@@ -1098,26 +1100,26 @@
             </div>
         </section>
 
-        <!-- LGPD E PRIVACIDADE -->
+        <!-- SEÇÃO EXCLUSIVA DE LGPD E PRIVACIDADE -->
         <section class="lgpd-section" id="lgpd">
             <div class="container">
                 <div class="trust-box">
-                    <div class="section-label">Privacidade e Conformidade</div>
-                    <h2>Tratamento ético e responsável dos seus dados.</h2>
-                    <p>A PROXITI adota princípios de privacidade, segurança e confidencialidade no tratamento de informações acessadas durante a prestação dos serviços, observando, quando aplicável, a Lei nº 13.709/2018 (LGPD).</p>
+                    <div class="section-label">LGPD e Tratamento de Dados</div>
+                    <h2>Tratamento ético, transparente e responsável de dados.</h2>
+                    <p>A PROXITI adota princípios de privacidade, minimização de dados e segurança da informação em todos os procedimentos, alinhada às boas práticas e aos requisitos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
 
                     <div class="trust-grid">
                         <article class="trust-item">
-                            <h3>Tratamento Adequado</h3>
-                            <p>Coletamos apenas as informações voluntariamente fornecidas para responder a contatos e prestar atendimentos. Não comercializamos dados de clientes.</p>
+                            <h3>Tratamento Mínimo e Adequado</h3>
+                            <p>Coletamos exclusivamente as informações fornecidas voluntariamente para fins de contato, diagnóstico e orçamento. Nenhum dado pessoal é vendido ou repassado a terceiros.</p>
                         </article>
                         <article class="trust-item">
-                            <h3>Compromisso de Confidencialidade</h3>
-                            <p>Qualquer arquivo, documento ou informação acessada durante manutenções presenciais ou remotas é tratada sob sigilo profissional estrito.</p>
+                            <h3>Compromisso de Sigilo</h3>
+                            <p>Durante procedimentos de manutenção, suporte remoto ou presencial, qualquer dado mantido nos equipamentos do cliente é tratado sob estrito dever ético de confidencialidade.</p>
                         </article>
                         <article class="trust-item">
-                            <h3>Limites Operacionais</h3>
-                            <p>Atuação pautada na ética. Nenhum procedimento, alteração de segurança ou teste é realizado sem prévia autorização do responsável pelo ambiente.</p>
+                            <h3>Acesso com Autorização Explícita</h3>
+                            <p>Sem intervenções arbitrárias. Qualquer modificação em sistemas, acesso a pastas restritas ou migração de dados é feita somente mediante autorização prévia do responsável.</p>
                         </article>
                     </div>
                 </div>
@@ -1150,15 +1152,14 @@
             </div>
         </section>
 
-        <!-- CTA FINAL COM FOCO NA BARREIRA COMERCIAL -->
+        <!-- CTA FINAL COM FOCO EXCLUSIVO E CENTRALIZADO NO WHATSAPP -->
         <section class="final-cta" id="contato">
             <div class="container">
                 <div class="cta-box">
                     <h2>Não sabe exatamente o que precisa? Explique o problema.</h2>
                     <p>Seja um computador lento, um Wi-Fi que falha no trabalho ou a necessidade de organizar os dados da sua empresa: a PROXITI começa sempre pelo diagnóstico do seu cenário.</p>
-                    <div class="cta-actions">
+                    <div class="cta-actions-centered">
                         <a href="https://wa.me/5541988235598" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
-                        <a href="mailto:contato@proxiti.com.br" class="btn btn-secondary">Enviar E-mail</a>
                     </div>
                 </div>
             </div>
@@ -1177,16 +1178,16 @@
                 <div class="footer-column">
                     <h3>Navegação</h3>
                     <ul>
-                        <li><a href="#residencial">Para Você e Sua Casa</a></li>
-                        <li><a href="#negocios">Para Seu Negócio</a></li>
-                        <li><a href="#ciberseguranca">Segurança Digital</a></li>
+                        <li><a href="#residencial" class="nav-link">Para Você e Sua Casa</a></li>
+                        <li><a href="#negocios" class="nav-link">Para Seu Negócio</a></li>
+                        <li><a href="#ciberseguranca" class="nav-link">Segurança Digital</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contato</h3>
                     <ul>
                         <li><a href="https://wa.me/5541988235598" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-                        <li><a href="mailto:contato@proxiti.com.br">contato@proxiti.com.br</a></li>
+                        <li><a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a></li>
                         <li><span>Curitiba - PR</span></li>
                     </ul>
                 </div>
@@ -1215,7 +1216,7 @@
             <p>A PROXITI atua como controladora das informações de contato fornecidas voluntariamente neste site. Nosso foco é a prestação de serviços de suporte técnico, manutenção preventivas/corretivas, consultoria em TI e segurança digital.</p>
 
             <h3>2. Coleta e Finalidade dos Dados</h3>
-            <p>Tratamos dados pessoais mínimos (como nome, número de telefone e e-mail) fornecidos por você ao clicar nos canais de WhatsApp ou e-mail. A única finalidade é responder à sua mensagem, elaborar orçamentos e prestar o atendimento solicitado.</p>
+            <p>Tratamos dados pessoais mínimos fornecidos por você ao entrar em contato via WhatsApp ou e-mail. A única finalidade é responder à sua mensagem, elaborar orçamentos e prestar o atendimento solicitado.</p>
 
             <h3>3. Confidencialidade e Acesso a Equipamentos</h3>
             <p>Durante a prestação de serviços presenciais ou remotos, a PROXITI pode ter acesso eventual a arquivos e ambientes do cliente. Esse acesso ocorre estritamente dentro do limite necessário para executar a manutenção autorizada, mantendo-se o compromisso ético de confidencialidade sobre todas as informações.</p>
@@ -1224,15 +1225,14 @@
             <p>A PROXITI não vende, aluga ou compartilha seus dados pessoais com terceiros para fins de marketing. O compartilhamento ocorre apenas quando estritamente necessário para cumprimento de obrigações legais ou fiscais.</p>
 
             <h3>5. Direitos do Titular</h3>
-            <p>Em conformidade com a Lei nº 13.709/2018 (LGPD), você pode solicitar a confirmação do tratamento, a exclusão ou a atualização dos seus dados de contato a qualquer momento enviando um e-mail para <strong>contato@proxiti.com.br</strong>.</p>
+            <p>Em conformidade com a Lei nº 13.709/2018 (LGPD), você pode solicitar a confirmação do tratamento, a exclusão ou a atualização dos seus dados de contato a qualquer momento enviando um e-mail para <strong>contato.proxiti@gmail.com</strong>.</p>
         </div>
     </div>
 
-    <!-- JAVASCRIPT (SISTEMA INTEGRADO E ACESSÍVEL) -->
+    <!-- JAVASCRIPT (SISTEMA INTEGRADO DE ROLAGEM E MODAL) -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
-        const navLinks = document.querySelectorAll('.nav-link');
 
         function toggleMenu() {
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -1244,14 +1244,34 @@
 
         menuToggle.addEventListener('click', toggleMenu);
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainNav.classList.contains('active')) {
-                    toggleMenu();
+        // FUNÇÃO DE ROLAGEM FORÇADA POR JAVASCRIPT PARA TODAS AS ÂNCORAS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId === '') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Fechar menu mobile se estiver aberto
+                    if (mainNav.classList.contains('active')) {
+                        toggleMenu();
+                    }
+
+                    const headerOffset = 80; // Compensação da altura do cabeçalho fixo
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
 
+        // MODAL DE TERMOS
         const modal = document.getElementById("termos");
         const openTerms = document.getElementById("openTerms");
         const closeTerms = document.getElementById("closeTerms");
@@ -1284,5 +1304,4 @@
         });
     </script>
 </body>
-</html>
 </html>
