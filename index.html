@@ -47,14 +47,16 @@
             --bg-card-hover: #19232d;
             --border: #27313c;
             --border-hover: #3a4857;
-            --text: #f1f5f9;
-            --text-soft: #c4ccd5;
-            --text-muted: #8d99a6;
             --accent: #58a6ff;
             --accent-soft: rgba(88, 166, 255, 0.12);
             --success: #3fb950;
             --max-width: 1180px;
             --radius: 12px;
+
+            /* Tipografia Calibrada para Autoridade Corporativa */
+            --text: #d8e1e9;
+            --text-soft: #b0b9c3;
+            --text-muted: #8d99a6;
         }
 
         * {
@@ -395,7 +397,6 @@
             font-weight: 700;
         }
 
-        /* Subcategorias e Blocos de Serviços */
         .service-group {
             margin-bottom: 56px;
         }
@@ -834,7 +835,6 @@
             }
         }
 
-        /* Acessibilidade de Foco e Redução de Movimento */
         :focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 3px;
@@ -1230,7 +1230,6 @@
 
     <!-- JAVASCRIPT (SISTEMA INTEGRADO E ACESSÍVEL) -->
     <script>
-        // Menu Mobile Responsivo com Acessibilidade ARIA
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -1253,7 +1252,6 @@
             });
         });
 
-        // Modal de Termos de Uso / LGPD
         const modal = document.getElementById("termos");
         const openTerms = document.getElementById("openTerms");
         const closeTerms = document.getElementById("closeTerms");
@@ -1286,4 +1284,5 @@
         });
     </script>
 </body>
+</html>
 </html>
