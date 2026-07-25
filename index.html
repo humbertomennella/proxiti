@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://proxiti.com.br/">
     <meta property="og:locale" content="pt_BR">
 
-    <!-- Schema.org - Dados Estruturados (LocalBusiness) -->
+    <!-- Schema.org - Dados Estruturados -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,7 +53,6 @@
             --max-width: 1180px;
             --radius: 12px;
 
-            /* Tipografia Calibrada para Autoridade Corporativa */
             --text: #d8e1e9;
             --text-soft: #b0b9c3;
             --text-muted: #8d99a6;
@@ -65,8 +64,10 @@
             box-sizing: border-box;
         }
 
+        /* Rolagem nativa suave com compensação para o menu fixo */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
 
         body {
@@ -99,10 +100,7 @@
             margin: 0 auto;
         }
 
-        /* =========================================================
-           HEADER & NAVEGAÇÃO
-        ========================================================= */
-
+        /* HEADER & NAVEGAÇÃO */
         header {
             position: sticky;
             top: 0;
@@ -217,10 +215,7 @@
             color: var(--accent);
         }
 
-        /* =========================================================
-           HERO
-        ========================================================= */
-
+        /* HERO */
         .hero {
             position: relative;
             padding: 90px 0 70px;
@@ -319,10 +314,7 @@
             color: var(--accent);
         }
 
-        /* =========================================================
-           ESTRUTURA DE SEÇÕES E CARDS
-        ========================================================= */
-
+        /* SEÇÕES E CARDS */
         section {
             padding: 70px 0;
         }
@@ -450,10 +442,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        /* =========================================================
-           CIBERSEGURANÇA E SEÇÃO LGPD
-        ========================================================= */
-
+        /* CIBERSEGURANÇA E SEÇÃO LGPD */
         .security-layout {
             display: grid;
             grid-template-columns: 1fr;
@@ -499,7 +488,6 @@
             line-height: 1.65;
         }
 
-        /* BLOCO LGPD EXPLICITO NO CORPO DA PÁGINA */
         .lgpd-section {
             background: var(--bg-soft);
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -550,10 +538,7 @@
             line-height: 1.65;
         }
 
-        /* =========================================================
-           DIFERENCIAIS E CTA CENTRALIZADO
-        ========================================================= */
-
+        /* DIFERENCIAIS E CTA CENTRALIZADO */
         .difference-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -616,10 +601,7 @@
             width: 100%;
         }
 
-        /* =========================================================
-           FOOTER E MODAL
-        ========================================================= */
-
+        /* FOOTER E MODAL */
         footer {
             padding: 40px 0 24px;
             background: #090c10;
@@ -1229,10 +1211,11 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT (SISTEMA INTEGRADO DE ROLAGEM E MODAL) -->
+    <!-- JAVASCRIPT SIMPLIFICADO (APENAS MENU MOBILE E MODAL) -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
 
         function toggleMenu() {
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -1244,29 +1227,11 @@
 
         menuToggle.addEventListener('click', toggleMenu);
 
-        // FUNÇÃO DE ROLAGEM FORÇADA POR JAVASCRIPT PARA TODAS AS ÂNCORAS
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#' || targetId === '') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    
-                    // Fechar menu mobile se estiver aberto
-                    if (mainNav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-
-                    const headerOffset = 80; // Compensação da altura do cabeçalho fixo
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+        // Ao clicar em qualquer link no celular, fecha a gaveta do menu
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('active')) {
+                    toggleMenu();
                 }
             });
         });
