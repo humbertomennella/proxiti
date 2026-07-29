@@ -41,6 +41,11 @@
             --text-soft: #c4ccd5;
             --text-muted: #8d99a6;
             --accent: #58a6ff;
+
+            /* WhatsApp */
+            --whatsapp: #25D366;
+            --whatsapp-hover: #20BD5A;
+
             --accent-soft: rgba(88, 166, 255, 0.12);
             --success: #3fb950;
             --max-width: 1180px;
@@ -314,6 +319,20 @@
         .btn-secondary:hover {
             border-color: var(--accent);
             color: var(--accent);
+        }
+
+        /* BOTÃO WHATSAPP */
+
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            border-color: var(--whatsapp);
+            color: #ffffff;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--whatsapp-hover);
+            border-color: var(--whatsapp-hover);
+            color: #ffffff;
         }
 
         /* =========================================================
@@ -604,11 +623,12 @@
             line-height: 1.7;
         }
 
+        /* CTA DO WHATSAPP CENTRALIZADO */
+
         .cta-actions {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
             justify-content: center;
+            align-items: center;
         }
 
         /* =========================================================
@@ -765,8 +785,8 @@
         ========================================================= */
 
         @media (min-width: 640px) {
-            .hero-actions,
-            .cta-actions {
+
+            .hero-actions {
                 flex-direction: row;
                 justify-content: flex-start;
             }
@@ -791,6 +811,7 @@
         }
 
         @media (min-width: 900px) {
+
             .menu-toggle {
                 display: none;
             }
@@ -839,7 +860,9 @@
             }
         }
 
-        /* Acessibilidade de Foco e Redução de Movimento */
+        /* =========================================================
+           ACESSIBILIDADE
+        ========================================================= */
 
         :focus-visible {
             outline: 2px solid var(--accent);
@@ -847,6 +870,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+
             html {
                 scroll-behavior: auto;
             }
@@ -887,12 +911,41 @@
 
             <nav aria-label="Navegação principal" id="mainNav">
                 <ul>
-                    <li><a href="#inicio" class="nav-link">Início</a></li>
-                    <li><a href="#residencial" class="nav-link">Para Você</a></li>
-                    <li><a href="#negocios" class="nav-link">Para Negócios</a></li>
-                    <li><a href="#ciberseguranca" class="nav-link">Segurança</a></li>
-                    <li><a href="#lgpd" class="nav-link">LGPD</a></li>
-                    <li><a href="#contato" class="nav-cta nav-link">Contato</a></li>
+                    <li>
+                        <a href="#inicio" class="nav-link">
+                            Início
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#residencial" class="nav-link">
+                            Para Você
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#negocios" class="nav-link">
+                            Para Negócios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#ciberseguranca" class="nav-link">
+                            Segurança
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#lgpd" class="nav-link">
+                            LGPD
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contato" class="nav-cta nav-link">
+                            Contato
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
@@ -905,6 +958,7 @@
 
         <section class="hero" id="inicio">
             <div class="container">
+
                 <div class="hero-content">
 
                     <span class="eyebrow">
@@ -924,6 +978,7 @@
                     </p>
 
                     <div class="hero-actions">
+
                         <a href="#residencial" class="btn btn-primary">
                             Para Você e Sua Casa
                         </a>
@@ -931,9 +986,11 @@
                         <a href="#negocios" class="btn btn-secondary">
                             Para Seu Negócio
                         </a>
+
                     </div>
 
                 </div>
+
             </div>
         </section>
 
@@ -943,6 +1000,7 @@
             <div class="container">
 
                 <div class="section-header">
+
                     <div class="section-label">
                         O que a PROXITI resolve
                     </div>
@@ -956,52 +1014,68 @@
                         a infraestrutura de dados de uma microempresa, a abordagem é a mesma:
                         diagnóstico antes da solução, sem empurrar serviços desnecessários.
                     </p>
+
                 </div>
 
                 <div class="entry-grid">
 
                     <article class="entry-card">
+
                         <div>
-                            <h3>Para Você e Sua Casa</h3>
+
+                            <h3>
+                                Para Você e Sua Casa
+                            </h3>
 
                             <p>
                                 Lentidão, formatação, remoção de vírus, problemas de Wi-Fi,
                                 configuração de roteadores, impressoras e orientação prática
                                 para não cair em golpes digitais.
                             </p>
+
                         </div>
 
                         <a href="#residencial" class="entry-link">
                             Conheça os serviços residenciais
                         </a>
+
                     </article>
 
                     <article class="entry-card">
+
                         <div>
-                            <h3>Para Seu Negócio</h3>
+
+                            <h3>
+                                Para Seu Negócio
+                            </h3>
 
                             <p>
                                 Consultoria em TI, organização de redes corporativas,
                                 separação de Wi-Fi para clientes, rotinas de backup,
                                 proteção de dados e orientação técnica para a equipe.
                             </p>
+
                         </div>
 
                         <a href="#negocios" class="entry-link">
                             Conheça os serviços para empresas
                         </a>
+
                     </article>
 
                 </div>
+
             </div>
         </section>
 
         <!-- ATENDIMENTO RESIDENCIAL DETALHADO -->
 
         <section class="services-section" id="residencial">
+
             <div class="container">
 
                 <div class="section-header">
+
                     <div class="section-label">
                         Pessoa Física e Residencial
                     </div>
@@ -1015,6 +1089,7 @@
                         Explicamos o que causou a falha, o que precisa ser corrigido
                         e como evitar novos problemas.
                     </p>
+
                 </div>
 
                 <!-- Bloco 1: Computadores e Periféricos -->
@@ -1022,6 +1097,7 @@
                 <div class="service-group">
 
                     <div class="service-group-title">
+
                         <h3>
                             Computadores, Notebooks e Periféricos
                         </h3>
@@ -1030,12 +1106,16 @@
                             Manutenção técnica e otimização para devolver o desempenho
                             do seu equipamento de uso diário ou de trabalho.
                         </p>
+
                     </div>
 
                     <div class="service-grid">
 
                         <article class="service-card">
-                            <h4>Diagnóstico e Manutenção</h4>
+                            <h4>
+                                Diagnóstico e Manutenção
+                            </h4>
+
                             <p>
                                 Investigação técnica minuciosa antes de qualquer troca de peça.
                                 Identificação das causas reais de travamentos, desligamentos
@@ -1044,7 +1124,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Formatação e Reinstalação</h4>
+                            <h4>
+                                Formatação e Reinstalação
+                            </h4>
+
                             <p>
                                 Reinstalação limpa do sistema operacional (Windows/Linux),
                                 mantendo os drivers atualizados e configurações essenciais
@@ -1053,7 +1136,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Programas e Limpeza Técnica</h4>
+                            <h4>
+                                Programas e Limpeza Técnica
+                            </h4>
+
                             <p>
                                 Instalação de programas essenciais para uso pessoal ou trabalho,
                                 limpeza interna física e eliminação de softwares desnecessários
@@ -1062,7 +1148,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Preservação de Arquivos</h4>
+                            <h4>
+                                Preservação de Arquivos
+                            </h4>
+
                             <p>
                                 Avaliação técnica prévia para preservar documentos, fotos e
                                 arquivos pessoais importantes antes de procedimentos que alterem o sistema.
@@ -1070,7 +1159,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Impressoras e Periféricos</h4>
+                            <h4>
+                                Impressoras e Periféricos
+                            </h4>
+
                             <p>
                                 Configuração e integração de impressoras (USB ou Wi-Fi),
                                 scanners, monitores adicionais e outros dispositivos ao seu computador.
@@ -1078,7 +1170,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Orientação ao Usuário</h4>
+                            <h4>
+                                Orientação ao Usuário
+                            </h4>
+
                             <p>
                                 Instruções em linguagem simples para você aprender a cuidar
                                 do equipamento e reconhecer alertas de falhas antes que elas piorem.
@@ -1086,6 +1181,7 @@
                         </article>
 
                     </div>
+
                 </div>
 
                 <!-- Bloco 2: Wi-Fi e Redes Residenciais -->
@@ -1093,6 +1189,7 @@
                 <div class="service-group">
 
                     <div class="service-group-title">
+
                         <h3>
                             Wi-Fi, Roteadores e Cobertura Doméstica
                         </h3>
@@ -1100,12 +1197,16 @@
                         <p>
                             Diagnóstico de problemas de sinal que vão além da operadora de internet.
                         </p>
+
                     </div>
 
                     <div class="service-grid">
 
                         <article class="service-card">
-                            <h4>Posicionamento de Roteadores</h4>
+                            <h4>
+                                Posicionamento de Roteadores
+                            </h4>
+
                             <p>
                                 Avaliação técnica do melhor local da casa para colocar o roteador,
                                 considerando distância, pontos de uso e distribuição de sinal no imóvel.
@@ -1113,7 +1214,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Interferências Físicas</h4>
+                            <h4>
+                                Interferências Físicas
+                            </h4>
+
                             <p>
                                 Identificação de barreiras que enfraquecem o sinal, como paredes espessas
                                 de concreto, espelhos, eletrodomésticos e estruturas metálicas.
@@ -1121,7 +1225,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Redes Vizinhas e Apartamentos</h4>
+                            <h4>
+                                Redes Vizinhas e Apartamentos
+                            </h4>
+
                             <p>
                                 Ajuste de canais e frequências para reduzir a interferência provocada
                                 pela grande quantidade de roteadores vizinhos operando no mesmo prédio.
@@ -1129,7 +1236,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Casas Grandes e Múltiplos Andares</h4>
+                            <h4>
+                                Casas Grandes e Múltiplos Andares
+                            </h4>
+
                             <p>
                                 Soluções para levar a internet com velocidade para quartos distantes,
                                 escritórios ou andares superiores sem quedas de conexão.
@@ -1137,7 +1247,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Instalação e Ajuste de Equipamentos</h4>
+                            <h4>
+                                Instalação e Ajuste de Equipamentos
+                            </h4>
+
                             <p>
                                 Configuração adequada de roteadores particulares, pontos de acesso,
                                 sistemas Mesh e repetidores de sinal, conforme as características do ambiente.
@@ -1145,7 +1258,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Instalação e Cabeamento Leve</h4>
+                            <h4>
+                                Instalação e Cabeamento Leve
+                            </h4>
+
                             <p>
                                 Organização e passagem pontual de cabos de rede para conectar Smart TVs,
                                 computadores ou videogames diretamente com máxima estabilidade e desempenho.
@@ -1153,6 +1269,7 @@
                         </article>
 
                     </div>
+
                 </div>
 
                 <!-- Bloco 3: Segurança Residencial -->
@@ -1160,6 +1277,7 @@
                 <div class="service-group">
 
                     <div class="service-group-title">
+
                         <h3>
                             Segurança Digital Residencial
                         </h3>
@@ -1168,12 +1286,16 @@
                             Cuidados essenciais para proteger sua privacidade,
                             seus dispositivos e sua família.
                         </p>
+
                     </div>
 
                     <div class="service-grid">
 
                         <article class="service-card">
-                            <h4>Proteção do Roteador Doméstico</h4>
+                            <h4>
+                                Proteção do Roteador Doméstico
+                            </h4>
+
                             <p>
                                 Alteração de senhas padrão de fábrica, fechamento de brechas de acesso
                                 remoto e configuração de segurança na rede sem fio.
@@ -1181,7 +1303,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Prevenção Contra Golpes e Phishing</h4>
+                            <h4>
+                                Prevenção Contra Golpes e Phishing
+                            </h4>
+
                             <p>
                                 Orientação técnica para aprender a identificar e-mails falsos,
                                 mensagens de fraude, links maliciosos e tentativas de engenharia social.
@@ -1189,7 +1314,10 @@
                         </article>
 
                         <article class="service-card">
-                            <h4>Boas Práticas para Dispositivos</h4>
+                            <h4>
+                                Boas Práticas para Dispositivos
+                            </h4>
+
                             <p>
                                 Ajustes de privacidade em celulares, computadores familiares e orientação
                                 sobre gerenciamento seguro de senhas pessoais.
@@ -1197,17 +1325,21 @@
                         </article>
 
                     </div>
+
                 </div>
 
             </div>
+
         </section>
 
         <!-- ATENDIMENTO EMPRESARIAL DETALHADO -->
 
         <section id="negocios">
+
             <div class="container">
 
                 <div class="section-header">
+
                     <div class="section-label">
                         Micro e Pequenas Empresas
                     </div>
@@ -1220,12 +1352,16 @@
                         Estruturamos a TI do seu empreendimento com foco em prevenção de paradas,
                         organização de acessos e continuidade operacional.
                     </p>
+
                 </div>
 
                 <div class="service-grid">
 
                     <article class="service-card">
-                        <h4>Diagnóstico e Consultoria em TI</h4>
+                        <h4>
+                            Diagnóstico e Consultoria em TI
+                        </h4>
+
                         <p>
                             Avaliação completa da estrutura atual. Orientação sobre compra de computadores,
                             licenças de software e infraestrutura de rede sem gastar além do necessário.
@@ -1233,7 +1369,10 @@
                     </article>
 
                     <article class="service-card">
-                        <h4>Computadores e Infraestrutura</h4>
+                        <h4>
+                            Computadores e Infraestrutura
+                        </h4>
+
                         <p>
                             Padronização, manutenção e suporte preventivo para as estações de trabalho
                             da equipe, garantindo produtividade e redução de chamados de urgência.
@@ -1241,7 +1380,10 @@
                     </article>
 
                     <article class="service-card">
-                        <h4>Redes Corporativas</h4>
+                        <h4>
+                            Redes Corporativas
+                        </h4>
+
                         <p>
                             Planejamento, organização de cabeamento e configuração de roteadores e switches
                             comerciais para manter os setores comunicados sem lentidão.
@@ -1249,7 +1391,10 @@
                     </article>
 
                     <article class="service-card">
-                        <h4>Wi-Fi Corporativo e Convidados</h4>
+                        <h4>
+                            Wi-Fi Corporativo e Convidados
+                        </h4>
+
                         <p>
                             Estruturação de redes sem fio com isolamento entre os aparelhos dos funcionários,
                             sistemas de venda e o Wi-Fi disponibilizado a clientes.
@@ -1257,7 +1402,10 @@
                     </article>
 
                     <article class="service-card">
-                        <h4>Organização e Segmentação</h4>
+                        <h4>
+                            Organização e Segmentação
+                        </h4>
+
                         <p>
                             Controle do fluxo de dados interno para evitar que visitantes ou dispositivos
                             não autorizados enxerguem computadores administrativos ou financeiros.
@@ -1265,7 +1413,10 @@
                     </article>
 
                     <article class="service-card">
-                        <h4>Backup e Continuidade do Negócio</h4>
+                        <h4>
+                            Backup e Continuidade do Negócio
+                        </h4>
+
                         <p>
                             Criação e testes periódicos de rotinas automáticas de cópia de segurança
                             de documentos fiscais, administrativos e arquivos dos clientes.
@@ -1273,17 +1424,21 @@
                     </article>
 
                 </div>
+
             </div>
+
         </section>
 
         <!-- CIBERSEGURANÇA SEPARADA -->
 
         <section id="ciberseguranca">
+
             <div class="container">
 
                 <div class="security-layout">
 
                     <div class="security-intro">
+
                         <div class="section-label">
                             Segurança da Informação
                         </div>
@@ -1297,51 +1452,76 @@
                             gerenciamento adequado de acessos, preparo humano e capacidade de recuperar
                             dados em caso de incidentes.
                         </p>
+
                     </div>
 
                     <div class="security-list">
 
                         <article class="security-item">
-                            <h3>Gestão de Senhas e Acessos</h3>
+
+                            <h3>
+                                Gestão de Senhas e Acessos
+                            </h3>
+
                             <p>
                                 Definição de políticas de senhas fortes, autenticação em dois fatores (2FA)
                                 e restrição de privilégios administrativos somente ao necessário.
                             </p>
+
                         </article>
 
                         <article class="security-item">
-                            <h3>Phishing e Engenharia Social</h3>
+
+                            <h3>
+                                Phishing e Engenharia Social
+                            </h3>
+
                             <p>
                                 Orientação focada no fator humano para conscientizar a equipe ou usuários
                                 sobre técnicas de manipulação e roubo de credenciais.
                             </p>
+
                         </article>
 
                         <article class="security-item">
-                            <h3>Prevenção e Mitigação de Ransomware</h3>
+
+                            <h3>
+                                Prevenção e Mitigação de Ransomware
+                            </h3>
+
                             <p>
                                 Estratégias para isolar sistemas críticos, reduzir a exposição de arquivos
                                 a códigos maliciosos e garantir meios de restauração.
                             </p>
+
                         </article>
 
                         <article class="security-item">
-                            <h3>Backup Seguro e Desconectado</h3>
+
+                            <h3>
+                                Backup Seguro e Desconectado
+                            </h3>
+
                             <p>
                                 Implementação de estratégias de backup com isolamento, controle de acesso
                                 e testes periódicos de restauração, reduzindo o impacto de incidentes
                                 como ransomware.
                             </p>
+
                         </article>
 
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
         <!-- LGPD E PRIVACIDADE -->
 
         <section class="lgpd-section" id="lgpd">
+
             <div class="container">
 
                 <div class="trust-box">
@@ -1363,41 +1543,61 @@
                     <div class="trust-grid">
 
                         <article class="trust-item">
-                            <h3>Tratamento Adequado</h3>
+
+                            <h3>
+                                Tratamento Adequado
+                            </h3>
+
                             <p>
                                 Coletamos apenas as informações voluntariamente fornecidas para responder
                                 a contatos e prestar atendimentos. Não comercializamos dados de clientes.
                             </p>
+
                         </article>
 
                         <article class="trust-item">
-                            <h3>Compromisso de Confidencialidade</h3>
+
+                            <h3>
+                                Compromisso de Confidencialidade
+                            </h3>
+
                             <p>
                                 Qualquer arquivo, documento ou informação acessada durante manutenções
                                 presenciais ou remotas é tratada com compromisso de confidencialidade
                                 durante a prestação do serviço.
                             </p>
+
                         </article>
 
                         <article class="trust-item">
-                            <h3>Limites Operacionais</h3>
+
+                            <h3>
+                                Limites Operacionais
+                            </h3>
+
                             <p>
                                 Atuação pautada na ética. Nenhum procedimento, alteração de segurança
                                 ou teste é realizado sem prévia autorização e alinhamento com o cliente.
                             </p>
+
                         </article>
 
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
         <!-- DIFERENCIAIS -->
 
         <section>
+
             <div class="container">
 
                 <div class="section-header">
+
                     <div class="section-label">
                         Por que a PROXITI
                     </div>
@@ -1410,42 +1610,61 @@
                         Você não precisa descobrir sozinho qual é a solução técnica.
                         Nosso papel é escutar o sintoma e propor o caminho correto.
                     </p>
+
                 </div>
 
                 <div class="difference-grid">
 
                     <article class="difference-card">
-                        <h3>Linguagem Acessível</h3>
+
+                        <h3>
+                            Linguagem Acessível
+                        </h3>
+
                         <p>
                             Explicamos a situação em português claro, sem jargões desnecessários.
                             Você entende exatamente o que está sendo feito no seu equipamento.
                         </p>
+
                     </article>
 
                     <article class="difference-card">
-                        <h3>Diagnóstico Antes de Vender</h3>
+
+                        <h3>
+                            Diagnóstico Antes de Vender
+                        </h3>
+
                         <p>
                             Avaliamos o cenário antes de sugerir trocas de peças, compras de software
                             ou contratação de planos. A recomendação é sempre técnica e imparcial.
                         </p>
+
                     </article>
 
                     <article class="difference-card">
-                        <h3>Soluções Proporcionais</h3>
+
+                        <h3>
+                            Soluções Proporcionais
+                        </h3>
+
                         <p>
                             Respeitamos o orçamento e o tamanho do cliente.
                             Não oferecemos soluções hipercomplexas para quem só precisa
                             do básico funcionando bem.
                         </p>
+
                     </article>
 
                 </div>
+
             </div>
+
         </section>
 
         <!-- CTA FINAL -->
 
         <section class="final-cta" id="contato">
+
             <div class="container">
 
                 <div class="cta-box">
@@ -1464,23 +1683,19 @@
 
                         <a
                             href="https://wa.me/5541988235598"
-                            class="btn btn-primary"
+                            class="btn btn-whatsapp"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             Falar pelo WhatsApp
                         </a>
 
-                        <a
-                            href="mailto:contato@proxiti.com.br"
-                            class="btn btn-secondary"
-                        >
-                            Enviar E-mail
-                        </a>
-
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
     </main>
@@ -1488,23 +1703,32 @@
     <!-- FOOTER -->
 
     <footer>
+
         <div class="container">
 
             <div class="footer-grid">
 
                 <div class="footer-brand">
-                    <h2>PROXITI</h2>
+
+                    <h2>
+                        PROXITI
+                    </h2>
 
                     <p>
                         Tecnologia, suporte técnico, consultoria em TI e segurança digital
                         para pessoas e empresas em Curitiba-PR e região.
                     </p>
+
                 </div>
 
                 <div class="footer-column">
-                    <h3>Navegação</h3>
+
+                    <h3>
+                        Navegação
+                    </h3>
 
                     <ul>
+
                         <li>
                             <a href="#residencial">
                                 Para Você e Sua Casa
@@ -1522,14 +1746,21 @@
                                 Segurança Digital
                             </a>
                         </li>
+
                     </ul>
+
                 </div>
 
                 <div class="footer-column">
-                    <h3>Contato</h3>
+
+                    <h3>
+                        Contato
+                    </h3>
 
                     <ul>
+
                         <li>
+
                             <a
                                 href="https://wa.me/5541988235598"
                                 target="_blank"
@@ -1537,31 +1768,42 @@
                             >
                                 WhatsApp
                             </a>
+
                         </li>
 
                         <li>
+
                             <a href="mailto:contato@proxiti.com.br">
                                 contato@proxiti.com.br
                             </a>
+
                         </li>
 
                         <li>
-                            <span>Curitiba - PR</span>
+                            <span>
+                                Curitiba - PR
+                            </span>
                         </li>
+
                     </ul>
+
                 </div>
 
             </div>
 
             <div class="privacy-notice">
+
                 Este site atua com respeito à privacidade e à LGPD.
                 Consulte os nossos
+
                 <button type="button" id="openTerms">
                     Termos de Uso e Privacidade
                 </button>.
+
             </div>
 
             <div class="footer-bottom">
+
                 <span>
                     © 2026 PROXITI. Todos os direitos reservados.
                 </span>
@@ -1569,9 +1811,11 @@
                 <span>
                     Tecnologia, suporte e segurança digital.
                 </span>
+
             </div>
 
         </div>
+
     </footer>
 
     <!-- MODAL DE TERMOS E PRIVACIDADE -->
@@ -1604,7 +1848,9 @@
                 Última atualização: julho de 2026
             </div>
 
-            <h3>1. Sobre a PROXITI</h3>
+            <h3>
+                1. Sobre a PROXITI
+            </h3>
 
             <p>
                 A PROXITI presta serviços de suporte técnico, manutenção preventiva e corretiva
@@ -1612,7 +1858,9 @@
                 segurança digital para pessoas físicas e jurídicas.
             </p>
 
-            <h3>2. Tratamento de Dados (LGPD)</h3>
+            <h3>
+                2. Tratamento de Dados (LGPD)
+            </h3>
 
             <p>
                 Os dados fornecidos voluntariamente pelo usuário, como nome, telefone e e-mail,
@@ -1621,7 +1869,9 @@
                 nem os compartilha com terceiros para fins publicitários.
             </p>
 
-            <h3>3. Confidencialidade e Acesso a Arquivos</h3>
+            <h3>
+                3. Confidencialidade e Acesso a Arquivos
+            </h3>
 
             <p>
                 Durante os procedimentos de suporte ou consultoria, a PROXITI pode ter acesso
@@ -1630,7 +1880,9 @@
                 confidencialidade sobre as informações acessadas durante a prestação do serviço.
             </p>
 
-            <h3>4. Responsabilidade sobre Dados</h3>
+            <h3>
+                4. Responsabilidade sobre Dados
+            </h3>
 
             <p>
                 Recomenda-se a realização de cópias de segurança de dados pessoais antes de
@@ -1638,7 +1890,9 @@
                 previamente de acordo com a integridade do hardware e do sistema do cliente.
             </p>
 
-            <h3>5. Modificações dos Termos</h3>
+            <h3>
+                5. Modificações dos Termos
+            </h3>
 
             <p>
                 Estes termos podem ser atualizados periodicamente para refletir melhorias em nossas
@@ -1647,11 +1901,13 @@
             </p>
 
         </div>
+
     </div>
 
     <!-- JAVASCRIPT -->
 
     <script>
+
         // Menu Mobile Responsivo
 
         const menuToggle = document.getElementById("menuToggle");
@@ -1659,26 +1915,52 @@
         const navLinks = document.querySelectorAll(".nav-link");
 
         function toggleMenu() {
+
             const isOpen = mainNav.classList.toggle("active");
 
             menuToggle.classList.toggle("active", isOpen);
-            document.body.classList.toggle("menu-open", isOpen);
 
-            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            document.body.classList.toggle(
+                "menu-open",
+                isOpen
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
             menuToggle.setAttribute(
                 "aria-label",
-                isOpen ? "Fechar Menu" : "Abrir Menu"
+                isOpen
+                    ? "Fechar Menu"
+                    : "Abrir Menu"
             );
+
         }
 
-        menuToggle.addEventListener("click", toggleMenu);
+        menuToggle.addEventListener(
+            "click",
+            toggleMenu
+        );
 
         navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                if (mainNav.classList.contains("active")) {
-                    toggleMenu();
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        mainNav.classList.contains("active")
+                    ) {
+
+                        toggleMenu();
+
+                    }
+
                 }
-            });
+            );
+
         });
 
         // Modal de Termos de Uso / LGPD
@@ -1688,41 +1970,80 @@
         const closeTerms = document.getElementById("closeTerms");
 
         function abrirModal() {
+
             modal.classList.add("active");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.classList.add("modal-open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "modal-open"
+            );
 
             closeTerms.focus();
+
         }
 
         function fecharModal() {
+
             modal.classList.remove("active");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.classList.remove("modal-open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.classList.remove(
+                "modal-open"
+            );
 
             openTerms.focus();
+
         }
 
-        openTerms.addEventListener("click", abrirModal);
+        openTerms.addEventListener(
+            "click",
+            abrirModal
+        );
 
-        closeTerms.addEventListener("click", fecharModal);
+        closeTerms.addEventListener(
+            "click",
+            fecharModal
+        );
 
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                fecharModal();
+        modal.addEventListener(
+            "click",
+            (e) => {
+
+                if (
+                    e.target === modal
+                ) {
+
+                    fecharModal();
+
+                }
+
             }
-        });
+        );
 
-        document.addEventListener("keydown", (e) => {
+        document.addEventListener(
+            "keydown",
+            (e) => {
 
-            if (
-                e.key === "Escape" &&
-                modal.classList.contains("active")
-            ) {
-                fecharModal();
+                if (
+                    e.key === "Escape" &&
+                    modal.classList.contains("active")
+                ) {
+
+                    fecharModal();
+
+                }
+
             }
+        );
 
-        });
     </script>
 
 </body>
