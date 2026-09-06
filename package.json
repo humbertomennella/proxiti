@@ -1,0 +1,10 @@
+{
+  "name": "proxiti-site",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/preview.mjs",
+    "check:js": "node --check assets/js/main.js",
+    "check": "python3 scripts/check.py",
+    "check:runtime": "node scripts/check-runtime.mjs"
+  }
+}

@@ -5,7 +5,6 @@
   const themeButton = document.querySelector(".theme-toggle");
   const menuButton = document.querySelector(".menu-button");
   const mobilePanel = document.querySelector(".mobile-panel");
-  const mobileLinks = document.querySelectorAll(".mobile-nav a");
   const navLinks = document.querySelectorAll(".desktop-nav a");
   const sections = document.querySelectorAll("main section[id]");
   const year = document.querySelector("#year");
@@ -77,7 +76,8 @@
     document.body.classList.remove("menu-open");
     setBackgroundInert(false);
     if (returnFocus && wasOpen) {
-      menuButton.focus();
+      const focusTarget = menuButton.getClientRects().length ? menuButton : header?.querySelector(".brand");
+      focusTarget?.focus();
     }
   };
 
@@ -99,10 +99,6 @@
     isOpen ? closeMenu({ returnFocus: true }) : openMenu();
   });
 
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => closeMenu());
-  });
-
   document.addEventListener("keydown", (event) => {
     const menuIsOpen = menuButton?.getAttribute("aria-expanded") === "true";
     if (event.key === "Escape" && menuIsOpen) {
@@ -111,7 +107,10 @@
       return;
     }
     if (event.key === "Tab" && menuIsOpen && mobilePanel) {
-      const focusable = [...mobilePanel.querySelectorAll("a[href]")];
+      const focusable = [
+        ...header.querySelectorAll("a[href], button"),
+        ...mobilePanel.querySelectorAll("a[href]")
+      ].filter((element) => element.getClientRects().length && !element.disabled);
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (!first || !last) {
@@ -123,7 +122,7 @@
       } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
         first.focus();
-      } else if (!mobilePanel.contains(document.activeElement)) {
+      } else if (!focusable.includes(document.activeElement)) {
         event.preventDefault();
         first.focus();
       }
@@ -132,7 +131,7 @@
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 1050) {
-      closeMenu();
+      closeMenu({ returnFocus: true });
     }
   });
   const updateHeader = () => {
@@ -141,11 +140,13 @@
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
   if ("IntersectionObserver" in window) {
+    const motionAllowed = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
+            entry.target.classList.remove("reveal-pending");
             observer.unobserve(entry.target);
           }
         });
@@ -156,7 +157,13 @@
       }
     );
     document.querySelectorAll(".reveal").forEach((element) => {
-      revealObserver.observe(element);
+      // Somente elementos que cabem na tela e estão abaixo dela aguardam animação.
+      // Blocos longos e documentos legais permanecem legíveis em qualquer viewport.
+      const bounds = element.getBoundingClientRect();
+      if (motionAllowed && bounds.top > window.innerHeight && bounds.height < window.innerHeight) {
+        element.classList.add("reveal-pending");
+        revealObserver.observe(element);
+      }
     });
     const navigationObserver = new IntersectionObserver(
       (entries) => {
@@ -215,11 +222,16 @@
       target.open = true;
     }
   };
-  document.querySelectorAll(".footer-legal a").forEach((link) => {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", () => {
-      const target = document.querySelector(link.getAttribute("href"));
+      const target = document.getElementById(link.getAttribute("href").slice(1));
+      if (!target) return;
+      closeMenu();
       if (target instanceof HTMLDetailsElement) {
         target.open = true;
+        target.querySelector("summary")?.focus({ preventScroll: true });
+      } else {
+        target.focus({ preventScroll: true });
       }
     });
   });
