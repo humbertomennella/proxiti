@@ -1,15 +1,19 @@
-# Arquivos de imagem
+# Imagens e ícones
 
-## Incluídos no projeto
+## Arquivos referenciados
 
-- `assets/og-proxiti.jpg` — imagem Open Graph em 1200 × 630 pixels.
-- `assets/icons/favicon.svg` — favicon vetorial com a letra P azul.
-- `assets/icons/favicon.ico` — fallback para navegadores e atalhos antigos.
-- `assets/icons/apple-touch-icon.png` — ícone de 180 × 180 pixels para dispositivos Apple.
-- `assets/icons/icon-192.png` — ícone do manifesto.
-- `assets/icons/icon-512.png` — ícone do manifesto.
-- `assets/icons/icon-maskable-512.png` — ícone com área segura para máscaras do sistema.
+| Arquivo | Uso | Dimensão |
+| --- | --- | --- |
+| assets/og-proxiti.jpg | Open Graph e Twitter Card | 1200 × 630 |
+| assets/icons/favicon.svg | Favicon vetorial P | Vetorial |
+| assets/icons/favicon.ico | Fallback de favicon | Múltiplos tamanhos |
+| assets/icons/apple-touch-icon.png | Ícone Apple | 180 × 180 |
+| assets/icons/icon-192.png | Manifesto | 192 × 192 |
+| assets/icons/icon-512.png | Manifesto | 512 × 512 |
+| assets/icons/icon-maskable-512.png | Manifesto com máscara | 512 × 512 |
 
-## Não necessários atualmente
+Todos foram preservados do repositório oficial. O monograma P, os SVGs em uso e a imagem social não foram redesenhados.
 
-O site não utiliza fotografias ou ilustrações nas seções. Isso mantém o carregamento leve e evita imagens genéricas. Se forem adicionadas imagens futuramente, informar dimensões, usar formatos otimizados e definir `width`, `height`, `loading="lazy"` e `decoding="async"` quando estiverem fora da primeira tela.
+Os ícones antigos na raiz e `about.txt` foram preservados para compatibilidade e procedência. O HTML e o manifesto usam os arquivos de `assets/icons/`. Não excluir os antigos sem conferir eventuais consumidores externos.
+
+Não há necessidade de fotografias, ilustrações ou novas imagens para esta revisão. Depois da publicação, verificar HTTP 200, tipos de conteúdo e atualização dos caches de compartilhamento.
