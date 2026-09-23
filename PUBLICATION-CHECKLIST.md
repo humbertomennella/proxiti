@@ -1,42 +1,49 @@
 # Checklist de publicação e manutenção
 
-Este arquivo registra validações recorrentes do site. A versão pública não depende de informações provisórias no HTML.
+## Conteúdo e comercial
 
-## Estado atual
+- [x] Telefone/WhatsApp oficial: `+55 41 8823-5598`.
+- [x] E-mail oficial: `contato.proxiti@gmail.com`.
+- [x] Home com três rotas comerciais: problema atual, melhoria planejada e produto digital.
+- [x] Página de serviços publicada em `/servicos/`.
+- [x] Pré-diagnóstico processado localmente no navegador.
+- [x] Catálogo em `/produtos/`.
+- [x] PC Seguro em `/produtos/pc-seguro/`.
+- [x] Compra assistida do PC Seguro pelo WhatsApp.
+- [x] PDF pago fora do GitHub Pages.
+- [x] Política de Privacidade e Termos em páginas próprias.
+- [x] Nenhuma métrica, SLA, depoimento ou garantia sem evidência.
 
-- [x] Telefone/WhatsApp oficial padronizado: `+55 41 8823-5598`.
-- [x] E-mail oficial preservado: `contato.proxiti@gmail.com`.
-- [x] Domínio público configurado: `https://proxiti.com.br/`.
-- [x] Home sem placeholders operacionais.
-- [x] Política de Privacidade publicada em `/privacidade/`.
-- [x] Termos de Atendimento publicados em `/termos/`.
-- [x] Catálogo publicado em `/produtos/`.
-- [x] PC Seguro publicado em `/produtos/pc-seguro/`.
-- [x] PDF pago mantido fora do GitHub Pages.
-- [x] Compra assistida do PC Seguro disponível pelo WhatsApp.
-- [x] Sitemap atualizado com páginas comerciais e institucionais.
+## Visual e UX
+
+- [x] Identidade V3 documentada em `DESIGN-SYSTEM.md`.
+- [x] Ilustrações SVG originais, sem dependência de stock photo.
+- [x] Carrossel com controles manuais.
+- [x] Carrossel respeita `prefers-reduced-motion`.
+- [x] Tema claro/escuro.
+- [x] Imagens com dimensões explícitas.
+- [x] Assets abaixo da primeira dobra usam carregamento preguiçoso quando aplicável.
+- [x] Foco de teclado visível.
 
 ## Antes de cada publicação relevante
 
-- [ ] Revisar telefone, WhatsApp, e-mail e mensagens pré-preenchidas.
-- [ ] Confirmar que nenhum arquivo pago, credencial, token ou dado privado foi incluído.
-- [ ] Validar links internos, menu desktop e menu móvel.
-- [ ] Testar tema claro/escuro e navegação por teclado.
-- [ ] Testar largura mínima de 320 px e zoom de 200%.
-- [ ] Verificar console do navegador e ausência de erros JavaScript.
-- [ ] Conferir canonical, meta description, Open Graph e sitemap.
-- [ ] Revisar textos que descrevem escopo, garantias, disponibilidade e preços.
-
-## Infraestrutura e SEO
-
-- [ ] Confirmar HTTPS e redirecionamento do domínio.
-- [ ] Validar resposta HTTP 200 dos assets principais.
-- [ ] Revisar cabeçalhos de segurança quando a hospedagem permitir configuração.
-- [ ] Enviar ou atualizar `sitemap.xml` no Google Search Console quando necessário.
-- [ ] Revisar dados estruturados após mudanças de oferta ou contato.
+- [ ] Confirmar telefone, WhatsApp e e-mail.
+- [ ] Confirmar que nenhum arquivo pago, credencial, token ou dado de cliente foi incluído.
+- [ ] Testar menu desktop e móvel.
+- [ ] Testar carrossel por mouse, teclado e toque.
+- [ ] Testar o formulário de pré-diagnóstico.
+- [ ] Testar links de WhatsApp.
+- [ ] Testar tema claro e escuro.
+- [ ] Testar Chrome/Chromium e Firefox.
+- [ ] Testar 320 px, 768 px, 1024 px e desktop amplo.
+- [ ] Testar zoom de 200%.
+- [ ] Verificar console do navegador.
+- [ ] Validar canonical, metadados e sitemap.
+- [ ] Verificar ausência de afirmações não comprovadas.
 
 ## Evolução comercial
 
-- [ ] Substituir o fallback de compra por checkout automático quando a plataforma estiver definida.
-- [ ] Adicionar casos reais somente quando existirem e puderem ser publicados sem expor clientes.
-- [ ] Adicionar novos produtos apenas quando o material estiver finalizado e o fluxo de entrega estiver definido.
+- [ ] Substituir compra assistida por checkout automático quando a plataforma estiver configurada.
+- [ ] Adicionar avaliações apenas quando forem reais e publicáveis.
+- [ ] Adicionar cases apenas com contexto verificável e autorização adequada.
+- [ ] Adicionar novos produtos somente quando o conteúdo e a entrega estiverem prontos.
