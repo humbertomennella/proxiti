@@ -208,7 +208,7 @@
       String(data.get("sintoma") || "").trim()
     ];
 
-    const url = `https://wa.me/5541998235598?text=${encodeURIComponent(lines.join("\n"))}`;
+    const url = `https://wa.me/554188235598?text=${encodeURIComponent(lines.join("\n"))}`;
     if (triageStatus) {
       triageStatus.textContent = "Mensagem preparada. Abrindo o WhatsApp...";
     }

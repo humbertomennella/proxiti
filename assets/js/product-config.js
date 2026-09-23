@@ -7,7 +7,7 @@
   window.PROXITI_PRODUCT_CONFIG = Object.freeze({
     "pc-seguro": Object.freeze({
       checkoutUrl: "",
-      fallbackUrl: "https://wa.me/5541998235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90."
+      fallbackUrl: "https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90."
     })
   });
 })();
