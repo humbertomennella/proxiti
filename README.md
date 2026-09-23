@@ -51,7 +51,7 @@ A direção visual está documentada em `DESIGN-SYSTEM.md`.
 
 ## Contato
 
-- Telefone / WhatsApp: **(41) 99823-5598**
+- Telefone / WhatsApp: **(41) 8823-5598**
 - E-mail: **contato.proxiti@gmail.com**
 - Área principal: **Curitiba/PR**
 
