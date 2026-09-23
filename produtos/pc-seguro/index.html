@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="no-js" data-theme="dark">
+<html lang="pt-BR" class="no-js" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#07111f">
+  <meta name="theme-color" content="#f6f7f9">
   <title>PC Seguro | Guia prático de segurança digital | PROXITI</title>
-  <meta name="description" content="PC Seguro é o guia prático da PROXITI para proteger contas, computador, celular, Wi-Fi e arquivos sem exigir conhecimento técnico avançado.">
+  <meta name="description" content="PC Seguro: guia digital de 15 páginas sobre senhas, 2FA, phishing, backup, Wi-Fi, celular e resposta inicial a incidentes.">
   <meta name="author" content="PROXITI">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://proxiti.com.br/produtos/pc-seguro/">
@@ -14,10 +14,9 @@
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="PROXITI">
   <meta property="og:title" content="PC Seguro | Guia prático de segurança digital">
-  <meta property="og:description" content="Senhas, 2FA, phishing, backup, Wi-Fi, celular e resposta inicial a incidentes em um guia direto de 15 páginas.">
+  <meta property="og:description" content="Segurança digital básica organizada em um roteiro de 15 páginas com checklist mensal.">
   <meta property="og:url" content="https://proxiti.com.br/produtos/pc-seguro/">
   <meta property="og:image" content="https://proxiti.com.br/assets/og-proxiti.jpg">
-  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
@@ -30,13 +29,7 @@
     "description":"Guia prático de segurança digital para usuários comuns.",
     "brand":{"@type":"Brand","name":"PROXITI"},
     "category":"Guia digital de segurança",
-    "offers":{
-      "@type":"Offer",
-      "priceCurrency":"BRL",
-      "price":"24.90",
-      "url":"https://proxiti.com.br/produtos/pc-seguro/",
-      "availability":"https://schema.org/InStock"
-    }
+    "offers":{"@type":"Offer","priceCurrency":"BRL","price":"24.90","url":"https://proxiti.com.br/produtos/pc-seguro/","availability":"https://schema.org/InStock"}
   }
   </script>
   <link rel="stylesheet" href="/assets/css/style.css">
@@ -46,39 +39,23 @@
 
   <header class="site-header" id="topo">
     <div class="container header-inner">
-      <a class="brand" href="/" aria-label="PROXITI — ir para o início">
-        <span class="brand-mark" aria-hidden="true"><span>P</span></span>
-        <span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span>
-      </a>
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><span>P</span></span><span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span></a>
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="/">Início</a>
-        <a href="/#servicos">Serviços</a>
-        <a href="/#metodo">Método</a>
-        <a href="/produtos/" aria-current="page">Produtos</a>
-        <a href="/#sobre">Sobre</a>
-        <a href="/#contato">Contato</a>
+        <a href="/">Início</a><a href="/servicos/">Serviços</a><a href="/#como-funciona">Como funciona</a><a href="/produtos/" aria-current="page">Produtos</a><a href="/#sobre">Sobre</a><a href="/#contato">Contato</a>
       </nav>
       <div class="header-actions">
-        <button class="icon-button theme-toggle" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">
+        <button class="icon-button theme-toggle" type="button" aria-label="Alternar tema claro e escuro">
           <svg class="theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20 15.4A8.5 8.5 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" stroke="currentColor" stroke-width="1.8"/></svg>
           <svg class="theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2" stroke="currentColor" stroke-width="1.8"/></svg>
         </button>
         <a class="button button-primary header-cta" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90." target="_blank" rel="noopener noreferrer" data-checkout="pc-seguro" data-ready-label="Comprar PC Seguro" data-fallback-label="Comprar pelo WhatsApp" data-unavailable-label="Venda indisponível">Comprar</a>
-        <button class="icon-button menu-button" type="button" aria-label="Abrir menu" aria-controls="menu-mobile" aria-expanded="false">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </button>
+        <button class="icon-button menu-button" type="button" aria-label="Abrir menu" aria-controls="menu-mobile" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8"/></svg></button>
       </div>
     </div>
   </header>
 
   <div class="mobile-panel" id="menu-mobile" hidden>
-    <nav class="container mobile-nav" aria-label="Navegação móvel">
-      <a href="/">Início</a>
-      <a href="/produtos/">Produtos</a>
-      <a href="#conteudo-guia">Conteúdo</a>
-      <a href="#publico">Para quem é</a>
-      <a href="/#contato">Contato</a>
-    </nav>
+    <nav class="container mobile-nav"><a href="/">Início</a><a href="/produtos/">Produtos</a><a href="#conteudo-guia">Conteúdo</a><a href="#entrega">O que recebe</a><a href="#publico">Para quem é</a><a href="/#contato">Contato</a></nav>
   </div>
 
   <main class="page-main" id="conteudo">
@@ -86,70 +63,55 @@
       <div class="container page-hero-grid">
         <div class="reveal">
           <div class="breadcrumbs"><a href="/">Início</a><span>/</span><a href="/produtos/">Produtos</a><span>/</span><span>PC Seguro</span></div>
-          <span class="kicker">Guia digital · edição 1.0</span>
-          <h1>PC <span>Seguro.</span></h1>
+          <span class="hero-kicker">Guia digital · edição 1.0</span>
+          <h1>Segurança digital básica,<span>em ordem de ação.</span></h1>
           <p class="lead">
-            Um guia de 15 páginas para organizar as medidas de segurança que mais fazem
-            diferença no dia a dia: senhas, autenticação em dois fatores, phishing, backup,
-            Wi-Fi, celular e resposta inicial quando algo dá errado.
+            O PC Seguro reúne medidas que usuários comuns conseguem aplicar sem transformar
+            prevenção em um curso de cibersegurança: senhas, 2FA, phishing, backup, Wi-Fi,
+            celular e resposta inicial quando algo dá errado.
           </p>
-          <div class="product-meta">
-            <span class="tag">PDF · 15 páginas</span>
-            <span class="tag">Checklist mensal</span>
-            <span class="tag">Uso individual</span>
-            <span class="tag">R$ 24,90</span>
-          </div>
+          <div class="product-meta"><span class="tag">PDF · 15 páginas</span><span class="tag">Checklist mensal</span><span class="tag">Uso individual</span><span class="tag tag-orange">R$ 24,90</span></div>
         </div>
-
-        <div class="guide-cover reveal" aria-label="Representação visual do guia PC Seguro">
-          <div class="guide-cover-top"><span>PROXITI</span><span>01 / GUIAS</span></div>
-          <div class="guide-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <small>Guia prático</small>
-          <h4>PC Seguro</h4>
-          <p>Segurança digital para usuários comuns.</p>
-        </div>
+        <div class="page-visual reveal"><img src="/assets/illustrations/product-pc-seguro.svg" width="820" height="520" fetchpriority="high" decoding="async" alt="Mockup vetorial original do guia PC Seguro e de uma página de checklist."></div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="problema-title">
+    <section class="section" aria-labelledby="objetivo-title">
       <div class="container product-detail">
         <div class="reveal">
-          <span class="section-index">01 · O problema</span>
-          <h2 id="problema-title">Segurança costuma falhar nas coisas simples que ninguém revisa.</h2>
+          <span class="section-label">Objetivo</span>
+          <h2 id="objetivo-title">Reduzir falhas comuns e organizar uma rotina de prevenção.</h2>
           <p>
-            Senhas repetidas, conta principal sem segundo fator, backup que nunca foi testado,
-            roteador esquecido e mensagens de phishing são problemas comuns justamente porque
-            parecem pequenos até o dia em que deixam de ser.
+            O guia não promete eliminar riscos. Ele organiza medidas de alto impacto que
+            costumam ser negligenciadas: contas sem segundo fator, senhas reutilizadas,
+            backups não testados, roteadores esquecidos e decisões tomadas sob pressão de golpes.
           </p>
           <ul class="feature-grid">
             <li>Senhas únicas e uso de gerenciador.</li>
-            <li>Autenticação em dois fatores e recuperação de conta.</li>
+            <li>Autenticação em dois fatores e recuperação.</li>
             <li>Proteção do e-mail principal.</li>
-            <li>Identificação de phishing e golpes por urgência.</li>
+            <li>Reconhecimento de phishing e urgência falsa.</li>
             <li>Backup e regra 3-2-1.</li>
             <li>Segurança básica do Wi-Fi e do roteador.</li>
           </ul>
         </div>
 
         <aside class="buy-card reveal" aria-label="Compra do PC Seguro">
-          <span class="tag status-live">Venda ativa</span>
+          <span class="tag tag-orange">Disponível</span>
           <span class="product-price">R$ 24,90</span>
-          <p>Compra assistida pelo WhatsApp enquanto o checkout automático não está configurado.</p>
+          <p>Guia digital em PDF, edição 1.0 de 2026.</p>
           <a class="button button-primary" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90." target="_blank" rel="noopener noreferrer" data-checkout="pc-seguro" data-ready-label="Comprar PC Seguro" data-fallback-label="Comprar pelo WhatsApp" data-unavailable-label="Venda indisponível">Comprar pelo WhatsApp</a>
-          <p class="buy-note">O arquivo pago não fica exposto no site público. O material é educacional e não promete eliminar todos os riscos.</p>
+          <p class="buy-note">O arquivo pago não fica exposto no site público. O material é educacional e possui licença de uso individual.</p>
         </aside>
       </div>
     </section>
 
-    <section class="section section-alt" id="conteudo-guia" aria-labelledby="conteudo-guia-title">
+    <section class="section section-soft" id="conteudo-guia" aria-labelledby="conteudo-title">
       <div class="container">
         <div class="section-head reveal">
-          <div><span class="section-index">02 · Conteúdo</span><h2 id="conteudo-guia-title">O essencial, em ordem de ação.</h2></div>
-          <p>O material foi organizado para você aplicar primeiro o que tem maior impacto e depois manter uma rotina simples de revisão.</p>
+          <div><span class="section-label">Conteúdo</span><h2 id="conteudo-title">O que o guia cobre.</h2></div>
+          <p>O conteúdo foi estruturado para começar pelas medidas mais urgentes e terminar com uma rotina de revisão periódica.</p>
         </div>
-
         <ul class="feature-grid">
           <li>Proteção inicial em 10 minutos.</li>
           <li>Atualizações de sistema, navegador e aplicativos.</li>
@@ -167,59 +129,55 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="recebe-title">
+    <section class="section" id="entrega" aria-labelledby="entrega-title">
       <div class="container">
         <div class="section-head reveal">
-          <div><span class="section-index">03 · Entrega</span><h2 id="recebe-title">O que você recebe.</h2></div>
-          <p>Não existe bônus secreto, comunidade premium ou contagem regressiva teatral. Existe o material que está descrito aqui.</p>
+          <div><span class="section-label">Entrega</span><h2 id="entrega-title">O que você recebe.</h2></div>
+          <p>A página comercial descreve exatamente o produto entregue, sem bônus fictício ou contagem regressiva de urgência.</p>
         </div>
         <div class="receive-grid">
-          <article class="receive-card reveal"><strong>15 páginas</strong><span>Guia objetivo, edição 1.0 de 2026.</span></article>
-          <article class="receive-card reveal"><strong>Checklist mensal</strong><span>Contas, backup, dispositivos, roteador e comportamento.</span></article>
+          <article class="receive-card reveal"><strong>15 páginas</strong><span>Guia digital, edição 1.0 de 2026.</span></article>
+          <article class="receive-card reveal"><strong>Checklist mensal</strong><span>Revisão de contas, backup, dispositivos, roteador e comportamento.</span></article>
           <article class="receive-card reveal"><strong>Resposta inicial</strong><span>Primeiras ações após invasão de conta, malware ou golpe financeiro.</span></article>
           <article class="receive-card reveal"><strong>Licença individual</strong><span>Uso pessoal; redistribuição e revenda não são permitidas.</span></article>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" id="publico" aria-labelledby="publico-title">
+    <section class="section section-dark" id="publico" aria-labelledby="publico-title">
       <div class="container product-detail">
         <div class="reveal">
-          <span class="section-index">04 · Para quem é</span>
-          <h2 id="publico-title">Para quem quer reduzir riscos sem estudar cibersegurança como profissão.</h2>
-          <p>O PC Seguro foi escrito para usuários domésticos, famílias, autônomos e pequenos empresários que precisam de uma rotina de prevenção compreensível.</p>
-          <div class="product-meta">
-            <span class="tag">Usuários domésticos</span>
-            <span class="tag">Famílias</span>
-            <span class="tag">Autônomos</span>
-            <span class="tag">Pequenos negócios</span>
-          </div>
+          <span class="section-label">Para quem é</span>
+          <h2 id="publico-title">Para quem precisa de uma rotina simples, não de uma especialização.</h2>
+          <p>Usuários domésticos, famílias, profissionais autônomos e pequenos empresários que querem melhorar hábitos de segurança sem depender de ferramentas caras ou conhecimento avançado.</p>
+          <div class="product-meta"><span class="tag">Usuários domésticos</span><span class="tag">Famílias</span><span class="tag">Autônomos</span><span class="tag">Pequenos negócios</span></div>
         </div>
-        <aside class="page-card reveal">
-          <span class="kicker">Limites</span>
-          <h3>O que ele não substitui.</h3>
-          <p>O guia não substitui investigação forense, resposta profissional a incidente, suporte bancário, assessoria jurídica ou diagnóstico técnico individual quando o problema exige análise específica.</p>
-          <a class="text-link" href="/#pre-diagnostico">Precisa de diagnóstico? Use o pré-diagnóstico →</a>
+        <aside class="buy-card reveal">
+          <span class="section-label">Limites</span>
+          <h3>O que o PC Seguro não substitui.</h3>
+          <p>Investigação forense, resposta profissional a incidente, suporte bancário, assessoria jurídica e diagnóstico técnico individual quando o problema depende do estado real do equipamento ou da rede.</p>
+          <a class="text-link" href="/#pre-diagnostico">Precisa de análise individual? Envie o contexto →</a>
         </aside>
       </div>
     </section>
 
     <section class="section">
-      <div class="container contact-shell reveal">
+      <div class="container contact-card reveal">
         <div class="contact-copy">
-          <span class="section-index">05 · Compra</span>
-          <h2>R$ 24,90. Sem pacote inflado.</h2>
-          <p>Você compra o guia descrito nesta página. O checkout automático poderá substituir a compra assistida sem mudar o produto nem a oferta.</p>
+          <span class="section-label">Compra</span>
+          <h2>PC Seguro · R$ 24,90.</h2>
+          <p>O checkout automático pode substituir a compra assistida pelo WhatsApp sem alterar o conteúdo, o preço ou a proposta do produto.</p>
           <div class="contact-actions">
-            <a class="button button-primary" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90." target="_blank" rel="noopener noreferrer" data-checkout="pc-seguro" data-ready-label="Comprar PC Seguro" data-fallback-label="Comprar pelo WhatsApp" data-unavailable-label="Venda indisponível">Comprar pelo WhatsApp</a>
+            <a class="button button-accent" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2024%2C90." target="_blank" rel="noopener noreferrer" data-checkout="pc-seguro" data-ready-label="Comprar PC Seguro" data-fallback-label="Comprar pelo WhatsApp" data-unavailable-label="Venda indisponível">Comprar pelo WhatsApp</a>
             <a class="button button-secondary" href="/produtos/">Voltar ao catálogo</a>
           </div>
         </div>
-        <aside class="contact-panel">
-          <div class="contact-line"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.8"/></svg><span><span>Formato</span><strong>PDF digital</strong></span></div>
-          <div class="contact-line"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span><span>Extensão</span><strong>15 páginas</strong></span></div>
-          <div class="contact-line"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span><span>Edição</span><strong>1.0 · 2026</strong></span></div>
-        </aside>
+        <div class="contact-list">
+          <div class="contact-row simple"><span><span>Formato</span><strong>PDF digital</strong></span></div>
+          <div class="contact-row simple"><span><span>Extensão</span><strong>15 páginas</strong></span></div>
+          <div class="contact-row simple"><span><span>Edição</span><strong>1.0 · 2026</strong></span></div>
+          <div class="contact-row simple"><span><span>Preço</span><strong>R$ 24,90</strong></span></div>
+        </div>
       </div>
     </section>
   </main>
@@ -227,31 +185,12 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-main">
-        <div class="footer-brand">
-          <a class="brand" href="/">
-            <span class="brand-mark" aria-hidden="true"><span>P</span></span>
-            <span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span>
-          </a>
-          <p>Suporte técnico, redes, infraestrutura essencial e segurança digital preventiva em Curitiba/PR.</p>
-        </div>
-        <address class="footer-identity">
-          <strong>PROXITI</strong>
-          <span>Curitiba/PR</span>
-          <a href="tel:+554188235598">(41) 8823-5598</a>
-          <a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a>
-        </address>
-        <nav class="footer-nav" aria-label="Navegação do rodapé">
-          <a href="/">Início</a>
-          <a href="/produtos/">Produtos</a>
-          <a href="/#pre-diagnostico">Pré-diagnóstico</a>
-          <a href="/#contato">Contato</a>
-        </nav>
+        <div class="footer-brand"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><span>P</span></span><span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span></a><p>Suporte técnico, redes, backup, acessos e segurança digital preventiva em Curitiba/PR.</p></div>
+        <address class="footer-identity"><strong>PROXITI</strong><span>Curitiba/PR</span><a href="tel:+554188235598">(41) 8823-5598</a><a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a></address>
+        <nav class="footer-nav"><a href="/">Início</a><a href="/servicos/">Serviços</a><a href="/produtos/">Produtos</a><a href="/#contato">Contato</a></nav>
       </div>
-      <nav class="footer-legal" aria-label="Privacidade e termos">
-        <a href="/privacidade/">Política de Privacidade</a>
-        <a href="/termos/">Termos de Atendimento</a>
-      </nav>
-      <div class="footer-bottom"><span>© <span id="year">2026</span> PROXITI. Curitiba/PR.</span><a class="back-to-top" href="#topo">Voltar ao topo ↑</a></div>
+      <nav class="footer-legal"><a href="/privacidade/">Política de Privacidade</a><a href="/termos/">Termos de Atendimento</a></nav>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> PROXITI.</span><a href="#topo">Voltar ao topo ↑</a></div>
     </div>
   </footer>
 

@@ -1,28 +1,35 @@
 # PROXITI
 
-Site institucional e comercial da PROXITI, operação de suporte técnico, redes, infraestrutura essencial e segurança digital preventiva em Curitiba/PR.
+Site institucional e comercial da PROXITI, operação de suporte técnico, redes, backup, organização de acessos e segurança digital preventiva em Curitiba/PR.
 
 **Site:** https://proxiti.com.br/
 
 ## Estrutura pública
 
-- `/` — home comercial, serviços, método e pré-diagnóstico.
+- `/` — home comercial, cenários, serviços, processo e pré-diagnóstico.
+- `/servicos/` — escopo detalhado de atuação.
 - `/produtos/` — catálogo de produtos digitais.
 - `/produtos/pc-seguro/` — página comercial do PC Seguro.
 - `/privacidade/` — política de privacidade.
 - `/termos/` — termos gerais de atendimento.
-- `/.well-known/security.txt` — canal padronizado para assuntos de segurança.
+- `/.well-known/security.txt` — canal de contato para assuntos de segurança.
 
-## Diferencial operacional
+## Posicionamento
 
-A comunicação da PROXITI parte de quatro princípios:
+A comunicação foi estruturada para responder de forma objetiva:
 
-1. diagnóstico antes da decisão;
-2. solução proporcional ao problema;
-3. limites de atuação declarados;
-4. acesso técnico somente quando necessário e autorizado.
+1. o que a PROXITI atende;
+2. quais problemas entram no escopo;
+3. como o atendimento começa;
+4. como escopo e autorização são tratados;
+5. quais serviços não fazem parte da operação atual;
+6. qual é o próximo passo comercial.
 
-A home inclui um **pré-diagnóstico local**: o formulário organiza as informações no navegador e abre uma mensagem estruturada no WhatsApp. Não existe envio do formulário para backend.
+O site evita métricas, SLAs, depoimentos, garantias e selos que não possam ser comprovados.
+
+## Pré-diagnóstico
+
+O formulário da home funciona localmente no navegador. Ele organiza perfil, área, equipamento, impacto e contexto e abre uma mensagem no WhatsApp. Não existe envio para backend.
 
 ## Produto digital
 
@@ -37,28 +44,23 @@ Enquanto o checkout estiver vazio, o site usa compra assistida pelo WhatsApp. Ar
 ## Tecnologia
 
 - HTML semântico;
-- CSS responsivo, sem framework;
+- CSS responsivo sem framework;
 - JavaScript sem dependências;
+- carrossel acessível para cenários de atendimento;
 - tema claro/escuro;
+- ilustrações SVG originais;
 - GitHub Pages;
-- sitemap, canonical e Open Graph;
-- layout mínimo de 320 px;
-- foco visível e respeito a `prefers-reduced-motion`.
+- sitemap, canonical e metadados;
+- foco visível e `prefers-reduced-motion`.
 
-## Identidade visual
+## Documentação
 
-A direção visual está documentada em `DESIGN-SYSTEM.md`.
+- `DESIGN-SYSTEM.md` — sistema visual e editorial.
+- `MARKETING-RESEARCH.md` — pesquisa de referências e decisões comerciais.
+- `PUBLICATION-CHECKLIST.md` — checklist de manutenção.
 
 ## Contato
 
-- Telefone / WhatsApp: **(41) 8823-5598**
+- Telefone / WhatsApp: **+55 41 8823-5598**
 - E-mail: **contato.proxiti@gmail.com**
 - Área principal: **Curitiba/PR**
-
-## Manutenção
-
-- nunca publicar tokens, chaves, senhas ou dados de clientes;
-- nunca hospedar produtos pagos diretamente no repositório público;
-- não publicar métricas, depoimentos ou garantias sem evidência;
-- manter o escopo atual coerente com os serviços realmente executados;
-- usar `PUBLICATION-CHECKLIST.md` antes de mudanças relevantes.

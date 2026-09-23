@@ -14,24 +14,19 @@
 
   const readTheme = () => {
     try {
-      const saved = localStorage.getItem("proxiti-theme");
-      return saved === "light" || saved === "dark" ? saved : "dark";
+      const saved = localStorage.getItem("proxiti-theme-v3");
+      return saved === "light" || saved === "dark" ? saved : "light";
     } catch {
-      return "dark";
+      return "light";
     }
   };
 
   const applyTheme = (theme) => {
     root.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#07111f" : "#f4f7fb");
-    }
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#0b1220" : "#f6f7f9");
     if (themeButton) {
-      themeButton.setAttribute(
-        "aria-label",
-        theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
-      );
+      themeButton.setAttribute("aria-label", theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro");
     }
   };
 
@@ -40,14 +35,10 @@
   themeButton?.addEventListener("click", () => {
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     applyTheme(next);
-    try {
-      localStorage.setItem("proxiti-theme", next);
-    } catch {
-      // O tema continua funcionando sem armazenamento local.
-    }
+    try { localStorage.setItem("proxiti-theme-v3", next); } catch {}
   });
 
-  const setPageInert = (value) => {
+  const setInert = (value) => {
     if (mainContent) mainContent.inert = value;
     if (footer) footer.inert = value;
   };
@@ -56,22 +47,20 @@
     if (!mobilePanel || !menuButton) return;
     const wasOpen = menuButton.getAttribute("aria-expanded") === "true";
     mobilePanel.hidden = true;
-    mobilePanel.classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Abrir menu");
     document.body.classList.remove("menu-open");
-    setPageInert(false);
+    setInert(false);
     if (returnFocus && wasOpen) menuButton.focus();
   };
 
   const openMenu = () => {
     if (!mobilePanel || !menuButton) return;
     mobilePanel.hidden = false;
-    mobilePanel.classList.add("open");
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Fechar menu");
     document.body.classList.add("menu-open");
-    setPageInert(true);
+    setInert(true);
     mobilePanel.querySelector("a[href]")?.focus();
   };
 
@@ -86,23 +75,10 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    const open = menuButton?.getAttribute("aria-expanded") === "true";
-    if (event.key === "Escape" && open) {
+    const isOpen = menuButton?.getAttribute("aria-expanded") === "true";
+    if (event.key === "Escape" && isOpen) {
       event.preventDefault();
       closeMenu({ returnFocus: true });
-      return;
-    }
-    if (event.key !== "Tab" || !open || !mobilePanel) return;
-    const focusable = [...mobilePanel.querySelectorAll("a[href],button:not([disabled])")];
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (!first || !last) return;
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
     }
   });
 
@@ -110,9 +86,7 @@
     if (window.innerWidth > 1080) closeMenu();
   });
 
-  const updateHeader = () => {
-    header?.classList.toggle("scrolled", window.scrollY > 12);
-  };
+  const updateHeader = () => header?.classList.toggle("scrolled", window.scrollY > 12);
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
 
@@ -129,16 +103,15 @@
     );
     document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-    const localNavLinks = [...document.querySelectorAll(".desktop-nav a")].filter((link) =>
-      (link.getAttribute("href") || "").startsWith("#")
+    const localNavLinks = [...document.querySelectorAll(".desktop-nav a")].filter((a) =>
+      (a.getAttribute("href") || "").startsWith("#")
     );
-    const localSections = document.querySelectorAll("main section[id]");
     if (localNavLinks.length) {
       const navObserver = new IntersectionObserver(
         (entries) => {
           const current = entries
             .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
           if (!current) return;
           localNavLinks.forEach((link) => {
             const active = link.getAttribute("href") === `#${current.target.id}`;
@@ -149,7 +122,7 @@
         },
         { rootMargin: "-22% 0px -62% 0px", threshold: [0.01, 0.2, 0.5] }
       );
-      localSections.forEach((section) => navObserver.observe(section));
+      document.querySelectorAll("main section[id]").forEach((section) => navObserver.observe(section));
     }
   } else {
     document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
@@ -162,6 +135,62 @@
         if (other !== item) other.open = false;
       });
     });
+  });
+
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector(".carousel-track");
+    const slides = [...carousel.querySelectorAll(".carousel-slide")];
+    const prev = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+    const dots = [...carousel.querySelectorAll("[data-carousel-dot]")];
+    if (!track || slides.length < 2) return;
+
+    let index = 0;
+    let timer = null;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const render = (announce = false) => {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((slide, i) => {
+        slide.setAttribute("aria-hidden", i === index ? "false" : "true");
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
+      });
+      if (announce) {
+        const label = carousel.querySelector(".carousel-status");
+        if (label) label.textContent = `Cenário ${index + 1} de ${slides.length}`;
+      }
+    };
+
+    const go = (newIndex, announce = true) => {
+      index = (newIndex + slides.length) % slides.length;
+      render(announce);
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    };
+
+    const start = () => {
+      stop();
+      if (reduced) return;
+      timer = window.setInterval(() => go(index + 1, false), 7000);
+    };
+
+    prev?.addEventListener("click", () => { go(index - 1); start(); });
+    next?.addEventListener("click", () => { go(index + 1); start(); });
+    dots.forEach((dot, i) => dot.addEventListener("click", () => { go(i); start(); }));
+
+    carousel.addEventListener("mouseenter", stop);
+    carousel.addEventListener("mouseleave", start);
+    carousel.addEventListener("focusin", stop);
+    carousel.addEventListener("focusout", start);
+
+    render();
+    start();
   });
 
   document.querySelectorAll("[data-checkout]").forEach((link) => {
@@ -183,7 +212,7 @@
         : (link.dataset.fallbackLabel || "Comprar pelo WhatsApp");
     } else {
       link.removeAttribute("href");
-      link.setAttribute("aria-disabled", "true");
+      link.setAttribute("aria-disabled","true");
       link.textContent = link.dataset.unavailableLabel || "Venda temporariamente indisponível";
     }
   });
@@ -197,21 +226,18 @@
 
     const data = new FormData(triageForm);
     const lines = [
-      "Olá, PROXITI. Quero solicitar uma orientação inicial.",
+      "Olá, PROXITI. Quero solicitar uma avaliação inicial.",
       "",
       `Perfil: ${data.get("perfil")}`,
       `Área: ${data.get("area")}`,
       `Equipamento/ambiente: ${data.get("equipamento") || "Não informado"}`,
       `Impacto: ${data.get("impacto")}`,
       "",
-      "Sintoma:",
+      "Contexto:",
       String(data.get("sintoma") || "").trim()
     ];
-
     const url = `https://wa.me/554188235598?text=${encodeURIComponent(lines.join("\n"))}`;
-    if (triageStatus) {
-      triageStatus.textContent = "Mensagem preparada. Abrindo o WhatsApp...";
-    }
+    if (triageStatus) triageStatus.textContent = "Mensagem preparada. Abrindo o WhatsApp...";
     window.open(url, "_blank", "noopener,noreferrer");
   });
 
