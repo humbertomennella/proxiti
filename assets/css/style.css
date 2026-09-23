@@ -11,6 +11,7 @@
   --border-strong:#aebdd0;
   --accent:#245dd8;
   --accent-strong:#1647b7;
+  --accent-contrast:#ffffff;
   --accent-soft:#e7efff;
   --teal:#087a73;
   --teal-soft:#e0f5f2;
@@ -42,6 +43,7 @@
   --border-strong:#36516f;
   --accent:#5ea0ff;
   --accent-strong:#79b1ff;
+  --accent-contrast:#07111f;
   --accent-soft:#102a4a;
   --teal:#2dd4bf;
   --teal-soft:#0c3436;
@@ -97,7 +99,7 @@ p:last-child{margin-bottom:0}
   transition:transform var(--ease),background-color var(--ease),border-color var(--ease),color var(--ease),box-shadow var(--ease)
 }
 .button:hover{transform:translateY(-2px)}
-.button-primary{background:var(--accent);color:#fff;box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 20%,transparent)}
+.button-primary{background:var(--accent);color:var(--accent-contrast);box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 20%,transparent)}
 .button-primary:hover{background:var(--accent-strong)}
 .button-secondary{border-color:var(--border-strong);background:var(--surface);color:var(--text)}
 .button-secondary:hover{border-color:var(--accent);color:var(--accent)}
