@@ -1,260 +1,219 @@
 (() => {
   "use strict";
+
   const root = document.documentElement;
   const header = document.querySelector(".site-header");
   const themeButton = document.querySelector(".theme-toggle");
   const menuButton = document.querySelector(".menu-button");
   const mobilePanel = document.querySelector(".mobile-panel");
-  const mobileLinks = document.querySelectorAll(".mobile-nav a");
-  const navLinks = document.querySelectorAll(".desktop-nav a");
-  const sections = document.querySelectorAll("main section[id]");
-  const year = document.querySelector("#year");
   const mainContent = document.querySelector("main");
   const footer = document.querySelector("footer");
+  const year = document.querySelector("#year");
+
   root.classList.remove("no-js");
 
-  const readStoredTheme = () => {
+  const readTheme = () => {
     try {
-      return window.localStorage.getItem("proxiti-theme");
+      const saved = localStorage.getItem("proxiti-theme");
+      return saved === "light" || saved === "dark" ? saved : "dark";
     } catch {
-      return null;
+      return "dark";
     }
   };
 
-  const storeTheme = (theme) => {
-    try {
-      window.localStorage.setItem("proxiti-theme", theme);
-    } catch {
-      // O tema continua funcionando na sessão mesmo sem armazenamento local.
-    }
-  };
-
-  const getPreferredTheme = () => {
-    const savedTheme = readStoredTheme();
-    if (savedTheme === "light" || savedTheme === "dark") {
-      return savedTheme;
-    }
-    return "dark";
-  };
   const applyTheme = (theme) => {
     root.dataset.theme = theme;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", theme === "dark" ? "#07111f" : "#f4f7fb");
+    }
     if (themeButton) {
       themeButton.setAttribute(
         "aria-label",
         theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
       );
     }
-    const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) {
-      themeColor.setAttribute("content", theme === "dark" ? "#0d1117" : "#f6f8fa");
-    }
   };
-  applyTheme(getPreferredTheme());
+
+  applyTheme(readTheme());
 
   themeButton?.addEventListener("click", () => {
-    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-    applyTheme(nextTheme);
-    storeTheme(nextTheme);
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try {
+      localStorage.setItem("proxiti-theme", next);
+    } catch {
+      // O tema continua funcionando sem armazenamento local.
+    }
   });
 
-  const setBackgroundInert = (isInert) => {
-    [mainContent, footer].forEach((region) => {
-      if (region) {
-        region.inert = isInert;
-      }
-    });
+  const setPageInert = (value) => {
+    if (mainContent) mainContent.inert = value;
+    if (footer) footer.inert = value;
   };
 
   const closeMenu = ({ returnFocus = false } = {}) => {
-    if (!mobilePanel || !menuButton) {
-      return;
-    }
+    if (!mobilePanel || !menuButton) return;
     const wasOpen = menuButton.getAttribute("aria-expanded") === "true";
-    mobilePanel.classList.remove("open");
     mobilePanel.hidden = true;
+    mobilePanel.classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Abrir menu");
     document.body.classList.remove("menu-open");
-    setBackgroundInert(false);
-    if (returnFocus && wasOpen) {
-      menuButton.focus();
-    }
+    setPageInert(false);
+    if (returnFocus && wasOpen) menuButton.focus();
   };
 
   const openMenu = () => {
-    if (!mobilePanel || !menuButton) {
-      return;
-    }
+    if (!mobilePanel || !menuButton) return;
     mobilePanel.hidden = false;
     mobilePanel.classList.add("open");
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Fechar menu");
     document.body.classList.add("menu-open");
-    setBackgroundInert(true);
+    setPageInert(true);
     mobilePanel.querySelector("a[href]")?.focus();
   };
 
   menuButton?.addEventListener("click", () => {
-    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-    isOpen ? closeMenu({ returnFocus: true }) : openMenu();
+    menuButton.getAttribute("aria-expanded") === "true"
+      ? closeMenu({ returnFocus: true })
+      : openMenu();
   });
 
-  mobileLinks.forEach((link) => {
+  document.querySelectorAll(".mobile-nav a").forEach((link) => {
     link.addEventListener("click", () => closeMenu());
   });
 
   document.addEventListener("keydown", (event) => {
-    const menuIsOpen = menuButton?.getAttribute("aria-expanded") === "true";
-    if (event.key === "Escape" && menuIsOpen) {
+    const open = menuButton?.getAttribute("aria-expanded") === "true";
+    if (event.key === "Escape" && open) {
       event.preventDefault();
       closeMenu({ returnFocus: true });
       return;
     }
-    if (event.key === "Tab" && menuIsOpen && mobilePanel) {
-      const focusable = [...mobilePanel.querySelectorAll("a[href]")];
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (!first || !last) {
-        return;
-      }
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      } else if (!mobilePanel.contains(document.activeElement)) {
-        event.preventDefault();
-        first.focus();
-      }
+    if (event.key !== "Tab" || !open || !mobilePanel) return;
+    const focusable = [...mobilePanel.querySelectorAll("a[href],button:not([disabled])")];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 1050) {
-      closeMenu();
-    }
+    if (window.innerWidth > 1080) closeMenu();
   });
+
   const updateHeader = () => {
-    header?.classList.toggle("scrolled", window.scrollY > 16);
+    header?.classList.toggle("scrolled", window.scrollY > 12);
   };
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
+
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
         });
       },
-      {
-        rootMargin: "0px 0px -8% 0px",
-        threshold: 0.08
-      }
+      { rootMargin: "0px 0px -7% 0px", threshold: 0.08 }
     );
-    document.querySelectorAll(".reveal").forEach((element) => {
-      revealObserver.observe(element);
-    });
-    const navigationObserver = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visibleEntry) {
-          return;
-        }
-        navLinks.forEach((link) => {
-          const target = link.getAttribute("href").slice(1);
-          const isActive = target === visibleEntry.target.id;
-          link.classList.toggle("active", isActive);
-          if (isActive) {
-            link.setAttribute("aria-current", "location");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
-      },
-      {
-        rootMargin: "-22% 0px -62% 0px",
-        threshold: [0.01, 0.2, 0.5]
-      }
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+    const localNavLinks = [...document.querySelectorAll(".desktop-nav a")].filter((link) =>
+      (link.getAttribute("href") || "").startsWith("#")
     );
-    sections.forEach((section) => {
-      navigationObserver.observe(section);
-    });
+    const localSections = document.querySelectorAll("main section[id]");
+    if (localNavLinks.length) {
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          const current = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!current) return;
+          localNavLinks.forEach((link) => {
+            const active = link.getAttribute("href") === `#${current.target.id}`;
+            link.classList.toggle("active", active);
+            if (active) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+        },
+        { rootMargin: "-22% 0px -62% 0px", threshold: [0.01, 0.2, 0.5] }
+      );
+      localSections.forEach((section) => navObserver.observe(section));
+    }
   } else {
-    document.querySelectorAll(".reveal").forEach((element) => {
-      element.classList.add("visible");
-    });
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
   }
+
   document.querySelectorAll(".faq-item").forEach((item) => {
     item.addEventListener("toggle", () => {
-      if (!item.open) {
-        return;
-      }
-      document.querySelectorAll(".faq-item[open]").forEach((openItem) => {
-        if (openItem !== item) {
-          openItem.open = false;
-        }
+      if (!item.open) return;
+      document.querySelectorAll(".faq-item[open]").forEach((other) => {
+        if (other !== item) other.open = false;
       });
     });
   });
-  const openHashDetail = () => {
-    let id = "";
-    try {
-      id = decodeURIComponent(window.location.hash.slice(1));
-    } catch {
-      return;
-    }
-    const target = id ? document.getElementById(id) : null;
 
-    if (target instanceof HTMLDetailsElement) {
-      target.open = true;
-    }
-  };
-  document.querySelectorAll(".footer-legal a").forEach((link) => {
-    link.addEventListener("click", () => {
-      const href = link.getAttribute("href") || "";
-      if (!href.startsWith("#")) {
-        return;
-      }
-      const target = document.querySelector(href);
-      if (target instanceof HTMLDetailsElement) {
-        target.open = true;
-      }
-    });
-  });
-  openHashDetail();
-  window.addEventListener("hashchange", openHashDetail);
   document.querySelectorAll("[data-checkout]").forEach((link) => {
-    const productKey = link.dataset.checkout;
-    const product = window.PROXITI_PRODUCT_CONFIG?.[productKey] || {};
+    const key = link.dataset.checkout;
+    const product = window.PROXITI_PRODUCT_CONFIG?.[key] || {};
     const checkoutUrl = product.checkoutUrl?.trim() || "";
     const fallbackUrl = product.fallbackUrl?.trim() || "";
-    const readyLabel = link.dataset.readyLabel || "Comprar agora";
-    const fallbackLabel = link.dataset.fallbackLabel || "Comprar pelo WhatsApp";
-    const unavailableLabel = link.dataset.unavailableLabel || "Venda temporariamente indisponível";
-    const targetUrl = /^https:\/\//i.test(checkoutUrl)
+    const target = /^https:\/\//i.test(checkoutUrl)
       ? checkoutUrl
       : (/^https:\/\//i.test(fallbackUrl) ? fallbackUrl : "");
-    if (targetUrl) {
-      link.setAttribute("href", targetUrl);
-      link.setAttribute("target", "_blank");
-      link.setAttribute("rel", "noopener noreferrer");
+
+    if (target) {
+      link.href = target;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
       link.removeAttribute("aria-disabled");
-      link.textContent = /^https:\/\//i.test(checkoutUrl) ? readyLabel : fallbackLabel;
+      link.textContent = /^https:\/\//i.test(checkoutUrl)
+        ? (link.dataset.readyLabel || "Comprar agora")
+        : (link.dataset.fallbackLabel || "Comprar pelo WhatsApp");
     } else {
       link.removeAttribute("href");
-      link.removeAttribute("target");
-      link.removeAttribute("rel");
       link.setAttribute("aria-disabled", "true");
-      link.textContent = unavailableLabel;
+      link.textContent = link.dataset.unavailableLabel || "Venda temporariamente indisponível";
     }
   });
-  if (year) {
-    year.textContent = new Date().getFullYear();
-  }
+
+  const triageForm = document.querySelector("#pre-diagnostico-form");
+  const triageStatus = document.querySelector("#triage-status");
+
+  triageForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!triageForm.reportValidity()) return;
+
+    const data = new FormData(triageForm);
+    const lines = [
+      "Olá, PROXITI. Quero solicitar uma orientação inicial.",
+      "",
+      `Perfil: ${data.get("perfil")}`,
+      `Área: ${data.get("area")}`,
+      `Equipamento/ambiente: ${data.get("equipamento") || "Não informado"}`,
+      `Impacto: ${data.get("impacto")}`,
+      "",
+      "Sintoma:",
+      String(data.get("sintoma") || "").trim()
+    ];
+
+    const url = `https://wa.me/5541998235598?text=${encodeURIComponent(lines.join("\n"))}`;
+    if (triageStatus) {
+      triageStatus.textContent = "Mensagem preparada. Abrindo o WhatsApp...";
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  if (year) year.textContent = new Date().getFullYear();
 })();
