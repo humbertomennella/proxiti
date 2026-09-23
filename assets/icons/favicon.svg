@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="favicon-title">
   <title id="favicon-title">PROXITI</title>
-  <rect width="64" height="64" rx="14" fill="#161b22"/>
-  <path d="M18 15h19c10 0 16 5 16 14s-6 14-16 14h-8v9H18V15Zm11 9v10h8c3 0 5-2 5-5s-2-5-5-5h-8Z" fill="#58a6ff"/>
+  <defs>
+    <linearGradient id="g" x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5EA0FF"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#07111F"/>
+  <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="#20344D" stroke-width="2"/>
+  <path d="M17 14h20c10 0 16 5.5 16 14.5S47 43 37 43h-8v8H17V14Zm12 10v9h8c3 0 5-1.7 5-4.5S40 24 37 24h-8Z" fill="url(#g)"/>
 </svg>
