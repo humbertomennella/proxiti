@@ -420,3 +420,5 @@ p:last-child{margin-bottom:0}
 .section-dark .buy-card p,.section-dark .buy-note{color:#aebbcf}
 .section-dark .tag{background:#111a2a;border-color:#34445c;color:#c8d3e3}
 .section-dark .text-link{color:#8cb7ff}
+
+.contact-row.simple{grid-template-columns:1fr}
