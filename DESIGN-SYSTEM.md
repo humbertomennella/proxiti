@@ -1,104 +1,112 @@
-# Sistema visual e editorial PROXITI
+# Sistema visual e editorial PROXITI — V3
 
 ## Direção
 
-A identidade evita duas fórmulas comuns no mercado de suporte e serviços de TI:
+A PROXITI deve parecer uma operação técnica real, não:
 
-1. o visual genérico de “empresa corporativa azul + foto de reunião”;
-2. a estética de “cybersecurity hacker”, com neon, ameaças e linguagem alarmista.
+- um template genérico de SaaS;
+- uma assistência técnica com estética improvisada;
+- um site de “cybersecurity” baseado em neon, cadeados e ameaças;
+- uma empresa maior do que a operação realmente é.
 
-A PROXITI adota uma estética de **operação técnica**: superfícies escuras ou claras de alto contraste, estrutura em grade, painéis que lembram documentação/diagnóstico e acentos de cor controlados.
-
-## Pesquisa de referência
-
-A revisão de 2026 observou padrões recorrentes em sites de MSP, suporte e infraestrutura:
-
-- NinjaOne: hero curto, contraste alto, foco em uma proposta simples e visual de produto/operação.
-- Ntiva: estrutura orientada a negócio, serviço + método + confiança.
-- Dataprise: arquitetura por capacidades e resultados operacionais.
-- Mercado local de Curitiba: recorrência de “24/7”, “solução completa”, “parceiro estratégico”, métricas e promessas fortes.
-
-A PROXITI se diferencia evitando números não comprovados, disponibilidade não confirmada e linguagem como “blindagem total”, “melhor solução” ou “segurança garantida”.
-
-## Posicionamento editorial
-
-Frase central:
-
-> Primeiro a causa. Depois a solução.
-
-Princípios de copy:
-
-- explicar antes de persuadir;
-- preferir substantivos concretos: computador, Wi-Fi, backup, acesso, configuração;
-- não usar “inovação”, “transformação”, “solução completa” ou “tecnologia de ponta” sem contexto;
-- não prometer disponibilidade, SLA, prazo, resultado ou nível de segurança não formalizado;
-- deixar limites técnicos explícitos;
-- usar CTA de ação concreta: “Fazer pré-diagnóstico”, “Falar no WhatsApp”, “Ver serviços”.
+A direção V3 é **institucional técnica com linguagem editorial**: base clara, seções escuras de contraste, visual original de infraestrutura, azul para orientação e laranja para chamadas comerciais.
 
 ## Paleta
 
-### Dark
-- Fundo: `#07111F`
-- Superfície: `#0D1A2B`
-- Superfície elevada: `#101F33`
-- Texto: `#F3F7FC`
-- Texto secundário: `#CAD5E2`
-- Muted: `#9FB0C3`
-- Borda: `#20344D`
-- Azul principal: `#5EA0FF`
-- Teal secundário: `#2DD4BF`
-
 ### Light
-- Fundo: `#F4F7FB`
+- Papel: `#F6F7F9`
+- Papel secundário: `#EEF1F5`
 - Superfície: `#FFFFFF`
-- Texto: `#0B1726`
-- Muted: `#536579`
-- Borda: `#CFDAE7`
-- Azul principal: `#245DD8`
-- Teal secundário: `#087A73`
+- Ink: `#0B1220`
+- Texto: `#243044`
+- Muted: `#5B6475`
+- Linha: `#D9E0E9`
+- Azul técnico: `#2F6DF6`
+- Laranja de ação: `#F28C45`
 
-O azul funciona como cor de ação e orientação; o teal identifica estados positivos, confirmação e prevenção. Nenhuma informação depende apenas da cor.
+### Dark
+- Fundo: `#0B1220`
+- Superfície: `#141F31`
+- Texto: `#F7F8FA`
+- Azul: `#67A2FF`
+- Laranja: `#FFAD73`
 
-Contrastes verificados para combinações centrais:
-- dark: texto principal sobre fundo `#07111F` ≈ **17,6:1**;
-- dark: texto secundário `#9FB0C3` sobre `#0D1A2B` ≈ **7,9:1**;
-- dark: texto de botão `#07111F` sobre azul `#5EA0FF` ≈ **7,2:1**;
-- light: texto principal sobre `#F4F7FB` ≈ **16,8:1**;
-- light: texto secundário `#536579` sobre branco ≈ **6,0:1**;
-- light: texto branco sobre azul `#245DD8` ≈ **5,8:1**.
+## Função das cores
+
+- **Azul:** navegação, orientação, links e estrutura técnica.
+- **Laranja:** CTA comercial, destaque pontual e pontos de decisão.
+- **Navy:** infraestrutura, processo e áreas de maior densidade técnica.
+- **Cinzas quentes/frios:** criar hierarquia sem transformar tudo em caixas coloridas.
+
+## Linguagem visual
+
+- alternar áreas claras e escuras;
+- usar ilustrações técnicas próprias, não stock photos;
+- cantos moderados;
+- bordas finas e sombras controladas;
+- tipografia grande apenas quando a mensagem é concreta;
+- não usar dashboard falso, gráfico inventado ou número decorativo;
+- animação somente para navegação, carrossel ou feedback.
+
+## Copy
+
+### Regra principal
+
+A primeira dobra deve dizer:
+- o que a empresa faz;
+- para quem;
+- em qual região;
+- como começa o atendimento.
+
+### Evitar
+
+- “soluções inovadoras”;
+- “tecnologia de ponta”;
+- “parceiro estratégico” sem contexto;
+- “sua empresa blindada”;
+- “não pare nunca”;
+- “garantia de segurança”;
+- métricas e SLAs sem evidência;
+- frases conceituais que poderiam pertencer a qualquer empresa.
+
+### Preferir
+
+- computador, notebook, Wi-Fi, roteador, backup, acesso, conta, atualização;
+- diagnóstico, escopo, autorização, execução;
+- “descrever meu problema”, “ver escopo”, “comprar o guia”;
+- informar preço quando o produto possui preço fixo;
+- explicar por que um serviço variável não possui preço genérico.
+
+## Diferencial
+
+A PROXITI não se diferencia por declarar ser “a melhor”. Diferencia-se por tornar o processo comercial e técnico mais compreensível:
+
+1. contexto;
+2. diagnóstico;
+3. escopo;
+4. autorização;
+5. execução;
+6. orientação final.
+
+## Carrossel
+
+O carrossel existe para mostrar **cenários de atendimento**, não slogans. Deve:
+- ter controles manuais;
+- respeitar `prefers-reduced-motion`;
+- pausar ao receber foco ou hover;
+- manter texto completo fora de imagens.
+
+## Imagens
+
+As ilustrações atuais são SVGs originais do projeto. Evitar imagens externas quando não acrescentarem informação.
 
 ## Acessibilidade
 
-A paleta foi escolhida para manter contraste forte em texto e controles. O projeto também usa:
-
-- foco visível com outline;
-- labels em campos;
+- contraste AA como mínimo;
+- foco visível;
+- labels associados;
 - HTML semântico;
 - navegação por teclado;
 - `prefers-reduced-motion`;
-- sem texto essencial em imagem;
-- layout adaptável a 320 px.
-
-Referência normativa: WCAG 2.2.
-
-## Componentes de marca
-
-- Monograma “P” com gradiente azul → teal.
-- Cantos moderados, não excessivamente arredondados.
-- Bordas finas em vez de sombras pesadas.
-- Grid técnico sutil como elemento de fundo.
-- Painéis de “processo” em vez de dashboards com métricas fictícias.
-- Sem fotografias genéricas como dependência da identidade.
-
-## Regra para novas páginas
-
-Uma página nova deve responder, nesta ordem:
-
-1. o que é;
-2. para quem serve;
-3. qual problema resolve;
-4. como funciona;
-5. quais são os limites;
-6. qual é o próximo passo.
-
-Se uma seção não acrescenta uma dessas respostas, ela provavelmente não precisa existir.
+- conteúdo essencial nunca apenas em imagem;
+- responsividade desde 320 px.
