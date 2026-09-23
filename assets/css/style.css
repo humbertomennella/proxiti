@@ -168,7 +168,7 @@ p:last-child{margin-bottom:0}
 /* Carousel */
 .scenario-shell{position:relative}
 .carousel{position:relative}
-.carousel-viewport{position:relative;overflow:hidden;border-radius:26px;touch-action:pan-y pinch-zoom;cursor:grab;user-select:none;-webkit-user-select:none}
+.carousel-viewport{position:relative;overflow:hidden;border-radius:26px;touch-action:pan-y;overscroll-behavior-x:contain;cursor:grab;user-select:none;-webkit-user-select:none}
 .carousel-viewport.is-dragging{cursor:grabbing}
 .carousel-track{display:flex;will-change:transform;transition:transform 480ms cubic-bezier(.22,.61,.36,1)}
 .carousel-slide{min-width:100%;padding:1px}
@@ -180,7 +180,7 @@ p:last-child{margin-bottom:0}
 .scenario-list{display:grid;gap:9px;margin:22px 0 0;padding:0;list-style:none}
 .scenario-list li{display:grid;grid-template-columns:18px 1fr;gap:9px;color:var(--text);font-size:.84rem}
 .scenario-list li::before{color:var(--orange);content:"•";font-size:1.45rem;line-height:.75}
-.scenario-visual img{width:100%;border-radius:18px}
+.scenario-visual img{width:100%;border-radius:18px;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
 .carousel-controls{position:absolute;z-index:5;left:43px;right:43px;bottom:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:44px;align-items:center;pointer-events:none}
 .carousel-dots,.carousel-buttons{pointer-events:auto}
 .carousel-buttons{display:flex;gap:8px;justify-self:end}
