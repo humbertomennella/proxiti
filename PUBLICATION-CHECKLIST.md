@@ -4,7 +4,7 @@ Este arquivo registra validações recorrentes do site. A versão pública não 
 
 ## Estado atual
 
-- [x] Telefone/WhatsApp oficial padronizado: `+55 41 99823-5598`.
+- [x] Telefone/WhatsApp oficial padronizado: `+55 41 8823-5598`.
 - [x] E-mail oficial preservado: `contato.proxiti@gmail.com`.
 - [x] Domínio público configurado: `https://proxiti.com.br/`.
 - [x] Home sem placeholders operacionais.
