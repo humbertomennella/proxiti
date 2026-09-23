@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-labelledby="t"><title id="t">Diagnóstico de computador e notebook</title>
+<rect width="760" height="440" rx="28" fill="#EEF1F5"/>
+<circle cx="620" cy="60" r="170" fill="#DDE7FF"/><circle cx="650" cy="70" r="100" fill="#FBE3D1"/>
+<rect x="90" y="78" width="420" height="248" rx="24" fill="#0B1220"/><rect x="112" y="102" width="376" height="190" rx="14" fill="#172033"/>
+<path d="M144 242h70l40-100 48 122 46-84 28 62h74" fill="none" stroke="#2F6DF6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="163" cy="133" r="8" fill="#F28C45"/><circle cx="190" cy="133" r="8" fill="#2F6DF6"/><circle cx="217" cy="133" r="8" fill="#5B6475"/>
+<path d="M230 326h140l28 46H202z" fill="#C8D1DD"/>
+<g transform="translate(510 224)"><rect width="160" height="120" rx="22" fill="#FFF" stroke="#C9D0DC" stroke-width="2"/><path d="m45 60 24 24 48-56" fill="none" stroke="#F28C45" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
