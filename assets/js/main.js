@@ -231,15 +231,21 @@
   window.addEventListener("hashchange", openHashDetail);
   document.querySelectorAll("[data-checkout]").forEach((link) => {
     const productKey = link.dataset.checkout;
-    const checkoutUrl = window.PROXITI_PRODUCT_CONFIG?.[productKey]?.checkoutUrl?.trim() || "";
+    const product = window.PROXITI_PRODUCT_CONFIG?.[productKey] || {};
+    const checkoutUrl = product.checkoutUrl?.trim() || "";
+    const fallbackUrl = product.fallbackUrl?.trim() || "";
     const readyLabel = link.dataset.readyLabel || "Comprar agora";
-    const unavailableLabel = link.dataset.unavailableLabel || "Disponível em breve";
-    if (/^https:\/\//i.test(checkoutUrl)) {
-      link.setAttribute("href", checkoutUrl);
+    const fallbackLabel = link.dataset.fallbackLabel || "Comprar pelo WhatsApp";
+    const unavailableLabel = link.dataset.unavailableLabel || "Venda temporariamente indisponível";
+    const targetUrl = /^https:\/\//i.test(checkoutUrl)
+      ? checkoutUrl
+      : (/^https:\/\//i.test(fallbackUrl) ? fallbackUrl : "");
+    if (targetUrl) {
+      link.setAttribute("href", targetUrl);
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
       link.removeAttribute("aria-disabled");
-      link.textContent = readyLabel;
+      link.textContent = /^https:\/\//i.test(checkoutUrl) ? readyLabel : fallbackLabel;
     } else {
       link.removeAttribute("href");
       link.removeAttribute("target");
