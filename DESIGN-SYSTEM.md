@@ -98,7 +98,11 @@ O carrossel existe para mostrar **cenários de atendimento**, não slogans. Deve
 
 ## Imagens
 
-As ilustrações atuais são SVGs originais do projeto. Evitar imagens externas quando não acrescentarem informação.
+As ilustrações institucionais atuais são SVGs originais do projeto. Evitar imagens externas quando não acrescentarem informação.
+
+Quando um produto real já existir, **preferir prévias reais do próprio material a mockups genéricos**. A prévia deve provar que o produto existe sem expor páginas completas cujo conteúdo faça parte da entrega paga.
+
+Para serviços, fotografias próprias de equipamentos ou ambientes podem ser adicionadas no futuro quando houver material real e autorização adequada. Não usar stock photo apenas para preencher espaço.
 
 ## Acessibilidade
 
