@@ -148,10 +148,19 @@
 
     let index = 0;
     let timer = null;
-    let dragging = false;
+
+    let pointerDragging = false;
     let pointerId = null;
-    let startX = 0;
-    let currentX = 0;
+    let pointerStartX = 0;
+    let pointerCurrentX = 0;
+
+    let touchTracking = false;
+    let touchAxis = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+    let touchCurrentY = 0;
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const restoreTransition = () => {
@@ -161,13 +170,16 @@
     const render = (announce = false) => {
       restoreTransition();
       track.style.transform = `translateX(-${index * 100}%)`;
+
       slides.forEach((slide, i) => {
         slide.setAttribute("aria-hidden", i === index ? "false" : "true");
       });
+
       dots.forEach((dot, i) => {
         dot.classList.toggle("active", i === index);
         dot.setAttribute("aria-current", i === index ? "true" : "false");
       });
+
       if (announce) {
         const label = carousel.querySelector(".carousel-status");
         if (label) label.textContent = `Cenário ${index + 1} de ${slides.length}`;
@@ -190,6 +202,17 @@
       timer = window.setInterval(() => go(index + 1, false), 7000);
     };
 
+    const liveTranslate = (deltaX) => {
+      const width = viewport.clientWidth || 1;
+      const base = -index * width;
+      track.style.transform = `translateX(${base + deltaX}px)`;
+    };
+
+    const swipeThreshold = () => {
+      const width = viewport.clientWidth || 1;
+      return Math.min(84, Math.max(42, width * 0.10));
+    };
+
     prev?.addEventListener("click", () => {
       go(index - 1);
       start();
@@ -207,14 +230,72 @@
       });
     });
 
-    const finishDrag = () => {
-      if (!dragging) return;
+    // Touch dedicado: mais confiável em navegadores móveis do que depender só de PointerEvent.
+    viewport.addEventListener("touchstart", (event) => {
+      if (event.touches.length !== 1) return;
+      if (event.target.closest("button, a")) return;
 
-      const deltaX = currentX - startX;
-      const width = viewport.clientWidth || 1;
-      const threshold = Math.min(90, Math.max(48, width * 0.12));
+      const touch = event.touches[0];
+      touchTracking = true;
+      touchAxis = null;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchCurrentX = touch.clientX;
+      touchCurrentY = touch.clientY;
 
-      dragging = false;
+      stop();
+      viewport.classList.add("is-dragging");
+      track.style.transition = "none";
+    }, { passive: true });
+
+    viewport.addEventListener("touchmove", (event) => {
+      if (!touchTracking || event.touches.length !== 1) return;
+
+      const touch = event.touches[0];
+      touchCurrentX = touch.clientX;
+      touchCurrentY = touch.clientY;
+
+      const deltaX = touchCurrentX - touchStartX;
+      const deltaY = touchCurrentY - touchStartY;
+
+      if (!touchAxis && (Math.abs(deltaX) > 7 || Math.abs(deltaY) > 7)) {
+        touchAxis = Math.abs(deltaX) > Math.abs(deltaY) * 1.08 ? "x" : "y";
+      }
+
+      if (touchAxis === "x") {
+        event.preventDefault();
+        liveTranslate(deltaX);
+      }
+    }, { passive: false });
+
+    const finishTouch = () => {
+      if (!touchTracking) return;
+
+      const deltaX = touchCurrentX - touchStartX;
+      const horizontal = touchAxis === "x";
+
+      touchTracking = false;
+      touchAxis = null;
+      viewport.classList.remove("is-dragging");
+
+      if (horizontal && Math.abs(deltaX) >= swipeThreshold()) {
+        go(index + (deltaX < 0 ? 1 : -1));
+      } else {
+        render(false);
+      }
+
+      start();
+    };
+
+    viewport.addEventListener("touchend", finishTouch, { passive: true });
+    viewport.addEventListener("touchcancel", finishTouch, { passive: true });
+
+    // Mouse e caneta continuam com Pointer Events; toque fica exclusivamente nos Touch Events.
+    const finishPointerDrag = () => {
+      if (!pointerDragging) return;
+
+      const deltaX = pointerCurrentX - pointerStartX;
+      pointerDragging = false;
       viewport.classList.remove("is-dragging");
 
       if (pointerId !== null && viewport.hasPointerCapture?.(pointerId)) {
@@ -222,7 +303,7 @@
       }
       pointerId = null;
 
-      if (Math.abs(deltaX) >= threshold) {
+      if (Math.abs(deltaX) >= swipeThreshold()) {
         go(index + (deltaX < 0 ? 1 : -1));
       } else {
         render(false);
@@ -232,39 +313,35 @@
     };
 
     viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") return;
       if (event.target.closest("button, a")) return;
       if (event.pointerType === "mouse" && event.button !== 0) return;
 
-      dragging = true;
+      pointerDragging = true;
       pointerId = event.pointerId;
-      startX = event.clientX;
-      currentX = event.clientX;
-      stop();
+      pointerStartX = event.clientX;
+      pointerCurrentX = event.clientX;
 
+      stop();
       viewport.classList.add("is-dragging");
       viewport.setPointerCapture?.(pointerId);
       track.style.transition = "none";
     });
 
     viewport.addEventListener("pointermove", (event) => {
-      if (!dragging || event.pointerId !== pointerId) return;
-
-      currentX = event.clientX;
-      const deltaX = currentX - startX;
-      const width = viewport.clientWidth || 1;
-      const base = -index * width;
-
-      track.style.transform = `translateX(${base + deltaX}px)`;
+      if (!pointerDragging || event.pointerId !== pointerId) return;
+      pointerCurrentX = event.clientX;
+      liveTranslate(pointerCurrentX - pointerStartX);
     });
 
     viewport.addEventListener("pointerup", (event) => {
       if (event.pointerId !== pointerId) return;
-      finishDrag();
+      finishPointerDrag();
     });
 
     viewport.addEventListener("pointercancel", (event) => {
       if (event.pointerId !== pointerId) return;
-      finishDrag();
+      finishPointerDrag();
     });
 
     viewport.addEventListener("dragstart", (event) => event.preventDefault());
@@ -275,7 +352,7 @@
     carousel.addEventListener("focusout", start);
 
     window.addEventListener("resize", () => {
-      if (!dragging) render(false);
+      if (!pointerDragging && !touchTracking) render(false);
     });
 
     render();
