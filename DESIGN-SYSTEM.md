@@ -59,6 +59,14 @@ Princípios de copy:
 
 O azul funciona como cor de ação e orientação; o teal identifica estados positivos, confirmação e prevenção. Nenhuma informação depende apenas da cor.
 
+Contrastes verificados para combinações centrais:
+- dark: texto principal sobre fundo `#07111F` ≈ **17,6:1**;
+- dark: texto secundário `#9FB0C3` sobre `#0D1A2B` ≈ **7,9:1**;
+- dark: texto de botão `#07111F` sobre azul `#5EA0FF` ≈ **7,2:1**;
+- light: texto principal sobre `#F4F7FB` ≈ **16,8:1**;
+- light: texto secundário `#536579` sobre branco ≈ **6,0:1**;
+- light: texto branco sobre azul `#245DD8` ≈ **5,8:1**.
+
 ## Acessibilidade
 
 A paleta foi escolhida para manter contraste forte em texto e controles. O projeto também usa:
