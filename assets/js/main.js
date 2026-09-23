@@ -217,7 +217,11 @@
   };
   document.querySelectorAll(".footer-legal a").forEach((link) => {
     link.addEventListener("click", () => {
-      const target = document.querySelector(link.getAttribute("href"));
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) {
+        return;
+      }
+      const target = document.querySelector(href);
       if (target instanceof HTMLDetailsElement) {
         target.open = true;
       }
@@ -225,6 +229,25 @@
   });
   openHashDetail();
   window.addEventListener("hashchange", openHashDetail);
+  document.querySelectorAll("[data-checkout]").forEach((link) => {
+    const productKey = link.dataset.checkout;
+    const checkoutUrl = window.PROXITI_PRODUCT_CONFIG?.[productKey]?.checkoutUrl?.trim() || "";
+    const readyLabel = link.dataset.readyLabel || "Comprar agora";
+    const unavailableLabel = link.dataset.unavailableLabel || "Disponível em breve";
+    if (/^https:\/\//i.test(checkoutUrl)) {
+      link.setAttribute("href", checkoutUrl);
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+      link.removeAttribute("aria-disabled");
+      link.textContent = readyLabel;
+    } else {
+      link.removeAttribute("href");
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
+      link.setAttribute("aria-disabled", "true");
+      link.textContent = unavailableLabel;
+    }
+  });
   if (year) {
     year.textContent = new Date().getFullYear();
   }
