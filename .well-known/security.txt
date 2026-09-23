@@ -1,0 +1,4 @@
+Contact: mailto:contato.proxiti@gmail.com
+Canonical: https://proxiti.com.br/.well-known/security.txt
+Preferred-Languages: pt-BR, pt
+Expires: 2027-09-23T23:59:59Z
