@@ -168,10 +168,11 @@ p:last-child{margin-bottom:0}
 /* Carousel */
 .scenario-shell{position:relative}
 .carousel{position:relative}
-.carousel-viewport{overflow:hidden;border-radius:26px}
-.carousel-track{display:flex;transition:transform 480ms cubic-bezier(.22,.61,.36,1)}
+.carousel-viewport{position:relative;overflow:hidden;border-radius:26px;touch-action:pan-y pinch-zoom;cursor:grab;user-select:none;-webkit-user-select:none}
+.carousel-viewport.is-dragging{cursor:grabbing}
+.carousel-track{display:flex;will-change:transform;transition:transform 480ms cubic-bezier(.22,.61,.36,1)}
 .carousel-slide{min-width:100%;padding:1px}
-.scenario-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:44px;align-items:center;min-height:470px;padding:42px;border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.scenario-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:44px;align-items:center;min-height:470px;padding:42px 42px 108px;border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow-sm)}
 .scenario-copy{max-width:620px}
 .scenario-copy .tag{margin-bottom:18px}
 .scenario-copy h3{margin-bottom:14px;font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.05em;line-height:1}
@@ -180,11 +181,12 @@ p:last-child{margin-bottom:0}
 .scenario-list li{display:grid;grid-template-columns:18px 1fr;gap:9px;color:var(--text);font-size:.84rem}
 .scenario-list li::before{color:var(--orange);content:"•";font-size:1.45rem;line-height:.75}
 .scenario-visual img{width:100%;border-radius:18px}
-.carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
-.carousel-buttons{display:flex;gap:8px}
-.carousel-btn{display:grid;width:44px;height:44px;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer}
-.carousel-btn:hover{border-color:var(--blue);color:var(--blue)}
-.carousel-dots{display:flex;gap:7px}
+.carousel-controls{position:absolute;z-index:5;left:43px;right:43px;bottom:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:44px;align-items:center;pointer-events:none}
+.carousel-dots,.carousel-buttons{pointer-events:auto}
+.carousel-buttons{display:flex;gap:8px;justify-self:end}
+.carousel-btn{display:grid;width:44px;height:44px;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:0 8px 22px rgba(11,18,32,.08);cursor:pointer;transition:transform var(--ease),border-color var(--ease),color var(--ease),box-shadow var(--ease)}
+.carousel-btn:hover{transform:translateY(-1px);border-color:var(--blue);color:var(--blue);box-shadow:0 10px 26px rgba(11,18,32,.12)}
+.carousel-dots{display:flex;gap:7px;justify-self:start}
 .carousel-dot{width:9px;height:9px;padding:0;border:0;border-radius:999px;background:var(--line-strong);cursor:pointer;transition:width var(--ease),background-color var(--ease)}
 .carousel-dot.active{width:28px;background:var(--blue)}
 
@@ -362,7 +364,7 @@ p:last-child{margin-bottom:0}
   .desktop-nav,.header-cta{display:none}.menu-button{display:grid}
   .hero-grid,.page-hero-grid{grid-template-columns:1fr}.hero-visual{max-width:760px}
   .hero-note{left:20px}
-  .scenario-card{grid-template-columns:1fr}.scenario-visual{max-width:620px}
+  .scenario-card{grid-template-columns:1fr;padding-bottom:100px}.scenario-visual{max-width:620px}.carousel-controls{left:28px;right:28px;bottom:20px;grid-template-columns:1fr auto;gap:18px}
   .process-grid{grid-template-columns:repeat(2,1fr)}
   .triage-wrap,.product-feature,.about-grid,.contact-card,.product-detail{grid-template-columns:1fr}
   .buy-card{position:static}
@@ -389,12 +391,12 @@ p:last-child{margin-bottom:0}
   .hero-actions,.product-actions,.contact-actions,.catalog-actions{display:grid}
   .hero-actions .button,.product-actions .button,.contact-actions .button,.catalog-actions .button{width:100%}
   .hero-note{position:static;width:100%;margin-top:12px}
-  .scenario-card,.product-feature,.contact-card{padding:22px;border-radius:20px}
+  .scenario-card,.product-feature,.contact-card{padding:22px;border-radius:20px}.scenario-card{padding-bottom:94px}
   .process-grid,.receive-grid,.feature-grid,.detail-cols,.triage-form{grid-template-columns:1fr}
   .field-full,.form-actions{grid-column:auto}
   .service-panel{grid-template-columns:54px 1fr;padding:20px}.service-code{height:54px}
   .service-cta{align-items:flex-start;flex-direction:column}
-  .carousel-controls{align-items:flex-start;flex-direction:column}
+  .carousel-controls{left:18px;right:18px;bottom:16px;grid-template-columns:1fr auto;gap:12px}.carousel-buttons{justify-self:end}.carousel-dots{align-self:center}
   .floating-whatsapp{right:14px;bottom:14px;width:50px;height:50px;justify-content:center;padding:0}.floating-whatsapp span{display:none}
   .footer-bottom{display:grid}
 }
