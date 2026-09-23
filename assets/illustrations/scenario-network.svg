@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-labelledby="t"><title id="t">Diagnóstico de rede e Wi-Fi</title>
+<rect width="760" height="440" rx="28" fill="#0B1220"/>
+<g opacity=".18" stroke="#8DA1BA"><path d="M0 88h760M0 176h760M0 264h760M0 352h760"/><path d="M95 0v440M190 0v440M285 0v440M380 0v440M475 0v440M570 0v440M665 0v440"/></g>
+<path d="M380 215 168 130M380 215 607 116M380 215 605 332M380 215 190 340" stroke="#345074" stroke-width="3" stroke-dasharray="8 10"/>
+<g fill="#172033" stroke="#36506F" stroke-width="2">
+<rect x="288" y="154" width="184" height="122" rx="24"/><rect x="92" y="76" width="150" height="102" rx="18"/><rect x="525" y="62" width="164" height="110" rx="18"/><rect x="525" y="278" width="164" height="102" rx="18"/><rect x="110" y="286" width="164" height="102" rx="18"/></g>
+<path d="M330 206c32-30 68-30 100 0M350 228c20-18 40-18 60 0" fill="none" stroke="#67A2FF" stroke-width="8" stroke-linecap="round"/><circle cx="380" cy="248" r="8" fill="#F28C45"/>
+<g fill="#2F6DF6"><circle cx="168" cy="128" r="9"/><circle cx="607" cy="116" r="9"/><circle cx="605" cy="330" r="9"/><circle cx="192" cy="338" r="9"/></g>
+</svg>
