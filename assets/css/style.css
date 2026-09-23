@@ -428,3 +428,7 @@ p:last-child{margin-bottom:0}
   .page-main{padding-top:0}
   .section{padding-block:36px}
 }
+
+.page-card-title{margin-top:16px}
+.error-hero{min-height:100vh;display:grid;align-items:center}
+.error-content{margin-top:64px}
