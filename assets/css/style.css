@@ -408,3 +408,15 @@ p:last-child{margin-bottom:0}
 }
 
 .error-content{margin-top:60px}
+
+.section-dark .about-fact{background:#111a2a;border-color:#2b3b53;color:#fff}
+.section-dark .about-fact span{color:#aebbcf}
+.section-dark .contact-card{background:#111a2a;border-color:#2b3b53;color:#fff}
+.section-dark .contact-copy p{color:#aebbcf}
+.section-dark .contact-row{background:#0d1625;border-color:#2b3b53;color:#fff}
+.section-dark .contact-row span{color:#9fb0c3}
+.section-dark .contact-row strong{color:#fff}
+.section-dark .buy-card{background:#111a2a;border-color:#2b3b53;color:#fff}
+.section-dark .buy-card p,.section-dark .buy-note{color:#aebbcf}
+.section-dark .tag{background:#111a2a;border-color:#34445c;color:#c8d3e3}
+.section-dark .text-link{color:#8cb7ff}
