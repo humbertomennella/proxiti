@@ -138,18 +138,28 @@
   });
 
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const viewport = carousel.querySelector(".carousel-viewport");
     const track = carousel.querySelector(".carousel-track");
     const slides = [...carousel.querySelectorAll(".carousel-slide")];
     const prev = carousel.querySelector("[data-carousel-prev]");
     const next = carousel.querySelector("[data-carousel-next]");
     const dots = [...carousel.querySelectorAll("[data-carousel-dot]")];
-    if (!track || slides.length < 2) return;
+    if (!viewport || !track || slides.length < 2) return;
 
     let index = 0;
     let timer = null;
+    let dragging = false;
+    let pointerId = null;
+    let startX = 0;
+    let currentX = 0;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    const restoreTransition = () => {
+      track.style.removeProperty("transition");
+    };
+
     const render = (announce = false) => {
+      restoreTransition();
       track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((slide, i) => {
         slide.setAttribute("aria-hidden", i === index ? "false" : "true");
@@ -180,14 +190,93 @@
       timer = window.setInterval(() => go(index + 1, false), 7000);
     };
 
-    prev?.addEventListener("click", () => { go(index - 1); start(); });
-    next?.addEventListener("click", () => { go(index + 1); start(); });
-    dots.forEach((dot, i) => dot.addEventListener("click", () => { go(i); start(); }));
+    prev?.addEventListener("click", () => {
+      go(index - 1);
+      start();
+    });
+
+    next?.addEventListener("click", () => {
+      go(index + 1);
+      start();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        go(i);
+        start();
+      });
+    });
+
+    const finishDrag = () => {
+      if (!dragging) return;
+
+      const deltaX = currentX - startX;
+      const width = viewport.clientWidth || 1;
+      const threshold = Math.min(90, Math.max(48, width * 0.12));
+
+      dragging = false;
+      viewport.classList.remove("is-dragging");
+
+      if (pointerId !== null && viewport.hasPointerCapture?.(pointerId)) {
+        viewport.releasePointerCapture(pointerId);
+      }
+      pointerId = null;
+
+      if (Math.abs(deltaX) >= threshold) {
+        go(index + (deltaX < 0 ? 1 : -1));
+      } else {
+        render(false);
+      }
+
+      start();
+    };
+
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("button, a")) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+
+      dragging = true;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      currentX = event.clientX;
+      stop();
+
+      viewport.classList.add("is-dragging");
+      viewport.setPointerCapture?.(pointerId);
+      track.style.transition = "none";
+    });
+
+    viewport.addEventListener("pointermove", (event) => {
+      if (!dragging || event.pointerId !== pointerId) return;
+
+      currentX = event.clientX;
+      const deltaX = currentX - startX;
+      const width = viewport.clientWidth || 1;
+      const base = -index * width;
+
+      track.style.transform = `translateX(${base + deltaX}px)`;
+    });
+
+    viewport.addEventListener("pointerup", (event) => {
+      if (event.pointerId !== pointerId) return;
+      finishDrag();
+    });
+
+    viewport.addEventListener("pointercancel", (event) => {
+      if (event.pointerId !== pointerId) return;
+      finishDrag();
+    });
+
+    viewport.addEventListener("dragstart", (event) => event.preventDefault());
 
     carousel.addEventListener("mouseenter", stop);
     carousel.addEventListener("mouseleave", start);
     carousel.addEventListener("focusin", stop);
     carousel.addEventListener("focusout", start);
+
+    window.addEventListener("resize", () => {
+      if (!dragging) render(false);
+    });
 
     render();
     start();
