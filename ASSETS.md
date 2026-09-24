@@ -10,15 +10,15 @@ Os vetores abaixo foram criados especificamente para este projeto. Não dependem
 - `assets/illustrations/scenario-security.svg` — backup, acessos e segurança preventiva.
 - `assets/illustrations/product-pc-seguro.svg` — mockup vetorial do PC Seguro e checklist.
 
-## Prévias reais de produto
+## Ilustrações do PC Seguro 2.2 Premium
 
-As imagens abaixo foram derivadas do próprio **PC Seguro** para uso comercial no site:
+Os arquivos abaixo são SVGs originais, independentes de bibliotecas e serviços externos:
 
-- `assets/products/pc-seguro-cover.jpg` — capa real do guia;
-- `assets/products/pc-seguro-phishing-preview.jpg` — recorte parcial da seção sobre phishing e golpes;
-- `assets/products/pc-seguro-checklist-preview.jpg` — recorte parcial do checklist mensal.
+- `assets/products/pc-seguro-2-2-capa.svg` — representação visual da capa com notebook e escudo;
+- `assets/products/pc-seguro-2-2-phishing.svg` — ilustração do módulo de phishing e golpes;
+- `assets/products/pc-seguro-2-2-checklist.svg` — ilustração do checklist mensal.
 
-As duas páginas internas são exibidas apenas como **prévia parcial**, para aumentar a tangibilidade do produto sem publicar o conteúdo pago completo.
+Estes arquivos substituem JPGs anteriores que apresentavam falha de decodificação. As imagens do site são **ilustrações editoriais**, não capturas literais do PDF vendido. O PDF da edição 2.2 Premium revisada e os quatro anexos permanecem fora do GitHub Pages.
 
 ## Imagens e ícones já existentes
 
