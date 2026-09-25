@@ -1,0 +1,12 @@
+/* PROXITI: bancada editorial no hero, cartões compactos sem overlays decorativos. */
+.hero{background:#0b1220}.hero-grid{gap:clamp(28px,4.5vw,64px)}
+.hero-visual{align-self:center;isolation:isolate}.hero-visual img{width:100%;height:auto;max-height:610px;object-fit:contain;object-position:center;border:1px solid #344965;border-radius:20px;box-shadow:0 26px 65px rgba(0,0,0,.22)}
+.hero-visual:before,.hero-visual:after{display:none!important}.hero-copy>p{max-width:61ch}
+.entry-grid{gap:15px}
+.entry-card.px-card{padding:clamp(22px,2.4vw,29px);border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 12px 40px rgba(11,18,32,.035);transition:border-color 180ms ease,box-shadow 180ms ease,transform 180ms ease}
+.entry-card.px-card:hover{border-color:var(--line-strong);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
+.entry-card.px-card .entry-no{font-variant-numeric:tabular-nums}
+[data-theme="dark"] .entry-card.px-card{box-shadow:0 10px 32px rgba(0,0,0,.12)}
+.hero-actions.px-cluster{gap:10px}.hero-actions .px-button{min-height:48px}
+@media(max-width:840px){.hero-grid{gap:24px}.hero-visual img{max-height:480px}}
+@media(prefers-reduced-motion:reduce){.entry-card.px-card{transition:none}.entry-card.px-card:hover{transform:none}}
