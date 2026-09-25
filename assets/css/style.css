@@ -594,3 +594,20 @@ p:last-child{margin-bottom:0}
 .partner-state-dot{width:9px;height:9px;border-radius:50%;background:var(--orange)}
 @media(max-width:960px){.partner-hero .careers-hero-grid,.partner-panel{grid-template-columns:1fr}.partner-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.partner-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.partner-steps,.partner-benefits{grid-template-columns:1fr}.partner-hero-actions{display:grid}.partner-hero-actions .button{width:100%}.partner-step-number,.partner-benefit-kicker{margin-bottom:22px}.partner-panel-visual{padding:18px}.partner-status-meta>span{display:grid;gap:2px}}
+
+
+/* Imagens originais do programa de parcerias: acessíveis e sem perfis fictícios. */
+.partner-hero-side{display:grid;gap:18px;min-width:0;align-content:start}
+.partner-media{margin:0;min-width:0}
+.partner-media-hero{overflow:hidden;border:1px solid #365778;border-radius:21px;background:#10243e;box-shadow:0 22px 48px rgba(0,0,0,.16)}
+.partner-media-hero img{display:block;width:100%;height:auto;aspect-ratio:960/590;object-fit:cover}
+.partner-media-hero figcaption{padding:10px 16px;color:#b9cbe2;font-size:.71rem;line-height:1.5}
+.partner-hero-side .partner-status{box-shadow:0 12px 35px rgba(0,0,0,.12)}
+.partner-training-media{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:0;align-items:stretch;overflow:hidden;margin:0 0 24px;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
+.partner-training-media img{display:block;width:100%;height:100%;min-height:245px;object-fit:cover}
+.partner-training-media figcaption{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px;padding:clamp(22px,4vw,40px)}
+.partner-training-kicker{color:var(--blue);font-size:.71rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+.partner-training-media figcaption strong{max-width:21ch;font-size:clamp(1.45rem,2.6vw,2.25rem);line-height:1.17;letter-spacing:-.03em}
+.partner-training-media figcaption>span:last-child{max-width:48ch;color:var(--muted);font-size:.86rem;line-height:1.7}
+@media(max-width:930px){.partner-training-media{grid-template-columns:1fr}.partner-training-media img{height:auto;min-height:0;max-height:420px;aspect-ratio:960/540}.partner-hero-side{max-width:730px}}
+@media(max-width:650px){.partner-media-hero figcaption{font-size:.67rem}.partner-training-media figcaption{padding:22px}.partner-training-media figcaption strong{font-size:1.48rem}}
