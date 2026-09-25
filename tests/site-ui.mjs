@@ -16,6 +16,11 @@ assert(!home.includes("/assets/illustrations/hero-operations.svg"));
 assert(!home.includes('class="hero-note"'));
 assert.equal((home.match(/class="entry-card reveal px-card"/g)||[]).length,3);
 assert(home.includes('class="hero-actions px-cluster"'));
+for(const name of ["parcerias-rede.svg","parcerias-modelo.svg","parcerias-capacitacao.svg","parcerias-ingresso.svg"]){
+ const art=read("assets/illustrations/"+name);
+ assert(!art.includes("M0 110H1100M0 220H1100"),name+" ainda tem grade decorativa");
+}
+
 assert(read("assets/css/style.css").includes('[data-theme="dark"]'));
 assert(read("assets/js/main.js").includes("proxiti-theme-v3"));
 for(const name of ["main.js","chat-widget.js","site-requests.js","support-thread.js"])
