@@ -626,3 +626,23 @@ p:last-child{margin-bottom:0}
 /* Integração pública da Central Técnica. Contatos diretos continuam no rodapé. */
 .floating-chat{position:fixed;z-index:80;right:21px;bottom:22px;display:inline-flex;align-items:center;gap:11px;padding:13px 18px;border:1px solid #77aeea;border-radius:999px;color:#f5faff;background:#173f69;box-shadow:0 11px 33px #05162966;text-decoration:none;font-size:.82rem;font-weight:800}.floating-chat:hover{background:#225888}.floating-chat:focus-visible{outline:3px solid #c8e3ff;outline-offset:4px}.request-consent label{display:flex;align-items:flex-start;gap:10px;line-height:1.65;font-size:.83rem}.request-consent input{flex:none;width:17px;height:17px;min-height:0;margin-top:4px;accent-color:#78b7f5}.request-consent a{color:#9eccff}.hp-field{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.request-fallback a{color:#a4ceff;text-decoration:underline}
 @media(max-width:650px){.floating-chat{right:12px;bottom:12px;padding:12px 15px;font-size:.76rem}}
+
+/* PROXITI | chat contextual, preserva a página principal e o mesmo backend. */
+.support-widget{position:fixed;z-index:120;right:20px;bottom:85px;display:flex;flex-direction:column;width:min(426px,calc(100vw - 30px));height:min(670px,calc(100dvh - 105px));border:1px solid #557a9e;border-radius:19px;background:#111f31;box-shadow:0 23px 70px #030d1a88;overflow:hidden;color:#e9f4ff}
+.support-widget[hidden]{display:none!important}
+.support-widget-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(115deg,#193655,#122b47);border-bottom:1px solid #476d91;color:#fff}
+.support-widget-head strong{display:block;font-size:.9rem;font-weight:850;letter-spacing:-.025em}.support-widget-head small{display:block;margin-top:3px;font-size:.69rem;color:#b4cee9}
+.support-widget-head button{width:35px;height:35px;border:1px solid #6085ac;background:#264769;border-radius:9px;color:#eaf5ff;font-size:1.15rem;font-weight:750;cursor:pointer}
+.support-widget iframe{display:block;flex:1;width:100%;min-height:0;border:0;background:#0d1828}
+.support-widget footer{padding:10px 15px;border-top:1px solid #395676;text-align:center;font-size:.72rem;background:#14253a}.support-widget footer a{color:#b9daf9;text-decoration:none}.support-widget footer a:hover{text-decoration:underline}
+button.floating-chat{font:inherit;cursor:pointer}.floating-chat[aria-expanded=true]{background:#235983;box-shadow:0 0 0 3px #7fbeff44,0 11px 33px #05162966}
+@media(max-width:650px){.support-widget{right:8px;bottom:70px;width:calc(100vw - 16px);height:min(650px,calc(100dvh - 82px));border-radius:15px}.support-widget-head{padding:10px 13px}}
+/* Vitrines de documentos: todas as miniaturas no mesmo formato, sem cortes ou distorção. */
+@media(min-width:761px){
+.page-hero .pc-mini-gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:12px;padding:17px;min-height:330px}
+.page-hero .pc-mini-gallery img{display:block;box-sizing:border-box;width:100%;height:286px;aspect-ratio:auto;object-fit:contain;object-position:center;padding:12px;margin:0;transform:none!important;background:#fff;border:1px solid #e0e6ef;border-radius:13px;box-shadow:0 11px 28px #0c182022}
+.page-hero .pc-mini-gallery img:first-child{height:286px;grid-column:auto;transform:none!important}
+.catalog-card .pc-mini-gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:10px}
+.catalog-card .pc-mini-gallery img{display:block;width:100%;height:240px;object-fit:contain;object-position:center;padding:8px;background:#fff;border-radius:12px;transform:none!important}
+}
+@media(min-width:761px) and (max-width:1100px){.page-hero .pc-mini-gallery{min-height:280px}.page-hero .pc-mini-gallery img{height:228px}.page-hero .pc-mini-gallery img:first-child{height:228px}}
