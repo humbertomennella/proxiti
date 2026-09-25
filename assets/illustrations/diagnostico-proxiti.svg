@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 650" role="img" aria-labelledby="title desc">
+<title id="title">Bancada técnica de diagnóstico PROXITI</title><desc id="desc">Notebook em diagnóstico, roteador, unidade de backup e ferramentas em bancada organizada de suporte técnico.</desc>
+<defs>
+ <linearGradient id="base" x2="1" y2="1"><stop stop-color="#14253b"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
+ <linearGradient id="screen" x2="1" y2="1"><stop stop-color="#1c3d61"/><stop offset="1" stop-color="#0c1d30"/></linearGradient>
+ <linearGradient id="metal" x2="0" y2="1"><stop stop-color="#8aa5c3"/><stop offset="1" stop-color="#304a68"/></linearGradient>
+ <linearGradient id="accent" x2="1" y2="1"><stop stop-color="#91bdff"/><stop offset="1" stop-color="#3675e9"/></linearGradient>
+ <linearGradient id="warm" x2="1" y2="1"><stop stop-color="#ffd3a9"/><stop offset="1" stop-color="#e78b49"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#2965a2" stop-opacity=".32"/><stop offset="1" stop-color="#2965a2" stop-opacity="0"/></radialGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000" flood-opacity=".30"/></filter>
+ <clipPath id="clip"><rect width="920" height="650" rx="32"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+ <rect width="920" height="650" fill="url(#base)"/>
+ <ellipse cx="590" cy="218" rx="390" ry="300" fill="url(#halo)"/>
+ <path d="M0 505Q355 473 920 490V650H0Z" fill="#182b40"/>
+ <path d="M0 505Q355 473 920 490" fill="none" stroke="#4a6886" stroke-width="3"/>
+ <path d="M80 563c198-15 521-15 744 2" stroke="#0a1726" stroke-opacity=".46" stroke-width="25" stroke-linecap="round"/>
+ <g filter="url(#shadow)">
+  <g transform="translate(96 132)">
+   <rect x="0" y="0" width="538" height="342" rx="20" fill="#253c57" stroke="#7e9bb9" stroke-width="3"/>
+   <rect x="16" y="16" width="506" height="309" rx="11" fill="url(#screen)"/>
+   <path d="M16 64H522" stroke="#416688" stroke-width="2"/>
+   <circle cx="40" cy="40" r="5" fill="#f2a66e"/><circle cx="59" cy="40" r="5" fill="#85b8f4"/><circle cx="78" cy="40" r="5" fill="#87d4b0"/>
+   <g font-family="Inter,Arial,sans-serif"><text x="112" y="46" font-size="14" fill="#bfd8f5" font-weight="700" letter-spacing="2">PROXITI  /  DIAGNÓSTICO</text>
+    <text x="43" y="110" font-size="19" fill="#f7fafc" font-weight="750">Contexto do atendimento</text>
+    <text x="43" y="139" font-size="12" fill="#8caac6">Equipamento · sintoma · impacto</text>
+   </g>
+   <rect x="42" y="167" width="278" height="115" rx="13" fill="#10253c" stroke="#436b93"/>
+   <path d="M66 252h35l23-40 30 23 27-53 28 43 24-27 25 18h39" fill="none" stroke="#80b7fd" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+   <path d="M67 192h68" stroke="#698bac" stroke-width="6" stroke-linecap="round"/>
+   <rect x="338" y="167" width="144" height="34" rx="9" fill="#1d4760" stroke="#4b8f95"/><circle cx="354" cy="184" r="5" fill="#8bd9b4"/><text x="368" y="189" font-size="12" fill="#d1f2e8" font-family="Inter,Arial,sans-serif" font-weight="700">Rede</text>
+   <rect x="338" y="211" width="144" height="34" rx="9" fill="#30425e" stroke="#658ab1"/><circle cx="354" cy="228" r="5" fill="#8abaff"/><text x="368" y="233" font-size="12" fill="#e1efff" font-family="Inter,Arial,sans-serif" font-weight="700">Sistema</text>
+   <rect x="338" y="255" width="144" height="34" rx="9" fill="#48352d" stroke="#b27c54"/><circle cx="354" cy="272" r="5" fill="#f2ad79"/><text x="368" y="277" font-size="12" fill="#ffe4ce" font-family="Inter,Arial,sans-serif" font-weight="700">Backup</text>
+   <path d="M-27 342h590l-50 42H24Z" fill="url(#metal)" stroke="#9fb9d1" stroke-width="2"/>
+   <rect x="193" y="349" width="164" height="13" rx="4" fill="#314e6d" opacity=".75"/>
+   <path d="M26 383h485" stroke="#bbd0df" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(698 248)">
+    <path d="M15 12V-50M110 12V-50" stroke="#9dbbdb" stroke-width="5" stroke-linecap="round"/>
+    <rect x="0" y="0" width="126" height="161" rx="18" fill="#1a3048" stroke="#8cabcd" stroke-width="3"/>
+    <rect x="15" y="16" width="96" height="93" rx="11" fill="#0a1a2c" stroke="#3a5676"/>
+    <path d="M37 64q27-29 53 0M48 77q16-16 31 0" stroke="#81b8ff" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="64" cy="90" r="5" fill="#f5ad78"/><rect x="15" y="122" width="96" height="22" rx="6" fill="#15293c"/>
+    <circle cx="32" cy="133" r="4" fill="#8cddb7"/><circle cx="48" cy="133" r="4" fill="#8cddb7"/><circle cx="64" cy="133" r="4" fill="#f1ac70"/>
+  </g>
+  <g transform="translate(677 480)">
+    <rect x="0" y="0" width="164" height="53" rx="12" fill="#213951" stroke="#6b91b2" stroke-width="2"/>
+    <rect x="12" y="11" width="104" height="31" rx="7" fill="#0d1f31"/><path d="M27 22h53M27 31h41" stroke="#79a8d1" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="143" cy="27" r="6" fill="#81dab5"/>
+  </g>
+ </g>
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M761 410v28q0 20-20 20h-29q-22 0-22 21v5" stroke="#f0a46e" stroke-width="5"/><path d="m682 484 8 8 8-8" stroke="#f0a46e" stroke-width="4"/></g>
+ <g transform="translate(159 554)" font-family="Inter,Arial,sans-serif"><text x="0" y="0" fill="#f0f5fa" font-size="19" font-weight="800">Diagnóstico antes da intervenção</text><text x="0" y="28" fill="#9eafc2" font-size="13">Computadores, redes e dados tratados com método.</text></g>
+</g>
+</svg>
