@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" role="img" aria-labelledby="title desc">
+<title id="title">Formação técnica com apostilas e ferramentas</title><desc id="desc">Bancada ilustrativa com curso digital, caderno de consulta e recursos utilizados nos atendimentos.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061225"/><stop offset=".57" stop-color="#102849"/><stop offset="1" stop-color="#061325"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#203d65"/><stop offset="1" stop-color="#10233f"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#A4BAD2"/><stop offset="1" stop-color="#3D5F85"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#2f6df6" stop-opacity=".36"/><stop offset="1" stop-color="#2f6df6" stop-opacity="0"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="13"/></filter><filter id="shade"><feGaussianBlur stdDeviation="19"/></filter>
+</defs>
+<rect width="1100" height="680" rx="24" fill="url(#bg)"/>
+<ellipse cx="580" cy="310" rx="470" ry="285" fill="url(#halo)"/>
+<g fill="none" stroke="#5585ba" opacity=".12" stroke-width="1">
+<path d="M0 110H1100M0 220H1100M0 330H1100M0 440H1100M0 550H1100M110 0V680M220 0V680M330 0V680M440 0V680M550 0V680M660 0V680M770 0V680M880 0V680M990 0V680"/>
+</g>
+<g fill="#f28c45"><circle cx="65" cy="70" r="4"/><circle cx="1030" cy="595" r="4"/></g>
+
+<ellipse cx="565" cy="568" rx="450" ry="47" fill="#030b14" opacity=".65" filter="url(#shade)"/>
+<g transform="translate(194 104)">
+<rect x="12" y="9" width="610" height="401" rx="24" fill="#071321" stroke="#4d7299" stroke-width="5"/>
+<rect x="36" y="34" width="560" height="342" rx="10" fill="#102a49"/>
+<path d="M37 85H595M190 85V376" stroke="#4c759d" stroke-width="2"/>
+<rect x="59" y="57" width="139" height="9" rx="4.5" fill="#91c3f8"/>
+<rect x="60" y="111" width="105" height="13" rx="6" fill="#21508b"/>
+<rect x="60" y="142" width="113" height="13" rx="6" fill="#315a86"/>
+<rect x="60" y="173" width="91" height="13" rx="6" fill="#315a86"/>
+<rect x="60" y="204" width="110" height="13" rx="6" fill="#315a86"/>
+<rect x="213" y="110" width="348" height="170" rx="15" fill="#153e65" stroke="#4e82b2" stroke-width="2"/>
+<path d="M242 240l69-68 62 40 79-75 79 57" fill="none" stroke="#68b1f8" stroke-width="7" stroke-linecap="round"/>
+<circle cx="373" cy="211" r="9" fill="#f5ae75"/><circle cx="452" cy="137" r="9" fill="#6dc5e7"/>
+<rect x="213" y="306" width="230" height="10" rx="5" fill="#afccea"/><rect x="213" y="330" width="174" height="7" rx="3.5" fill="#658cb7"/>
+<path d="M-20 418h651l-50 31H34Z" fill="url(#metal)" stroke="#7b9ebf" stroke-width="3"/>
+</g>
+<g transform="translate(59 396) rotate(-9 175 115)">
+<path d="M10 22q116-40 223 9v184q-111-45-223 0Z" fill="#d6e8fa" stroke="#7da1c7" stroke-width="5"/>
+<path d="M233 31q100-36 187 7v177q-90-38-187 0Z" fill="#e9f3fe" stroke="#91afcd" stroke-width="5"/>
+<path d="M233 30v188" stroke="#9bb9d5" stroke-width="8"/>
+<path d="M36 76h163M36 104h163M36 132h132M36 161h151M263 83h123M263 113h123M263 143h95" stroke="#7199c6" stroke-width="7" stroke-linecap="round"/>
+<rect x="282" y="165" width="82" height="28" rx="7" fill="#1d548f"/><path d="m299 179 8 8 17-18" stroke="#e0f5ff" stroke-width="4" fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(757 389)">
+<rect x="0" y="45" width="247" height="137" rx="18" fill="#142d4c" stroke="#668bb2" stroke-width="4"/>
+<path d="M0 73H247M26 110h65M110 110h56M183 110h37" stroke="#5a85b2" stroke-width="6" stroke-linecap="round"/>
+<rect x="20" y="0" width="202" height="60" rx="13" fill="#1a3e67" stroke="#6794c3" stroke-width="4"/>
+<path d="M43 29h104" stroke="#94bfe7" stroke-width="8" stroke-linecap="round"/>
+<rect x="12" y="201" width="230" height="20" rx="8" fill="#12263e" stroke="#6288ad" stroke-width="3"/>
+<rect x="50" y="185" width="120" height="17" rx="6" fill="#e59359"/>
+</g>
+
+</svg>

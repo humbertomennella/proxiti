@@ -611,3 +611,14 @@ p:last-child{margin-bottom:0}
 .partner-training-media figcaption>span:last-child{max-width:48ch;color:var(--muted);font-size:.86rem;line-height:1.7}
 @media(max-width:930px){.partner-training-media{grid-template-columns:1fr}.partner-training-media img{height:auto;min-height:0;max-height:420px;aspect-ratio:960/540}.partner-hero-side{max-width:730px}}
 @media(max-width:650px){.partner-media-hero figcaption{font-size:.67rem}.partner-training-media figcaption{padding:22px}.partner-training-media figcaption strong{font-size:1.48rem}}
+
+/* Visuais editoriais específicos para as quatro seções da parceria técnica. */
+.partner-section-intro{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:center;gap:clamp(24px,3.8vw,58px);margin-bottom:32px}
+.partner-section-intro>.careers-section-head{min-width:0;max-width:none;margin:0}
+.partner-section-intro .careers-section-head h2{font-size:clamp(2rem,3.35vw,3.35rem)}
+.partner-section-image{margin:0;min-width:0;overflow:hidden;border:1px solid #355477;border-radius:21px;background:#10233d;box-shadow:0 15px 46px rgba(9,24,45,.12)}
+.partner-section-image img{display:block;width:100%;height:auto;aspect-ratio:1100/680;object-fit:cover}
+.partner-media-hero img{aspect-ratio:1100/680}
+.partner-training-media img{aspect-ratio:1100/680}
+@media(max-width:930px){.partner-section-intro{grid-template-columns:1fr;gap:24px}.partner-section-image{max-width:760px}.partner-section-intro .careers-section-head h2{font-size:clamp(2rem,4.6vw,3.6rem)}}
+@media(max-width:650px){.partner-section-intro{gap:20px;margin-bottom:26px}.partner-section-image{border-radius:16px}.partner-section-intro .careers-section-head h2{font-size:clamp(1.95rem,8vw,2.65rem)}}

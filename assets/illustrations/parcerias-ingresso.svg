@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" role="img" aria-labelledby="title desc">
+<title id="title">Etapas de ingresso na rede técnica</title><desc id="desc">Sequência conceitual que representa apresentação profissional, formalização das condições e preparação dos recursos técnicos.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061225"/><stop offset=".57" stop-color="#102849"/><stop offset="1" stop-color="#061325"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#203d65"/><stop offset="1" stop-color="#10233f"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#A4BAD2"/><stop offset="1" stop-color="#3D5F85"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#2f6df6" stop-opacity=".36"/><stop offset="1" stop-color="#2f6df6" stop-opacity="0"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="13"/></filter><filter id="shade"><feGaussianBlur stdDeviation="19"/></filter>
+</defs>
+<rect width="1100" height="680" rx="24" fill="url(#bg)"/>
+<ellipse cx="580" cy="310" rx="470" ry="285" fill="url(#halo)"/>
+<g fill="none" stroke="#5585ba" opacity=".12" stroke-width="1">
+<path d="M0 110H1100M0 220H1100M0 330H1100M0 440H1100M0 550H1100M110 0V680M220 0V680M330 0V680M440 0V680M550 0V680M660 0V680M770 0V680M880 0V680M990 0V680"/>
+</g>
+<g fill="#f28c45"><circle cx="65" cy="70" r="4"/><circle cx="1030" cy="595" r="4"/></g>
+
+<path d="M117 418H989" stroke="#246fcb" stroke-width="23" opacity=".4" filter="url(#glow)"/>
+<path d="M117 418H989" stroke="#66b2ff" stroke-width="7" stroke-linecap="round"/>
+<circle cx="376" cy="418" r="12" fill="#f5aa6f" stroke="#143050" stroke-width="6"/><circle cx="724" cy="418" r="12" fill="#f5aa6f" stroke="#143050" stroke-width="6"/>
+<g transform="translate(67 137)">
+<rect x="0" y="0" width="287" height="372" rx="25" fill="url(#panel)" stroke="#5684b5" stroke-width="3"/>
+<rect x="23" y="24" width="104" height="7" rx="3" fill="#86b9f0"/><rect x="23" y="45" width="77" height="5" rx="2.5" fill="#5c89ba"/>
+<rect x="38" y="91" width="211" height="222" rx="15" fill="#12375e" stroke="#5289bd" stroke-width="3"/>
+<circle cx="144" cy="154" r="36" fill="#5498dd"/><path d="M78 236q8-67 66-67t66 67" fill="#29619b"/>
+<path d="M75 264h139M92 280h104" stroke="#91bee7" stroke-width="7" stroke-linecap="round"/>
+<circle cx="143" cy="344" r="10" fill="#f2a56c"/>
+</g>
+<g transform="translate(407 101)">
+<rect x="0" y="0" width="289" height="436" rx="25" fill="url(#panel)" stroke="#7598c0" stroke-width="3"/>
+<rect x="26" y="28" width="102" height="8" rx="4" fill="#93bde7"/>
+<path d="M62 103h165v248H62Z" fill="#dcebf9" stroke="#86a8cb" stroke-width="5"/>
+<path d="M89 143h108M89 170h108M89 197h89M89 224h108M89 251h73" stroke="#7599be" stroke-width="8" stroke-linecap="round"/>
+<path d="M96 298c30-35 46 28 67-4q18-24 36-10" stroke="#346daa" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M109 331h98" stroke="#97b2cf" stroke-width="5" stroke-linecap="round"/>
+<circle cx="144" cy="390" r="22" fill="#0f615f" stroke="#77dec0" stroke-width="3"/>
+<path d="m134 390 8 8 14-18" fill="none" stroke="#94ffda" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g transform="translate(749 137)">
+<rect x="0" y="0" width="287" height="372" rx="25" fill="url(#panel)" stroke="#5684b5" stroke-width="3"/>
+<rect x="25" y="26" width="103" height="7" rx="3.5" fill="#88baf1"/>
+<rect x="38" y="90" width="213" height="136" rx="18" fill="#0c213b" stroke="#477aa9" stroke-width="3"/>
+<path d="M61 125h167M61 153h167M61 182h167" stroke="#547ca3" stroke-width="9" stroke-linecap="round"/>
+<circle cx="222" cy="125" r="4" fill="#81e3bd"/><circle cx="222" cy="153" r="4" fill="#81e3bd"/>
+<rect x="69" y="261" width="148" height="70" rx="13" fill="#235483" stroke="#79a9d4" stroke-width="3"/>
+<path d="M86 282h112M96 309h91" stroke="#9fc8ec" stroke-width="7" stroke-linecap="round"/>
+<path d="M54 347h180" stroke="#5c87b0" stroke-width="7" stroke-linecap="round"/>
+</g>
+
+</svg>
