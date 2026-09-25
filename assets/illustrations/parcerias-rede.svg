@@ -9,9 +9,6 @@
 </defs>
 <rect width="1100" height="680" rx="24" fill="url(#bg)"/>
 <ellipse cx="580" cy="310" rx="470" ry="285" fill="url(#halo)"/>
-<g fill="none" stroke="#5585ba" opacity=".12" stroke-width="1">
-<path d="M0 110H1100M0 220H1100M0 330H1100M0 440H1100M0 550H1100M110 0V680M220 0V680M330 0V680M440 0V680M550 0V680M660 0V680M770 0V680M880 0V680M990 0V680"/>
-</g>
 <g fill="#f28c45"><circle cx="65" cy="70" r="4"/><circle cx="1030" cy="595" r="4"/></g>
 
 <path d="M291 353H458Q491 353 491 308V257M790 351H644Q612 351 612 307V257" stroke="#287ce1" stroke-width="19" fill="none" opacity=".46" filter="url(#glow)"/>
