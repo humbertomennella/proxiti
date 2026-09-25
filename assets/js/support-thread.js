@@ -9,14 +9,14 @@
     area.className="support-feedback"+(fail?" error":"");
   }
   function store(){
-    for(const item of [localStorage,sessionStorage]){
-      try{item.setItem("__proxiti_test","yes");item.removeItem("__proxiti_test");return item;}catch{}
+    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage]){
+      try{const item=getStorage();item.setItem("__proxiti_test","yes");item.removeItem("__proxiti_test");return item;}catch{}
     }
     return null;
   }
   function findKey(id){
-    for(const item of [localStorage,sessionStorage]){
-      try{const val=JSON.parse(item.getItem("proxiti_ticket_"+id)||"null");if(val?.token)return val.token;}catch{}
+    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage]){
+      try{const val=JSON.parse(getStorage().getItem("proxiti_ticket_"+id)||"null");if(val?.token)return val.token;}catch{}
     }
     return null;
   }
@@ -114,7 +114,7 @@
   });
   el("forget-ticket").addEventListener("click",()=>{
     if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
-    for(const item of [localStorage,sessionStorage])try{item.removeItem("proxiti_ticket_"+ticketId);}catch{}
+    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage])try{getStorage().removeItem("proxiti_ticket_"+ticketId);}catch{}
     token=null;ticketId=null;if(timer)clearInterval(timer);
     history.replaceState(null,"","/atendimento/");
     el("support-conversation").hidden=true;el("support-start").hidden=false;
