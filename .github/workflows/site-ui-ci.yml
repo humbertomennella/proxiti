@@ -20,3 +20,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verificar temas, framework e scripts
         run: node tests/site-ui.mjs
+      - name: Validar XML de ilustrações SVG
+        run: python3 -c 'import glob, xml.etree.ElementTree as ET; [ET.parse(path) for path in glob.glob("assets/illustrations/*.svg")]'
