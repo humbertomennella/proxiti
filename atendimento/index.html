@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0e1725">
+<meta name="description" content="Atendimento e conversa privada com a equipe PROXITI.">
+<title>Atendimento e chat | PROXITI</title>
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/support.css">
+<script src="/assets/js/support-config.js" defer></script>
+<script src="/assets/js/support-thread.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#principal">Ir para o conteúdo</a>
+<div class="support-shell">
+<header class="support-head"><a class="support-brand" href="/"><span class="support-mark">P</span><span>PROXI<b>TI</b></span></a><a class="support-back" href="/">← Voltar ao site</a></header>
+<main id="principal">
+<div class="support-intro"><span class="support-kicker">PROXITI / CENTRAL TÉCNICA</span><h1>Atendimento com<br><span>contexto e acompanhamento.</span></h1><p>Registre sua solicitação ou converse com a equipe pelo chat. O histórico deste atendimento ficará disponível neste navegador. Não compartilhe senhas, códigos de acesso ou documentos sigilosos.</p></div>
+<div class="support-layout">
+<section class="support-card" aria-label="Solicitação ou conversa">
+<div id="online-status" class="availability" role="status">Verificando a disponibilidade da equipe…</div>
+<form id="support-start" novalidate>
+<h2>Iniciar atendimento</h2><p>Se houver um profissional disponível, sua mensagem será encaminhada para ele. Caso contrário, permanecerá na fila de chamados.</p>
+<label for="support-name">Seu nome</label><input id="support-name" type="text" maxlength="120" minlength="2" autocomplete="name" required placeholder="Nome para o atendimento">
+<label for="support-email">E-mail</label><input id="support-email" type="email" maxlength="254" autocomplete="email" required placeholder="seuemail@exemplo.com">
+<label for="support-subject">Assunto</label><input id="support-subject" type="text" maxlength="160" minlength="4" required value="Atendimento pelo chat">
+<label for="support-description">Como podemos ajudar?</label><textarea id="support-description" rows="5" minlength="8" maxlength="2000" required placeholder="Conte o que aconteceu. Não informe senhas ou códigos de autenticação."></textarea>
+<div class="honeypot" aria-hidden="true"><label for="support-company">Website</label><input id="support-company" autocomplete="off" tabindex="-1"></div>
+<label class="support-consent"><input id="support-consent" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para este atendimento.</span></label>
+<button class="support-primary" type="submit" id="start-submit">Iniciar conversa <span aria-hidden="true">↗</span></button>
+</form>
+<section id="support-conversation" hidden aria-labelledby="conversation-heading">
+<div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div>
+<div id="customer-messages" class="customer-messages" role="log" aria-live="polite" aria-label="Histórico da conversa"></div>
+<form id="customer-reply"><label for="customer-reply-text">Enviar mensagem</label><textarea id="customer-reply-text" rows="3" minlength="1" maxlength="2000" required placeholder="Sua mensagem para a equipe."></textarea><button type="submit" id="reply-submit" class="support-primary">Enviar mensagem <span aria-hidden="true">↗</span></button></form>
+</section>
+<section id="support-lost" class="support-lost" hidden><h2>Acesso à conversa indisponível neste navegador</h2><p>O link do chamado não contém sua chave privada. Utilize o mesmo navegador em que abriu o atendimento ou entre em contato diretamente para solicitar orientação.</p><a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a><p><a href="/#pre-diagnostico">Abrir uma nova solicitação</a></p></section>
+<div id="support-feedback" class="support-feedback" role="status" aria-live="polite" hidden></div>
+</section>
+<aside class="support-side" aria-label="Informações sobre o atendimento">
+<div class="support-aside-card"><span class="support-kicker">COMO FUNCIONA</span><h2>Um histórico. Um responsável.</h2><ol><li><strong>01 · Solicitação</strong><span>Você descreve o problema e registra o atendimento.</span></li><li><strong>02 · Encaminhamento</strong><span>A equipe recebe o chamado; um técnico autorizado poderá assumir.</span></li><li><strong>03 · Conversa</strong><span>As mensagens aparecem aqui com atualização automática.</span></li></ol></div>
+<div class="support-aside-card"><span class="support-kicker">CONTATO DIRETO</span><p>Se preferir, utilize os canais tradicionais da PROXITI.</p><a href="tel:+554188235598">(41) 8823-5598</a><a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a></div>
+</aside>
+</div></main>
+<footer class="support-footer"><span>© PROXITI · Curitiba/PR</span><a href="/privacidade/">Privacidade e dados</a></footer>
+</div>
+</body></html>
