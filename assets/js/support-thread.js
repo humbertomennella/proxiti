@@ -4,6 +4,40 @@
   const endpoint=cfg?.url+"/functions/v1/proxiti-support";
   const params=new URLSearchParams(location.search);
   let ticketId=params.get("ticket"),token=null,seen="",timer=null;
+  let soundOn=false,audio=null,seenStaff=null;
+  function soundLabel(){const b=el("customer-sound-toggle");if(b){b.textContent=soundOn?"♫ Som ligado":"♪ Ativar som";b.setAttribute("aria-pressed",String(soundOn))}}
+  async function enableSound(){
+    try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;
+      audio=audio||new Audio();await audio.resume();soundOn=audio.state==="running";soundLabel();
+    }catch{soundOn=false;soundLabel()}
+  }
+  function sound(){
+    if(!soundOn||!audio||audio.state!=="running")return;
+    const t=audio.currentTime;
+    for(let i=0;i<2;i++){
+      const oscillator=audio.createOscillator(),gain=audio.createGain(),start=t+i*.15;
+      oscillator.type="sine";oscillator.frequency.setValueAtTime(i?820:1050,start);
+      gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(.052,start+.015);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+.13);
+      oscillator.connect(gain);gain.connect(audio.destination);
+      oscillator.start(start);oscillator.stop(start+.15);
+    }
+  }
+  function restoreMostRecent(){
+    let latest=null;
+    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage]){
+      try{const store=getStorage();
+        for(let i=0;i<store.length;i++){
+          const key=store.key(i);if(!key?.startsWith("proxiti_ticket_"))continue;
+          const id=key.slice("proxiti_ticket_".length),record=JSON.parse(store.getItem(key)||"null");
+          if(/^[0-9a-f-]{36}$/i.test(id)&&record?.token&&Number(record.savedAt)>Number(latest?.time||0))
+            latest={id,time:Number(record.savedAt)};
+        }
+      }catch{}
+    }
+    return latest?.id||null;
+  }
+  if(!ticketId&&params.get("embed")==="1")ticketId=restoreMostRecent();
   function note(message,fail=false){
     const area=el("support-feedback");area.textContent=message;area.hidden=!message;
     area.className="support-feedback"+(fail?" error":"");
@@ -59,6 +93,9 @@
       el("conversation-status").textContent="Situação: "+(statusNames[data.ticket.status]||data.ticket.status)+
         (data.ticket.online?" · Técnico designado":" · Aguardando técnico");
       el("customer-reply").hidden=data.ticket.status==="closed";
+      const currentStaff=new Set(data.messages.filter(m=>m.sender_kind==="staff").map(m=>m.id));
+      if(seenStaff&&data.messages.some(m=>m.sender_kind==="staff"&&!seenStaff.has(m.id)))sound();
+      seenStaff=currentStaff;
       const signature=JSON.stringify(data.messages.map(m=>[m.id,m.created_at]));
       if(signature!==seen){
         seen=signature;const box=el("customer-messages"),wasBottom=box.scrollHeight-box.scrollTop-box.clientHeight<100;
@@ -87,6 +124,7 @@
     if(!form.reportValidity())return;
     const stash=store();
     if(!stash){note("Ative o armazenamento do navegador para manter acesso à conversa ou utilize o e-mail de contato.",true);return;}
+    void enableSound();
     const send=el("start-submit");send.disabled=true;note("Registrando sua mensagem…");
     try{
       const result=await call("create",{
@@ -98,14 +136,14 @@
       ticketId=result.id;token=result.access_token;
       stash.setItem("proxiti_ticket_"+ticketId,JSON.stringify({token,savedAt:Date.now()}));
       history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId));
-      seen="";await open();
+      seen="";seenStaff=null;await open();
     }catch(error){note(error.message,true);}
     finally{send.disabled=false;}
   });
   el("customer-reply").addEventListener("submit",async event=>{
     event.preventDefault();if(!ticketId||!token)return;
     const field=el("customer-reply-text"),msg=field.value.trim(),send=el("reply-submit");
-    if(!msg)return;send.disabled=true;
+    if(!msg)return;void enableSound();send.disabled=true;
     try{
       await call("reply",{ticket_id:ticketId,access_token:token,message:msg});
       field.value="";await refresh();
@@ -118,8 +156,10 @@
     token=null;ticketId=null;if(timer)clearInterval(timer);
     history.replaceState(null,"","/atendimento/");
     el("support-conversation").hidden=true;el("support-start").hidden=false;
-    seen="";note("O acesso a esta conversa foi apagado deste navegador.");
+    seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
   });
+  el("customer-sound-toggle").addEventListener("click",()=>{if(soundOn){soundOn=false;soundLabel()}else void enableSound()});
+  window.addEventListener("message",event=>{if(event.origin===location.origin&&event.data?.type==="proxiti-chat-resume")void refresh()});
   document.addEventListener("visibilitychange",()=>{if(!document.hidden&&ticketId&&token)void refresh();});
   void online();setInterval(()=>{if(!document.hidden)void online();},20000);
   if(ticketId)void open();
