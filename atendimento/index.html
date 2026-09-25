@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0e1725">
 <meta name="description" content="Atendimento e conversa privada com a equipe PROXITI.">
+<script>if(new URLSearchParams(location.search).get("embed")==="1")document.documentElement.classList.add("embedded")</script>
 <title>Atendimento e chat | PROXITI</title>
 <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/support.css">
@@ -15,7 +16,7 @@
 <div class="support-shell">
 <header class="support-head"><a class="support-brand" href="/"><span class="support-mark">P</span><span>PROXI<b>TI</b></span></a><a class="support-back" href="/">← Voltar ao site</a></header>
 <main id="principal">
-<div class="support-intro"><span class="support-kicker">PROXITI / CENTRAL TÉCNICA</span><h1>Atendimento com<br><span>contexto e acompanhamento.</span></h1><p>Registre sua solicitação ou converse com a equipe pelo chat. O histórico deste atendimento ficará disponível neste navegador. Não compartilhe senhas, códigos de acesso ou documentos sigilosos.</p></div>
+<div class="support-intro"><div class="support-intro-copy"><span class="support-kicker">PROXITI / CENTRAL TÉCNICA</span><h1>Atendimento com<br><span>contexto e acompanhamento.</span></h1><p>Registre sua solicitação ou converse com a equipe pelo chat. O histórico deste atendimento ficará disponível neste navegador. Não compartilhe senhas, códigos de acesso ou documentos sigilosos.</p></div><figure class="support-illustration"><img src="/assets/illustrations/partner-workstation.svg" width="1200" height="760" alt="Ilustração de bancada de suporte técnico, notebook, rede e ferramentas." decoding="async"></figure></div>
 <div class="support-layout">
 <section class="support-card" aria-label="Solicitação ou conversa">
 <div id="online-status" class="availability" role="status">Verificando a disponibilidade da equipe…</div>
@@ -30,7 +31,7 @@
 <button class="support-primary" type="submit" id="start-submit">Iniciar conversa <span aria-hidden="true">↗</span></button>
 </form>
 <section id="support-conversation" hidden aria-labelledby="conversation-heading">
-<div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div>
+<div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><div class="chat-actions"><button type="button" id="customer-sound-toggle" class="support-plain" aria-pressed="false" title="Ativar notificações de novas mensagens">♪ Ativar som</button><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div></div>
 <div id="customer-messages" class="customer-messages" role="log" aria-live="polite" aria-label="Histórico da conversa"></div>
 <form id="customer-reply"><label for="customer-reply-text">Enviar mensagem</label><textarea id="customer-reply-text" rows="3" minlength="1" maxlength="2000" required placeholder="Sua mensagem para a equipe."></textarea><button type="submit" id="reply-submit" class="support-primary">Enviar mensagem <span aria-hidden="true">↗</span></button></form>
 </section>
