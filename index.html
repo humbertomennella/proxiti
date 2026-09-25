@@ -542,7 +542,7 @@
             <p data-proxiti-content="home.contact.intro">Não é necessário saber o nome técnico do problema. Informe o que acontece, em qual equipamento ou rede e como isso afeta sua rotina.</p>
             <div class="contact-actions">
               <a class="button button-accent" href="/#pre-diagnostico">Abrir chamado</a>
-              <a class="button button-secondary" href="/atendimento/?chat=1">Chat com a equipe</a>
+              <a class="button button-secondary" href="#chat" data-open-chat>Chat com a equipe</a>
               <a class="button button-secondary" href="mailto:contato.proxiti@gmail.com?subject=Solicita%C3%A7%C3%A3o%20de%20atendimento">Enviar e-mail</a>
             </div>
           </div>
@@ -557,7 +557,12 @@
     </section>
   </main>
 
-  <a class="floating-chat" href="/atendimento/?chat=1" aria-label="Conversar pelo chat da PROXITI">Chat com a equipe <span aria-hidden="true">↗</span></a>
+  <section id="support-widget" class="support-widget" role="dialog" aria-label="Chat da PROXITI" hidden>
+    <header class="support-widget-head"><div><strong>Chat PROXITI</strong><small>Atendimento e acompanhamento</small></div><button id="support-widget-close" type="button" aria-label="Minimizar chat" title="Minimizar chat">−</button></header>
+    <iframe id="support-widget-frame" title="Conversa com a equipe PROXITI" data-src="/atendimento/?chat=1&amp;embed=1" loading="lazy"></iframe>
+    <footer><a href="/atendimento/?chat=1" target="_blank" rel="noopener noreferrer">Abrir conversa em página completa ↗</a></footer>
+  </section>
+  <button class="floating-chat" type="button" id="support-widget-toggle" aria-controls="support-widget" aria-expanded="false" aria-label="Abrir janela do chat com a equipe">Chat com a equipe <span aria-hidden="true">↗</span></button>
 
 <footer class="site-footer">
     <div class="container">
@@ -596,5 +601,6 @@
   <script src="/assets/js/support-config.js" defer></script>
   <script src="/assets/js/site-cms.js" defer></script>
   <script src="/assets/js/site-requests.js" defer></script>
+  <script src="/assets/js/chat-widget.js" defer></script>
 </body>
 </html>
