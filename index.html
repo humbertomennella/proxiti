@@ -111,7 +111,7 @@
           <div class="hero-facts" aria-label="Informações do atendimento">
             <span>Curitiba/PR</span>
             <span>Residências e pequenos negócios</span>
-            <span>Atendimento mediante contato</span>
+            <span data-proxiti-content="home.hero.fact">Atendimento mediante solicitação</span>
           </div>
         </div>
 
@@ -150,7 +150,7 @@
           <article class="entry-card reveal">
             <span class="entry-no">01</span>
             <h3>Tenho um problema agora</h3>
-            <p>Organize o contexto em poucos campos e abra o WhatsApp com a mensagem já estruturada.</p>
+            <p>Organize o contexto e registre sua solicitação diretamente na Central Técnica PROXITI.</p>
             <a class="text-link" href="#pre-diagnostico">Fazer pré-diagnóstico →</a>
           </article>
           <article class="entry-card reveal">
@@ -402,14 +402,18 @@
           <div class="triage-copy">
             <span class="section-label">Pré-diagnóstico</span>
             <h2 id="triagem-title">Envie contexto útil no primeiro contato.</h2>
-            <p>O formulário organiza as informações no seu navegador e monta uma mensagem para o WhatsApp. Ele não fecha diagnóstico nem substitui análise técnica.</p>
+            <p data-proxiti-content="home.triage.intro">O formulário registra a solicitação na Central Técnica. Nossa equipe avalia o contexto antes de confirmar escopo, valores ou disponibilidade. Não envie senhas nem dados sigilosos.</p>
             <div class="privacy-note">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.8"/></svg>
-              <span>Os dados não são enviados para um servidor da PROXITI. Eles permanecem no navegador até você abrir a mensagem no WhatsApp.</span>
+              <span>Os dados informados são enviados para a Central Técnica e armazenados para atendimento, conforme nossa Política de Privacidade. Não informe senhas ou documentos sigilosos.</span>
             </div>
           </div>
 
           <form class="triage-form" id="pre-diagnostico-form">
+            <div class="field"><label for="solicitante-nome">Seu nome</label><input id="solicitante-nome" name="nome" type="text" autocomplete="name" maxlength="120" required placeholder="Nome para o atendimento"></div>
+            <div class="field"><label for="solicitante-email">Seu e-mail</label><input id="solicitante-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="seuemail@exemplo.com"></div>
+            <div class="field"><label for="solicitante-telefone">Telefone (opcional)</label><input id="solicitante-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="40" placeholder="DDD + número"></div>
+            <div class="hp-field" aria-hidden="true"><label for="solicitante-site">Website</label><input id="solicitante-site" name="company_website" type="text" autocomplete="off" tabindex="-1"></div>
             <div class="field">
               <label for="perfil">Perfil</label>
               <select id="perfil" name="perfil" required>
@@ -448,8 +452,9 @@
               <label for="sintoma">O que está acontecendo?</label>
               <textarea id="sintoma" name="sintoma" maxlength="700" required placeholder="Descreva o sintoma, quando começou e se houve alguma mudança antes do problema."></textarea>
             </div>
+            <div class="field field-full request-consent"><label><input name="privacidade" type="checkbox" required> Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para esta solicitação.</label></div>
             <div class="form-actions">
-              <button class="button button-accent" type="submit">Montar mensagem no WhatsApp</button>
+              <button class="button button-accent" type="submit">Abrir chamado na PROXITI</button>
               <p class="form-status" id="triage-status" aria-live="polite"></p>
             </div>
           </form>
@@ -515,7 +520,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div><span class="section-label">Dúvidas frequentes</span><h2 id="faq-title">O que vale saber antes de entrar em contato.</h2></div>
-          <p>Informações básicas sobre escopo e contratação ficam visíveis antes do contato, para que o WhatsApp não seja usado como substituto de uma página comercial incompleta.</p>
+          <p>Informações básicas sobre escopo e contratação ficam visíveis antes do contato, para que o contato não seja usado como substituto de uma página comercial incompleta.</p>
         </div>
         <div class="faq-list">
           <details class="faq-item reveal"><summary>Um computador lento precisa ser formatado?</summary><div class="faq-answer">Não necessariamente. Armazenamento, programas, inicialização, configuração e limitações do equipamento também podem causar lentidão. A formatação só é considerada quando fizer sentido para o caso.</div></details>
@@ -523,7 +528,7 @@
           <details class="faq-item reveal"><summary>A PROXITI atende empresas?</summary><div class="faq-answer">Sim, com foco em micro e pequenos negócios dentro do escopo anunciado: computadores, rede local, Wi-Fi, equipamentos, backup, acessos e segurança preventiva.</div></details>
           <details class="faq-item reveal"><summary>Vocês fazem pentest, SOC ou perícia digital?</summary><div class="faq-answer">Não. Essas áreas não fazem parte do escopo atual anunciado pela PROXITI.</div></details>
           <details class="faq-item reveal"><summary>A PROXITI instala software pirata ou ativadores?</summary><div class="faq-answer">Não. Instalações dependem de software e licenças obtidos por meios legítimos e autorizados pelo titular.</div></details>
-          <details class="faq-item reveal"><summary>Como começo um atendimento?</summary><div class="faq-answer">Você pode usar o pré-diagnóstico desta página ou enviar uma mensagem pelo WhatsApp. O ideal é informar equipamento, sintoma, quando começou e impacto na rotina.</div></details>
+          <details class="faq-item reveal"><summary>Como começo um atendimento?</summary><div class="faq-answer">Abra um chamado pelo formulário desta página ou utilize o chat para conversar com um técnico disponível. O contato direto por telefone e e-mail permanece disponível.</div></details>
         </div>
       </div>
     </section>
@@ -534,9 +539,10 @@
           <div class="contact-copy">
             <span class="section-label">Contato</span>
             <h2 id="contato-title">Descreva o cenário. A recomendação vem depois.</h2>
-            <p>Não é necessário saber o nome técnico do problema. Informe o que acontece, em qual equipamento ou rede e como isso afeta sua rotina.</p>
+            <p data-proxiti-content="home.contact.intro">Não é necessário saber o nome técnico do problema. Informe o que acontece, em qual equipamento ou rede e como isso afeta sua rotina.</p>
             <div class="contact-actions">
-              <a class="button button-accent" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Gostaria%20de%20solicitar%20uma%20avalia%C3%A7%C3%A3o%20inicial." target="_blank" rel="noopener noreferrer">WhatsApp · (41) 8823-5598</a>
+              <a class="button button-accent" href="/#pre-diagnostico">Abrir chamado</a>
+              <a class="button button-secondary" href="/atendimento/?chat=1">Chat com a equipe</a>
               <a class="button button-secondary" href="mailto:contato.proxiti@gmail.com?subject=Solicita%C3%A7%C3%A3o%20de%20atendimento">Enviar e-mail</a>
             </div>
           </div>
@@ -551,12 +557,9 @@
     </section>
   </main>
 
-  <a class="floating-whatsapp" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Gostaria%20de%20falar%20sobre%20um%20atendimento." target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa com a PROXITI no WhatsApp">
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 19.7l1.2-4.1A8 8 0 1 1 20 11.5Z" stroke="currentColor" stroke-width="1.8"/><path d="M9 8.5c.5 2.8 2.2 4.5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    <span>WhatsApp</span>
-  </a>
+  <a class="floating-chat" href="/atendimento/?chat=1" aria-label="Conversar pelo chat da PROXITI">Chat com a equipe <span aria-hidden="true">↗</span></a>
 
-  <footer class="site-footer">
+<footer class="site-footer">
     <div class="container">
       <div class="footer-main">
         <div class="footer-brand">
@@ -589,5 +592,9 @@
 
   <script src="/assets/js/product-config.js"></script>
   <script src="/assets/js/main.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
+  <script src="/assets/js/support-config.js" defer></script>
+  <script src="/assets/js/site-cms.js" defer></script>
+  <script src="/assets/js/site-requests.js" defer></script>
 </body>
 </html>
