@@ -11,7 +11,7 @@
       provider: "kiwify",
       checkoutUrl: "https://pay.kiwify.com.br/vHyqcmj",
       readyForSales: true,
-      fallbackUrl: "https://wa.me/554188235598?text=Ol%C3%A1%2C%20PROXITI.%20Quero%20comprar%20o%20PC%20Seguro%20por%20R%24%2029%2C90."
+      fallbackUrl: "https://proxiti.com.br/#contato"
     })
   });
 })();
