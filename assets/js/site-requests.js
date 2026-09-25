@@ -7,8 +7,8 @@
   const endpoint=cfg?.url+"/functions/v1/proxiti-support";
   const tell=(msg)=>{if(status)status.textContent=msg;};
   function storage(){
-    for(const item of [localStorage,sessionStorage]){
-      try{item.setItem("__proxiti_storage_check","1");item.removeItem("__proxiti_storage_check");return item;}
+    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage]){
+      try{const item=getStorage();item.setItem("__proxiti_storage_check","1");item.removeItem("__proxiti_storage_check");return item;}
       catch{/* tenta armazenamento de sessão */}
     }
     return null;
