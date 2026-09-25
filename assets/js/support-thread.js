@@ -4,9 +4,12 @@
   const endpoint=cfg?.url+"/functions/v1/proxiti-support";
   const params=new URLSearchParams(location.search);
   let ticketId=params.get("ticket"),token=null,seen="",timer=null;
-  let soundOn=false,audio=null,seenStaff=null;
-  function soundLabel(){const b=el("customer-sound-toggle");if(b){b.textContent=soundOn?"♫ Som ligado":"♪ Ativar som";b.setAttribute("aria-pressed",String(soundOn))}}
+  let soundOn=true,audio=null,seenStaff=null;
+  const soundPreference="proxiti-customer-alerts-v2";
+  try{soundOn=localStorage.getItem(soundPreference)!=="false"}catch{}
+  function soundLabel(){const b=el("customer-sound-toggle");if(b){b.textContent=soundOn?"♫ Alertas ativados":"♪ Alertas desativados";b.setAttribute("aria-pressed",String(soundOn));b.setAttribute("aria-label",soundOn?"Desativar alertas":"Ativar alertas");b.title=soundOn?"Desativar alertas":"Ativar alertas"}}
   async function enableSound(){
+    if(!soundOn)return;
     try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;
       audio=audio||new Audio();await audio.resume();soundOn=audio.state==="running";soundLabel();
     }catch{soundOn=false;soundLabel()}
@@ -159,7 +162,15 @@
     el("support-conversation").hidden=true;el("support-start").hidden=false;
     seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
   });
-  el("customer-sound-toggle").addEventListener("click",()=>{if(soundOn){soundOn=false;soundLabel()}else void enableSound()});
+  el("customer-sound-toggle").addEventListener("click",()=>{
+    soundOn=!soundOn;
+    try{localStorage.setItem(soundPreference,String(soundOn))}catch{}
+    soundLabel();
+    if(soundOn)void enableSound();
+  });
+  document.addEventListener("pointerdown",()=>{if(soundOn&&audio?.state!=="running")void enableSound()},{capture:true});
+  document.addEventListener("keydown",()=>{if(soundOn&&audio?.state!=="running")void enableSound()},{capture:true});
+  soundLabel();
   window.addEventListener("message",event=>{if(event.origin===location.origin&&event.data?.type==="proxiti-chat-resume")void refresh()});
   document.addEventListener("visibilitychange",()=>{if(!document.hidden&&ticketId&&token)void refresh();});
   void online();setInterval(()=>{if(!document.hidden)void online();},20000);
