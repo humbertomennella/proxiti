@@ -396,29 +396,7 @@
     }
   });
 
-  const triageForm = document.querySelector("#pre-diagnostico-form");
-  const triageStatus = document.querySelector("#triage-status");
-
-  triageForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!triageForm.reportValidity()) return;
-
-    const data = new FormData(triageForm);
-    const lines = [
-      "Olá, PROXITI. Quero solicitar uma avaliação inicial.",
-      "",
-      `Perfil: ${data.get("perfil")}`,
-      `Área: ${data.get("area")}`,
-      `Equipamento/ambiente: ${data.get("equipamento") || "Não informado"}`,
-      `Impacto: ${data.get("impacto")}`,
-      "",
-      "Contexto:",
-      String(data.get("sintoma") || "").trim()
-    ];
-    const url = `https://wa.me/554188235598?text=${encodeURIComponent(lines.join("\n"))}`;
-    if (triageStatus) triageStatus.textContent = "Mensagem preparada. Abrindo o WhatsApp...";
-    window.open(url, "_blank", "noopener,noreferrer");
-  });
+  // A solicitação de atendimento é registrada por site-requests.js.
 
   if (year) year.textContent = new Date().getFullYear();
 })();
