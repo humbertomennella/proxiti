@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title description">
+<title id="title">Estação técnica de redes e infraestrutura</title>
+<desc id="description">Arte técnica editorial de notebook, infraestrutura de rede, cabos e ferramentas sobre bancada, em grafite, azul e detalhes âmbar.</desc>
+<defs>
+ <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0C182B"/><stop offset=".58" stop-color="#0C2036"/><stop offset="1" stop-color="#07111F"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#2663A0" stop-opacity=".46"/><stop offset="1" stop-color="#2663A0" stop-opacity="0"/></radialGradient>
+ <linearGradient id="device" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#304B68"/><stop offset=".55" stop-color="#1C3049"/><stop offset="1" stop-color="#12243B"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1A436B"/><stop offset=".55" stop-color="#10253F"/><stop offset="1" stop-color="#0A1829"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#88A8C5"/><stop offset=".45" stop-color="#426584"/><stop offset="1" stop-color="#203A56"/></linearGradient>
+ <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#233B55"/><stop offset="1" stop-color="#0C1829"/></linearGradient>
+ <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F9B77F"/><stop offset="1" stop-color="#C97242"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+ <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="27"/></filter>
+ <clipPath id="clip"><rect width="1200" height="760" rx="28"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+ <rect width="1200" height="760" fill="url(#background)"/>
+ <ellipse cx="822" cy="154" rx="390" ry="235" fill="url(#light)"/>
+ <path d="M0 0V760M120 0V760M240 0V760M360 0V760M480 0V760M600 0V760M720 0V760M840 0V760M960 0V760M1080 0V760M1200 0V760 M0 0H1200M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200M0 720H1200" stroke="#7EA6D4" stroke-opacity=".065" stroke-width="1"/>
+ <path d="M0 605L1200 566V760H0Z" fill="url(#desk)"/>
+ <path d="M0 605L1200 566" stroke="#6D8FAC" stroke-width="3" opacity=".58"/>
+ <g opacity=".4" stroke="#6091C4" stroke-width="2" fill="none"><path d="M90 115h125l55 58h112"/><circle cx="90" cy="115" r="5" fill="#F0A46E"/><circle cx="382" cy="173" r="5" fill="#85BBF1"/><path d="M838 69h160l57 58h78"/><circle cx="838" cy="69" r="5" fill="#85BBF1"/></g>
+ <!-- Rack de rede, em perspectiva -->
+ <path d="M874 161l43-28 254 1-40 29Z" fill="#344C63" stroke="#6283A2" stroke-width="3"/>
+ <path d="M1131 163l40-29v365l-40 36Z" fill="#102338" stroke="#426987" stroke-width="3"/>
+ <rect x="874" y="161" width="258" height="376" rx="15" fill="url(#device)" stroke="#6586A5" stroke-width="3"/>
+ <rect x="892" y="183" width="223" height="85" rx="7" fill="#0A1727" stroke="#375673" stroke-width="2"/>
+ <path d="M910 209h185M910 224h185M910 239h185" stroke="#416483" stroke-width="8" stroke-linecap="round"/>
+ <path d="M923 197h105" stroke="#84ADD3" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+ <circle cx="925" cy="281" r="3.5" fill="#6FCDB3" opacity=".9"/><circle cx="967" cy="281" r="3.5" fill="#6FCDB3" opacity=".9"/><circle cx="1009" cy="281" r="3.5" fill="#F2A06B" opacity=".9"/><circle cx="1051" cy="281" r="3.5" fill="#6FCDB3" opacity=".9"/><circle cx="1093" cy="281" r="3.5" fill="#6FCDB3" opacity=".9"/><circle cx="1135" cy="281" r="3.5" fill="#6FCDB3" opacity=".9"/>
+ <rect x="893" y="331" width="222" height="165" rx="8" fill="#10243A" stroke="#4D7191" stroke-width="2"/>
+ <g transform="translate(909 353)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#F5A66E"/></g><g transform="translate(965 353)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#54C99C"/></g><g transform="translate(1021 353)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#54C99C"/></g><g transform="translate(1077 353)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#F5A66E"/></g><g transform="translate(909 419)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#54C99C"/></g><g transform="translate(965 419)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#54C99C"/></g><g transform="translate(1021 419)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#F5A66E"/></g><g transform="translate(1077 419)"><rect width="39" height="34" rx="5" fill="#0A1424" stroke="#6687A5" stroke-width="1.5"/><path d="M8 11h23v13H8zM12 24v5m7-5v5m7-5v5" stroke="#79A9D9" stroke-width="2" fill="none"/><circle cx="31" cy="6" r="2.5" fill="#54C99C"/></g>
+ <path d="M904 516h202" stroke="#6886A4" stroke-width="5" stroke-linecap="round"/>
+ <path d="M932 519v24M1041 519v24" stroke="#7094B6" stroke-width="4" stroke-linecap="round"/>
+ <!-- Rede de cabos com curvas reais, sem dashboard fictício -->
+ <g fill="none" stroke-linecap="round">
+  <path d="M933 401C835 405 841 563 717 574" stroke="#2984CF" stroke-width="9"/>
+  <path d="M990 401C932 500 873 579 732 587" stroke="#67A4DF" stroke-width="8"/>
+  <path d="M1046 401C1032 482 1085 566 958 611" stroke="#F2A06B" stroke-width="7"/>
+ </g>
+ <g opacity=".45"><ellipse cx="506" cy="643" rx="395" ry="42" fill="#000A13" filter="url(#shadow)"/><ellipse cx="996" cy="608" rx="163" ry="35" fill="#000A13" filter="url(#shadow)"/></g>
+ <!-- Notebook e área de análise técnica -->
+ <path d="M165 235l584-30q18-1 21 18l24 329-613 26Z" fill="#091422" stroke="#7E9DBB" stroke-width="5" stroke-linejoin="round"/>
+ <path d="M184 253l548-28 20 303-550 26Z" fill="url(#glass)"/>
+ <path d="M200 282l510-25" stroke="#7CA5CD" stroke-opacity=".24" stroke-width="2"/>
+ <rect x="223" y="295" width="160" height="11" rx="5" fill="#A9C9E9" opacity=".85"/>
+ <rect x="224" y="320" width="108" height="7" rx="3.5" fill="#638DB7" opacity=".6"/>
+ <g fill="none" stroke="#438EC8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M271 438l112-78 119 62 119-114"/>
+  <path d="M383 360l28 112 118 12 92-176" stroke-opacity=".45"/>
+ </g>
+ <g><circle cx="271" cy="438" r="11" fill="#0F3959" stroke="#7EB8E4" stroke-width="4"/><circle cx="383" cy="360" r="11" fill="#0F3959" stroke="#7EB8E4" stroke-width="4"/><circle cx="502" cy="422" r="12" fill="#173C59" stroke="#F4B27D" stroke-width="5"/><circle cx="621" cy="308" r="11" fill="#0F3959" stroke="#7EB8E4" stroke-width="4"/><circle cx="529" cy="484" r="7" fill="#61C69E"/></g>
+ <path d="M201 563l592-26 127 105-609 42Z" fill="url(#metal)" stroke="#83A1BD" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M231 579l537-22 89 71-548 30Z" fill="#122841" stroke="#426681" stroke-width="2"/>
+ <rect x="267" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="304" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="341" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="378" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="415" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="452" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="489" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="526" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="563" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="600" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="637" y="559" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="275" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="312" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="349" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="386" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="423" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="460" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="497" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="534" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="571" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="608" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="645" y="572" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="283" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="320" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="357" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="394" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="431" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="468" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="505" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="542" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="579" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="616" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="653" y="585" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="291" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="328" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="365" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="402" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="439" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="476" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="513" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="550" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="587" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="624" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="661" y="598" width="29" height="7" rx="2" fill="#7093B2" opacity=".52"/><rect x="299" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="336" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="373" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="410" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="447" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="484" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="521" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="558" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="595" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="632" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/><rect x="669" y="611" width="29" height="7" rx="2" fill="#466B8A" opacity=".72"/>
+ <path d="M492 647l139-6 22 20-137 9Z" fill="#527591" opacity=".73"/>
+ <path d="M306 683l610-40-5 15-596 44Z" fill="#1A2F48" stroke="#6B8DAC" stroke-width="2"/>
+ <!-- Ferramentas e cabo sobre a bancada -->
+ <g transform="translate(73 602) rotate(-10)">
+  <rect x="0" y="0" width="173" height="32" rx="13" fill="#162940" stroke="#5C7B98" stroke-width="3"/>
+  <rect x="18" y="7" width="75" height="18" rx="7" fill="url(#warm)"/>
+  <path d="M170 12h85v9h-85Z" fill="#A6B7C8"/>
+  <path d="M235 10l36 6-36 7Z" fill="#E5B88E"/>
+ </g>
+ <g transform="translate(65 687)"><path d="M0 7c44-55 116-50 168-11s93 31 124-2" fill="none" stroke="#3B93D5" stroke-width="13" stroke-linecap="round"/><rect x="284" y="-20" width="42" height="27" rx="4" fill="#7FA7C5" stroke="#B7CFDF" stroke-width="2"/><path d="M325-15h21v18h-21Z" fill="#C1D5E4"/></g>
+ <rect x="958" y="596" width="155" height="40" rx="10" fill="#102338" stroke="#6485A3" stroke-width="2"/><path d="M977 616h70" stroke="#7DA3C8" stroke-width="5" stroke-linecap="round"/><circle cx="1091" cy="615" r="5" fill="#65CBA7"/>
+ <path d="M945 118h111" stroke="#F3A16F" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+</g></svg>
