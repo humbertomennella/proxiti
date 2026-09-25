@@ -1,0 +1,22 @@
+name: PROXITI | Integridade visual do site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "**/index.html"
+      - "404.html"
+      - "assets/**"
+      - "tests/**"
+      - ".github/workflows/site-ui-ci.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar temas, framework e scripts
+        run: node tests/site-ui.mjs
