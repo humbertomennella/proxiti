@@ -396,6 +396,16 @@
     }
   });
 
+  // Área privada em endereço separado: nenhuma credencial permanece neste site público.
+  const footerNav = document.querySelector(".footer-legal");
+  if (footerNav && !footerNav.querySelector('[data-partner-login]')) {
+    const loginLink = document.createElement("a");
+    loginLink.href = "https://humbertomennella.github.io/painel-proxiti/";
+    loginLink.textContent = "Área dos técnicos";
+    loginLink.dataset.partnerLogin = "true";
+    footerNav.append(loginLink);
+  }
+
   // A solicitação de atendimento é registrada por site-requests.js.
 
   if (year) year.textContent = new Date().getFullYear();
