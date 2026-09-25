@@ -113,6 +113,7 @@
     if(!ticketId||!/^[\da-f-]{36}$/i.test(ticketId)){showLost();return;}
     token=findKey(ticketId);
     if(!token){showLost();return;}
+    if(!new URLSearchParams(location.search).has("ticket"))history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId)+(document.documentElement.classList.contains("embedded")?"&embed=1":""));
     el("support-start").hidden=true;el("support-lost").hidden=true;
     el("support-conversation").hidden=false;
     await refresh();
@@ -135,7 +136,7 @@
       if(!result.id||!result.access_token)throw new Error("Não foi possível abrir a conversa.");
       ticketId=result.id;token=result.access_token;
       stash.setItem("proxiti_ticket_"+ticketId,JSON.stringify({token,savedAt:Date.now()}));
-      history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId));
+      history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId)+(document.documentElement.classList.contains("embedded")?"&embed=1":""));
       seen="";seenStaff=null;await open();
     }catch(error){note(error.message,true);}
     finally{send.disabled=false;}
@@ -154,7 +155,7 @@
     if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
     for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage])try{getStorage().removeItem("proxiti_ticket_"+ticketId);}catch{}
     token=null;ticketId=null;if(timer)clearInterval(timer);
-    history.replaceState(null,"","/atendimento/");
+    history.replaceState(null,"",document.documentElement.classList.contains("embedded")?"/atendimento/?embed=1":"/atendimento/");
     el("support-conversation").hidden=true;el("support-start").hidden=false;
     seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
   });
