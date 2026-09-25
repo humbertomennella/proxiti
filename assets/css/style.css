@@ -600,7 +600,7 @@ p:last-child{margin-bottom:0}
 .partner-hero-side{display:grid;gap:18px;min-width:0;align-content:start}
 .partner-media{margin:0;min-width:0}
 .partner-media-hero{overflow:hidden;border:1px solid #365778;border-radius:21px;background:#10243e;box-shadow:0 22px 48px rgba(0,0,0,.16)}
-.partner-media-hero img{display:block;width:100%;height:auto;aspect-ratio:960/590;object-fit:cover}
+.partner-media-hero img{display:block;width:100%;height:auto;aspect-ratio:1200/760;object-fit:cover}
 .partner-media-hero figcaption{padding:10px 16px;color:#b9cbe2;font-size:.71rem;line-height:1.5}
 .partner-hero-side .partner-status{box-shadow:0 12px 35px rgba(0,0,0,.12)}
 .partner-training-media{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:0;align-items:stretch;overflow:hidden;margin:0 0 24px;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
