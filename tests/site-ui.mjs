@@ -3,7 +3,7 @@ import {readFileSync,existsSync} from "node:fs";
 import {Script} from "node:vm";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 const pages=["404.html","index.html","servicos/index.html","produtos/index.html",
- "produtos/pc-seguro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
+ "produtos/pc-seguro/index.html","seja-parceiro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
  "privacidade/index.html","termos/index.html","contato-seguranca/index.html"];
 for(const page of pages)assert(read(page).includes("/assets/css/proxiti-ui.css"),
   page+" não carrega o framework compartilhado");
@@ -21,34 +21,63 @@ for(const name of ["parcerias-rede.svg","parcerias-modelo.svg","parcerias-capaci
  assert(!art.includes("M0 110H1100M0 220H1100"),name+" ainda tem grade decorativa");
 }
 
-/* Contratos editoriais: recrutamento PJ sem prometer vagas ou condições ainda indefinidas. */
-const partner=read("trabalhe-conosco/index.html");
+/* Contratos editoriais: ingresso inclusivo, marca UNIPROXITI e transparência de etapas. */
+const partner=read("seja-parceiro/index.html");
+const legacy=read("trabalhe-conosco/index.html");
+const sitemap=read("sitemap.xml");
 for(const required of [
-  "Sua experiência técnica,",
-  "técnico parceiro PJ (MEI ou ME)",
-  "O parceiro presta serviços à PROXITI",
-  "A PROXITI cuida da contratação.",
-  "Aceita ou recusa",
-  "certificação interna UniProxiti",
-  "não um anúncio de vaga de emprego",
-  "O contato não garante credenciamento, faturamento ou quantidade de chamados",
-  "mailto:contato.proxiti@gmail.com?subject=Parceria%20t%C3%A9cnica%20PJ%20-%20PROXITI"
-])assert(partner.includes(required),"Parcerias: informação obrigatória ausente: "+required);
-assert(partner.includes('data-proxiti-content="partner.panel.intro.v2"')&&
-  !partner.includes('data-proxiti-content="partner.panel.intro"'),
-  "O CMS anterior poderia substituir o posicionamento atualizado da parceria.");
+  "Seja Parceiro",
+  "Seu próximo passo em TI",
+  "Iniciantes e experientes",
+  "Não é necessário ter CNPJ para apresentar seu perfil",
+  "ainda atuam como pessoa física",
+  "Sou iniciante em TI. Posso me apresentar?",
+  "UNIPROXITI",
+  "A PROXITI recebe as solicitações",
+  "As condições da colaboração são definidas antes de qualquer atendimento",
+  "não garante credenciamento, renda, acesso a clientes ou oferta de chamados",
+  "mailto:contato.proxiti@gmail.com?subject=Quero%20ser%20parceiro%20PROXITI"
+])assert(partner.includes(required),"Seja Parceiro: informação ausente: "+required);
+assert(!/(?:UniProxiti|uniProxiti)/.test(partner)&&
+  !/técnico parceiro PJ|CNPJ ativo|parceria PJ|prestação de serviços entre pessoas jurídicas/i.test(partner),
+  "Seja Parceiro: comunicação incorretamente restritiva ou grafia antiga.");
+assert(partner.includes('data-proxiti-content="partner.panel.intro.v3"')&&
+  !partner.includes('data-proxiti-content="partner.panel.intro.v2"'),
+  "Conteúdo antigo do CMS poderia substituir a redação inclusiva.");
+assert(partner.includes('href="https://proxiti.com.br/seja-parceiro/"')&&
+  partner.includes('content="https://proxiti.com.br/seja-parceiro/"'),
+  "Seja Parceiro: URLs canônicas ou sociais inconsistentes.");
+assert(legacy.includes('http-equiv="refresh" content="0; url=/seja-parceiro/"')&&
+  legacy.includes('content="noindex, follow"')&&
+  legacy.includes('href="/seja-parceiro/"'),
+  "Rota anterior não direciona para Seja Parceiro.");
+assert(sitemap.includes("https://proxiti.com.br/seja-parceiro/")&&
+  !sitemap.includes("https://proxiti.com.br/trabalhe-conosco/"),
+  "Sitemap não acompanha a nova rota.");
+for(const page of ["index.html","servicos/index.html","produtos/index.html",
+  "produtos/pc-seguro/index.html","privacidade/index.html",
+  "termos/index.html","contato-seguranca/index.html","seja-parceiro/index.html"]){
+  const html=read(page);
+  assert(html.includes('href="/seja-parceiro/"')&&
+    !html.includes('href="/trabalhe-conosco/"')&&
+    !html.includes("Trabalhe Conosco"),
+    page+": rodapé ainda contém a rota ou o rótulo anterior.");
+}
 for(const match of partner.matchAll(/href="#([a-z][a-z0-9-]+)"/g))
- assert(partner.includes('id="'+match[1]+'"'),"Parcerias: âncora sem destino: "+match[1]);
+ assert(partner.includes('id="'+match[1]+'"'),
+   "Seja Parceiro: âncora sem destino: "+match[1]);
 for(const match of partner.matchAll(/src="\/(assets\/illustrations\/[^"]+)"/g))
  assert(existsSync(new URL("../"+match[1],import.meta.url)),
-   "Parcerias: arte referenciada não existe: "+match[1]);
+   "Seja Parceiro: ilustração inexistente: "+match[1]);
 for(const required of ["modelo-de-parceria","apoio-ao-tecnico","painel-de-atendimento",
   "ingresso-parceiros","duvidas-parceria","contato-profissional"])
- assert(partner.includes('id="'+required+'"'),"Parcerias: seção ausente: "+required);
-assert.equal((partner.match(/<main\b/g)||[]).length,(partner.match(/<\/main>/g)||[]).length,
-  "Parcerias: elemento principal incompleto");
-assert.equal((partner.match(/<details\b/g)||[]).length,(partner.match(/<\/details>/g)||[]).length,
-  "Parcerias: respostas frequentes incompletas");
+ assert(partner.includes('id="'+required+'"'),
+   "Seja Parceiro: seção ausente: "+required);
+for(const tag of ["main","section","article","details"]){
+ assert.equal((partner.match(new RegExp("<"+tag+"\\b","g"))||[]).length,
+  (partner.match(new RegExp("</"+tag+">","g"))||[]).length,
+  "Seja Parceiro: elementos incompletos: "+tag);
+}
 assert(read("assets/css/style.css").includes('[data-theme="dark"]'));
 assert(read("assets/js/main.js").includes("proxiti-theme-v3"));
 for(const name of ["main.js","chat-widget.js","site-requests.js","support-thread.js"])
