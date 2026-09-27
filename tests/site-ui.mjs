@@ -31,7 +31,7 @@ for(const required of [
   "Ao lado de quem resolve.",
   "não exigimos CNPJ para receber seu primeiro contato",
   "quem atua como pessoa física",
-  "Estou começando em TI. Posso participar?",
+  "Estou começando em TI. Posso me apresentar?",
   "UNIPROXITI",
   "Projeto pessoal também é experiência",
   "Quem dá suporte também merece suporte.",
