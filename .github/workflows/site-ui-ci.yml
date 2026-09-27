@@ -9,6 +9,15 @@ on:
       - "assets/**"
       - "tests/**"
       - ".github/workflows/site-ui-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "**/index.html"
+      - "404.html"
+      - "assets/**"
+      - "tests/**"
+      - ".github/workflows/site-ui-ci.yml"
   workflow_dispatch:
 permissions:
   contents: read
