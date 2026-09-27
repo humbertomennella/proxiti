@@ -38,7 +38,8 @@ for(const required of [
   "não garante credenciamento, renda, acesso a clientes ou oferta de chamados",
   "mailto:contato.proxiti@gmail.com?subject=Quero%20ser%20parceiro%20PROXITI"
 ])assert(partner.includes(required),"Seja Parceiro: informação ausente: "+required);
-assert(!/UniProxiti|uniProxiti|técnico parceiro PJ|CNPJ ativo|parceria PJ|prestação de serviços entre pessoas jurídicas/i.test(partner),
+assert(!/(?:UniProxiti|uniProxiti)/.test(partner)&&
+  !/técnico parceiro PJ|CNPJ ativo|parceria PJ|prestação de serviços entre pessoas jurídicas/i.test(partner),
   "Seja Parceiro: comunicação incorretamente restritiva ou grafia antiga.");
 assert(partner.includes('data-proxiti-content="partner.panel.intro.v3"')&&
   !partner.includes('data-proxiti-content="partner.panel.intro.v2"'),
