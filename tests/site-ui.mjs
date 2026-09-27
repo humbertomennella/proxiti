@@ -27,22 +27,24 @@ const legacy=read("trabalhe-conosco/index.html");
 const sitemap=read("sitemap.xml");
 for(const required of [
   "Seja Parceiro",
-  "Seu próximo passo em TI",
-  "Iniciantes e experientes",
-  "Não é necessário ter CNPJ para apresentar seu perfil",
-  "ainda atuam como pessoa física",
-  "Sou iniciante em TI. Posso me apresentar?",
+  "Sua história com tecnologia",
+  "Quem começa ou já atua em TI",
+  "Ter CNPJ não é requisito para enviar sua apresentação",
+  "ainda atua como pessoa física",
+  "Estou começando em TI. Posso participar?",
   "UNIPROXITI",
-  "A PROXITI recebe as solicitações",
-  "As condições da colaboração são definidas antes de qualquer atendimento",
-  "não garante credenciamento, renda, acesso a clientes ou oferta de chamados",
+  "Seu laboratório também conta uma história",
+  "Vamos nos conhecer?",
+  "Nós organizamos a solicitação",
+  "Cada possível serviço é conversado e combinado antes do início",
+  "não garante credenciamento, renda ou chamados",
   "mailto:contato.proxiti@gmail.com?subject=Quero%20ser%20parceiro%20PROXITI"
 ])assert(partner.includes(required),"Seja Parceiro: informação ausente: "+required);
 assert(!/(?:UniProxiti|uniProxiti)/.test(partner)&&
   !/técnico parceiro PJ|CNPJ ativo|parceria PJ|prestação de serviços entre pessoas jurídicas/i.test(partner),
   "Seja Parceiro: comunicação incorretamente restritiva ou grafia antiga.");
-assert(partner.includes('data-proxiti-content="partner.panel.intro.v3"')&&
-  !partner.includes('data-proxiti-content="partner.panel.intro.v2"'),
+assert(partner.includes('data-proxiti-content="partner.panel.intro.v4"')&&
+  !partner.includes('data-proxiti-content="partner.panel.intro.v3"'),
   "Conteúdo antigo do CMS poderia substituir a redação inclusiva.");
 assert(partner.includes('href="https://proxiti.com.br/seja-parceiro/"')&&
   partner.includes('content="https://proxiti.com.br/seja-parceiro/"'),
