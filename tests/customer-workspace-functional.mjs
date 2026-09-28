@@ -146,7 +146,7 @@ try{
  assert((await page.textContent("#customer-welcome")).includes("Cliente de teste"));
  assert.equal(await page.locator("#customer-nav").count(),0);
  await page.click('[data-customer-view="tickets"]');
- await page.click('[data-open-customer-request]');
+ await page.click('[data-customer-panel="tickets"] [data-open-customer-request]');
  await page.fill("#customer-request-subject","Notebook não inicia");
  await page.fill("#customer-request-description","O notebook não abre o sistema operacional.");
  await page.check("#customer-request-privacy");
