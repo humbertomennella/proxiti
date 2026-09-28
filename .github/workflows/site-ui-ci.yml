@@ -24,10 +24,21 @@ permissions:
 jobs:
   visual-integrity:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Verificar temas, framework e scripts
-        run: node tests/site-ui.mjs
+        run: |
+          node --check assets/js/support-thread.js
+          node tests/site-ui.mjs
+      - name: Preparar navegador para simular o portal privado
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Testar consulta e decisão de orçamento pelo cliente
+        run: node tests/customer-quote-functional.mjs
       - name: Validar XML de ilustrações SVG
         run: python3 -c 'import glob, xml.etree.ElementTree as ET; [ET.parse(path) for path in glob.glob("assets/illustrations/*.svg")]'
