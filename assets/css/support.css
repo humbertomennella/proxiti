@@ -89,3 +89,13 @@ html.embedded #customer-reply-text{min-height:65px}
  .customer-quote-card{padding:12px}.customer-quote-actions button{flex:1 1 160px}}
 @media(max-width:420px){.customer-quote-actions{display:grid;grid-template-columns:1fr}
  .customer-quote-actions button{width:100%}.customer-quotes-head button{width:100%}}
+
+/* Conta opcional: o chat permanece aberto para qualquer visitante. */
+.support-account-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.support-account-links>a{font-size:13px;font-weight:700;text-decoration:none}
+.support-account-invite{margin:0 0 17px;padding:12px 15px;
+ border:1px solid #42617e;border-radius:10px;background:#122c47;
+ color:#c7def1;font-size:13px;line-height:1.6}
+.support-account-invite a{color:#acd9ff;font-weight:760}
+@media(max-width:490px){.support-account-links{gap:8px}
+ .support-account-links>a{font-size:11px}.support-account-invite{padding:11px;font-size:12px}}
