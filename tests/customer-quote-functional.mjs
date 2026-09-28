@@ -22,6 +22,10 @@ const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
 const base="http://127.0.0.1:"+server.address().port;
 const ticket="00000000-0000-4000-8000-000000000123";
 const quoteId="00000000-0000-4000-8000-000000000456";
+const clientSource=await readFile(resolve(root,"assets/js/support-thread.js"),"utf8");
+assert(clientSource.includes("lastQuotesCheck<180000")&&
+ clientSource.includes("lastQuotesCheck>=180000"),
+ "Consulta periódica deve respeitar o limite horário de 30 requisições");
 const token="a".repeat(64),wrong="b".repeat(64);
 let page;
 const calls=[],errors=[];

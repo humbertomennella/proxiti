@@ -143,7 +143,7 @@
   }
   async function loadQuotes(force=false){
     if(!ticketId||!token||quotesBusy||document.hidden)return;
-    if(!force&&Date.now()-lastQuotesCheck<30000)return;
+    if(!force&&Date.now()-lastQuotesCheck<180000)return;
     quotesBusy=true;lastQuotesCheck=Date.now();
     const id=ticketId,key=token,epoch=quoteEpoch;
     try{
@@ -221,7 +221,7 @@
         if(wasBottom)box.scrollTop=box.scrollHeight;
       }
       note("");
-      if(Date.now()-lastQuotesCheck>=30000)void loadQuotes();
+      if(Date.now()-lastQuotesCheck>=180000)void loadQuotes();
     }catch(error){note(error.message,true);}
   }
   function showLost(){
