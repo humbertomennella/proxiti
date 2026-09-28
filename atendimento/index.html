@@ -33,6 +33,11 @@
 </form>
 <section id="support-conversation" hidden aria-labelledby="conversation-heading">
 <div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><div class="chat-actions"><button type="button" id="customer-sound-toggle" class="support-plain" aria-pressed="true" aria-label="Desativar alertas" title="Desativar alertas">♫ Alertas ativados</button><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div></div>
+<section id="customer-quotes" class="customer-quotes" aria-labelledby="customer-quotes-heading" hidden>
+<div class="customer-quotes-head"><div><span class="support-kicker">PROPOSTAS DO SEU CHAMADO</span><h3 id="customer-quotes-heading">Orçamentos e aprovação</h3><p>Confira os serviços e valores antes de responder. Sua decisão fica registrada no atendimento; ela não efetua pagamentos.</p></div><button id="customer-quotes-refresh" class="support-plain" type="button">Atualizar propostas</button></div>
+<p id="customer-quotes-feedback" class="customer-quotes-feedback" role="status" aria-live="polite">Buscando as propostas do seu chamado…</p>
+<div id="customer-quotes-list" class="customer-quotes-list"></div>
+</section>
 <div id="customer-messages" class="customer-messages" role="log" aria-live="polite" aria-label="Histórico da conversa"></div>
 <form id="customer-reply"><label for="customer-reply-text">Enviar mensagem</label><textarea id="customer-reply-text" rows="3" minlength="1" maxlength="2000" required placeholder="Sua mensagem para a equipe."></textarea><button type="submit" id="reply-submit" class="support-primary">Enviar mensagem <span aria-hidden="true">↗</span></button></form>
 </section>
