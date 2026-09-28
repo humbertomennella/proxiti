@@ -133,6 +133,14 @@ function renderDevices(){
  }
  if(!records.length)empty(host,"Cadastre seu primeiro equipamento para lembrar os detalhes no próximo atendimento.");
 }
+async function cancelSchedule(request){
+ if(!authenticated()||request.status!=="pending"||
+   !window.confirm("Cancelar o pedido de horário para "+fmt(request.preferred_at)+"?"))return;
+ try{
+  await read(db.rpc("proxiti_customer_cancel_schedule",{p_id:request.id}));
+  await reload("Pedido de horário cancelado.");showView("schedule");
+ }catch(e){notify(err(e),true);}
+}
 async function archiveDevice(device){
  if(!window.confirm("Arquivar "+device.label+"? O equipamento não será apagado permanentemente."))return;
  try{
@@ -150,9 +158,19 @@ function renderSchedules(){
     request.modality==="remote"?"Atendimento remoto":"Atendimento presencial");
   item.append(badge(statuses[request.status]||request.status));
   if(request.note)item.append(make("small",request.note));
+  if(request.status==="pending")item.append(button("Cancelar pedido de horário",()=>void cancelSchedule(request)));
   host.append(item);
  }
  if(!(dashboard.schedule||[]).length)empty(host,"Nenhum horário solicitado. A confirmação depende da equipe.");
+ for(const appointment of dashboard.appointments||[]){
+  const t=tickets().find(x=>x.id===appointment.ticket_id);
+  const item=card("Agendamento confirmado · chamado #"+(t?.reference??"—"),
+    appointment.title+" · "+fmt(appointment.starts_at)+" · "+
+    (appointment.modality==="remote"?"Remoto":"Presencial"));
+  item.append(badge(appointment.status==="confirmed"?"Confirmado":
+    appointment.status==="done"?"Realizado":"Cancelado",appointment.status==="confirmed"));
+  host.prepend(item);
+ }
  setOptions("customer-schedule-ticket",openTickets(),"Escolha o chamado",t=>t.id,
   t=>"#"+t.reference+" · "+t.subject);
 }
