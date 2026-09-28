@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0d1828">
+<meta name="description" content="Minha PROXITI: seus atendimentos, equipamentos, agendamentos e propostas em um só lugar.">
+<title>Minha PROXITI | Seu espaço de suporte</title>
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+<link rel="stylesheet" href="/assets/css/minha-proxiti.css?v=20260928-1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
+<script src="/assets/js/support-config.js" defer></script>
+<script src="/assets/js/minha-proxiti.js?v=20260928-1" defer></script>
+</head><body>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+<header class="customer-header"><a class="customer-brand" href="/" aria-label="PROXITI: página inicial"><span class="customer-logo">P</span><strong>PROXI<span>TI</span></strong></a>
+<nav aria-label="Navegação pública"><a href="/">Site PROXITI</a><a href="/atendimento/">Chat sem login</a></nav></header>
+<main id="main">
+<section class="auth-shell" id="customer-auth">
+<div class="auth-visual"><span class="eyebrow">MINHA PROXITI · ÁREA DO CLIENTE</span>
+<h1>Seu suporte tem história. <span>Agora tem um lugar só seu.</span></h1>
+<p>Acompanhe seus chamados, organize seus equipamentos e encontre ajuda quando precisar. Sua conta é gratuita e o chat continua aberto sem cadastro.</p>
+<img src="/assets/illustrations/partner-workstation.svg" width="1200" height="760" alt="Ilustração de espaço organizado com notebook e ferramentas de suporte." loading="lazy">
+<div class="auth-points"><span>Histórico dos atendimentos</span><span>Orientação e agendamentos</span><span>Profissionais de sua preferência</span></div>
+</div>
+<div class="auth-panel">
+<div class="auth-switch" role="group" aria-label="Acesso do cliente">
+<button type="button" id="customer-show-login" aria-pressed="true" class="active">Entrar</button>
+<button type="button" id="customer-show-signup" aria-pressed="false">Criar conta gratuita</button></div>
+<form id="customer-login-form" class="customer-form"><h2>Bom ter você por aqui.</h2><p>Acesse seu espaço com o e-mail cadastrado.</p>
+<label>E-mail<input id="customer-login-email" type="email" required maxlength="254" autocomplete="email" placeholder="voce@exemplo.com"></label>
+<label>Senha<input id="customer-login-password" type="password" required autocomplete="current-password"></label>
+<button class="primary" type="submit">Entrar na Minha PROXITI</button>
+<button class="text-button" id="customer-forgot" type="button">Esqueci minha senha</button></form>
+<form id="customer-signup-form" class="customer-form" hidden><h2>Que bom ter você com a gente.</h2><p>Crie uma conta para organizar seus atendimentos. Não pedimos CPF nem dados bancários.</p>
+<label>Como podemos chamar você?<input id="customer-signup-name" type="text" minlength="2" maxlength="120" required autocomplete="name"></label>
+<label>E-mail<input id="customer-signup-email" type="email" maxlength="254" required autocomplete="email"></label>
+<label>Senha com pelo menos 12 caracteres<input id="customer-signup-password" type="password" minlength="12" required autocomplete="new-password"></label>
+<label>Confirmar senha<input id="customer-signup-confirm" type="password" minlength="12" required autocomplete="new-password"></label>
+<label class="check"><input id="customer-signup-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e concordo com o uso dos meus dados para criar a conta e prestar suporte.</span></label>
+<button class="primary" type="submit">Criar minha conta</button></form>
+<form id="customer-recovery-form" class="customer-form" hidden><h2>Recuperar acesso</h2><p>Enviaremos instruções ao e-mail da sua conta, caso esteja cadastrado.</p>
+<label>E-mail<input id="customer-recovery-email" type="email" maxlength="254" autocomplete="email" required></label>
+<button class="primary" type="submit">Enviar instruções</button><button class="text-button" type="button" data-customer-back>Voltar</button></form>
+<form id="customer-reset-form" class="customer-form" hidden><h2>Definir nova senha</h2>
+<label>Nova senha<input id="customer-reset-password" type="password" minlength="12" autocomplete="new-password" required></label>
+<label>Confirme a senha<input id="customer-reset-confirm" type="password" minlength="12" autocomplete="new-password" required></label>
+<button class="primary" type="submit">Salvar nova senha</button></form>
+<p id="customer-auth-status" class="status" role="status" aria-live="polite"></p>
+<p class="auth-foot">Precisa de ajuda agora? <a href="/atendimento/">O chat continua disponível sem login ↗</a></p>
+</div></section>
+<section id="customer-verify" class="customer-verify" hidden><h1>Falta confirmar seu e-mail.</h1><p>Abra a mensagem de confirmação da PROXITI. Depois, volte a esta página e entre na sua conta. Nenhum chamado antigo será vinculado apenas pelo endereço de e-mail.</p><button id="customer-verify-retry" class="secondary">Já confirmei · verificar novamente</button><button id="customer-verify-logout" class="text-button">Sair</button></section>
+<div id="customer-app" class="customer-app" hidden>
+<aside class="customer-sidebar" aria-label="Navegação da Minha PROXITI">
+<div class="sidebar-name"><small>OLÁ,</small><strong id="customer-welcome">Cliente PROXITI</strong><span id="customer-email"></span></div>
+<nav class="customer-nav" aria-label="Áreas da conta">
+<button type="button" data-customer-view="home" class="active">⌂ <span>Minha página</span></button>
+<button type="button" data-customer-view="tickets">▤ <span>Meus atendimentos</span></button>
+<button type="button" data-customer-view="equipment">▣ <span>Meus equipamentos</span></button>
+<button type="button" data-customer-view="schedule">◷ <span>Agendamentos</span></button>
+<button type="button" data-customer-view="professionals">♧ <span>Meus profissionais</span></button>
+<button type="button" data-customer-view="profile">⚙ <span>Meu perfil</span></button>
+</nav><a href="/atendimento/" class="sidebar-link">↗ Chat sem login</a>
+<button id="customer-logout" class="text-button" type="button">Sair da conta</button></aside>
+<div class="customer-content">
+<div class="app-toolbar"><span class="eyebrow">MINHA PROXITI · CONTA GRATUITA</span><button id="customer-refresh" type="button" class="secondary">Atualizar dados ↻</button></div>
+<p id="customer-app-status" class="status" role="status" aria-live="polite"></p>
+<section data-customer-panel="home" aria-labelledby="customer-home-title">
+<div class="welcome-hero"><div><span class="eyebrow">A GENTE CUIDA DO CAMINHO COM VOCÊ</span><h1 id="customer-home-title">Precisou de ajuda? <span>Você está no lugar certo.</span></h1><p>Conte o que acontece, acompanhe a resposta e mantenha seus equipamentos organizados. Você escolhe como prefere ser atendido.</p><button type="button" class="primary" data-open-customer-request>Solicitar suporte ↗</button></div><img src="/assets/illustrations/partner-workstation.svg" width="1200" height="760" loading="lazy" alt="Ilustração de estação de atendimento e suporte técnico."></div>
+<div id="customer-home-metrics" class="customer-metrics" aria-label="Resumo da sua conta"></div>
+<div class="two-col"><section class="customer-card"><h2>Seus atendimentos recentes</h2><div id="customer-home-tickets"></div></section>
+<section class="customer-card"><h2>Sua conta, suas vantagens</h2><p>Histórico centralizado, solicitação orientada e profissionais de sua preferência. O cadastro é gratuito. Qualquer serviço pago terá proposta antes da execução.</p><a class="secondary customer-link" href="/atendimento/">Conversar sem login ↗</a></section></div>
+</section>
+<section data-customer-panel="tickets" hidden aria-labelledby="customer-tickets-title">
+<div class="section-head"><div><span class="eyebrow">ACOMPANHAMENTO</span><h1 id="customer-tickets-title">Meus atendimentos</h1><p>Histórico e conversas dos chamados vinculados à sua conta, em qualquer dispositivo após entrar.</p></div><button class="primary" data-open-customer-request type="button">Novo pedido de suporte</button></div>
+<section class="customer-card"><h2>Trazer uma conversa antiga</h2><p>Se abriu atendimento pelo chat sem login, use a chave guardada neste navegador. Só vinculamos chamados com a mesma conta de e-mail confirmado.</p><form id="customer-link-ticket-form" class="customer-form inline-form"><label>Conversa salva neste navegador<select id="customer-link-ticket" required><option value="">Selecione um chamado salvo</option></select></label><button class="secondary" type="submit">Vincular à minha conta</button></form><small>Se a conversa está em outro dispositivo, use aquele navegador para vinculá-la à conta.</small></section>
+<div id="customer-ticket-list" class="customer-card-grid"></div>
+<section id="customer-ticket-detail" class="customer-card" hidden aria-labelledby="customer-ticket-detail-title"><div class="section-head"><h2 id="customer-ticket-detail-title">Atendimento</h2><button id="customer-close-ticket" class="secondary">Voltar aos atendimentos</button></div>
+<p id="customer-thread-status" class="status" aria-live="polite"></p><div id="customer-thread" class="customer-thread" role="log" aria-label="Conversa do atendimento"></div>
+<form id="customer-message-form" class="customer-form"><label>Responder à equipe<textarea id="customer-message" rows="3" maxlength="2000" required placeholder="Conte o que mudou, sem informar senhas ou códigos."></textarea></label><button type="submit" class="primary">Enviar mensagem</button></form>
+<div id="customer-detail-quotes" class="customer-quotes"></div>
+</section>
+</section>
+<section data-customer-panel="equipment" hidden aria-labelledby="customer-equipment-title"><div class="section-head"><div><span class="eyebrow">ORGANIZAÇÃO</span><h1 id="customer-equipment-title">Meus equipamentos</h1><p>Organize seus dispositivos sem guardar senhas, números de documentos ou outros dados desnecessários.</p></div></div>
+<div class="two-col"><section class="customer-card"><h2>Adicionar equipamento</h2><form id="customer-device-form" class="customer-form">
+<input id="customer-device-id" type="hidden"><label>Apelido do equipamento<input id="customer-device-label" minlength="2" maxlength="90" required placeholder="Ex.: Notebook de trabalho"></label>
+<label>Categoria<select id="customer-device-category"><option value="notebook">Notebook</option><option value="desktop">Desktop</option><option value="router">Roteador</option><option value="network">Equipamento de rede</option><option value="printer">Impressora</option><option value="phone">Celular</option><option value="other">Outro</option></select></label>
+<label>Marca (opcional)<input id="customer-device-brand" maxlength="90"></label><label>Modelo (opcional)<input id="customer-device-model" maxlength="110"></label>
+<label>Observações úteis (opcional)<textarea id="customer-device-notes" maxlength="500" rows="2" placeholder="Ex.: sistema operacional e sintoma recorrente."></textarea></label>
+<button type="submit" class="primary">Salvar equipamento</button><button id="customer-device-clear" type="button" class="text-button">Limpar formulário</button></form></section>
+<section class="customer-card"><h2>Seus dispositivos</h2><div id="customer-device-list"></div></section></div></section>
+<section data-customer-panel="schedule" hidden aria-labelledby="customer-schedule-title"><div class="section-head"><div><span class="eyebrow">COMBINANDO O MELHOR HORÁRIO</span><h1 id="customer-schedule-title">Agendamentos</h1><p>Solicite um horário para um chamado aberto. O agendamento só estará confirmado depois da resposta da equipe.</p></div></div>
+<div class="two-col"><section class="customer-card"><h2>Solicitar horário</h2><form id="customer-schedule-form" class="customer-form"><label>Chamado<select id="customer-schedule-ticket" required></select></label>
+<label>Modalidade<select id="customer-schedule-modality"><option value="remote">Remoto</option><option value="on_site">Presencial</option></select></label>
+<label>Data e horário de preferência<input id="customer-schedule-date" type="datetime-local" required></label>
+<label>Observação (opcional)<textarea id="customer-schedule-note" maxlength="500" rows="2" placeholder="Ex.: tenho disponibilidade à tarde."></textarea></label>
+<button type="submit" class="primary">Enviar pedido de horário</button></form></section>
+<section class="customer-card"><h2>Solicitações enviadas</h2><div id="customer-schedule-list"></div></section></div></section>
+<section data-customer-panel="professionals" hidden aria-labelledby="customer-professionals-title"><div class="section-head"><div><span class="eyebrow">GENTE QUE CONHECE SUA HISTÓRIA</span><h1 id="customer-professionals-title">Meus profissionais</h1><p>Se gostou de um atendimento, pode indicar aquele profissional como preferência. A PROXITI confirma disponibilidade e autorização antes de atribuir o chamado.</p></div></div>
+<div class="two-col"><section class="customer-card"><h2>Preferência para um atendimento</h2><form id="customer-preference-form" class="customer-form">
+<label>Chamado<select id="customer-preference-ticket" required></select></label>
+<label>Profissional de preferência<select id="customer-preference-partner"><option value="">Sem preferência · a equipe escolhe</option></select></label>
+<button type="submit" class="primary">Salvar preferência</button></form><p class="customer-help">Uma preferência não reserva horário nem obriga um profissional a aceitar a solicitação.</p></section>
+<section class="customer-card"><h2>Avaliar um atendimento concluído</h2><form id="customer-rating-form" class="customer-form">
+<label>Chamado concluído<select id="customer-rating-ticket" required></select></label>
+<label>Como foi o atendimento?<select id="customer-rating-stars"><option value="5">5 · Muito bom</option><option value="4">4 · Bom</option><option value="3">3 · Regular</option><option value="2">2 · Poderia melhorar</option><option value="1">1 · Ruim</option></select></label>
+<label>Conte sua experiência (opcional)<textarea id="customer-rating-comment" rows="3" maxlength="500" placeholder="Sua avaliação ajuda a PROXITI a melhorar."></textarea></label>
+<button type="submit" class="primary">Enviar avaliação</button></form></section></div>
+<section class="customer-card"><h2>Profissionais disponíveis na rede</h2><div id="customer-partner-directory" class="customer-card-grid"></div></section></section>
+<section data-customer-panel="profile" hidden aria-labelledby="customer-profile-title"><div class="section-head"><div><span class="eyebrow">SUA CONTA</span><h1 id="customer-profile-title">Meu perfil</h1><p>Mantenha apenas as informações necessárias para o seu atendimento.</p></div></div>
+<section class="customer-card narrow"><form id="customer-profile-form" class="customer-form">
+<label>Nome<input id="customer-profile-name" minlength="2" maxlength="120" required autocomplete="name"></label>
+<label>E-mail confirmado<input id="customer-profile-email" readonly autocomplete="email"></label>
+<label>Telefone (opcional)<input id="customer-profile-phone" maxlength="40" autocomplete="tel"></label>
+<label>Cidade (opcional)<input id="customer-profile-city" maxlength="120" autocomplete="address-level2"></label>
+<label>Canal preferido<select id="customer-profile-channel"><option value="email">E-mail</option><option value="whatsapp">WhatsApp</option><option value="phone">Telefone</option></select></label>
+<button type="submit" class="primary">Salvar perfil</button></form>
+<p>O e-mail de acesso não pode ser alterado por este formulário. Para atualizar credenciais ou dados sensíveis, fale com a equipe.</p>
+<button id="customer-profile-password" class="secondary" type="button">Enviar link para alterar senha</button>
+</section></section>
+</div></div>
+</main>
+<footer class="customer-footer"><a href="/">PROXITI</a><span>Seu suporte, com contexto.</span><a href="/privacidade/">Privacidade</a><a href="/atendimento/">Chat sem login</a></footer>
+</body></html>
