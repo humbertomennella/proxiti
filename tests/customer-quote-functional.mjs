@@ -66,7 +66,19 @@ try{
      headers:{"access-control-allow-origin":base},body:JSON.stringify(result)});
  });
  await page.goto(base+"/atendimento/?ticket="+ticket,{waitUntil:"load"});
- await page.waitForSelector("#customer-quotes-list .customer-quote-card");
+ await page.waitForSelector("#customer-quotes-list .customer-quote-card",{timeout:10000})
+   .catch(async error=>{
+     console.log("DIAGNÓSTICO PORTAL:",JSON.stringify({
+       calls,errors,
+       state:await page.evaluate(()=>({
+         setup:document.getElementById("support-conversation")?.hidden,
+         quoteHidden:document.getElementById("customer-quotes")?.hidden,
+         feedback:document.getElementById("support-feedback")?.textContent,
+         quoteFeedback:document.getElementById("customer-quotes-feedback")?.textContent,
+         scripts:[...document.scripts].map(x=>x.src)
+       }))
+     }));throw error;
+   });
  assert((await page.textContent("#customer-quotes-list")).includes("150,00"));
  assert((await page.textContent("#customer-quotes-list")).includes("Diagnóstico técnico"));
  assert(!(await page.textContent("#customer-quotes-list")).includes("Custo interno"));
