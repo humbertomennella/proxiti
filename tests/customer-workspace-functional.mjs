@@ -153,7 +153,7 @@ try{
  await page.click("#customer-request-form button[type=submit]");
  await page.waitForFunction(()=>window.__customerFixture.tickets.length===1);
  await page.waitForFunction(()=>document.querySelector("#customer-ticket-detail")?.hidden===false);
- assert((await page.textContent("#customer-detail-quotes")).includes("Suporte remoto"));
+ await page.waitForFunction(()=>document.querySelector("#customer-detail-quotes")?.textContent.includes("Suporte remoto"),{timeout:10000});
  assert((await page.textContent("#customer-detail-quotes")).includes("R$ 40,00")||
   (await page.textContent("#customer-detail-quotes")).includes("R$ 40,00"));
  await page.click('[data-customer-view="equipment"]');
