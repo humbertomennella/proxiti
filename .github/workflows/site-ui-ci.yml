@@ -34,11 +34,15 @@ jobs:
         run: |
           node --check assets/js/support-thread.js
           node tests/site-ui.mjs
+          node --check assets/js/minha-proxiti.js
+          node tests/customer-workspace-v19-integrity.mjs
       - name: Preparar navegador para simular o portal privado
         run: |
           npm install --no-save --no-package-lock playwright@1.55.0
           npx playwright install --with-deps chromium
       - name: Testar consulta e decisão de orçamento pelo cliente
         run: node tests/customer-quote-functional.mjs
+      - name: Simular cadastro e recursos da Minha PROXITI
+        run: node tests/customer-workspace-functional.mjs
       - name: Validar XML de ilustrações SVG
         run: python3 -c 'import glob, xml.etree.ElementTree as ET; [ET.parse(path) for path in glob.glob("assets/illustrations/*.svg")]'
