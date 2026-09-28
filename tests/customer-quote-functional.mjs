@@ -10,7 +10,7 @@ const mime={".html":"text/html; charset=utf-8",".js":"application/javascript; ch
 const server=createServer(async(req,res)=>{
  try{
   const pathname=new URL(req.url,"http://localhost").pathname;
-  const target=resolve(root,"."+decodeURIComponent(pathname==="/"?"/index.html":pathname));
+  const target=resolve(root,"."+decodeURIComponent(pathname.endsWith("/")?pathname+"index.html":pathname));
   if(!target.startsWith(root+sep)){res.writeHead(403);res.end();return;}
   const data=await readFile(target);
   res.writeHead(200,{"content-type":mime[extname(target)]||"application/octet-stream",
