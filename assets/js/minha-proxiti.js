@@ -35,9 +35,21 @@ function notify(message,error=false,target="customer-app-status"){
  const n=el(target);n.textContent=message;n.className="status"+(error?" error":message?" success":"");
 }
 function formMode(mode){
- const nodes={login:"customer-login-form",signup:"customer-signup-form",
-  forgot:"customer-recovery-form",reset:"customer-reset-form"};
- for(const [key,id] of Object.entries(nodes))el(id).hidden=key!==mode;
+ const sliding=mode==="login"||mode==="signup";
+ const panel=el("customer-auth-panel");
+ const viewport=el("customer-auth-viewport");
+ panel.dataset.authMode=mode;
+ viewport.hidden=!sliding;
+ for(const [key,id] of [["login","customer-login-form"],["signup","customer-signup-form"]]){
+  const form=el(id),pane=form.closest(".auth-pane");
+  // Os dois formulários permanecem montados: só o trilho se move.
+  form.hidden=!sliding;
+  pane.inert=key!==mode;
+  pane.setAttribute("aria-hidden",String(key!==mode));
+  if(key===mode)pane.scrollTop=0;
+ }
+ el("customer-recovery-form").hidden=mode!=="forgot";
+ el("customer-reset-form").hidden=mode!=="reset";
  for(const [key,id] of [["login","customer-show-login"],["signup","customer-show-signup"]]){
   el(id).classList.toggle("active",key===mode);
   el(id).setAttribute("aria-pressed",String(key===mode));
