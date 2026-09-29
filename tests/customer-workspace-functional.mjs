@@ -411,7 +411,7 @@ try{
  assert.equal(await page.locator("#customer-metric-open").innerText(),"1");
  assert.equal(await page.locator("#customer-next-status").innerText(),"CHAMADO REGISTRADO");
  assert((await page.locator("#customer-next-description").innerText()).includes("Chamado #17"));
- assert.equal(await page.locator("#customer-home-action").innerText(),"Ver meus atendimentos ↗");
+ assert.equal((await page.locator("#customer-home-action").textContent()).replace(/\s+/g," ").trim(),"Ver meus atendimentos ↗");
  await page.click("#customer-next-action");
  await page.waitForFunction(()=>document.querySelector("#customer-ticket-detail")?.hidden===false);
  assert.equal(await page.locator('[data-customer-panel="tickets"]').isVisible(),true);
