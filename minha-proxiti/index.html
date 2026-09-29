@@ -10,19 +10,19 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti-redesign.css?v=20260929-1">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-portal.css?v=20260929-3">
-<link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-1">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-2">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
 <script src="/assets/js/minha-proxiti.js?v=20260929-3" defer></script>
-<script src="/assets/js/minha-proxiti-chat.js?v=20260929-1" defer></script>
+<script src="/assets/js/minha-proxiti-chat.js?v=20260929-2" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="customer-header">
 <a class="customer-brand brand" href="/minha-proxiti/" aria-label="MINHA PROXITI: permanecer na área do cliente"><span class="brand-mark" aria-hidden="true"><span>P</span></span><span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span></a>
 <nav class="customer-header-actions" aria-label="Navegação da conta">
 <span class="customer-header-caption"><span class="customer-header-dot" aria-hidden="true"></span>MINHA PROXITI <span class="customer-header-caption-secondary">/ área do cliente</span></span>
-<a class="customer-back customer-explore" href="/" aria-label="Conhecer o site institucional da PROXITI" title="Conheça a PROXITI"><span class="customer-explore-icon" aria-hidden="true">↗</span><span class="customer-explore-label">Conheça a PROXITI</span></a>
+<a class="customer-back customer-explore" href="/" aria-label="Voltar ao site da PROXITI" title="Voltar ao site"><span class="customer-explore-icon" aria-hidden="true">←</span><span class="customer-explore-label">Voltar</span></a>
 <button id="customer-theme-toggle" class="customer-theme-toggle" type="button" aria-label="Ativar tema escuro" title="Alternar tema claro e escuro">
 <svg class="customer-theme-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20 15.4A8.5 8.5 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" stroke="currentColor" stroke-width="1.8"/></svg>
 <svg class="customer-theme-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2" stroke="currentColor" stroke-width="1.8"/></svg><span id="customer-theme-label" class="customer-theme-label">Tema escuro</span>
@@ -146,8 +146,14 @@
 <p>Diagnóstico antes da intervenção. Suporte técnico, redes e segurança preventiva com clareza do primeiro contato ao acompanhamento.</p></div>
 <nav aria-label="Links úteis"><a href="/#como-funciona">Como funciona</a><a href="/privacidade/">Privacidade</a><button type="button" id="customer-footer-chat" aria-controls="customer-support-popover" aria-expanded="false">Conversar com a equipe</button></nav>
 </div><div class="customer-footer-bottom"><span>PROXITI · Curitiba/PR</span><span>Menos repetição. Mais contexto para resolver.</span></div></footer>
-<section id="customer-support-popover" class="customer-support-popover" role="dialog" aria-labelledby="customer-support-title" hidden>
-<header class="customer-support-popover-head"><div><strong id="customer-support-title">Conversa com a PROXITI</strong><small>Atendimento com contexto, sem sair desta página.</small></div><button type="button" id="customer-support-close" aria-label="Fechar janela de conversa" title="Fechar conversa">✕</button></header>
+<div id="customer-chat-overlay" class="customer-chat-overlay" hidden></div>
+<section id="customer-support-popover" class="customer-support-popover" role="dialog" aria-modal="true" aria-labelledby="customer-support-title" hidden>
+<header class="customer-support-popover-head"><div><strong id="customer-support-title">Conversa com a PROXITI</strong><small>Suporte direto, com contexto.</small></div>
+<div class="customer-chat-actions"><button type="button" id="customer-support-minimize" aria-label="Minimizar conversa" title="Minimizar conversa">−</button><button type="button" id="customer-support-close" aria-label="Fechar conversa" title="Fechar conversa">✕</button></div></header>
 <iframe id="customer-support-frame" title="Chat com a equipe PROXITI" data-src="/atendimento/?chat=1&amp;embed=1" loading="lazy"></iframe>
 </section>
+<div id="customer-chat-minimized" class="customer-chat-minimized" hidden>
+<button type="button" id="customer-chat-restore" aria-label="Retomar conversa com a PROXITI"><span aria-hidden="true">◉</span> Retomar conversa</button>
+<button type="button" id="customer-chat-dismiss" aria-label="Fechar conversa minimizada" title="Fechar conversa">✕</button>
+</div>
 </body></html>
