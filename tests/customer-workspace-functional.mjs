@@ -380,6 +380,8 @@ try{
  assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"false",
   "Navegar deve recolher o menu móvel");
  await page.setViewportSize({width:1280,height:850});
+ await page.click('[data-customer-view="home"]');
+ await page.locator("#customer-home-hero-title").waitFor({state:"visible"});
  const measureDashboard=()=>page.evaluate(()=>{
   const rect=element=>{const {x,y,width,height,right,bottom}=element.getBoundingClientRect();
    return {x,y,width,height,right,bottom};};
@@ -399,10 +401,11 @@ try{
    expanded.content.x-expanded.sidebar.right>=16&&
    expanded.content.x-expanded.sidebar.right<=24,
    "Sidebar expandida precisa ter proporção de painel, sem espaço perdido: "+JSON.stringify(expanded));
- assert(expanded.hero.width<=1030&&expanded.hero.height<=260&&
-   expanded.metric.height<=132,"Banner e indicadores devem ficar compactos: "+JSON.stringify(expanded));
+ assert(expanded.hero.width>=750&&expanded.hero.width<=1030&&
+   expanded.hero.height>=170&&expanded.hero.height<=260&&
+   expanded.metric.height>=90&&expanded.metric.height<=132,"Banner e indicadores devem ficar compactos: "+JSON.stringify(expanded));
  assert(expanded.brandVisible);
- assert.equal(await page.locator("#customer-current-view").innerText(),"Meus atendimentos");
+ assert.equal(await page.locator("#customer-current-view").innerText(),"Minha página");
  assert.equal(await page.locator("#customer-sidebar-avatar").innerText(),"C");
  await page.click("#customer-sidebar-toggle");
  assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),true);
@@ -410,7 +413,7 @@ try{
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Expandir menu lateral");
  const collapsed=await measureDashboard();
  assert(collapsed.sidebar.width>=74&&collapsed.sidebar.width<=79&&
-  collapsed.hero.width<=1080&&collapsed.brandVisible,
+  collapsed.hero.width>=900&&collapsed.hero.width<=1080&&collapsed.brandVisible,
   "Menu recolhido precisa manter proporção de referência: "+JSON.stringify(collapsed));
  assert(Math.abs(collapsed.header.x-collapsed.sidebar.x)<2&&
   collapsed.content.x-collapsed.sidebar.right>=16&&
@@ -425,12 +428,13 @@ try{
    Math.abs(wide.header.x-wide.sidebar.x)<2&&
    Math.abs(wide.header.x-(1649-wide.shell.width)/2)<2,
    "Na resolução da captura, shell e cabeçalho devem estar centrados: "+JSON.stringify(wide));
- assert(wide.hero.width<=1024&&wide.hero.height<=260&&wide.content.width<=1024,
+ assert(wide.hero.width>=950&&wide.hero.width<=1024&&
+   wide.hero.height>=170&&wide.hero.height<=260&&wide.content.width<=1024,
   "O banner não pode voltar a ocupar toda a tela na resolução original: "+JSON.stringify(wide));
  await page.click("#customer-sidebar-toggle");
  const wideCollapsed=await measureDashboard();
  assert(wideCollapsed.sidebar.width>=74&&wideCollapsed.sidebar.width<=79&&
-   wideCollapsed.hero.width<=1080&&
+   wideCollapsed.hero.width>=1000&&wideCollapsed.hero.width<=1080&&
    Math.abs(wideCollapsed.header.x-wideCollapsed.sidebar.x)<2,
    "Sidebar de ícones não pode desalinhar cabeçalho e conteúdo na resolução original: "+JSON.stringify(wideCollapsed));
  await page.click("#customer-sidebar-toggle");
