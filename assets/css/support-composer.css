@@ -177,3 +177,38 @@ html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#091626}
  #support-start .support-start-composer-row #start-submit:not(:disabled):hover svg,
  #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover svg{transform:none}
 }
+
+/* Contraste do campo de resposta no tema claro: o componente deve permanecer
+   legível sem foco, com texto, placeholder e contorno próprios. */
+html.embedded[data-theme="light"] #customer-reply .reply-composer-label{
+ color:#152740;font-size:.96rem;font-weight:800;letter-spacing:-.012em;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text{
+ background:#f7faff!important;color:#132844!important;
+ border:2px solid #8aa5d1!important;
+ box-shadow:0 1px 4px rgba(28,66,117,.075)!important;
+ font-size:1rem;font-weight:550;caret-color:#245de0;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text::placeholder{
+ color:#425672!important;opacity:1!important;font-weight:500;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text:focus{
+ background:#fff!important;border-color:#245de0!important;
+ box-shadow:0 0 0 3px rgba(47,109,246,.19),
+ 0 1px 4px rgba(28,66,117,.08)!important;
+ outline:0!important;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-hint{
+ color:#435670;font-size:.81rem;font-weight:550;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #reply-submit:disabled{
+ opacity:1;background:#b8cbed;color:#24466d;
+ border-color:#9fbbe5;box-shadow:none;
+}
+html.embedded #forget-ticket{
+ max-width:100%;white-space:normal;text-align:center;
+ font-size:.76rem;line-height:1.35;
+}
+@media(max-width:440px){
+ html.embedded #forget-ticket{font-size:.72rem}
+}
