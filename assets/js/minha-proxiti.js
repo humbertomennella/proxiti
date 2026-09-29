@@ -78,6 +78,7 @@ function resetPrivate(){
   el(id).replaceChildren();
  el("customer-ticket-detail").hidden=true;notify("");
  el("customer-welcome").textContent="Cliente PROXITI";
+ el("customer-sidebar-avatar").textContent="P";
  el("customer-email").textContent="";
  el("customer-home-first-name").textContent="você";
  for(const id of ["customer-metric-tickets","customer-metric-open","customer-metric-equipment"])
@@ -87,6 +88,9 @@ function resetPrivate(){
 function showView(next){
  if(!authenticated()||!["home","tickets","equipment","schedule","professionals","profile"].includes(next))return;
  view=next;
+ el("customer-current-view").textContent={home:"Minha página",tickets:"Meus atendimentos",
+  equipment:"Meus equipamentos",schedule:"Agendamentos",
+  professionals:"Meus profissionais",profile:"Meu perfil"}[next];
  for(const panel of document.querySelectorAll("[data-customer-panel]"))
   panel.hidden=panel.dataset.customerPanel!==next;
  for(const button of document.querySelectorAll("[data-customer-view]")){
@@ -188,6 +192,7 @@ function render(){
  if(!authenticated())return;
  const account=dashboard.account||{};
  el("customer-welcome").textContent=account.display_name||"Cliente PROXITI";
+ el("customer-sidebar-avatar").textContent=String(account.display_name||"P").trim().charAt(0).toLocaleUpperCase("pt-BR")||"P";
  el("customer-email").textContent=user.email||"";
  el("customer-profile-name").value=account.display_name||"";
  el("customer-profile-email").value=user.email||"";
@@ -324,7 +329,7 @@ async function reload(message=""){
    read(db.rpc("proxiti_customer_partner_directory"))]);
   if(id!==refreshId||uid!==user?.id)return;
   dashboard=a;partners=Array.isArray(b)?b:[];render();
-  notify(message||"Dados atualizados.");
+  notify(message);
  }catch(e){
   if(id!==refreshId)return;
   dashboard=null;
@@ -576,7 +581,7 @@ for(const button of document.querySelectorAll("[data-open-customer-request]"))
  button.addEventListener("click",formRequest);
 for(const button of document.querySelectorAll("[data-customer-shortcut]"))
  button.addEventListener("click",()=>showView(button.dataset.customerShortcut));
-el("customer-refresh").addEventListener("click",()=>void reload());
+el("customer-refresh").addEventListener("click",()=>void reload("Dados atualizados."));
 el("customer-close-ticket").addEventListener("click",()=>{
  activeTicket=null;stopPolling();el("customer-ticket-detail").hidden=true;
  el("customer-thread").replaceChildren();el("customer-detail-quotes").replaceChildren();
