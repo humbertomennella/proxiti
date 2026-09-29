@@ -162,9 +162,9 @@ assert(chat.includes('id="close-ticket"')&&
  composerCss.includes('border:2px solid #8aa5d1!important')&&
  composerCss.includes('opacity:1!important'),
  "Encerrar precisa ser real, manter o histórico e melhorar a leitura da mensagem no tema claro");
-assert(html.includes('minha-proxiti-dashboard.css?v=20260929-1')&&
- html.includes('minha-proxiti-navigation.js?v=20260929-1')&&
- html.includes('minha-proxiti.js?v=20260929-4')&&
+assert(html.includes('minha-proxiti-dashboard.css?v=20260929-2')&&
+ html.includes('minha-proxiti-navigation.js?v=20260929-2')&&
+ html.includes('minha-proxiti.js?v=20260929-5')&&
  html.includes('id="customer-sidebar-toggle"')&&
  html.includes('id="customer-mobile-menu"')&&
  html.includes('id="customer-account-navigation"')&&
@@ -179,13 +179,33 @@ assert((html.match(/data-customer-view="/g)||[]).length===6&&
  dashboardCss.includes('#customer-app.sidebar-collapsed')&&
  dashboardCss.includes('#customer-app.sidebar-mobile-open .customer-sidebar-body')&&
  dashboardCss.includes('@media(prefers-reduced-motion:reduce)')&&
- dashboardNav.includes('proxiti-customer-sidebar-v1')&&
+ dashboardNav.includes('proxiti-customer-sidebar-v2')&&
  dashboardNav.includes('aria-expanded')&&
  js.includes('function renderHome()')&&
  js.includes('priority.status==="waiting_customer"')&&
  js.includes('heroAction.onclick=()=>showView("tickets")')&&
  js.includes('nextAction.onclick=()=>void openTicket(priority.id)'),
  "O painel precisa refletir chamados reais, atalhos válidos e navegação acessível");
+assert(html.includes('id="customer-sidebar-account"')&&
+ html.includes('id="customer-sidebar-avatar"')&&
+ html.includes('class="sidebar-brand customer-brand brand"')&&
+ html.includes('id="customer-current-view"')&&
+ !html.includes('customer-home-private')&&
+ dashboardCss.includes('width:min(1280px,calc(100% - 48px))')&&
+ dashboardCss.includes('grid-template-columns:252px minmax(0,1fr)')&&
+ dashboardCss.includes('grid-template-columns:76px minmax(0,1fr)')&&
+ dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-header')&&
+ dashboardCss.includes('max-width:1024px')&&
+ dashboardCss.includes('max-width:1080px')&&
+ dashboardNav.includes('document.getElementById("customer-sidebar-account")')&&
+ js.includes('el("customer-current-view").textContent=')&&
+ js.includes('el("customer-sidebar-avatar").textContent=String'),
+ "O novo shell precisa alinhar cabeçalho, sidebar e conteúdo nas duas larguras e preservar navegação");
+assert(!dashboardCss.includes('max-width:1580px')&&
+ !dashboardCss.includes('min-height:246px')&&
+ js.includes('notify(message);')&&
+ js.includes('reload("Dados atualizados.")'),
+ "O painel deve eliminar o banner desproporcional e o aviso permanente de atualização");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
