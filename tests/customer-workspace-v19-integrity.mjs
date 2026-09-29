@@ -162,9 +162,9 @@ assert(chat.includes('id="close-ticket"')&&
  composerCss.includes('border:2px solid #8aa5d1!important')&&
  composerCss.includes('opacity:1!important'),
  "Encerrar precisa ser real, manter o histórico e melhorar a leitura da mensagem no tema claro");
-assert(html.includes('minha-proxiti-dashboard.css?v=20260929-3')&&
+assert(html.includes('minha-proxiti-dashboard.css?v=20260929-4')&&
  html.includes('minha-proxiti-navigation.js?v=20260929-2')&&
- html.includes('minha-proxiti.js?v=20260929-5')&&
+ html.includes('minha-proxiti.js?v=20260929-6')&&
  html.includes('id="customer-sidebar-toggle"')&&
  html.includes('id="customer-mobile-menu"')&&
  html.includes('id="customer-account-navigation"')&&
@@ -206,6 +206,24 @@ assert(!dashboardCss.includes('max-width:1580px')&&
  js.includes('notify(message);')&&
  js.includes('reload("Dados atualizados.")'),
  "O painel deve eliminar o banner desproporcional e o aviso permanente de atualização");
+assert(html.includes('class="customer-profile-layout"')&&
+ html.includes('class="customer-profile-fields"')&&
+ html.includes('class="customer-card customer-profile-security"')&&
+ html.includes('id="customer-profile-form"')&&
+ html.includes('id="customer-profile-password"')&&
+ !html.includes('class="customer-card narrow"')&&
+ dashboardCss.includes('grid-template-columns:minmax(0,1.5fr) minmax(290px,.85fr)')&&
+ dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-footer-inner')&&
+ dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-footer-bottom')&&
+ dashboardCss.includes('gap:12px;align-items:start;')&&
+ dashboardCss.includes('max-width:38ch;text-wrap:balance;')&&
+ dashboardCss.includes('margin:22px auto 24px;'),
+ "O perfil deve aproveitar a tela, o rodapé alinhar ao shell e os cartões não podem criar vazios artificiais");
+assert(js.includes('"Cadastrar equipamento "')&&
+ js.includes('el("customer-device-label").focus()')&&
+ js.includes('"ORGANIZE SEU ESPAÇO"')&&
+ !js.includes('nextAction.onclick=devices?()=>showView("equipment"):formRequest'),
+ "O início sem chamados deve orientar uma ação diferente do CTA de suporte já presente");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
