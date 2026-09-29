@@ -261,7 +261,7 @@ async function authorize(session){
   return;
  }
  try{
-  const access=await api("customer_access_status");
+  const access=await read(db.rpc("proxiti_customer_access_status"));
   if(id!==refreshId||uid!==user?.id)return;
   if(!access.active){
    if(access.can_activate)showAccess("Ative sua área de cliente.",
@@ -454,7 +454,7 @@ el("customer-activate-form").addEventListener("submit",async event=>{
  if(busy||!db||!user||!event.currentTarget.reportValidity())return;
  setBusy(true);
  try{
-  const result=await api("customer_activate",{privacy_accepted:true});
+  const result=await read(db.rpc("proxiti_customer_activate",{p_privacy_accepted:true}));
   if(!result.ok)throw new Error("Não foi possível ativar sua área.");
   const {data,error}=await db.auth.getSession();
   if(error)throw error;
