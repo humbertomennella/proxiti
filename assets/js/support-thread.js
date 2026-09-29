@@ -124,12 +124,17 @@
     timer=setInterval(()=>void refresh(),4000);
   }
   el("support-start").addEventListener("submit",async event=>{
-    event.preventDefault();const form=event.currentTarget;
-    if(!form.reportValidity())return;
+    event.preventDefault();const form=event.currentTarget,send=el("start-submit");
+    if(send.disabled||!form.reportValidity())return;
     const stash=store();
     if(!stash){note("Ative o armazenamento do navegador para manter acesso à conversa ou utilize o e-mail de contato.",true);return;}
     void enableSound();
-    const send=el("start-submit");send.disabled=true;note("Registrando sua mensagem…");
+    send.disabled=true;send.dataset.sending="true";
+    send.setAttribute("aria-label","Abrindo conversa");
+    form.setAttribute("aria-busy","true");
+    const label=send.querySelector(".support-start-send-label");
+    if(label)label.textContent="Abrindo";
+    note("Registrando sua mensagem…");
     try{
       const result=await call("create",{
         source:"chat",name:el("support-name").value.trim(),email:el("support-email").value.trim(),
@@ -142,7 +147,12 @@
       history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId)+(document.documentElement.classList.contains("embedded")?"&embed=1":""));
       seen="";seenStaff=null;await open();
     }catch(error){note(error.message,true);}
-    finally{send.disabled=false;}
+    finally{
+      send.disabled=false;send.dataset.sending="false";
+      send.setAttribute("aria-label","Iniciar conversa");
+      form.setAttribute("aria-busy","false");
+      if(label)label.textContent="Iniciar";
+    }
   });
   const replyField=el("customer-reply-text"),replyButton=el("reply-submit");
   const replyLabel=replyButton.querySelector(".reply-send-text");
