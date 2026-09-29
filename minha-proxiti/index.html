@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti.css?v=20260928-1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
-<script src="/assets/js/minha-proxiti.js?v=20260928-1" defer></script>
+<script src="/assets/js/minha-proxiti.js?v=20260928-2" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="customer-header"><a class="customer-brand" href="/" aria-label="PROXITI: página inicial"><span class="customer-logo">P</span><strong>PROXI<span>TI</span></strong></a>
@@ -33,21 +33,21 @@
 <form id="customer-signup-form" class="customer-form" hidden><h2>Que bom ter você com a gente.</h2><p>Crie uma conta para organizar seus atendimentos. Não pedimos CPF nem dados bancários.</p>
 <label>Como podemos chamar você?<input id="customer-signup-name" type="text" minlength="2" maxlength="120" required autocomplete="name"></label>
 <label>E-mail<input id="customer-signup-email" type="email" maxlength="254" required autocomplete="email"></label>
-<label>Senha com pelo menos 12 caracteres<input id="customer-signup-password" type="password" minlength="12" required autocomplete="new-password"></label>
-<label>Confirmar senha<input id="customer-signup-confirm" type="password" minlength="12" required autocomplete="new-password"></label>
+<label>Senha com 10 caracteres ou mais<input id="customer-signup-password" type="password" minlength="10" maxlength="72" required autocomplete="new-password" aria-describedby="customer-password-help"></label><p id="customer-password-help" class="customer-password-help">Use letras, pelo menos um número e um símbolo (como @, # ou $). Não é obrigatório usar maiúsculas. Uma senha de 11 caracteres é aceita se cumprir essa combinação.</p>
+<label>Confirmar senha<input id="customer-signup-confirm" type="password" minlength="10" maxlength="72" required autocomplete="new-password"></label>
 <label class="check"><input id="customer-signup-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e concordo com o uso dos meus dados para criar a conta e prestar suporte.</span></label>
-<button class="primary" type="submit">Criar minha conta</button></form>
+<input id="customer-signup-company-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" hidden><button class="primary" type="submit">Criar minha conta e entrar</button><p class="customer-password-help">A conta fica disponível logo após o cadastro, sem confirmação obrigatória por e-mail. Informe um e-mail seu: ele será necessário para recuperar o acesso caso esqueça a senha.</p></form>
 <form id="customer-recovery-form" class="customer-form" hidden><h2>Recuperar acesso</h2><p>Enviaremos instruções ao e-mail da sua conta, caso esteja cadastrado.</p>
 <label>E-mail<input id="customer-recovery-email" type="email" maxlength="254" autocomplete="email" required></label>
 <button class="primary" type="submit">Enviar instruções</button><button class="text-button" type="button" data-customer-back>Voltar</button></form>
 <form id="customer-reset-form" class="customer-form" hidden><h2>Definir nova senha</h2>
-<label>Nova senha<input id="customer-reset-password" type="password" minlength="12" autocomplete="new-password" required></label>
-<label>Confirme a senha<input id="customer-reset-confirm" type="password" minlength="12" autocomplete="new-password" required></label>
+<label>Nova senha<input id="customer-reset-password" type="password" minlength="10" maxlength="72" autocomplete="new-password" required></label>
+<label>Confirme a senha<input id="customer-reset-confirm" type="password" minlength="10" maxlength="72" autocomplete="new-password" required></label>
 <button class="primary" type="submit">Salvar nova senha</button></form>
 <p id="customer-auth-status" class="status" role="status" aria-live="polite"></p>
 <p class="auth-foot">Precisa de ajuda agora? <a href="/atendimento/">O chat continua disponível sem login ↗</a></p>
 </div></section>
-<section id="customer-verify" class="customer-verify" hidden><h1>Falta confirmar seu e-mail.</h1><p>Abra a mensagem de confirmação da PROXITI. Depois, volte a esta página e entre na sua conta. Nenhum chamado antigo será vinculado apenas pelo endereço de e-mail.</p><button id="customer-verify-retry" class="secondary">Já confirmei · verificar novamente</button><button id="customer-verify-logout" class="text-button">Sair</button></section>
+<section id="customer-verify" class="customer-verify" hidden><h1>Precisamos revisar seu acesso.</h1><p>Não foi possível liberar sua área neste momento. Você pode tentar novamente ou usar nosso chat sem login, que continua disponível.</p><button id="customer-verify-retry" class="secondary">Tentar novamente</button><a class="secondary customer-link" href="/atendimento/">Conversar sem login</a><button id="customer-verify-logout" class="text-button">Sair</button></section>
 <div id="customer-app" class="customer-app" hidden>
 <aside class="customer-sidebar" aria-label="Navegação da Minha PROXITI">
 <div class="sidebar-name"><small>OLÁ,</small><strong id="customer-welcome">Cliente PROXITI</strong><span id="customer-email"></span></div>

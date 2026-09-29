@@ -31,7 +31,7 @@ assert(home.includes('href="/minha-proxiti/"')&&
  chat.includes('href="/minha-proxiti/"')&&
  chat.includes('id="support-start"')&&chatJs.includes('call("create"'),
  "A conta é opcional e o chat anônimo continua funcionando");
-assert(js.includes('proxiti_account_type:"customer"')&&
+assert(js.includes('action:"customer_register"')&&js.includes('validCustomerPassword')&&
  js.includes('storageKey:"proxiti-customer-session"')&&
  js.includes("proxiti_customer_link_ticket")&&js.includes("proxiti_customer_dashboard"),
  "Auth e vínculo real ao chamado precisam usar conta separada");
@@ -45,5 +45,12 @@ assert(js.includes("Li o escopo, o preço e as condições")&&
  "Não incluir credenciais privadas, valores automáticos ou aceite implícito");
 assert(!/pix[_-]key|charge_card|checkout_session|payment_intent/.test(js),
  "Conta gratuita não pode ativar cobrança não configurada");
+assert(html.includes('id="customer-signup-password" type="password" minlength="10"')&&
+ html.includes('id="customer-reset-password" type="password" minlength="10"')&&
+ html.includes("sem confirmação obrigatória por e-mail")&&
+ !html.includes("pelo menos 12 caracteres"),
+ "Registro e recuperação devem aceitar senha segura de 11 caracteres e não exigir e-mail.");
+assert(js.includes('db.auth.signInWithPassword({email,password})')&&
+ !js.includes("db.auth.signUp("), "O cadastro facilitado deve entrar pela função protegida.");
 assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length);
 console.log("PASS: Minha PROXITI V19, login separado, seis páginas, chat sem login e rotas protegidas.");

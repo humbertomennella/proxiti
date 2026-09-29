@@ -13,6 +13,8 @@ const fmt=value=>value?new Date(value).toLocaleString("pt-BR",{dateStyle:"short"
 const money=value=>Number.isSafeInteger(Number(value))&&Number(value)>=0?
  new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)/100):"Valor não informado";
 const read=async promise=>{const {data,error}=await promise;if(error)throw error;return data;};
+const validCustomerPassword=value=>typeof value==="string"&&value.length>=10&&value.length<=72&&
+ /\p{L}/u.test(value)&&/[0-9]/.test(value)&&/[^\p{L}\p{N}\s]/u.test(value);
 const err=error=>safe(error?.message||"Não foi possível concluir a operação.",220);
 let db=null,user=null,dashboard=null,partners=[],view="home",activeTicket=null,
  refreshId=0,busy=false,recovery=false,quotesAt=new Map(),ticketPolling=null;
@@ -355,25 +357,40 @@ el("customer-login-form").addEventListener("submit",async event=>{
  finally{setBusy(false);}
 });
 el("customer-signup-form").addEventListener("submit",async event=>{
- event.preventDefault();if(busy||!db||!event.currentTarget.reportValidity())return;
+ event.preventDefault();const form=event.currentTarget;
+ if(busy||!db||!form.reportValidity())return;
  const password=el("customer-signup-password").value;
- if(password.length<12||password!==el("customer-signup-confirm").value){
-  notify("Use 12 caracteres ou mais e confirme a mesma senha.",true,"customer-auth-status");return;}
+ if(!validCustomerPassword(password)||password!==el("customer-signup-confirm").value){
+  notify("A senha deve ter de 10 a 72 caracteres, com letra, número e símbolo, e as duas senhas precisam coincidir.",
+   true,"customer-auth-status");return;
+ }
  setBusy(true);
+ const email=el("customer-signup-email").value.trim().toLowerCase();
  try{
-  const {data,error}=await db.auth.signUp({
-   email:el("customer-signup-email").value.trim(),password,
-   options:{data:{proxiti_account_type:"customer",
-    display_name:el("customer-signup-name").value.trim()},
-    emailRedirectTo:location.origin+"/minha-proxiti/"}
+  const response=await fetch(cfg.url+"/functions/v1/proxiti-support",{
+   method:"POST",headers:{"content-type":"application/json",apikey:cfg.publishableKey},
+   body:JSON.stringify({action:"customer_register",name:el("customer-signup-name").value.trim(),
+    email,password,privacy_accepted:el("customer-signup-privacy").checked,
+    company_website:el("customer-signup-company-website").value})
   });
-  if(error)throw error;
-  el("customer-signup-password").value="";el("customer-signup-confirm").value="";
-  notify("Confira sua caixa de entrada e confirme o e-mail. Depois entre na Minha PROXITI.",
-   false,"customer-auth-status");
-  if(data?.session)showArea("verify");
- }catch(e){notify("Não foi possível criar a conta: "+err(e),true,"customer-auth-status");}
- finally{setBusy(false);}
+  let result;try{result=await response.json();}
+  catch{throw new Error("O servidor não respondeu corretamente.");}
+  if(!response.ok||!result?.ok||!result.login_ready)
+   throw new Error(result?.error||"Cadastro não confirmado. Tente novamente.");
+  const {data:login,error:loginError}=await db.auth.signInWithPassword({email,password});
+  el("customer-signup-password").value="";
+  el("customer-signup-confirm").value="";
+  if(loginError||!login?.session){
+   formMode("login");el("customer-login-email").value=email;
+   notify("Conta criada. Entre com o e-mail e a senha que acabou de escolher.",
+     false,"customer-auth-status");return;
+  }
+  form.reset();
+  await authorize(login.session);
+  notify("Sua conta está pronta! Você já pode pedir suporte e organizar seus equipamentos.");
+ }catch(error){
+  notify("Não foi possível criar sua conta: "+err(error),true,"customer-auth-status");
+ }finally{setBusy(false);}
 });
 el("customer-recovery-form").addEventListener("submit",async event=>{
  event.preventDefault();if(busy||!db||!event.currentTarget.reportValidity())return;
@@ -391,8 +408,8 @@ el("customer-recovery-form").addEventListener("submit",async event=>{
 el("customer-reset-form").addEventListener("submit",async event=>{
  event.preventDefault();if(busy||!db||!recovery||!event.currentTarget.reportValidity())return;
  const password=el("customer-reset-password").value;
- if(password.length<12||password!==el("customer-reset-confirm").value){
-  notify("As senhas não coincidem ou têm menos de 12 caracteres.",true,"customer-auth-status");return;}
+ if(!validCustomerPassword(password)||password!==el("customer-reset-confirm").value){
+  notify("Use entre 10 e 72 caracteres com letra, número e símbolo, e confirme a mesma senha.",true,"customer-auth-status");return;}
  setBusy(true);
  try{
   const {error}=await db.auth.updateUser({password});if(error)throw error;

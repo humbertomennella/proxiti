@@ -100,7 +100,15 @@ try{
     "access-control-allow-methods":"POST,OPTIONS"}});
   const b=route.request().postDataJSON(),fx=await page.evaluate(()=>window.__customerFixture);
   let response={};
-  if(b.action==="account_open"){
+  if(b.action==="customer_register"){
+   await page.evaluate(input=>window.__customerFixture.signups.push(input),{
+     email:b.email,passwordLength:b.password?.length,
+     hasDigit:/[0-9]/.test(b.password||""),
+     hasSymbol:/[@#$!%&*]/.test(b.password||""),
+     consent:b.privacy_accepted
+   });
+   response={ok:true,login_ready:true};
+  }else if(b.action==="account_open"){
    response={ok:true,id:"55555555-5555-4555-8555-555555555555",
     reference:17,status:"new",access_token:"a".repeat(64)};
    await page.evaluate(()=>{window.__customerFixture.tickets.push({
@@ -130,19 +138,24 @@ try{
  await page.click("#customer-show-signup");
  await page.fill("#customer-signup-name","Cliente de teste");
  await page.fill("#customer-signup-email","cliente@example.com");
- await page.fill("#customer-signup-password","uma-senha-com-12-ou-mais");
- await page.fill("#customer-signup-confirm","uma-senha-com-12-ou-mais");
+ await page.fill("#customer-signup-password","Teste123abc");
+ await page.fill("#customer-signup-confirm","Teste123abc");
  await page.check("#customer-signup-privacy");
  await page.click("#customer-signup-form button[type=submit]");
+ assert((await page.textContent("#customer-auth-status")).includes("letra, número e símbolo"));
+ assert.equal(await page.evaluate(()=>window.__customerFixture.signups.length),0,
+   "Senha sem símbolo não deve registrar uma conta");
+ await page.fill("#customer-signup-password","Teste123@ab");
+ await page.fill("#customer-signup-confirm","Teste123@ab");
+ await page.click("#customer-signup-form button[type=submit]");
  await page.waitForFunction(()=>window.__customerFixture.signups.length===1);
- const signup=await page.evaluate(()=>window.__customerFixture.signups[0]);
- assert.equal(signup.options.data.proxiti_account_type,"customer");
- assert(signup.options.emailRedirectTo.endsWith("/minha-proxiti/"));
- await page.click("#customer-show-login");
- await page.fill("#customer-login-email","cliente@example.com");
- await page.fill("#customer-login-password","uma-senha-com-12-ou-mais");
- await page.click("#customer-login-form button[type=submit]");
  await page.waitForSelector("#customer-app:not([hidden])");
+ const signup=await page.evaluate(()=>window.__customerFixture.signups[0]);
+ assert.equal(signup.passwordLength,11);
+ assert(signup.hasDigit&&signup.hasSymbol&&signup.consent);
+ assert.equal(signup.email,"cliente@example.com");
+ assert.equal(await page.locator("#customer-verify").isVisible(),false,
+   "O novo cadastro não deve depender de confirmação por e-mail");
  assert((await page.textContent("#customer-welcome")).includes("Cliente de teste"));
  assert.equal(await page.locator("#customer-nav").count(),0);
  await page.click('[data-customer-view="tickets"]');
