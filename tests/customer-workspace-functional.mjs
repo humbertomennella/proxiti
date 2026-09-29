@@ -413,7 +413,7 @@ try{
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Expandir menu lateral");
  const collapsed=await measureDashboard();
  assert(collapsed.sidebar.width>=74&&collapsed.sidebar.width<=79&&
-  collapsed.hero.width>=900&&collapsed.hero.width<=1080&&collapsed.brandVisible,
+  collapsed.hero.width>=1100&&collapsed.hero.width<=1160&&collapsed.brandVisible,
   "Menu recolhido precisa manter proporção de referência: "+JSON.stringify(collapsed));
  assert(Math.abs(collapsed.header.x-collapsed.sidebar.x)<2&&
   collapsed.content.x-collapsed.sidebar.right>=16&&
@@ -424,17 +424,21 @@ try{
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Recolher menu lateral");
  await page.setViewportSize({width:1649,height:928});
  const wide=await measureDashboard();
- assert(wide.shell.width>=1278&&wide.shell.width<=1282&&
+ assert(wide.shell.width>=1599&&wide.shell.width<=1603&&
    Math.abs(wide.header.x-wide.sidebar.x)<2&&
    Math.abs(wide.header.x-(1649-wide.shell.width)/2)<2,
    "Na resolução da captura, shell e cabeçalho devem estar centrados: "+JSON.stringify(wide));
- assert(wide.hero.width>=950&&wide.hero.width<=1024&&
-   wide.hero.height>=170&&wide.hero.height<=260&&wide.content.width<=1024,
+ assert(wide.hero.width>=1320&&wide.hero.width<=1340&&
+   wide.hero.height>=170&&wide.hero.height<=260&&
+   wide.content.width>=1320&&wide.content.width<=1340,
   "O banner não pode voltar a ocupar toda a tela na resolução original: "+JSON.stringify(wide));
+ const wideDocument=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth}));
+ assert(wideDocument.scroll<=wideDocument.viewport+1,
+  "Layout expandido não pode criar rolagem horizontal em 1649px: "+JSON.stringify(wideDocument));
  await page.click("#customer-sidebar-toggle");
  const wideCollapsed=await measureDashboard();
  assert(wideCollapsed.sidebar.width>=74&&wideCollapsed.sidebar.width<=79&&
-   wideCollapsed.hero.width>=1000&&wideCollapsed.hero.width<=1080&&
+   wideCollapsed.hero.width>=1490&&wideCollapsed.hero.width<=1520&&
    Math.abs(wideCollapsed.header.x-wideCollapsed.sidebar.x)<2,
    "Sidebar de ícones não pode desalinhar cabeçalho e conteúdo na resolução original: "+JSON.stringify(wideCollapsed));
  await page.click("#customer-sidebar-toggle");

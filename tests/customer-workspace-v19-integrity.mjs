@@ -162,7 +162,7 @@ assert(chat.includes('id="close-ticket"')&&
  composerCss.includes('border:2px solid #8aa5d1!important')&&
  composerCss.includes('opacity:1!important'),
  "Encerrar precisa ser real, manter o histórico e melhorar a leitura da mensagem no tema claro");
-assert(html.includes('minha-proxiti-dashboard.css?v=20260929-2')&&
+assert(html.includes('minha-proxiti-dashboard.css?v=20260929-3')&&
  html.includes('minha-proxiti-navigation.js?v=20260929-2')&&
  html.includes('minha-proxiti.js?v=20260929-5')&&
  html.includes('id="customer-sidebar-toggle"')&&
@@ -191,12 +191,12 @@ assert(html.includes('id="customer-sidebar-account"')&&
  html.includes('class="sidebar-brand customer-brand brand"')&&
  html.includes('id="customer-current-view"')&&
  !html.includes('customer-home-private')&&
- dashboardCss.includes('width:min(1280px,calc(100% - 48px))')&&
+ (dashboardCss.match(/width:calc\(100% - 48px\)/g)||[]).length===2&&
  dashboardCss.includes('grid-template-columns:252px minmax(0,1fr)')&&
  dashboardCss.includes('grid-template-columns:76px minmax(0,1fr)')&&
  dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-header')&&
- dashboardCss.includes('max-width:1024px')&&
- dashboardCss.includes('max-width:1080px')&&
+ dashboardCss.includes('min-width:0;width:100%;max-width:none;padding:0;margin:0;')&&
+ dashboardCss.includes('#customer-app.sidebar-collapsed .customer-content{max-width:none}')&&
  dashboardNav.includes('document.getElementById("customer-sidebar-account")')&&
  js.includes('el("customer-current-view").textContent=')&&
  js.includes('el("customer-sidebar-avatar").textContent=String'),
