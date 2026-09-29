@@ -143,8 +143,8 @@ try{
  await page.goto(base+"/minha-proxiti/",{waitUntil:"domcontentloaded"});
  await page.waitForSelector("#customer-login-form:not([hidden])");
  assert.equal(await page.locator("#customer-app").isVisible(),false);
- assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
- assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
+ assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
+ assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema claro");
  assert.equal(await page.locator(".customer-header .brand-mark").count(),1);
  await page.waitForFunction(()=>document.querySelector(".customer-portal-art img")?.naturalWidth>0);
  const mobileHero=await page.locator(".customer-auth-hero").boundingBox();
@@ -158,18 +158,18 @@ try{
   "No desktop, o cartão deve estar ao lado do hero");
  await page.setViewportSize({width:390,height:800});
  await page.click("#customer-theme-toggle");
- assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
- assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema claro");
- assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"light");
- await page.click("#customer-theme-toggle");
  assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
  assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
  assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"dark");
+ await page.click("#customer-theme-toggle");
+ assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
+ assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema claro");
+ assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"light");
  // Os blocos externos não podem crescer, mudar de posição nem fazer a página pular.
  await page.setViewportSize({width:1280,height:850});
  const geometry=()=>page.evaluate(()=>{
   const get=sel=>{const r=document.querySelector(sel).getBoundingClientRect();
-    return {x:r.x,y:r.y,width:r.width,height:r.height};};
+    return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height};};
   return {hero:get(".customer-auth-hero"),card:get("#customer-auth .auth-panel"),
    pageHeight:document.documentElement.scrollHeight};
  });
