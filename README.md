@@ -29,7 +29,7 @@ O site evita métricas, SLAs, depoimentos, garantias e selos que não possam ser
 
 ## Pré-diagnóstico
 
-O formulário da home funciona localmente no navegador. Ele organiza perfil, área, equipamento, impacto e contexto e abre uma mensagem no WhatsApp. Não existe envio para backend.
+O formulário da home envia a solicitação para a Edge Function `proxiti-support`, que registra o chamado no Supabase e direciona o cliente à página de acompanhamento. O chat público continua disponível sem login. Não solicitar senhas, códigos de autenticação ou documentos sigilosos no pré-diagnóstico.
 
 ## Produto digital
 
@@ -39,7 +39,7 @@ A URL de checkout automático permanece centralizada em:
 
 `assets/js/product-config.js`
 
-Enquanto o checkout estiver vazio, o site usa compra assistida pelo WhatsApp. Arquivos pagos não devem ser publicados no repositório nem no GitHub Pages.
+**Situação em 29/09/2026:** o checkout Kiwify está habilitado no front-end (`readyForSales: true`). Isso **não comprova** que o comprador recebe os cinco PDFs corretos: a confirmação do produto, do pagamento, da entrega e das proteções exige teste autorizado na Kiwify. Consulte `docs/pc-seguro-checkout-operacao.md`. Arquivos pagos, senhas de proprietário e dados pessoais não devem ser publicados no repositório nem no GitHub Pages.
 
 ## Tecnologia
 

@@ -92,4 +92,21 @@ for(const cssPath of ["assets/css/proxiti-ui.css","assets/css/site-refine.css"])
  const css=read(cssPath);
  assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length,cssPath+" possui CSS incompleto");
 }
+/* O documento comercial não pode contradizer a configuração efetivamente publicada. */
+const productConfig=read("assets/js/product-config.js");
+const checkoutDoc=read("docs/pc-seguro-checkout-operacao.md");
+const siteReadme=read("README.md");
+const active=/readyForSales:\s*true\b/.test(productConfig);
+const url=productConfig.match(/checkoutUrl:\s*"(https:\/\/pay\.kiwify\.com\.br\/[A-Za-z0-9]+)"/)?.[1];
+assert(url,"PC Seguro: URL de checkout HTTPS no domínio oficial ausente");
+for(const page of ["index.html","produtos/index.html","produtos/pc-seguro/index.html"])
+ assert(read(page).includes('href="'+url+'"')&&read(page).includes('data-checkout="pc-seguro"'),
+  page+": CTA e configuração de checkout divergentes");
+assert.equal(checkoutDoc.includes("**Checkout do site: habilitado.**"),active,
+ "Documentação do PC Seguro diverge do estado real do checkout no site");
+assert(checkoutDoc.includes("**Entrega Kiwify: não homologada nesta auditoria.**")&&
+ checkoutDoc.includes("Não foi realizada compra.")&&
+ siteReadme.includes("não comprova")&&
+ siteReadme.includes("proxiti-support"),
+ "Não confundir link de compra publicado com entrega ou pré-diagnóstico sem backend");
 console.log("PROXITI: framework compartilhado, temas, arte de diagnóstico e scripts validados.");
