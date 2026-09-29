@@ -35,6 +35,7 @@ jobs:
           node --check assets/js/support-thread.js
           node tests/site-ui.mjs
           node --check assets/js/minha-proxiti.js
+          node --check assets/js/minha-proxiti-theme.js
           node tests/customer-workspace-v19-integrity.mjs
       - name: Preparar navegador para simular o portal privado
         run: |

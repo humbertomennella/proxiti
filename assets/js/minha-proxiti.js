@@ -15,6 +15,18 @@ const money=value=>Number.isSafeInteger(Number(value))&&Number(value)>=0?
 const read=async promise=>{const {data,error}=await promise;if(error)throw error;return data;};
 const validCustomerPassword=value=>typeof value==="string"&&value.length>=10&&value.length<=72&&
  /\p{L}/u.test(value)&&/[0-9]/.test(value)&&/[^\p{L}\p{N}\s]/u.test(value);
+function updatePasswordHints(){
+ const value=el("customer-signup-password").value;
+ const checks={
+  length:value.length>=10&&value.length<=72,
+  letter:/\p{L}/u.test(value),
+  number:/[0-9]/.test(value),
+  symbol:/[^\p{L}\p{N}\s]/u.test(value),
+  case:/\p{Lu}/u.test(value)&&/\p{Ll}/u.test(value)
+ };
+ for(const node of el("customer-password-rules").querySelectorAll("[data-password-rule]"))
+  node.classList.toggle("is-met",checks[node.dataset.passwordRule]===true);
+}
 const err=error=>safe(error?.message||"Não foi possível concluir a operação.",220);
 let db=null,user=null,dashboard=null,partners=[],view="home",activeTicket=null,
  refreshId=0,busy=false,recovery=false,quotesAt=new Map(),ticketPolling=null;
@@ -373,6 +385,8 @@ async function useSession(event,session){
 function setBusy(value){busy=value;for(const node of document.querySelectorAll(".customer-form button[type=submit]"))node.disabled=value;}
 el("customer-show-login").addEventListener("click",()=>formMode("login"));
 el("customer-show-signup").addEventListener("click",()=>formMode("signup"));
+el("customer-signup-password").addEventListener("input",updatePasswordHints);
+updatePasswordHints();
 el("customer-forgot").addEventListener("click",()=>formMode("forgot"));
 document.querySelector("[data-customer-back]").addEventListener("click",()=>formMode("login"));
 el("customer-login-form").addEventListener("submit",async event=>{

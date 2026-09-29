@@ -6,9 +6,12 @@ import {Script} from "node:vm";
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const read=p=>readFileSync(resolve(root,p),"utf8");
 const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"),
- css=read("assets/css/minha-proxiti.css"),home=read("index.html"),
+ css=read("assets/css/minha-proxiti.css"),
+ redesign=read("assets/css/minha-proxiti-redesign.css"),
+ theme=read("assets/js/minha-proxiti-theme.js"),home=read("index.html"),
  chat=read("atendimento/index.html"),chatJs=read("assets/js/support-thread.js");
 new Script(js,{filename:"minha-proxiti.js"});new Script(chatJs,{filename:"support-thread.js"});
+new Script(theme,{filename:"minha-proxiti-theme.js"});
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 assert.equal(new Set(ids).size,ids.length,"ID duplicado na área do cliente");
 const dynamic=new Set(["customer-request-dialog","customer-request-form","customer-request-subject",
@@ -49,10 +52,21 @@ assert(!/pix[_-]key|charge_card|checkout_session|payment_intent/.test(js),
  "Conta gratuita não pode ativar cobrança não configurada");
 assert(html.includes('id="customer-signup-password" type="password" minlength="10"')&&
  html.includes('id="customer-reset-password" type="password" minlength="10"')&&
- html.includes("sem confirmação obrigatória por e-mail")&&
+ html.includes('id="customer-password-rules"')&&
+ html.includes('id="customer-theme-toggle"')&&
+ html.includes('class="auth-preview"')&&
+ html.includes('>Entrar</button>')&&
+ !html.includes("Não pedimos CPF")&&
  !html.includes("pelo menos 12 caracteres"),
  "Registro e recuperação devem aceitar senha segura de 11 caracteres e não exigir e-mail.");
 assert(js.includes('db.auth.signInWithPassword({email,password})')&&
  !js.includes("db.auth.signUp("), "O cadastro facilitado deve entrar pela função protegida.");
 assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length);
+assert.equal((redesign.match(/{/g)||[]).length,(redesign.match(/}/g)||[]).length);
+assert(home.includes('class="header-account"')&&home.includes("Entrar ou criar conta"),
+ "O site precisa destacar o acesso do cliente no cabeçalho");
+assert(html.includes('class="brand-mark"')&&chat.includes('class="brand-mark"'),
+ "O site, a Minha PROXITI e o atendimento devem compartilhar o logotipo oficial");
+assert(theme.includes("proxiti-theme-v3")&&redesign.includes('html[data-theme="dark"]'),
+ "O tema claro e escuro precisa acompanhar a preferência do site");
 console.log("PASS: Minha PROXITI V19, login separado, seis páginas, chat sem login e rotas protegidas.");
