@@ -78,3 +78,19 @@ header>.wordmark{font-size:1.25rem;letter-spacing:-.055em}
 .monogram{font-style:normal;font-weight:900;letter-spacing:-.06em;text-shadow:none;background-image:linear-gradient(135deg,#67a2ff,#f28c45);background-size:100% 100%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent}
 .card-brand>span,.wordmark>span,.back-top .wordmark>span{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#67a2ff;text-shadow:none}
 @media(forced-colors:active){.monogram,.card-brand>span,.wordmark>span,.back-top .wordmark>span{background:none;color:CanvasText}}
+
+/* Raised lettering with a narrow light reflection on the wordmark only. */
+.card-brand>.brand-word,.back-top .wordmark>.brand-word{
+ display:inline-block;position:relative;background:none;color:#eef2f8;
+ text-shadow:0 -1px 0 #ffffffa6,0 1px 0 #9eacbd,0 2px 0 #536172,0 3px 0 #101823,0 5px 5px #0009;
+}
+.brand-word>.brand-blue{color:#67a2ff;text-shadow:0 -1px 0 #c9e0ff99,0 1px 0 #396cc5,0 2px 0 #22467f,0 3px 0 #0b172b,0 5px 5px #0009}
+.brand-word::after{
+ content:"PROXITI";position:absolute;inset:0;pointer-events:none;color:transparent;text-shadow:none;
+ background:linear-gradient(110deg,transparent 36%,#dfefff1a 44%,#ffffffd9 49%,#cbe7ff73 52%,transparent 60%);
+ background-size:240% 100%;background-position:var(--light-x,50%) 50%;
+ -webkit-background-clip:text;background-clip:text;opacity:calc(var(--shine,.045) * 1.8);
+}
+.flat .brand-word::after{display:none}
+@media(prefers-reduced-motion:reduce){.brand-word::after{display:none}}
+@media(forced-colors:active){.card-brand>.brand-word,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{color:CanvasText;text-shadow:none}.brand-word::after{display:none}}
