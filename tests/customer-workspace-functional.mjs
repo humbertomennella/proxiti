@@ -146,7 +146,7 @@ try{
  assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
  assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
  assert.equal(await page.locator(".customer-header .brand-mark").count(),1);
- await page.waitForFunction(()=>document.querySelector(".customer-auth-photo img")?.naturalWidth>0);
+ await page.waitForFunction(()=>document.querySelector(".customer-portal-art img")?.naturalWidth>0);
  const mobileHero=await page.locator(".customer-auth-hero").boundingBox();
  const mobileCard=await page.locator("#customer-auth .auth-panel").boundingBox();
  assert(mobileCard.y>=mobileHero.y+mobileHero.height-1,
@@ -165,9 +165,33 @@ try{
  assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
  assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
  assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"dark");
+ // Os blocos externos não podem crescer, mudar de posição nem fazer a página pular.
+ await page.setViewportSize({width:1280,height:850});
+ const geometry=()=>page.evaluate(()=>{
+  const get=sel=>{const r=document.querySelector(sel).getBoundingClientRect();
+    return {x:r.x,y:r.y,width:r.width,height:r.height};};
+  return {hero:get(".customer-auth-hero"),card:get("#customer-auth .auth-panel"),
+   pageHeight:document.documentElement.scrollHeight};
+ });
+ const initial=await geometry();
  await page.click("#customer-show-signup");
+ await page.waitForFunction(()=>new DOMMatrixReadOnly(getComputedStyle(
+  document.querySelector(".auth-slider-track")).transform).m41 < -100);
+ assert.deepEqual(await geometry(),initial,"O layout externo não pode mudar no cadastro");
+ assert.equal(await page.locator("#customer-signup-form h2").innerText(),"Seu espaço começa aqui.");
+ assert.equal(await page.locator(".auth-pane-login").getAttribute("aria-hidden"),"true");
+ assert.equal(await page.locator(".auth-pane-signup").getAttribute("aria-hidden"),"false");
+ assert.equal(await page.locator(".auth-pane-login").evaluate(el=>el.inert),true);
+ await page.click("#customer-show-login");
+ await page.waitForFunction(()=>Math.abs(new DOMMatrixReadOnly(getComputedStyle(
+  document.querySelector(".auth-slider-track")).transform).m41)<1);
+ assert.deepEqual(await geometry(),initial,"O layout externo não pode mudar no login");
+ await page.click("#customer-show-signup");
+ await page.waitForFunction(()=>new DOMMatrixReadOnly(getComputedStyle(
+  document.querySelector(".auth-slider-track")).transform).m41 < -100);
+ assert.deepEqual(await geometry(),initial);
+ await page.setViewportSize({width:390,height:800});
  assert.equal(await page.locator(".customer-auth-card-top").isVisible(),true);
- assert.equal(await page.locator("#customer-signup-form h2").innerText(),"Criar sua conta");
  await page.fill("#customer-signup-name","Cliente de teste");
  await page.fill("#customer-signup-email","cliente@example.com");
  await page.fill("#customer-signup-password","Teste123abc");
