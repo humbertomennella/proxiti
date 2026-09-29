@@ -10,10 +10,13 @@ const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"
  redesign=read("assets/css/minha-proxiti-redesign.css"),
  centralLogin=read("assets/css/minha-proxiti-central-login.css"),
  portal=read("assets/css/minha-proxiti-portal.css"),
+ customerChatCss=read("assets/css/minha-proxiti-chat.css"),
+ customerChatJs=read("assets/js/minha-proxiti-chat.js"),
  theme=read("assets/js/minha-proxiti-theme.js"),home=read("index.html"),
  chat=read("atendimento/index.html"),chatJs=read("assets/js/support-thread.js");
 new Script(js,{filename:"minha-proxiti.js"});new Script(chatJs,{filename:"support-thread.js"});
 new Script(theme,{filename:"minha-proxiti-theme.js"});
+new Script(customerChatJs,{filename:"minha-proxiti-chat.js"});
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 assert.equal(new Set(ids).size,ids.length,"ID duplicado na área do cliente");
 const dynamic=new Set(["customer-request-dialog","customer-request-form","customer-request-subject",
@@ -76,6 +79,21 @@ assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length);
 assert.equal((redesign.match(/{/g)||[]).length,(redesign.match(/}/g)||[]).length);
 assert.equal((centralLogin.match(/{/g)||[]).length,(centralLogin.match(/}/g)||[]).length);
 assert.equal((portal.match(/{/g)||[]).length,(portal.match(/}/g)||[]).length);
+assert.equal((customerChatCss.match(/{/g)||[]).length,(customerChatCss.match(/}/g)||[]).length);
+assert(html.includes('<title>MINHA PROXITI')&&html.includes('>MINHA PROXITI <span class="customer-header-caption-secondary">'),
+ "A grafia da marca no título e cabeçalho deve ser consistente");
+assert.equal((html.match(/class="customer-brand brand" href="\/minha-proxiti\/"/g)||[]).length,2,
+ "Logo do cabeçalho e rodapé deve permanecer na Minha PROXITI");
+assert(html.includes('class="customer-back customer-explore"')&&html.includes('Conheça a PROXITI'),
+ "Saída institucional com identificação clara no cabeçalho");
+assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
+ html.includes('id="customer-footer-chat"')&&
+ html.includes('id="customer-support-popover"')&&
+ html.includes('data-src="/atendimento/?chat=1&amp;embed=1"')&&
+ html.includes('minha-proxiti-chat.js?v=20260929-1')&&
+ customerChatJs.includes('frame.contentWindow?.postMessage({type:"proxiti-chat-resume"}')&&
+ customerChatCss.includes('.customer-support-popover:not([hidden])'),
+ "O link redundante deve ser removido e o rodapé deve abrir o chat oficial na própria página");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
