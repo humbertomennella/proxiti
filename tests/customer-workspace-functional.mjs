@@ -163,6 +163,35 @@ try{
  assert(Math.abs(popupRect.x+popupRect.width/2-195)<2 &&
    Math.abs(popupRect.y+popupRect.height/2-400)<2,
    "Chat deve aparecer no centro da tela, inclusive no celular");
+ const headerGeometry=()=>page.evaluate(()=>{
+  const rect=id=>{const box=document.getElementById(id).getBoundingClientRect();
+   return {x:box.x,y:box.y,width:box.width,height:box.height,right:box.right};};
+  const panel=document.getElementById("customer-support-popover");
+  const actions=document.querySelector(".customer-support-popover-head>.customer-chat-actions");
+  return {min:rect("customer-support-minimize"),close:rect("customer-support-close"),
+   panel:rect("customer-support-popover"),display:getComputedStyle(actions).display,
+   direction:getComputedStyle(actions).flexDirection,
+   radius:parseFloat(getComputedStyle(panel).borderTopLeftRadius),
+   border:getComputedStyle(panel).borderTopWidth};
+ });
+ const mobile=await headerGeometry();
+ assert(mobile.display.includes("flex")&&mobile.direction==="row",
+  "Controles do chat devem ficar em uma linha");
+ assert(Math.abs(mobile.min.y-mobile.close.y)<2&&mobile.min.right+5<=mobile.close.x,
+  "Minimizar e fechar devem aparecer lado a lado, sem sobreposição no celular");
+ assert(mobile.min.width>=35&&mobile.close.width>=35&&mobile.radius>=16,
+  "Controles e janela precisam ter tamanho e cantos acessíveis");
+ assert(mobile.border!=="0px","Janela precisa ter borda visível");
+ assert.equal(await page.locator(".customer-chat-actions svg").count(),2);
+ await page.setViewportSize({width:1280,height:850});
+ const desktop=await headerGeometry();
+ assert(desktop.panel.width>=600&&desktop.panel.width<=630,
+  "A janela no desktop precisa ser mais larga que a versão anterior");
+ assert(Math.abs(desktop.min.y-desktop.close.y)<2&&desktop.min.right+6<=desktop.close.x,
+  "Controles do chat devem permanecer lado a lado no desktop");
+ assert(Math.abs(desktop.panel.x+desktop.panel.width/2-640)<2,
+  "Janela deve permanecer centralizada no desktop");
+ await page.setViewportSize({width:390,height:800});
  const chatUrl=new URL(await page.locator("#customer-support-frame").getAttribute("src"),base);
  assert.equal(chatUrl.pathname,"/atendimento/");
  assert.equal(chatUrl.searchParams.get("embed"),"1");
