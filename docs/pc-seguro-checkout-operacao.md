@@ -1,37 +1,36 @@
-# PC Seguro 2.2 Premium — ativação comercial segura
+# PC Seguro 2.2 Premium — operação publicada e validação da entrega
 
-**Estado:** pré-configurado. Checkout NÃO ativo enquanto não houver conta de vendedor autorizada, URL real de pagamento e teste comprovado da entrega protegida.
+**Revisão:** 29/09/2026. Este documento descreve o estado do código publicado, não certifica uma compra ou a operação interna da Kiwify.
 
-**Produto único:** R$ 29,90, guia de 29 páginas e quatro ferramentas PDF (2/2/3/2 páginas). Entregar exatamente cinco PDFs, sem relatório técnico. Há 300 campos AcroForm no total; os arquivos e senhas-mestre devem permanecer em armazenamento privado, nunca no GitHub Pages.
+## Estado verificado no site
 
-## Provedor considerado
+**Checkout do site: habilitado.** Em `assets/js/product-config.js`, o produto `pc-seguro` usa `provider: "kiwify"`, `readyForSales: true` e a URL HTTPS `https://pay.kiwify.com.br/vHyqcmj`. A home, o catálogo e a página de produto encaminham a essa URL. O JavaScript valida o domínio `pay.kiwify.com.br` antes de habilitar o link.
 
-Kiwify para checkout hospedado (Pix/cartão), confirmação de pagamento e área de membros. A conta de produtor e os dados financeiros devem ser autorizados pelo titular dentro da plataforma. Não solicitar ou armazenar CPF, senha bancária, token de API ou chaves de pagamento no repositório, site estático, issues ou chat.
+**Entrega Kiwify: não homologada nesta auditoria.** A presença de um link e os workflows de publicação do GitHub não permitem verificar o estado do produto na conta do vendedor, valores finais do checkout, pedido aprovado, acesso do comprador, anexos efetivamente disponibilizados, proteção ativa, estorno ou recebimento. Não existe conector Kiwify associado a esta auditoria; a página pública de pagamento tampouco permite consultar a área restrita do produtor. Não foi realizada compra.
 
-A plataforma documenta área de membros com anexos, pagamento por Pix e DRM Social PDF:
-- https://ajuda.kiwify.com.br/pt-br/article/como-entregar-um-e-book-12swd66/
-- https://ajuda.kiwify.com.br/pt-br/article/protecao-antipirataria-para-e-books-drm-social-13pqdu0/
+**Produto divulgado:** preço de R$ 29,90 por um kit de cinco PDFs: guia principal de 29 páginas e quatro ferramentas complementares. A composição e a integridade da **entrega efetiva** devem ser verificadas na área de membros com autorização. PDFs mestres, senhas de proprietário, relatórios internos e dados de compradores não devem ser hospedados no GitHub Pages.
 
-**ATENÇÃO:** o DRM Social nativo coloca nome, e-mail e CPF do comprador nas páginas; a documentação menciona formato PDF de 280 × 396 mm, diferente do A4 usado no kit. A compatibilidade com os 300 campos interativos não foi demonstrada. NÃO ativar indiscriminadamente, nem divulgar CPF em marca d'água sem revisar a necessidade, as informações prestadas ao cliente e as condições da plataforma. Os bloqueios de cópia/impressão são contornáveis em alguns leitores.
+O registro anterior desta documentação descrevia um checkout ainda inativo e recomendava manter `readyForSales: false`. Essa orientação ficou **histórica**, pois o código de produção já está habilitado. Corrigir este documento não altera o checkout e não equivale a liberar ou suspender a operação comercial.
 
-## Critério de liberação
+## Validação exigida antes de declarar a entrega concluída
 
-1. Criar um único produto com preço R$ 29,90, sem cobrança separada pelas quatro ferramentas.
-2. Manter o produto não divulgado até concluir teste com uma conta compradora de teste autorizada. Usar arquivos de teste e evitar enviar segredos.
-3. Confirmar no checkout o preço, Pix/cartão, nome do produto, dados de suporte e condições aplicáveis.
-4. Testar pagamento e acesso apenas após confirmação da plataforma, nunca por print de comprovante.
-5. Baixar o material como comprador; conferir cinco PDFs, 38 páginas A4 no total, campos 38+199+32+14+17, texto pesquisável, links/bookmarks do guia e preenchimento seguido de salvar/reabrir.
-6. Testar as condições reais do DRM e o impacto sobre a privacidade e usabilidade. Se alterar/desabilitar formulários, **não publicar** a venda: usar entrega privada externa com geração individual do kit por pedido, por webhook autenticado e serviço seguro.
-7. Verificar se não há PDF mestre, senha privada, relatório de validação ou dados pessoais dentro do pacote do cliente ou hospedagem pública.
-8. Após teste aprovado, colocar somente a URL HTTPS real do checkout em `assets/js/product-config.js` e mudar `readyForSales` para `true`. O código do site restringe o domínio permitido a `pay.kiwify.com.br`; qualquer outra URL continua usando o WhatsApp.
-9. Confirmar novamente os botões da home, do catálogo e da landing no desktop e celular. Confirmar venda e entrega de ponta a ponta antes de anunciar automação.
+1. **Conta do vendedor:** o titular verifica no painel privado que produto, preço, checkout, e-mail de suporte, meios de pagamento, eventuais taxas e política de reembolso correspondem à oferta publicada.
+2. **Pedido autorizado:** em ambiente ou procedimento de teste indicado pela própria Kiwify, confirmar o estado real do pagamento antes de conceder acesso. Não criar cobrança real sem autorização do titular.
+3. **Entrega do comprador:** entrar como comprador de teste autorizado, conferir que existem exatamente cinco arquivos corretos, sem PDF mestre, relatório de auditoria, senha privada ou dados de outro comprador.
+4. **Material:** conferir o guia de 29 páginas, as quatro ferramentas, conteúdo pesquisável, links, ordem, qualidade de impressão e funcionamento de todos os campos preenchíveis. Preencher uma cópia, salvar, fechar e reabrir em leitores compatíveis. Se houver personalização, comparar o conteúdo e a funcionalidade em vez de exigir hashes idênticos ao mestre.
+5. **Privacidade e proteção:** verificar se eventual DRM acrescenta dados pessoais, altera a dimensão A4, impede preenchimento/salvamento ou torna os anexos inacessíveis. Validar acesso após cancelamento, estorno e recuperação de conta, de acordo com os recursos reais da plataforma.
+6. **Resultado:** arquivar apenas evidências sanitizadas do teste, data, versão do kit, falhas encontradas e decisão de liberação do titular.
 
-## Distribuição e licenças
+**Base histórica, ainda não confirmada na entrega da Kiwify:** o relatório técnico da cópia protegida de teste registrava cinco PDFs, 38 páginas A4 e 300 campos AcroForm. Esses números devem ser comparados com a versão comercial vigente e **não** substituem a conferência do material disponibilizado ao comprador.
 
-A marca individual por código de pedido (sem CPF no documento) foi testada no gerador privado `PROXITI_Gerador_Kit_Individual.py`. Esse programa **não** confirma pagamentos nem entrega arquivos: para utilizá-lo automaticamente é necessário um serviço privado com webhook autenticado, prevenção de pedidos duplicados, armazenamento privado, expiração de links e controle de reembolso. Esse serviço **não está implantado**.
+## DRM e distribuição
 
-Até o checkout seguro estar ativo, o site conserva o WhatsApp como canal de compra assistida. Nunca deixar pagamento ativo sem conseguir fazer a entrega prometida.
+A [documentação oficial da Kiwify](https://ajuda.kiwify.com.br/pt-br/article/protecao-antipirataria-para-e-books-drm-social-13pqdu0/) informa que o DRM Social pode exibir nome, e-mail e CPF do comprador e descreve marca d'água em PDFs de tamanho padrão 280 × 396 mm. Não habilitar essa opção indiscriminadamente em materiais A4 preenchíveis nem incluir CPF em documentos sem análise de necessidade, transparência e compatibilidade. Bloqueios de cópia/impressão não são uma garantia contra redistribuição.
 
-## Referência de configuração
+O gerador privado `PROXITI_Gerador_Kit_Individual.py` cria uma cópia identificada, mas **não** verifica compra, registra baixa financeira, realiza entrega automática ou trata estorno. A integração privada por webhook autenticado, proteção contra duplicidade, armazenamento privado e links temporários **não foi comprovada como implantada**.
 
-`assets/js/product-config.js`: manter `checkoutUrl: ""` e `readyForSales: false` até liberar a operação. Chaves/tokens devem ficar exclusivamente no gerenciador de segredos da infraestrutura de processamento.
+## Limites operacionais e procedimento de retorno
+
+A configuração pública do checkout não deve receber credenciais, CPF de comprador, dados de venda ou chaves da Kiwify. Uma eventual suspensão do botão de compra é uma **decisão comercial com impacto em clientes e vendas**: exigir autorização do titular, análise de pedidos pendentes e plano de comunicação antes de mudar `readyForSales`.
+
+Em incidente de entrega, preservar o registro do pedido sem publicar dados pessoais; conferir a liberação na plataforma e orientar o comprador pelo canal de suporte. Caso seja necessária uma mudança no site, prepará-la em branch, testar os links e publicar pelo workflow existente. Não alegar automação ou proteção que não tenha sido verificada.
