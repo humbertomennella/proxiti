@@ -138,12 +138,23 @@ assert(chat.includes('class="support-start-composer-row"')&&
  "Primeira tela deve ter botão Iniciar ao lado da descrição e manter privacidade e envio único");
 assert(chat.includes('class="reply-composer-row"')&&
  chat.includes('id="reply-submit" class="support-primary reply-send"')&&
- chat.includes('support-composer.css?v=20260929-3')&&
- chat.includes('support-thread.js?v=20260929-3')&&
+ chat.includes('support-composer.css?v=20260929-4')&&
+ chat.includes('support-thread.js?v=20260929-4')&&
  composerCss.includes('#customer-reply .reply-composer-row #reply-submit')&&
  chatJs.includes('replyField.addEventListener("keydown"')&&
  chatJs.includes('event.shiftKey')&&chatJs.includes('sendingReply=true'),
  "O envio da conversa deve ficar ao lado do texto com Enter, quebra de linha e proteção contra duplo envio");
+assert(chat.includes('id="close-ticket"')&&
+ chat.includes('>Encerrar chamado</button>')&&
+ chat.includes('id="conversation-closed"')&&
+ chat.includes('id="customer-new-chat"')&&
+ !chat.includes('id="forget-ticket"')&&
+ chatJs.includes('await call("close",{ticket_id:ticketId,access_token:token,confirmed:true})')&&
+ chatJs.includes('el("customer-reply").hidden=ticketClosed')&&
+ !chatJs.includes('removeItem("proxiti_ticket_"')&&
+ composerCss.includes('border:2px solid #8aa5d1!important')&&
+ composerCss.includes('opacity:1!important'),
+ "Encerrar precisa ser real, manter o histórico e melhorar a leitura da mensagem no tema claro");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
