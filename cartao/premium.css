@@ -79,21 +79,22 @@ header>.wordmark{font-size:1.25rem;letter-spacing:-.055em}
 .card-brand>span,.wordmark>span,.back-top .wordmark>span{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#67a2ff;text-shadow:none}
 @media(forced-colors:active){.monogram,.card-brand>span,.wordmark>span,.back-top .wordmark>span{background:none;color:CanvasText}}
 
-/* Crisp wordmark: original blue with reflection confined to TI. */
-.card-brand,.card-brand>.brand-word,.back-top .wordmark,.back-top .wordmark>.brand-word{
- text-shadow:none;filter:none;
+/* Clean wordmark: a single text layer, with light confined to blue TI. */
+.card-brand,.card-brand>.brand-word,.back-top .wordmark,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{
+ text-shadow:none;filter:none;-webkit-text-stroke:0;
 }
 .card-brand>.brand-word,.back-top .wordmark>.brand-word{
  display:inline-block;position:relative;background:none;color:#eef2f8;
 }
-.brand-word::after{content:none}
-.brand-word>.brand-blue{display:inline-block;position:relative;color:#67a2ff;text-shadow:none;filter:none}
-.brand-blue::after{
- content:"TI";position:absolute;inset:0;pointer-events:none;color:transparent;text-shadow:none;
- background:linear-gradient(110deg,transparent 35%,#b8daff33 44%,#edf6ffcc 49%,#bddcff66 53%,transparent 62%);
- background-size:240% 100%;background-position:var(--light-x,50%) 50%;
- -webkit-background-clip:text;background-clip:text;opacity:calc(var(--shine,.045) * 1.8);
+.brand-word::before,.brand-word::after,.brand-blue::before,.brand-blue::after{content:none}
+.brand-word>.brand-blue{display:inline-block;color:#67a2ff;background:none}
+@supports(background-clip:text){
+ .brand-word>.brand-blue{
+  background-image:linear-gradient(110deg,transparent 35%,rgba(237,246,255,var(--shine,0)) 49%,transparent 62%),linear-gradient(#67a2ff,#67a2ff);
+  background-size:240% 100%,100% 100%;background-position:var(--light-x,50%) 50%,0 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+ }
 }
-.flat .brand-blue::after{display:none}
-@media(prefers-reduced-motion:reduce){.brand-blue::after{display:none}}
-@media(forced-colors:active){.card-brand>.brand-word,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{color:CanvasText}.brand-blue::after{display:none}}
+.flat .brand-word>.brand-blue{background:none;color:#67a2ff}
+@media(prefers-reduced-motion:reduce){.brand-word>.brand-blue{background:none;color:#67a2ff}}
+@media(forced-colors:active){.card-brand>.brand-word,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{background:none;color:CanvasText}}
