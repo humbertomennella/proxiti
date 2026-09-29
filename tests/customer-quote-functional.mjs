@@ -126,12 +126,18 @@ try{
   const layout=await page.evaluate(()=>{
    const bounds=id=>{const r=document.getElementById(id).getBoundingClientRect();
     return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+   const row=getComputedStyle(document.querySelector(".support-start-composer-row"));
+   const field=getComputedStyle(document.getElementById("support-description"));
    return {text:bounds("support-description"),button:bounds("start-submit"),
     consent:bounds("support-consent"),viewport:innerWidth,
-    scrollWidth:document.documentElement.scrollWidth};
+    scrollWidth:document.documentElement.scrollWidth,
+    groupBorder:row.borderLeftWidth,fieldBorder:field.borderLeftWidth};
   });
-  assert(layout.button.left>=layout.text.right+3&&layout.button.right<=layout.viewport,
-   "O botão Iniciar precisa ficar à direita do texto: "+JSON.stringify(layout));
+  assert(layout.button.left>=layout.text.right+(width<=430?8:12)&&
+   layout.button.right<=layout.viewport,
+   "Iniciar deve ficar separado à direita, não dentro do campo: "+JSON.stringify(layout));
+  assert(layout.groupBorder==="0px"&&parseFloat(layout.fieldBorder)>=1.4,
+   "O campo de mensagem deve ter borda própria, independente do botão");
   assert(layout.button.width>=44&&layout.button.height>=43&&layout.scrollWidth<=layout.viewport+1,
    "A primeira etapa deve caber no celular e no desktop: "+JSON.stringify(layout));
   assert(layout.consent.bottom<=layout.text.top,
