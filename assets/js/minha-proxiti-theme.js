@@ -2,6 +2,7 @@
  "use strict";
  const root=document.documentElement;
  const button=document.getElementById("customer-theme-toggle");
+ const label=document.getElementById("customer-theme-label");
  const key="proxiti-theme-v3";
  const apply=(theme)=>{
   const next=theme==="dark"?"dark":"light";
@@ -9,6 +10,7 @@
   const meta=document.querySelector('meta[name="theme-color"]');
   if(meta)meta.setAttribute("content",next==="dark"?"#0b1220":"#f6f7f9");
   button?.setAttribute("aria-label",next==="dark"?"Ativar tema claro":"Ativar tema escuro");
+  if(label)label.textContent=next==="dark"?"Tema escuro":"Tema claro";
  };
  apply(root.dataset.theme);
  button?.addEventListener("click",()=>{

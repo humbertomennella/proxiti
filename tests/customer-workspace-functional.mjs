@@ -143,15 +143,31 @@ try{
  await page.goto(base+"/minha-proxiti/",{waitUntil:"domcontentloaded"});
  await page.waitForSelector("#customer-login-form:not([hidden])");
  assert.equal(await page.locator("#customer-app").isVisible(),false);
- assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
+ assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
+ assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
  assert.equal(await page.locator(".customer-header .brand-mark").count(),1);
+ await page.waitForFunction(()=>document.querySelector(".customer-auth-photo img")?.naturalWidth>0);
+ const mobileHero=await page.locator(".customer-auth-hero").boundingBox();
+ const mobileCard=await page.locator("#customer-auth .auth-panel").boundingBox();
+ assert(mobileCard.y>=mobileHero.y+mobileHero.height-1,
+  "No celular, o cartão de acesso deve ficar abaixo do hero");
+ await page.setViewportSize({width:1280,height:850});
+ const desktopHero=await page.locator(".customer-auth-hero").boundingBox();
+ const desktopCard=await page.locator("#customer-auth .auth-panel").boundingBox();
+ assert(desktopCard.x>=desktopHero.x+desktopHero.width-1,
+  "No desktop, o cartão deve estar ao lado do hero");
+ await page.setViewportSize({width:390,height:800});
+ await page.click("#customer-theme-toggle");
+ assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
+ assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema claro");
+ assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"light");
  await page.click("#customer-theme-toggle");
  assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
+ assert.equal(await page.locator("#customer-theme-label").innerText(),"Tema escuro");
  assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"dark");
- await page.click("#customer-theme-toggle");
- assert.equal(await page.locator('html').getAttribute("data-theme"),"light");
- assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-theme-v3")),"light");
  await page.click("#customer-show-signup");
+ assert.equal(await page.locator(".customer-auth-card-top").isVisible(),true);
+ assert.equal(await page.locator("#customer-signup-form h2").innerText(),"Criar sua conta");
  await page.fill("#customer-signup-name","Cliente de teste");
  await page.fill("#customer-signup-email","cliente@example.com");
  await page.fill("#customer-signup-password","Teste123abc");

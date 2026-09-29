@@ -1,52 +1,52 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light"><head>
+<html lang="pt-BR" data-theme="dark"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<script>try{const saved=localStorage.getItem("proxiti-theme-v3");document.documentElement.dataset.theme=saved==="dark"?"dark":"light"}catch{document.documentElement.dataset.theme="light"}</script>
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f6f7f9">
+<script>try{const saved=localStorage.getItem("proxiti-theme-v3");document.documentElement.dataset.theme=saved==="light"||saved==="dark"?saved:"dark"}catch{document.documentElement.dataset.theme="dark"}</script>
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b1220">
 <meta name="description" content="Minha PROXITI: seus atendimentos, equipamentos, agendamentos e propostas em um só lugar.">
 <title>Minha PROXITI | Seu espaço de suporte</title>
 <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
 <link rel="stylesheet" href="/assets/css/minha-proxiti.css?v=20260928-1">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-redesign.css?v=20260929-1">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
-<script src="/assets/js/minha-proxiti-theme.js?v=20260929-1" defer></script>
+<script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
 <script src="/assets/js/minha-proxiti.js?v=20260929-1" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="customer-header">
 <a class="customer-brand brand" href="/" aria-label="PROXITI: página inicial"><span class="brand-mark" aria-hidden="true"><span>P</span></span><span class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></span></a>
 <nav class="customer-header-actions" aria-label="Navegação da conta">
+<span class="customer-header-caption"><span class="customer-header-dot" aria-hidden="true"></span>Minha PROXITI <span class="customer-header-caption-secondary">/ área do cliente</span></span>
 <a class="customer-back" href="/">← Voltar</a>
 <button id="customer-theme-toggle" class="customer-theme-toggle" type="button" aria-label="Ativar tema escuro" title="Alternar tema claro e escuro">
 <svg class="customer-theme-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20 15.4A8.5 8.5 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" stroke="currentColor" stroke-width="1.8"/></svg>
-<svg class="customer-theme-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2" stroke="currentColor" stroke-width="1.8"/></svg>
+<svg class="customer-theme-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2" stroke="currentColor" stroke-width="1.8"/></svg><span id="customer-theme-label" class="customer-theme-label">Tema escuro</span>
 </button>
 </nav></header>
 <main id="main">
 <section class="auth-shell" id="customer-auth">
-<div class="auth-visual"><span class="eyebrow">MINHA PROXITI · ÁREA DO CLIENTE</span>
-<h1>Seu suporte, <span>sem começar do zero.</span></h1>
-<p>Atendimentos, equipamentos e próximos passos no mesmo lugar. Mais contexto para quem atende; mais clareza para você.</p>
-<div class="auth-preview" role="img" aria-label="Prévia ilustrativa da área do cliente, com histórico de atendimento, equipamento e próximo passo">
-<div class="auth-preview-bar"><span class="auth-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><strong>MINHA PROXITI</strong><small>Prévia ilustrativa</small></div>
-<div class="auth-preview-body">
-<div class="auth-preview-heading"><div><small>VISÃO GERAL</small><strong>Seu atendimento em ordem.</strong></div><span class="auth-preview-avatar" aria-hidden="true">P</span></div>
-<div class="auth-preview-ticket"><div><small>ATENDIMENTO</small><strong>Notebook · diagnóstico orientado</strong><span>Histórico e conversa em um só lugar</span></div><span class="auth-preview-status">Em acompanhamento</span></div>
-<div class="auth-preview-tiles"><div class="auth-preview-tile"><small>EQUIPAMENTO</small><strong>Notebook pessoal</strong><span>Informações reunidas</span></div><div class="auth-preview-tile"><small>PRÓXIMO PASSO</small><strong>Agendamento</strong><span>A combinar com a equipe</span></div></div>
-</div></div>
-<div class="auth-points"><span>Histórico acessível</span><span>Equipamentos organizados</span><span>Suporte com contexto</span></div>
+<div class="auth-visual customer-auth-hero">
+<figure class="customer-auth-photo"><img src="/assets/photos/minha-proxiti-hero.webp" width="1536" height="1024" alt="Bancada técnica com notebook, roteador e equipamentos de rede." fetchpriority="high" decoding="async"></figure>
+<div class="customer-auth-hero-copy">
+<span class="eyebrow">ÁREA DO CLIENTE · PROXITI</span>
+<h1>Minha PROXITI<span>.</span></h1>
+<p>Seu atendimento não precisa começar do zero. Acompanhe chamados, organize equipamentos e tenha os próximos passos em um só lugar.</p>
+</div>
+<div class="auth-points" aria-label="Recursos da área do cliente"><span>Atendimentos</span><span>Equipamentos</span><span>Agendamentos</span></div>
 </div>
 <div class="auth-panel">
+<div class="customer-auth-card-top"><span class="customer-auth-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2 4.5 5v6c0 5 3 8.3 7.5 11 4.5-2.7 7.5-6 7.5-11V5L12 2Z"/><path d="M9 12.5 11.2 15 15.5 9.5" stroke-linecap="round"/></svg></span><span>IDENTIFICAÇÃO SEGURA</span></div>
 <div class="auth-switch" role="group" aria-label="Acesso do cliente">
 <button type="button" id="customer-show-login" aria-pressed="true" class="active">Entrar</button>
 <button type="button" id="customer-show-signup" aria-pressed="false">Criar conta</button></div>
-<form id="customer-login-form" class="customer-form"><h2>Bom ter você por aqui.</h2><p>Seu histórico e seus próximos passos estão aqui. Entre para continuar.</p>
+<form id="customer-login-form" class="customer-form"><h2>Acesso à conta</h2><p>Entre para acompanhar seus atendimentos e continuar de onde parou.</p>
 <label>E-mail<input id="customer-login-email" type="email" required maxlength="254" autocomplete="email" placeholder="voce@exemplo.com"></label>
 <label>Senha<input id="customer-login-password" type="password" required autocomplete="current-password"></label>
 <button class="primary customer-auth-submit" type="submit">Entrar</button>
 <button class="text-button" id="customer-forgot" type="button">Esqueci minha senha</button></form>
-<form id="customer-signup-form" class="customer-form" hidden><h2>Crie seu espaço.</h2><p>Seu atendimento fica mais simples quando o contexto acompanha você. Comece por aqui.</p>
+<form id="customer-signup-form" class="customer-form" hidden><h2>Criar sua conta</h2><p>Um espaço para seus atendimentos, equipamentos e próximos passos.</p>
 <label>Como podemos chamar você?<input id="customer-signup-name" type="text" minlength="2" maxlength="120" required autocomplete="name"></label>
 <label>E-mail<input id="customer-signup-email" type="email" maxlength="254" required autocomplete="email"></label>
 <label>Senha<input id="customer-signup-password" type="password" minlength="10" maxlength="72" required autocomplete="new-password" aria-describedby="customer-password-help customer-password-rules"></label><p id="customer-password-help" class="customer-password-help">Proteja seu acesso com uma senha exclusiva. Combine maiúsculas e minúsculas, número e símbolo.</p><div class="customer-password-rules" id="customer-password-rules" aria-label="Requisitos da senha"><span data-password-rule="length">10 a 72 caracteres</span><span data-password-rule="letter">Letra</span><span data-password-rule="number">Número</span><span data-password-rule="symbol">Símbolo</span><span data-password-rule="case">Maiúscula e minúscula recomendadas</span></div>
@@ -61,7 +61,8 @@
 <label>Confirme a senha<input id="customer-reset-confirm" type="password" minlength="10" maxlength="72" autocomplete="new-password" required></label>
 <button class="primary" type="submit">Salvar nova senha</button></form>
 <p id="customer-auth-status" class="status" role="status" aria-live="polite"></p>
-<p class="auth-foot">Precisa falar com a equipe antes de entrar? <a href="/atendimento/">Conversar sem login ↗</a></p>
+<p class="auth-foot">Precisa de suporte agora? <a href="/atendimento/">Conversar sem login ↗</a></p>
+<p class="customer-auth-card-foot">Seu acesso é individual. Proteja suas credenciais.</p>
 </div></section>
 <section id="customer-verify" class="customer-verify" hidden><h1 id="customer-verify-title">Precisamos revisar seu acesso.</h1><p id="customer-verify-message">Não foi possível liberar sua área neste momento. Você pode tentar novamente ou usar nosso chat sem login, que continua disponível.</p><form id="customer-activate-form" class="customer-form" hidden><label class="check"><input id="customer-activate-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos meus dados para criar minha área de cliente.</span></label><button class="primary" type="submit">Ativar minha área de cliente</button></form><p id="customer-verify-status" class="status" role="status" aria-live="polite"></p><button id="customer-verify-retry" class="secondary">Tentar novamente</button><a class="secondary customer-link" href="/atendimento/">Conversar sem login</a><button id="customer-verify-logout" class="text-button">Sair</button></section>
 <div id="customer-app" class="customer-app" hidden>
