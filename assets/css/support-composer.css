@@ -61,8 +61,8 @@ html.embedded #support-start>.support-consent input{
 #support-start .support-start-composer-row #support-description,
 html.embedded #support-start .support-start-composer-row #support-description{
  flex:1 1 auto;min-width:0;width:100%;height:124px;min-height:124px;max-height:245px;
- margin:0;padding:12px 14px;border:1.5px solid var(--chat-border)!important;
- border-radius:14px;background:var(--chat-input,#fff);color:var(--text);
+ margin:0;padding:12px 14px;border:1.5px solid var(--chat-border,var(--line,#58728f))!important;
+ border-radius:14px;background:var(--chat-input,var(--panel,#142338));color:var(--text);
  box-shadow:0 1px 2px rgba(17,45,83,.03)!important;outline:0;
  font-family:inherit;font-size:.92rem;line-height:1.6;font-weight:500;
  resize:vertical;overflow-y:auto;scrollbar-width:thin;
@@ -78,8 +78,8 @@ html.embedded #support-start .support-start-composer-row #support-description:fo
 html.embedded #customer-reply .reply-composer-row #customer-reply-text{
  flex:1 1 auto;min-width:0;width:100%;
  height:52px;min-height:52px;max-height:136px;
- margin:0;padding:12px 14px;border:1.5px solid var(--chat-border)!important;
- border-radius:13px;background:var(--chat-input,#fff);color:var(--text);
+ margin:0;padding:12px 14px;border:1.5px solid var(--chat-border,var(--line,#58728f))!important;
+ border-radius:13px;background:var(--chat-input,var(--panel,#142338));color:var(--text);
  box-shadow:0 1px 2px rgba(17,45,83,.03)!important;outline:0;
  font-family:inherit;font-size:.91rem;line-height:1.48;font-weight:500;
  resize:none;overflow-y:auto;scrollbar-width:thin;
@@ -96,7 +96,7 @@ html.embedded #customer-reply .reply-composer-row #customer-reply-text:focus-vis
  appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;
  flex:0 0 auto;align-self:flex-end;min-width:124px;width:auto;height:52px;min-height:52px;
  margin:0;padding:0 17px;border:1px solid transparent;border-radius:12px;
- background:var(--blue);color:#fff;font-family:inherit;
+ background:var(--blue);color:#0b1928;font-family:inherit;
  font-size:.86rem;font-weight:800;line-height:1;
  box-shadow:0 4px 13px color-mix(in srgb,var(--blue) 20%,transparent);
  cursor:pointer;
