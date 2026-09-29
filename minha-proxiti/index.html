@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-portal.css?v=20260929-3">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-6">
-<link rel="stylesheet" href="/assets/css/minha-proxiti-dashboard.css?v=20260929-3">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-dashboard.css?v=20260929-4">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
@@ -158,16 +158,21 @@
 <button type="submit" class="primary">Enviar avaliação</button></form></section></div>
 <section class="customer-card"><h2>Profissionais disponíveis na rede</h2><div id="customer-partner-directory" class="customer-card-grid"></div></section></section>
 <section data-customer-panel="profile" hidden aria-labelledby="customer-profile-title"><div class="section-head"><div><span class="eyebrow">SUA CONTA</span><h1 id="customer-profile-title">Meu perfil</h1><p>Mantenha apenas as informações necessárias para o seu atendimento.</p></div></div>
-<section class="customer-card narrow"><form id="customer-profile-form" class="customer-form">
+<div class="customer-profile-layout">
+<section class="customer-card customer-profile-card" aria-labelledby="customer-profile-details-title"><h2 id="customer-profile-details-title">Suas informações</h2>
+<form id="customer-profile-form" class="customer-form"><div class="customer-profile-fields">
 <label>Nome<input id="customer-profile-name" minlength="2" maxlength="120" required autocomplete="name"></label>
 <label>E-mail da conta<input id="customer-profile-email" readonly autocomplete="email"></label>
 <label>Telefone (opcional)<input id="customer-profile-phone" maxlength="40" autocomplete="tel"></label>
 <label>Cidade (opcional)<input id="customer-profile-city" maxlength="120" autocomplete="address-level2"></label>
 <label>Canal preferido<select id="customer-profile-channel"><option value="email">E-mail</option><option value="whatsapp">WhatsApp</option><option value="phone">Telefone</option></select></label>
-<button type="submit" class="primary">Salvar perfil</button></form>
+</div><button type="submit" class="primary">Salvar perfil</button></form>
+</section>
+<section class="customer-card customer-profile-security" aria-labelledby="customer-profile-security-title"><div class="customer-security-heading"><span class="customer-security-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4v5c0 5-3.2 7.8-8 9-4.8-1.2-8-4-8-9V7z"/><path d="m9 12 2 2 4-4"/></svg></span><h2 id="customer-profile-security-title">Segurança da conta</h2></div>
 <p>O e-mail de acesso não pode ser alterado por este formulário. Para atualizar credenciais ou dados sensíveis, fale com a equipe.</p>
 <button id="customer-profile-password" class="secondary" type="button">Enviar link para alterar senha</button>
-</section></section>
+</section>
+</div></section>
 </div></div>
 </main>
 <footer class="customer-footer"><div class="customer-footer-inner">
