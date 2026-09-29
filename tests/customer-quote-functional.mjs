@@ -48,7 +48,10 @@ try{
   const b=route.request().postDataJSON();calls.push(b.action);
   let status=200,result={};
   if(b.action==="online")result={online:0};
-  else if(b.ticket_id!==ticket||b.access_token!==token){
+  else if(b.action==="create"){
+   if(!b.privacy_accepted||!b.name||!b.description){status=400;result={error:"Dados incompletos"};}
+   else result={id:ticket,access_token:token};
+  }else if(b.ticket_id!==ticket||b.access_token!==token){
    status=404;result={error:"Acesso não confirmado"};
   }else if(b.action==="conversation")result={ticket:{
    reference:12,subject:"Notebook não inicia",status:"triage",online:false},
@@ -116,6 +119,40 @@ try{
  assert.equal(await page.locator("#support-start").isVisible(),true);
  assert(!calls.includes("quotes")&&!calls.includes("quote_decision"),
   "Propostas não podem ser consultadas ao abrir o chat público");
+ // Esta é a primeira tela do chat, exibida ANTES de abrir o chamado.
+ // Verifique o botão Iniciar ao lado do campo, não só o Enviar da conversa.
+ for(const width of [375,430,768,1280]){
+  await page.setViewportSize({width,height:850});
+  const layout=await page.evaluate(()=>{
+   const bounds=id=>{const r=document.getElementById(id).getBoundingClientRect();
+    return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+   return {text:bounds("support-description"),button:bounds("start-submit"),
+    consent:bounds("support-consent"),viewport:innerWidth,
+    scrollWidth:document.documentElement.scrollWidth};
+  });
+  assert(layout.button.left>=layout.text.right+3&&layout.button.right<=layout.viewport,
+   "O botão Iniciar precisa ficar à direita do texto: "+JSON.stringify(layout));
+  assert(layout.button.width>=44&&layout.button.height>=43&&layout.scrollWidth<=layout.viewport+1,
+   "A primeira etapa deve caber no celular e no desktop: "+JSON.stringify(layout));
+  assert(layout.consent.bottom<=layout.text.top,
+   "O aceite de privacidade deve permanecer antes do botão de envio");
+ }
+ await page.setViewportSize({width:390,height:800});
+ assert.equal(await page.locator("#start-submit").getAttribute("aria-label"),"Iniciar conversa");
+ await page.fill("#support-name","Cliente de teste");
+ await page.fill("#support-email","cliente@exemplo.com");
+ await page.fill("#support-subject","Notebook não inicia");
+ await page.fill("#support-description","Notebook não liga desde ontem; solicito orientação.");
+ await page.click("#start-submit");
+ assert.equal(calls.filter(action=>action==="create").length,0,
+  "Sem consentimento não pode abrir um chamado");
+ await page.check("#support-consent");
+ await page.click("#start-submit");
+ await page.waitForSelector("#support-conversation:not([hidden])");
+ assert.equal(calls.filter(action=>action==="create").length,1,
+  "O botão lateral deve criar apenas um chamado com consentimento");
+ assert((await page.locator("#conversation-heading").innerText()).includes("Notebook"));
+ assert.equal(await page.locator("#customer-quotes").count(),0);
  await page.close();
  const other=await browser.newContext({viewport:{width:390,height:850}});
  await other.addInitScript(({ticket,token})=>{
