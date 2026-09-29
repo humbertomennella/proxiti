@@ -234,7 +234,7 @@ async function reload(message=""){
  }catch(e){
   if(id!==refreshId)return;
   dashboard=null;el("customer-app").hidden=true;el("customer-verify").hidden=false;
-  notify("Não foi possível acessar sua conta. Confirme o e-mail cadastrado e tente novamente.",true);
+  notify("Não foi possível acessar sua conta. Atualize a página ou use o chat sem login para pedir ajuda.",true);
  }
 }
 async function authorize(session){
