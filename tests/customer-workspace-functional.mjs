@@ -419,6 +419,24 @@ try{
  await page.click("#customer-sidebar-toggle");
  assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),false);
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Recolher menu lateral");
+ await page.setViewportSize({width:1649,height:928});
+ const wide=await measureDashboard();
+ assert(wide.shell.width>=1278&&wide.shell.width<=1282&&
+   Math.abs(wide.header.x-wide.sidebar.x)<2&&
+   Math.abs(wide.header.x-(1649-wide.shell.width)/2)<2,
+   "Na resolução da captura, shell e cabeçalho devem estar centrados: "+JSON.stringify(wide));
+ assert(wide.hero.width<=1024&&wide.hero.height<=260&&wide.content.width<=1024,
+  "O banner não pode voltar a ocupar toda a tela na resolução original: "+JSON.stringify(wide));
+ await page.click("#customer-sidebar-toggle");
+ const wideCollapsed=await measureDashboard();
+ assert(wideCollapsed.sidebar.width>=74&&wideCollapsed.sidebar.width<=79&&
+   wideCollapsed.hero.width<=1080&&
+   Math.abs(wideCollapsed.header.x-wideCollapsed.sidebar.x)<2,
+   "Sidebar de ícones não pode desalinhar cabeçalho e conteúdo na resolução original: "+JSON.stringify(wideCollapsed));
+ await page.click("#customer-sidebar-toggle");
+ await page.setViewportSize({width:1280,height:850});
+ console.log("LAYOUT 1649x928: sidebar "+wide.sidebar.width+"px, banner "+
+   wide.hero.width+"×"+wide.hero.height+"px; recolhida "+wideCollapsed.sidebar.width+"px.");
  await page.click("#customer-sidebar-account");
  assert.equal(await page.locator('[data-customer-panel="profile"]').isVisible(),true,
   "O cartão de conta na barra lateral deve abrir o perfil real");
