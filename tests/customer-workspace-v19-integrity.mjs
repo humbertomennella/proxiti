@@ -11,6 +11,8 @@ const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"
  centralLogin=read("assets/css/minha-proxiti-central-login.css"),
  portal=read("assets/css/minha-proxiti-portal.css"),
  customerChatCss=read("assets/css/minha-proxiti-chat.css"),
+ dashboardCss=read("assets/css/minha-proxiti-dashboard.css"),
+ dashboardNav=read("assets/js/minha-proxiti-navigation.js"),
  customerChatJs=read("assets/js/minha-proxiti-chat.js"),
  embedCss=read("assets/css/support-embed-theme.css"),
  composerCss=read("assets/css/support-composer.css"),
@@ -20,6 +22,7 @@ const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"
 new Script(js,{filename:"minha-proxiti.js"});new Script(chatJs,{filename:"support-thread.js"});
 new Script(theme,{filename:"minha-proxiti-theme.js"});
 new Script(customerChatJs,{filename:"minha-proxiti-chat.js"});
+new Script(dashboardNav,{filename:"minha-proxiti-navigation.js"});
 new Script(embedJs,{filename:"support-embed-theme.js"});
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 assert.equal(new Set(ids).size,ids.length,"ID duplicado na área do cliente");
@@ -84,6 +87,7 @@ assert.equal((redesign.match(/{/g)||[]).length,(redesign.match(/}/g)||[]).length
 assert.equal((centralLogin.match(/{/g)||[]).length,(centralLogin.match(/}/g)||[]).length);
 assert.equal((portal.match(/{/g)||[]).length,(portal.match(/}/g)||[]).length);
 assert.equal((customerChatCss.match(/{/g)||[]).length,(customerChatCss.match(/}/g)||[]).length);
+assert.equal((dashboardCss.match(/{/g)||[]).length,(dashboardCss.match(/}/g)||[]).length);
 assert.equal((embedCss.match(/{/g)||[]).length,(embedCss.match(/}/g)||[]).length);
 assert.equal((composerCss.match(/{/g)||[]).length,(composerCss.match(/}/g)||[]).length);
 assert(html.includes('<title>MINHA PROXITI')&&html.includes('>MINHA PROXITI <span class="customer-header-caption-secondary">'),
@@ -158,6 +162,30 @@ assert(chat.includes('id="close-ticket"')&&
  composerCss.includes('border:2px solid #8aa5d1!important')&&
  composerCss.includes('opacity:1!important'),
  "Encerrar precisa ser real, manter o histórico e melhorar a leitura da mensagem no tema claro");
+assert(html.includes('minha-proxiti-dashboard.css?v=20260929-1')&&
+ html.includes('minha-proxiti-navigation.js?v=20260929-1')&&
+ html.includes('minha-proxiti.js?v=20260929-4')&&
+ html.includes('id="customer-sidebar-toggle"')&&
+ html.includes('id="customer-mobile-menu"')&&
+ html.includes('id="customer-account-navigation"')&&
+ html.includes('id="customer-home-first-name"')&&
+ html.includes('id="customer-next-action"')&&
+ html.includes('id="customer-home-action"')&&
+ !html.includes('↗ Chat sem login')&&
+ !html.includes('Sua conta, suas vantagens'),
+ "O painel precisa de navegação própria, resumo e próximos passos sem mensagens comerciais repetitivas");
+assert((html.match(/data-customer-view="/g)||[]).length===6&&
+ (html.match(/data-customer-shortcut="/g)||[]).length===3&&
+ dashboardCss.includes('#customer-app.sidebar-collapsed')&&
+ dashboardCss.includes('#customer-app.sidebar-mobile-open .customer-sidebar-body')&&
+ dashboardCss.includes('@media(prefers-reduced-motion:reduce)')&&
+ dashboardNav.includes('proxiti-customer-sidebar-v1')&&
+ dashboardNav.includes('aria-expanded')&&
+ js.includes('function renderHome()')&&
+ js.includes('priority.status==="waiting_customer"')&&
+ js.includes('heroAction.onclick=()=>showView("tickets")')&&
+ js.includes('nextAction.onclick=()=>void openTicket(priority.id)'),
+ "O painel precisa refletir chamados reais, atalhos válidos e navegação acessível");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),

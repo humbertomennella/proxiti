@@ -363,8 +363,30 @@ try{
  assert.equal(await page.locator("#customer-verify").isVisible(),false,
    "O novo cadastro não deve depender de confirmação por e-mail");
  assert((await page.textContent("#customer-welcome")).includes("Cliente de teste"));
+ assert.equal(await page.locator("#customer-home-first-name").innerText(),"Cliente");
+ assert.equal(await page.locator("#customer-metric-tickets").innerText(),"0");
+ assert.equal(await page.locator("#customer-metric-open").innerText(),"0");
+ assert.equal(await page.locator("#customer-metric-equipment").innerText(),"0");
+ assert.equal(await page.locator("#customer-next-status").innerText(),"COMECE POR AQUI");
  assert.equal(await page.locator("#customer-nav").count(),0);
+ assert.equal(await page.locator(".customer-nav svg").count(),6);
+ assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"false");
+ assert.equal(await page.locator('[data-customer-view="tickets"]').isVisible(),false,
+  "No celular, o menu da conta deve começar recolhido");
+ await page.click("#customer-mobile-menu");
+ assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"true");
+ assert.equal(await page.locator('[data-customer-view="tickets"]').isVisible(),true);
  await page.click('[data-customer-view="tickets"]');
+ assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"false",
+  "Navegar deve recolher o menu móvel");
+ await page.setViewportSize({width:1280,height:850});
+ await page.click("#customer-sidebar-toggle");
+ assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),true);
+ assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-customer-sidebar-v1")),"collapsed");
+ assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Expandir menu lateral");
+ await page.click("#customer-sidebar-toggle");
+ assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),false);
+ assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Recolher menu lateral");
  await page.click('[data-customer-panel="tickets"] [data-open-customer-request]');
  await page.fill("#customer-request-subject","Notebook não inicia");
  await page.fill("#customer-request-description","O notebook não abre o sistema operacional.");
@@ -384,12 +406,24 @@ try{
  await page.waitForFunction(()=>window.__customerFixture.quoteDecisions.length===1);
  assert.equal(await page.evaluate(()=>window.__customerFixture.quoteDecisions[0].confirmed),true);
  assert.equal(await page.evaluate(()=>window.__customerFixture.quoteDecisions[0].decision),"accepted");
+ await page.click('[data-customer-view="home"]');
+ assert.equal(await page.locator("#customer-metric-tickets").innerText(),"1");
+ assert.equal(await page.locator("#customer-metric-open").innerText(),"1");
+ assert.equal(await page.locator("#customer-next-status").innerText(),"CHAMADO REGISTRADO");
+ assert((await page.locator("#customer-next-description").innerText()).includes("Chamado #17"));
+ assert.equal((await page.locator("#customer-home-action").textContent()).replace(/\s+/g," ").trim(),"Ver meus atendimentos ↗");
+ await page.click("#customer-next-action");
+ await page.waitForFunction(()=>document.querySelector("#customer-ticket-detail")?.hidden===false);
+ assert.equal(await page.locator('[data-customer-panel="tickets"]').isVisible(),true);
  await page.click('[data-customer-view="equipment"]');
  await page.fill("#customer-device-label","Meu notebook");
  await page.click("#customer-device-form button[type=submit]");
  await page.waitForFunction(()=>window.__customerFixture.devices.length===1);
  assert((await page.textContent("#customer-device-list")).includes("Meu notebook"));
- await page.click('[data-customer-view="schedule"]');
+ await page.click('[data-customer-view="home"]');
+ assert.equal(await page.locator("#customer-metric-equipment").innerText(),"1");
+ await page.click('[data-customer-shortcut="schedule"]');
+ assert.equal(await page.locator('[data-customer-panel="schedule"]').isVisible(),true);
  await page.selectOption("#customer-schedule-ticket","55555555-5555-4555-8555-555555555555");
  const tomorrow=new Date(Date.now()+5*86400000);
  const local=tomorrow.getFullYear()+"-"+String(tomorrow.getMonth()+1).padStart(2,"0")+
@@ -409,6 +443,13 @@ try{
   await page.setViewportSize({width,height:850});
   const sizes=await page.evaluate(()=>({viewport:innerWidth,page:document.documentElement.scrollWidth}));
   assert(sizes.page<=sizes.viewport+1,"Rolagem horizontal em "+width+": "+JSON.stringify(sizes));
+  if(width<=800){
+   assert.equal(await page.locator("#customer-mobile-menu").isVisible(),true);
+   await page.click("#customer-mobile-menu");
+   assert.equal(await page.locator("#customer-account-navigation").isVisible(),true);
+   await page.click("#customer-mobile-menu");
+   assert.equal(await page.locator("#customer-account-navigation").isVisible(),false);
+  }else assert.equal(await page.locator("#customer-sidebar-toggle").isVisible(),true);
  }
  await page.click("#customer-logout");
  await page.waitForSelector("#customer-auth:not([hidden])");
