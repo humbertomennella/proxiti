@@ -80,3 +80,89 @@ html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#0b1b2c}
  #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover{transform:none}
  #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover svg{transform:none}
 }
+
+/* Etapa inicial do chat: botão de abertura junto à mensagem, não abaixo do formulário. */
+#support-start .support-start-composer{
+ display:flex;flex-direction:column;gap:7px;min-width:0;margin-top:12px;
+}
+#support-start .support-start-composer .support-start-composer-label{
+ display:block;margin:0;color:var(--text);font-size:.78rem;font-weight:750;
+}
+#support-start .support-start-composer-row{
+ display:flex;align-items:flex-end;gap:9px;min-width:0;
+ padding:7px;border:1px solid var(--chat-border,#58728f);
+ border-radius:16px;background:var(--chat-input,#0b1b2c);
+ transition:border-color .18s ease,box-shadow .18s ease;
+}
+#support-start .support-start-composer-row:focus-within{
+ border-color:var(--blue);
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 14%,transparent);
+}
+#support-start .support-start-composer-row #support-description,
+html.embedded #support-start .support-start-composer-row #support-description{
+ flex:1 1 auto;min-width:0;width:100%;height:120px;min-height:120px;
+ max-height:240px;margin:0;padding:10px 10px;
+ border:0!important;border-radius:10px;background:transparent;
+ color:var(--text);line-height:1.52;font-size:.82rem;
+ box-shadow:none!important;outline:none!important;resize:vertical;
+ scrollbar-width:thin;scrollbar-color:var(--chat-border,#58728f) transparent;
+}
+#support-start .support-start-composer-row #support-description:focus-visible{
+ outline:none!important;box-shadow:none!important;
+}
+#support-start .support-start-composer-row #start-submit{
+ appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+ flex:0 0 auto;width:auto;min-width:126px;height:45px;min-height:45px;
+ margin:0;padding:0 13px;border:1px solid transparent;border-radius:11px;
+ background:var(--blue);color:var(--chat-send-ink,#0b1b2c);
+ font:inherit;font-size:.76rem;font-weight:800;line-height:1;
+ box-shadow:0 3px 11px color-mix(in srgb,var(--blue) 19%,transparent);
+ cursor:pointer;transition:transform .17s ease,box-shadow .17s ease,
+ background-color .17s ease,opacity .17s ease;
+}
+html.embedded[data-theme="light"] #support-start #start-submit{color:#fff}
+html.embedded[data-theme="dark"] #support-start #start-submit{color:#0b1b2c}
+#support-start .support-start-composer-row #start-submit svg{
+ display:block;width:18px;height:18px;flex:none;
+ transition:transform .17s ease;
+}
+#support-start .support-start-composer-row #start-submit:not(:disabled):hover{
+ transform:translateY(-1px);
+ background:color-mix(in srgb,var(--blue) 87%,#153c87);
+ box-shadow:0 5px 15px color-mix(in srgb,var(--blue) 27%,transparent);
+}
+#support-start .support-start-composer-row #start-submit:not(:disabled):hover svg{
+ transform:translate(2px,-2px);
+}
+#support-start .support-start-composer-row #start-submit:active:not(:disabled){
+ transform:translateY(0);box-shadow:none;
+}
+#support-start .support-start-composer-row #start-submit:disabled{
+ opacity:.68;box-shadow:none;cursor:progress;transform:none;
+}
+#support-start .support-start-composer-row #start-submit[data-sending="true"] svg{
+ animation:reply-send-working .8s ease-in-out infinite alternate;
+}
+.support-start-composer-hint{
+ display:block;margin:0 2px;color:var(--muted);font-size:.69rem;line-height:1.4;
+}
+#support-start>.support-consent{margin:13px 0 0}
+@media(max-width:440px){
+ #support-start .support-start-composer-row{gap:5px;padding:5px}
+ #support-start .support-start-composer-row #start-submit{
+  width:46px;min-width:46px;height:46px;min-height:46px;padding:0;
+ }
+ #support-start .support-start-composer-row .support-start-send-label{display:none}
+ #support-start .support-start-composer-row #support-description,
+ html.embedded #support-start .support-start-composer-row #support-description{
+  height:110px;min-height:110px;padding:9px 7px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #support-start .support-start-composer-row,
+ #support-start .support-start-composer-row #start-submit,
+ #support-start .support-start-composer-row #start-submit svg{transition:none}
+ #support-start .support-start-composer-row #start-submit[data-sending="true"] svg{animation:none}
+ #support-start .support-start-composer-row #start-submit:not(:disabled):hover,
+ #support-start .support-start-composer-row #start-submit:not(:disabled):hover svg{transform:none}
+}
