@@ -357,7 +357,8 @@ el("customer-login-form").addEventListener("submit",async event=>{
  finally{setBusy(false);}
 });
 el("customer-signup-form").addEventListener("submit",async event=>{
- event.preventDefault();if(busy||!db||!event.currentTarget.reportValidity())return;
+ event.preventDefault();const form=event.currentTarget;
+ if(busy||!db||!form.reportValidity())return;
  const password=el("customer-signup-password").value;
  if(!validCustomerPassword(password)||password!==el("customer-signup-confirm").value){
   notify("A senha deve ter de 10 a 72 caracteres, com letra, número e símbolo, e as duas senhas precisam coincidir.",
@@ -384,7 +385,7 @@ el("customer-signup-form").addEventListener("submit",async event=>{
    notify("Conta criada. Entre com o e-mail e a senha que acabou de escolher.",
      false,"customer-auth-status");return;
   }
-  event.currentTarget.reset();
+  form.reset();
   await authorize(login.session);
   notify("Sua conta está pronta! Você já pode pedir suporte e organizar seus equipamentos.");
  }catch(error){
