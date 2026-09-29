@@ -199,6 +199,25 @@ try{
  assert(desktop.outline==="rgb(98, 136, 206)",
   "Borda externa precisa ter cor sólida e visível no tema claro");
  assert.equal(await page.locator("#customer-support-title").innerText(),"Converse com a PROXITI");
+ assert.equal(await page.locator(".customer-support-popover-head small").innerText(),
+  "Seu suporte, com contexto e continuidade.");
+ const typography=await page.evaluate(()=>{
+  const title=document.getElementById("customer-support-title");
+  const accent=title.querySelector("span");
+  const subtitle=document.querySelector(".customer-support-popover-head small");
+  const heroAccent=document.querySelector("#customer-auth .auth-visual h1 span");
+  const heading=getComputedStyle(title);
+  return {font:heading.fontFamily,size:parseFloat(heading.fontSize),
+   weight:parseInt(heading.fontWeight,10),
+   accent:getComputedStyle(accent).color,
+   heroAccent:getComputedStyle(heroAccent).color,
+   subtitleFont:getComputedStyle(subtitle).fontFamily};
+ });
+ assert(typography.font.includes("Inter")&&typography.subtitleFont.includes("Inter")&&
+  typography.size>=27&&typography.weight>=800,
+  "Cabeçalho deve usar a tipografia forte do título da tela de login");
+ assert.equal(typography.accent,typography.heroAccent,
+  "A marca no chat deve usar o mesmo azul do destaque da tela de login");
  assert.equal(await page.locator("#customer-support-popover").evaluate(
   el=>getComputedStyle(el).borderTopStyle),"solid");
  assert.equal(await page.locator("#customer-support-popover").evaluate(
