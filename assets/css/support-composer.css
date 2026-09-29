@@ -2,7 +2,7 @@
    Abertura do chamado e mensagens usam áreas independentes e lado a lado. */
 html.embedded,html.embedded body{
  font-family:"Manrope",Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
- font-size:15px;line-height:1.6;
+ font-size:16px;line-height:1.6;
 }
 html.embedded .support-card{padding:clamp(16px,2.8vw,25px)}
 html.embedded .support-card h2{
@@ -10,16 +10,16 @@ html.embedded .support-card h2{
  line-height:1.31;letter-spacing:-.032em;font-weight:800;color:var(--text);
 }
 html.embedded .support-card p{
- font-family:inherit;font-size:.92rem;line-height:1.62;font-weight:470;
+ font-family:inherit;font-size:.94rem;line-height:1.62;font-weight:470;
  color:var(--muted);margin:0 0 15px;
 }
 html.embedded .support-card label:not(.support-consent){
  display:block;margin:12px 0 6px;font-family:inherit;
- font-size:.86rem;line-height:1.45;font-weight:760;color:var(--text);
+ font-size:.92rem;line-height:1.45;font-weight:760;color:var(--text);
 }
 html.embedded #support-start input:not([type=checkbox]){
  display:block;min-height:46px;padding:10px 13px;font-family:inherit;
- font-size:.91rem;font-weight:500;line-height:1.45;
+ font-size:.96rem;font-weight:500;line-height:1.45;
  border:1.5px solid var(--chat-border);border-radius:11px;
 }
 html.embedded #support-start input:not([type=checkbox]):focus-visible{
@@ -29,11 +29,11 @@ html.embedded #support-start input:not([type=checkbox]):focus-visible{
 html.embedded .support-card input::placeholder,
 html.embedded .support-card textarea::placeholder{color:var(--muted);opacity:.86;font-weight:450}
 html.embedded .availability{
- font-size:.81rem;line-height:1.45;font-weight:720;padding:8px 12px;
+ font-size:.85rem;line-height:1.45;font-weight:720;padding:8px 12px;
 }
 html.embedded #support-start>.support-consent{
  display:flex;align-items:flex-start;gap:10px;
- margin:16px 0 0;font-family:inherit;font-size:.84rem;
+ margin:16px 0 0;font-family:inherit;font-size:.89rem;
  line-height:1.55;color:var(--text);
 }
 html.embedded #support-start>.support-consent input{
@@ -46,7 +46,7 @@ html.embedded #support-start>.support-consent input{
 #support-start .support-start-composer{margin:15px 0 0}
 #support-start .support-start-composer .support-start-composer-label,
 #customer-reply.reply-composer .reply-composer-label{
- display:block;margin:0;color:var(--text);font-size:.86rem;font-weight:760;
+ display:block;margin:0;color:var(--text);font-size:.92rem;font-weight:760;
 }
 #support-start .support-start-composer-row,
 #customer-reply .reply-composer-row{
@@ -64,7 +64,7 @@ html.embedded #support-start .support-start-composer-row #support-description{
  margin:0;padding:12px 14px;border:1.5px solid var(--chat-border,var(--line,#58728f))!important;
  border-radius:14px;background:var(--chat-input,var(--panel,#142338));color:var(--text);
  box-shadow:0 1px 2px rgba(17,45,83,.03)!important;outline:0;
- font-family:inherit;font-size:.92rem;line-height:1.6;font-weight:500;
+ font-family:inherit;font-size:1rem;line-height:1.6;font-weight:500;
  resize:vertical;overflow-y:auto;scrollbar-width:thin;
  scrollbar-color:var(--chat-border) transparent;
 }
@@ -81,7 +81,7 @@ html.embedded #customer-reply .reply-composer-row #customer-reply-text{
  margin:0;padding:12px 14px;border:1.5px solid var(--chat-border,var(--line,#58728f))!important;
  border-radius:13px;background:var(--chat-input,var(--panel,#142338));color:var(--text);
  box-shadow:0 1px 2px rgba(17,45,83,.03)!important;outline:0;
- font-family:inherit;font-size:.91rem;line-height:1.48;font-weight:500;
+ font-family:inherit;font-size:.97rem;line-height:1.48;font-weight:500;
  resize:none;overflow-y:auto;scrollbar-width:thin;
  scrollbar-color:var(--chat-border) transparent;
 }
@@ -97,7 +97,7 @@ html.embedded #customer-reply .reply-composer-row #customer-reply-text:focus-vis
  flex:0 0 auto;align-self:flex-end;min-width:124px;width:auto;height:52px;min-height:52px;
  margin:0;padding:0 17px;border:1px solid transparent;border-radius:12px;
  background:var(--blue);color:#0b1928;font-family:inherit;
- font-size:.86rem;font-weight:800;line-height:1;
+ font-size:.9rem;font-weight:800;line-height:1;
  box-shadow:0 4px 13px color-mix(in srgb,var(--blue) 20%,transparent);
  cursor:pointer;
  transition:transform .17s ease,box-shadow .17s ease,
@@ -140,7 +140,7 @@ html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#091626}
 }
 .support-start-composer-hint,.reply-composer-hint{
  display:block;margin:0 2px;color:var(--muted);
- font-family:inherit;font-size:.77rem;line-height:1.48;
+ font-family:inherit;font-size:.81rem;line-height:1.48;
 }
 @keyframes reply-send-working{
  from{opacity:.5;transform:translate(-2px,2px)}
@@ -149,8 +149,8 @@ html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#091626}
 @media(max-width:440px){
  html.embedded .support-card{padding:14px}
  html.embedded .support-card h2{font-size:1.18rem}
- html.embedded .support-card p{font-size:.84rem}
- html.embedded .support-card label:not(.support-consent){font-size:.82rem}
+ html.embedded .support-card p{font-size:.9rem}
+ html.embedded .support-card label:not(.support-consent){font-size:.88rem}
  #support-start .support-start-composer-row,
  #customer-reply .reply-composer-row{gap:9px}
  #support-start .support-start-composer-row #start-submit,
