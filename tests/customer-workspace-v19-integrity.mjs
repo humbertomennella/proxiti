@@ -123,10 +123,17 @@ assert(customerChatCss.includes('width:min(760px,calc(100vw - 28px))')&&
  customerChatJs.includes('panel.animate([')&&customerChatJs.includes('reduceMotion.matches')&&
  customerChatJs.includes('Promise.allSettled(animations.map'),
  "O modal precisa abrir e minimizar com efeitos acessíveis e ter largura até 760 px");
+assert(chat.includes('class="support-start-composer-row"')&&
+ chat.includes('id="start-submit" aria-label="Iniciar conversa"')&&
+ chat.includes('id="support-consent" type="checkbox" required')&&
+ composerCss.includes('#support-start .support-start-composer-row #start-submit')&&
+ chatJs.includes('send.dataset.sending="true"')&&
+ chatJs.includes('if(send.disabled||!form.reportValidity())return'),
+ "Primeira tela deve ter botão Iniciar ao lado da descrição e manter privacidade e envio único");
 assert(chat.includes('class="reply-composer-row"')&&
  chat.includes('id="reply-submit" class="support-primary reply-send"')&&
- chat.includes('support-composer.css?v=20260929-1')&&
- chat.includes('support-thread.js?v=20260929-2')&&
+ chat.includes('support-composer.css?v=20260929-2')&&
+ chat.includes('support-thread.js?v=20260929-3')&&
  composerCss.includes('#customer-reply .reply-composer-row #reply-submit')&&
  chatJs.includes('replyField.addEventListener("keydown"')&&
  chatJs.includes('event.shiftKey')&&chatJs.includes('sendingReply=true'),

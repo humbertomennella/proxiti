@@ -203,7 +203,25 @@ try{
  assert.equal(chatUrl.pathname,"/atendimento/");
  assert.equal(chatUrl.searchParams.get("embed"),"1");
  assert.equal(chatUrl.searchParams.get("theme"),"light");
- await page.frameLocator("#customer-support-frame").locator("#support-start").waitFor({state:"attached"});
+ await page.frameLocator("#customer-support-frame").locator("#support-start").waitFor({state:"visible"});
+ const firstChatLayout=()=>page.frameLocator("#customer-support-frame").locator("body").evaluate(()=>{
+  const box=id=>{const r=document.getElementById(id).getBoundingClientRect();
+   return {left:r.left,right:r.right,width:r.width,top:r.top,bottom:r.bottom};};
+  return {textarea:box("support-description"),send:box("start-submit"),
+   privacy:box("support-consent"),viewport:innerWidth};
+ });
+ let initialChat=await firstChatLayout();
+ assert(initialChat.send.left>=initialChat.textarea.right+3&&
+  initialChat.send.right<=initialChat.viewport&&initialChat.send.width>=44,
+  "Na primeira tela do chat, Iniciar deve ficar ao lado da descrição no celular");
+ assert(initialChat.privacy.bottom<=initialChat.textarea.top,
+  "Consentimento deve permanecer disponível antes do envio");
+ await page.setViewportSize({width:1280,height:850});
+ initialChat=await firstChatLayout();
+ assert(initialChat.send.left>=initialChat.textarea.right+3&&
+  initialChat.send.right<=initialChat.viewport&&initialChat.send.width>=120,
+  "Na primeira tela do chat, Iniciar deve ficar ao lado da descrição no desktop");
+ await page.setViewportSize({width:390,height:800});
  assert.equal(await page.frameLocator("#customer-support-frame").locator("html").getAttribute("data-theme"),"light");
  assert.equal(await page.frameLocator("#customer-support-frame").locator("#customer-quotes").count(),0);
  assert.equal(await page.frameLocator("#customer-support-frame").locator(".support-account-invite").isVisible(),false);
