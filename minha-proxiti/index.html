@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti.css?v=20260928-1">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-redesign.css?v=20260929-1">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-portal.css?v=20260929-3">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
-<script src="/assets/js/minha-proxiti.js?v=20260929-1" defer></script>
+<script src="/assets/js/minha-proxiti.js?v=20260929-3" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="customer-header">
@@ -28,31 +29,35 @@
 <main id="main">
 <section class="auth-shell" id="customer-auth">
 <div class="auth-visual customer-auth-hero">
-<figure class="customer-auth-photo"><img src="/assets/photos/minha-proxiti-hero.webp" width="1536" height="1024" alt="Bancada técnica com notebook, roteador e equipamentos de rede." fetchpriority="high" decoding="async"></figure>
 <div class="customer-auth-hero-copy">
-<span class="eyebrow">ÁREA DO CLIENTE · PROXITI</span>
-<h1>Minha PROXITI<span>.</span></h1>
-<p>Seu atendimento não precisa começar do zero. Acompanhe chamados, organize equipamentos e tenha os próximos passos em um só lugar.</p>
+<span class="eyebrow">MINHA PROXITI · SEU ESPAÇO</span>
+<h1>Suporte que <span>acompanha você.</span></h1>
+<p>Atendimentos, equipamentos e próximos passos reunidos em um só lugar. Porque explicar o mesmo problema toda vez não deveria fazer parte do serviço.</p>
 </div>
-<div class="auth-points" aria-label="Recursos da área do cliente"><span>Atendimentos</span><span>Equipamentos</span><span>Agendamentos</span></div>
+<figure class="customer-portal-art"><img src="/assets/illustrations/customer-portal-access.svg" width="800" height="560" alt="Ilustração do portal do cliente PROXITI, com acesso protegido, histórico de atendimento e equipamentos organizados." decoding="async" fetchpriority="high"></figure>
+<div class="auth-points" aria-label="Recursos da sua conta"><span>Histórico de suporte</span><span>Seus equipamentos</span><span>Próximos passos</span></div>
 </div>
-<div class="auth-panel">
+<div class="auth-panel" id="customer-auth-panel" data-auth-mode="login">
 <div class="customer-auth-card-top"><span class="customer-auth-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2 4.5 5v6c0 5 3 8.3 7.5 11 4.5-2.7 7.5-6 7.5-11V5L12 2Z"/><path d="M9 12.5 11.2 15 15.5 9.5" stroke-linecap="round"/></svg></span><span>IDENTIFICAÇÃO SEGURA</span></div>
 <div class="auth-switch" role="group" aria-label="Acesso do cliente">
 <button type="button" id="customer-show-login" aria-pressed="true" class="active">Entrar</button>
 <button type="button" id="customer-show-signup" aria-pressed="false">Criar conta</button></div>
-<form id="customer-login-form" class="customer-form"><h2>Acesso à conta</h2><p>Entre para acompanhar seus atendimentos e continuar de onde parou.</p>
+<div id="customer-auth-viewport" class="auth-slider-viewport"><div class="auth-slider-track">
+<section class="auth-pane auth-pane-login" aria-label="Entrar" aria-hidden="false">
+<form id="customer-login-form" class="customer-form"><h2>Bom ter você de volta.</h2><p>Seu histórico está aqui. Entre e continue de onde parou.</p>
 <label>E-mail<input id="customer-login-email" type="email" required maxlength="254" autocomplete="email" placeholder="voce@exemplo.com"></label>
 <label>Senha<input id="customer-login-password" type="password" required autocomplete="current-password"></label>
 <button class="primary customer-auth-submit" type="submit">Entrar</button>
 <button class="text-button" id="customer-forgot" type="button">Esqueci minha senha</button></form>
-<form id="customer-signup-form" class="customer-form" hidden><h2>Criar sua conta</h2><p>Um espaço para seus atendimentos, equipamentos e próximos passos.</p>
+</section><section class="auth-pane auth-pane-signup" aria-label="Criar conta" aria-hidden="true" inert>
+<form id="customer-signup-form" class="customer-form" hidden><h2>Seu espaço começa aqui.</h2><p>Crie sua conta e deixe o histórico do suporte com a gente. Sua memória agradece.</p>
 <label>Como podemos chamar você?<input id="customer-signup-name" type="text" minlength="2" maxlength="120" required autocomplete="name"></label>
 <label>E-mail<input id="customer-signup-email" type="email" maxlength="254" required autocomplete="email"></label>
-<label>Senha<input id="customer-signup-password" type="password" minlength="10" maxlength="72" required autocomplete="new-password" aria-describedby="customer-password-help customer-password-rules"></label><p id="customer-password-help" class="customer-password-help">Proteja seu acesso com uma senha exclusiva. Combine maiúsculas e minúsculas, número e símbolo.</p><div class="customer-password-rules" id="customer-password-rules" aria-label="Requisitos da senha"><span data-password-rule="length">10 a 72 caracteres</span><span data-password-rule="letter">Letra</span><span data-password-rule="number">Número</span><span data-password-rule="symbol">Símbolo</span><span data-password-rule="case">Maiúscula e minúscula recomendadas</span></div>
+<label>Senha<input id="customer-signup-password" type="password" minlength="10" maxlength="72" required autocomplete="new-password" aria-describedby="customer-password-help customer-password-rules"></label><p id="customer-password-help" class="customer-password-help">Use uma senha exclusiva, com letra, número e símbolo. Maiúsculas e minúsculas são uma boa dupla.</p><div class="customer-password-rules" id="customer-password-rules" aria-label="Requisitos da senha"><span data-password-rule="length">10 a 72 caracteres</span><span data-password-rule="letter">Letra</span><span data-password-rule="number">Número</span><span data-password-rule="symbol">Símbolo</span><span data-password-rule="case">Maiúscula e minúscula recomendadas</span></div>
 <label>Confirmar senha<input id="customer-signup-confirm" type="password" minlength="10" maxlength="72" required autocomplete="new-password"></label>
 <label class="check"><input id="customer-signup-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e concordo com o uso dos meus dados para criar a conta e prestar suporte.</span></label>
 <input id="customer-signup-company-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" hidden><button class="primary customer-auth-submit" type="submit">Criar conta</button></form>
+</section></div></div>
 <form id="customer-recovery-form" class="customer-form" hidden><h2>Recuperar acesso</h2><p>Enviaremos instruções ao e-mail da sua conta, caso esteja cadastrado.</p>
 <label>E-mail<input id="customer-recovery-email" type="email" maxlength="254" autocomplete="email" required></label>
 <button class="primary" type="submit">Enviar instruções</button><button class="text-button" type="button" data-customer-back>Voltar</button></form>
@@ -62,7 +67,7 @@
 <button class="primary" type="submit">Salvar nova senha</button></form>
 <p id="customer-auth-status" class="status" role="status" aria-live="polite"></p>
 <p class="auth-foot">Precisa de suporte agora? <a href="/atendimento/">Conversar sem login ↗</a></p>
-<p class="customer-auth-card-foot">Seu acesso é individual. Proteja suas credenciais.</p>
+<p class="customer-auth-card-foot">Seu acesso é pessoal. Seus atendimentos continuam organizados.</p>
 </div></section>
 <section id="customer-verify" class="customer-verify" hidden><h1 id="customer-verify-title">Precisamos revisar seu acesso.</h1><p id="customer-verify-message">Não foi possível liberar sua área neste momento. Você pode tentar novamente ou usar nosso chat sem login, que continua disponível.</p><form id="customer-activate-form" class="customer-form" hidden><label class="check"><input id="customer-activate-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos meus dados para criar minha área de cliente.</span></label><button class="primary" type="submit">Ativar minha área de cliente</button></form><p id="customer-verify-status" class="status" role="status" aria-live="polite"></p><button id="customer-verify-retry" class="secondary">Tentar novamente</button><a class="secondary customer-link" href="/atendimento/">Conversar sem login</a><button id="customer-verify-logout" class="text-button">Sair</button></section>
 <div id="customer-app" class="customer-app" hidden>
