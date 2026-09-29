@@ -190,12 +190,12 @@
     finally{sendingReply=false;replyField.readOnly=false;updateReply();}
   });
   el("forget-ticket").addEventListener("click",()=>{
-    if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
+    if(!window.confirm("Remover a chave de acesso deste navegador? O chamado continuará registrado, mas você poderá perder o acesso ao histórico se não tiver outra forma de recuperá-lo."))return;
     for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage])try{getStorage().removeItem("proxiti_ticket_"+ticketId);}catch{}
     token=null;ticketId=null;if(timer)clearInterval(timer);
     history.replaceState(null,"",document.documentElement.classList.contains("embedded")?"/atendimento/?embed=1":"/atendimento/");
     el("support-conversation").hidden=true;el("support-start").hidden=false;
-    seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
+    seen="";seenStaff=null;note("A chave de acesso foi removida deste navegador. O chamado continua registrado.");
   });
   el("customer-sound-toggle").addEventListener("click",()=>{
     soundOn=!soundOn;
