@@ -15,12 +15,12 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-portal.css?v=20260929-3">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-6">
-<link rel="stylesheet" href="/assets/css/minha-proxiti-dashboard.css?v=20260929-1">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-dashboard.css?v=20260929-2">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
-<script src="/assets/js/minha-proxiti.js?v=20260929-4" defer></script>
-<script src="/assets/js/minha-proxiti-navigation.js?v=20260929-1" defer></script>
+<script src="/assets/js/minha-proxiti.js?v=20260929-5" defer></script>
+<script src="/assets/js/minha-proxiti-navigation.js?v=20260929-2" defer></script>
 <script src="/assets/js/minha-proxiti-chat.js?v=20260929-3" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
@@ -80,11 +80,12 @@
 <div id="customer-app" class="customer-app" hidden>
 <aside class="customer-sidebar" id="customer-sidebar" aria-label="Navegação da Minha PROXITI">
 <div class="customer-sidebar-head">
-<div class="sidebar-name"><small>SUA CONTA</small><strong id="customer-welcome">Cliente PROXITI</strong><span id="customer-email"></span></div>
+<a class="sidebar-brand customer-brand brand" href="/minha-proxiti/" aria-label="MINHA PROXITI: ir para minha página" title="Minha página"><span class="brand-mark" aria-hidden="true"><span>P</span></span><span class="sidebar-brand-label"><strong class="brand-name"><span>PROXI</span><span class="brand-ti">TI</span></strong><small>SEU ESPAÇO</small></span></a>
 <button id="customer-sidebar-toggle" class="sidebar-collapse" type="button" aria-label="Recolher menu lateral" title="Recolher menu lateral" aria-controls="customer-sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m6-11-3 3 3 3"/></svg></button>
-<button id="customer-mobile-menu" class="sidebar-mobile-toggle" type="button" aria-controls="customer-account-navigation" aria-expanded="false" aria-label="Abrir menu da conta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu da conta</span></button>
+<button id="customer-mobile-menu" class="sidebar-mobile-toggle" type="button" aria-controls="customer-account-navigation" aria-expanded="false" aria-label="Abrir menu da conta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
 </div>
 <div class="customer-sidebar-body" id="customer-account-navigation">
+<span class="sidebar-section-label">NAVEGAÇÃO</span>
 <nav class="customer-nav" aria-label="Áreas da conta">
 <button type="button" data-customer-view="home" class="active" aria-label="Minha página" title="Minha página"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Minha página</span></button>
 <button type="button" data-customer-view="tickets" aria-label="Meus atendimentos" title="Meus atendimentos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 11h6M9 15h6"/></svg><span>Meus atendimentos</span></button>
@@ -95,14 +96,15 @@
 </nav>
 <div class="customer-sidebar-bottom">
 <button type="button" class="sidebar-support" data-open-customer-request aria-label="Solicitar suporte" title="Solicitar suporte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11.5h8"/></svg><span>Solicitar suporte</span></button>
+<button id="customer-sidebar-account" class="customer-sidebar-account" type="button" aria-label="Abrir meu perfil" title="Meu perfil"><span id="customer-sidebar-avatar" class="customer-sidebar-avatar" aria-hidden="true">P</span><span class="sidebar-name"><small>SUA CONTA</small><strong id="customer-welcome">Cliente PROXITI</strong><span id="customer-email"></span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
 <button id="customer-logout" class="sidebar-logout" type="button" aria-label="Sair da conta" title="Sair da conta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3"/><path d="M12 3h5a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-5"/></svg><span>Sair da conta</span></button>
 </div></div></aside>
 <div class="customer-content">
-<div class="app-toolbar"><span class="eyebrow">MINHA PROXITI · ÁREA DO CLIENTE</span><button id="customer-refresh" type="button" class="secondary" aria-label="Atualizar informações da conta" title="Recarregar seus dados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg><span>Atualizar</span></button></div>
+<div class="app-toolbar"><span class="customer-toolbar-path"><span>Minha PROXITI</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><strong id="customer-current-view">Minha página</strong></span><button id="customer-refresh" type="button" class="secondary" aria-label="Atualizar informações da conta" title="Recarregar seus dados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg><span>Atualizar</span></button></div>
 <p id="customer-app-status" class="status" role="status" aria-live="polite"></p>
 <section data-customer-panel="home" aria-labelledby="customer-home-title">
-<div class="customer-home-intro"><div><span class="eyebrow">MINHA PROXITI · VISÃO GERAL</span><h1 id="customer-home-title">Seu espaço, <span id="customer-home-first-name">você</span>.</h1><p>Seus atendimentos e próximos passos, em um só lugar.</p></div><span class="customer-home-private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Área pessoal</span></span></div>
-<div class="welcome-hero"><div class="welcome-hero-copy"><span class="eyebrow">SEU SUPORTE</span><h2 id="customer-home-hero-title">Precisou de ajuda? <span id="customer-home-hero-accent">A gente cuida do próximo passo.</span></h2><p id="customer-home-hero-description">Descreva o problema e acompanhe seu atendimento por aqui.</p><button type="button" class="primary" id="customer-home-action">Solicitar suporte <span aria-hidden="true">↗</span></button></div><img src="/assets/illustrations/partner-workstation.svg" width="1200" height="760" loading="lazy" alt="Ilustração de estação de atendimento e suporte técnico."></div>
+<div class="customer-home-intro"><div><span class="eyebrow">VISÃO GERAL</span><h1 id="customer-home-title">Seu espaço, <span id="customer-home-first-name">você</span>.</h1><p>Seus atendimentos e próximos passos, em um só lugar.</p></div></div>
+<div class="welcome-hero"><div class="welcome-hero-copy"><span class="eyebrow">SEU SUPORTE</span><h2 id="customer-home-hero-title">Precisou de ajuda? <span id="customer-home-hero-accent">A gente cuida do próximo passo.</span></h2><p id="customer-home-hero-description">Descreva o problema e acompanhe seu atendimento por aqui.</p><button type="button" class="primary" id="customer-home-action">Solicitar suporte <span aria-hidden="true">↗</span></button></div><div class="customer-hero-art"><img src="/assets/illustrations/partner-workstation.svg" width="1200" height="760" loading="lazy" alt="Ilustração de estação de atendimento e suporte técnico."></div></div>
 <div id="customer-home-metrics" class="customer-metrics" aria-label="Resumo da sua conta">
 <article><div class="customer-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 11h6M9 15h6"/></svg></div><span>Atendimentos</span><strong id="customer-metric-tickets">0</strong><small id="customer-metric-tickets-note">Seu histórico de suporte</small></article>
 <article><div class="customer-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span>Em andamento</span><strong id="customer-metric-open">0</strong><small id="customer-metric-open-note">Nenhum atendimento aberto</small></article>

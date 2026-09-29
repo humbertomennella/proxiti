@@ -380,13 +380,72 @@ try{
  assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"false",
   "Navegar deve recolher o menu móvel");
  await page.setViewportSize({width:1280,height:850});
+ await page.click('[data-customer-view="home"]');
+ await page.locator("#customer-home-hero-title").waitFor({state:"visible"});
+ const measureDashboard=()=>page.evaluate(()=>{
+  const rect=element=>{const {x,y,width,height,right,bottom}=element.getBoundingClientRect();
+   return {x,y,width,height,right,bottom};};
+  return {shell:rect(document.getElementById("customer-app")),
+   header:rect(document.querySelector(".customer-header")),
+   sidebar:rect(document.getElementById("customer-sidebar")),
+   content:rect(document.querySelector("#customer-app .customer-content")),
+   hero:rect(document.querySelector("#customer-app .welcome-hero")),
+   metric:rect(document.querySelector("#customer-app .customer-metrics article")),
+   brandVisible:getComputedStyle(document.querySelector(".sidebar-brand .brand-mark")).display!=="none"};
+ });
+ const expanded=await measureDashboard();
+ assert(Math.abs(expanded.header.x-expanded.sidebar.x)<2&&
+   Math.abs(expanded.shell.x-expanded.sidebar.x)<2,
+   "Cabeçalho e painel precisam começar no mesmo alinhamento: "+JSON.stringify(expanded));
+ assert(expanded.sidebar.width>=248&&expanded.sidebar.width<=256&&
+   expanded.content.x-expanded.sidebar.right>=16&&
+   expanded.content.x-expanded.sidebar.right<=24,
+   "Sidebar expandida precisa ter proporção de painel, sem espaço perdido: "+JSON.stringify(expanded));
+ assert(expanded.hero.width>=750&&expanded.hero.width<=1030&&
+   expanded.hero.height>=170&&expanded.hero.height<=260&&
+   expanded.metric.height>=90&&expanded.metric.height<=132,"Banner e indicadores devem ficar compactos: "+JSON.stringify(expanded));
+ assert(expanded.brandVisible);
+ assert.equal(await page.locator("#customer-current-view").innerText(),"Minha página");
+ assert.equal(await page.locator("#customer-sidebar-avatar").innerText(),"C");
  await page.click("#customer-sidebar-toggle");
  assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),true);
- assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-customer-sidebar-v1")),"collapsed");
+ assert.equal(await page.evaluate(()=>localStorage.getItem("proxiti-customer-sidebar-v2")),"collapsed");
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Expandir menu lateral");
+ const collapsed=await measureDashboard();
+ assert(collapsed.sidebar.width>=74&&collapsed.sidebar.width<=79&&
+  collapsed.hero.width>=900&&collapsed.hero.width<=1080&&collapsed.brandVisible,
+  "Menu recolhido precisa manter proporção de referência: "+JSON.stringify(collapsed));
+ assert(Math.abs(collapsed.header.x-collapsed.sidebar.x)<2&&
+  collapsed.content.x-collapsed.sidebar.right>=16&&
+  collapsed.content.x-collapsed.sidebar.right<=24,
+  "O painel não deve se deslocar para fora do alinhamento após recolher");
  await page.click("#customer-sidebar-toggle");
  assert.equal(await page.locator("#customer-app").evaluate(e=>e.classList.contains("sidebar-collapsed")),false);
  assert.equal(await page.locator("#customer-sidebar-toggle").getAttribute("aria-label"),"Recolher menu lateral");
+ await page.setViewportSize({width:1649,height:928});
+ const wide=await measureDashboard();
+ assert(wide.shell.width>=1278&&wide.shell.width<=1282&&
+   Math.abs(wide.header.x-wide.sidebar.x)<2&&
+   Math.abs(wide.header.x-(1649-wide.shell.width)/2)<2,
+   "Na resolução da captura, shell e cabeçalho devem estar centrados: "+JSON.stringify(wide));
+ assert(wide.hero.width>=950&&wide.hero.width<=1024&&
+   wide.hero.height>=170&&wide.hero.height<=260&&wide.content.width<=1024,
+  "O banner não pode voltar a ocupar toda a tela na resolução original: "+JSON.stringify(wide));
+ await page.click("#customer-sidebar-toggle");
+ const wideCollapsed=await measureDashboard();
+ assert(wideCollapsed.sidebar.width>=74&&wideCollapsed.sidebar.width<=79&&
+   wideCollapsed.hero.width>=1000&&wideCollapsed.hero.width<=1080&&
+   Math.abs(wideCollapsed.header.x-wideCollapsed.sidebar.x)<2,
+   "Sidebar de ícones não pode desalinhar cabeçalho e conteúdo na resolução original: "+JSON.stringify(wideCollapsed));
+ await page.click("#customer-sidebar-toggle");
+ await page.setViewportSize({width:1280,height:850});
+ console.log("LAYOUT 1649x928: sidebar "+wide.sidebar.width+"px, banner "+
+   wide.hero.width+"×"+wide.hero.height+"px; recolhida "+wideCollapsed.sidebar.width+"px.");
+ await page.click("#customer-sidebar-account");
+ assert.equal(await page.locator('[data-customer-panel="profile"]').isVisible(),true,
+  "O cartão de conta na barra lateral deve abrir o perfil real");
+ assert.equal(await page.locator("#customer-current-view").innerText(),"Meu perfil");
+ await page.click('[data-customer-view="tickets"]');
  await page.click('[data-customer-panel="tickets"] [data-open-customer-request]');
  await page.fill("#customer-request-subject","Notebook não inicia");
  await page.fill("#customer-request-description","O notebook não abre o sistema operacional.");
@@ -443,12 +502,24 @@ try{
   await page.setViewportSize({width,height:850});
   const sizes=await page.evaluate(()=>({viewport:innerWidth,page:document.documentElement.scrollWidth}));
   assert(sizes.page<=sizes.viewport+1,"Rolagem horizontal em "+width+": "+JSON.stringify(sizes));
-  if(width<=800){
+  if(width<=960){
    assert.equal(await page.locator("#customer-mobile-menu").isVisible(),true);
    await page.click("#customer-mobile-menu");
    assert.equal(await page.locator("#customer-account-navigation").isVisible(),true);
    await page.click("#customer-mobile-menu");
    assert.equal(await page.locator("#customer-account-navigation").isVisible(),false);
+   const mobileAlignment=await page.evaluate(()=>{
+    const header=document.querySelector(".customer-header").getBoundingClientRect();
+    const sidebar=document.getElementById("customer-sidebar").getBoundingClientRect();
+    const content=document.querySelector("#customer-app .customer-content").getBoundingClientRect();
+    return {hx:header.x,sx:sidebar.x,sw:sidebar.width,cx:content.x,
+     contentY:content.y,sidebarBottom:sidebar.bottom};
+   });
+   assert(Math.abs(mobileAlignment.hx-mobileAlignment.sx)<2&&
+    Math.abs(mobileAlignment.cx-mobileAlignment.sx)<2&&
+    mobileAlignment.contentY>=mobileAlignment.sidebarBottom,
+    "Navegação móvel e conteúdo devem estar alinhados e empilhados: "+
+     JSON.stringify(mobileAlignment));
   }else assert.equal(await page.locator("#customer-sidebar-toggle").isVisible(),true);
  }
  await page.click("#customer-logout");

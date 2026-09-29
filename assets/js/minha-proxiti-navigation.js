@@ -5,7 +5,7 @@
  const mobileToggle=document.getElementById("customer-mobile-menu");
  const navigation=document.getElementById("customer-account-navigation");
  if(!app||!collapse||!mobileToggle||!navigation)return;
- const storageKey="proxiti-customer-sidebar-v1";
+ const storageKey="proxiti-customer-sidebar-v2";
  const save=value=>{try{localStorage.setItem(storageKey,value?"collapsed":"expanded")}catch{}};
  const read=()=>{try{return localStorage.getItem(storageKey)==="collapsed"}catch{return false}};
  const updateCollapse=collapsed=>{
@@ -31,6 +31,11 @@
   mobileToggle.setAttribute("aria-expanded",String(open));
   mobileToggle.setAttribute("aria-label",open?"Fechar menu da conta":"Abrir menu da conta");
  });
+ const account=document.getElementById("customer-sidebar-account");
+ account?.addEventListener("click",()=>{
+  document.querySelector('[data-customer-view="profile"]')?.click();
+  closeMobile();
+ });
  navigation.querySelectorAll("[data-customer-view],[data-open-customer-request],#customer-logout")
   .forEach(control=>control.addEventListener("click",closeMobile));
  document.addEventListener("keydown",event=>{
@@ -38,7 +43,7 @@
    closeMobile();mobileToggle.focus();
   }
  });
- const desktop=window.matchMedia("(min-width: 801px)");
+ const desktop=window.matchMedia("(min-width: 961px)");
  const widthChanged=()=>{if(desktop.matches)closeMobile()};
  desktop.addEventListener?.("change",widthChanged);
 })();
