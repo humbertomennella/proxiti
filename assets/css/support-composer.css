@@ -1,0 +1,82 @@
+/* Campo de resposta: envio integrado ao lado do texto em todos os tamanhos. */
+.reply-composer{min-width:0;display:flex;flex-direction:column;gap:7px}
+.reply-composer .reply-composer-label{
+ display:block;margin:0;color:var(--text);font-size:.76rem;font-weight:740;
+}
+.reply-composer-row{
+ display:flex;align-items:flex-end;gap:8px;min-width:0;
+ padding:6px;border:1px solid var(--chat-border,#58728f);
+ border-radius:15px;background:var(--chat-input,#0b1b2c);
+ transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease;
+}
+.reply-composer-row:focus-within{
+ border-color:var(--blue);
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 14%,transparent);
+}
+#customer-reply .reply-composer-row #customer-reply-text,
+html.embedded #customer-reply .reply-composer-row #customer-reply-text{
+ flex:1 1 auto;width:100%;min-width:0;min-height:43px;max-height:120px;
+ height:43px;margin:0;padding:10px 9px;border:0!important;
+ border-radius:9px;background:transparent;color:var(--text);
+ line-height:1.45;font-size:.82rem;resize:none;overflow-y:auto;
+ box-shadow:none!important;outline:none!important;
+ scrollbar-width:thin;scrollbar-color:var(--chat-border,#58728f) transparent;
+}
+#customer-reply .reply-composer-row #customer-reply-text:focus-visible{
+ outline:none!important;box-shadow:none!important;
+}
+#customer-reply .reply-composer-row #reply-submit{
+ appearance:none;display:inline-flex;align-items:center;justify-content:center;
+ gap:9px;flex:0 0 auto;width:auto;min-width:106px;height:43px;min-height:43px;
+ padding:0 14px;margin:0;border:1px solid transparent;border-radius:10px;
+ background:var(--blue);color:var(--chat-send-ink,#0b1b2c);
+ font:inherit;font-size:.77rem;font-weight:820;line-height:1;
+ box-shadow:0 3px 10px color-mix(in srgb,var(--blue) 20%,transparent);
+ cursor:pointer;transition:transform .16s ease,background-color .16s ease,
+  box-shadow .16s ease,opacity .16s ease;
+}
+html.embedded[data-theme="light"] #customer-reply #reply-submit{color:#fff}
+html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#0b1b2c}
+#customer-reply .reply-composer-row #reply-submit svg{
+ display:block;flex:none;width:18px;height:18px;
+ transition:transform .17s ease;
+}
+#customer-reply .reply-composer-row #reply-submit:not(:disabled):hover{
+ transform:translateY(-1px);background:color-mix(in srgb,var(--blue) 87%,#153c87);
+ box-shadow:0 5px 14px color-mix(in srgb,var(--blue) 28%,transparent);
+}
+#customer-reply .reply-composer-row #reply-submit:not(:disabled):hover svg{
+ transform:translate(2px,-2px);
+}
+#customer-reply .reply-composer-row #reply-submit:active:not(:disabled){
+ transform:translateY(0);box-shadow:none;
+}
+#customer-reply .reply-composer-row #reply-submit:disabled{
+ opacity:.46;box-shadow:none;cursor:not-allowed;transform:none;
+}
+#customer-reply .reply-composer-row #reply-submit[data-sending="true"]{
+ opacity:.82;cursor:progress;
+}
+#customer-reply .reply-composer-row #reply-submit[data-sending="true"] svg{
+ animation:reply-send-working .8s ease-in-out infinite alternate;
+}
+.reply-composer-hint{display:block;margin:0 2px;color:var(--muted);font-size:.67rem;line-height:1.38}
+@keyframes reply-send-working{
+ from{opacity:.45;transform:translate(-2px,2px)}
+ to{opacity:1;transform:translate(2px,-2px)}
+}
+@media(max-width:440px){
+ #customer-reply .reply-composer-row #reply-submit{
+  min-width:44px;width:44px;padding:0;gap:0;
+ }
+ #customer-reply .reply-composer-row #reply-submit .reply-send-text{display:none}
+ .reply-composer-row{gap:5px;padding:5px}
+ .reply-composer-hint{font-size:.64rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .reply-composer-row,#customer-reply .reply-composer-row #reply-submit,
+ #customer-reply .reply-composer-row #reply-submit svg{transition:none}
+ #customer-reply .reply-composer-row #reply-submit[data-sending="true"] svg{animation:none}
+ #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover{transform:none}
+ #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover svg{transform:none}
+}

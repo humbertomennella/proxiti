@@ -13,6 +13,7 @@ const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"
  customerChatCss=read("assets/css/minha-proxiti-chat.css"),
  customerChatJs=read("assets/js/minha-proxiti-chat.js"),
  embedCss=read("assets/css/support-embed-theme.css"),
+ composerCss=read("assets/css/support-composer.css"),
  embedJs=read("assets/js/support-embed-theme.js"),
  theme=read("assets/js/minha-proxiti-theme.js"),home=read("index.html"),
  chat=read("atendimento/index.html"),chatJs=read("assets/js/support-thread.js");
@@ -84,6 +85,7 @@ assert.equal((centralLogin.match(/{/g)||[]).length,(centralLogin.match(/}/g)||[]
 assert.equal((portal.match(/{/g)||[]).length,(portal.match(/}/g)||[]).length);
 assert.equal((customerChatCss.match(/{/g)||[]).length,(customerChatCss.match(/}/g)||[]).length);
 assert.equal((embedCss.match(/{/g)||[]).length,(embedCss.match(/}/g)||[]).length);
+assert.equal((composerCss.match(/{/g)||[]).length,(composerCss.match(/}/g)||[]).length);
 assert(html.includes('<title>MINHA PROXITI')&&html.includes('>MINHA PROXITI <span class="customer-header-caption-secondary">'),
  "A grafia da marca no título e cabeçalho deve ser consistente");
 assert.equal((html.match(/class="customer-brand brand" href="\/minha-proxiti\/"/g)||[]).length,2,
@@ -95,8 +97,8 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  html.includes('id="customer-footer-chat"')&&
  html.includes('id="customer-support-popover"')&&
  html.includes('data-src="/atendimento/?chat=1&amp;embed=1"')&&
- html.includes('minha-proxiti-chat.js?v=20260929-2')&&
- html.includes('minha-proxiti-chat.css?v=20260929-3')&&
+ html.includes('minha-proxiti-chat.js?v=20260929-3')&&
+ html.includes('minha-proxiti-chat.css?v=20260929-4')&&
  html.includes('class="customer-chat-actions" role="group"')&&
  (html.match(/class="customer-chat-control"/g)||[]).length===2&&
  html.includes('id="customer-chat-overlay"')&&
@@ -115,6 +117,20 @@ assert(customerChatCss.includes('width:min(620px,calc(100vw - 32px))')&&
  customerChatCss.includes('@keyframes customer-chat-reveal')&&
  customerChatCss.includes('@media(prefers-reduced-motion:reduce)'),
  "Janela do chat precisa ser mais larga, premium, acessível e ter controles horizontais");
+assert(customerChatCss.includes('width:min(760px,calc(100vw - 28px))')&&
+ customerChatCss.includes('@keyframes customer-chat-open')&&
+ customerChatCss.includes('@keyframes customer-chat-pill-open')&&
+ customerChatJs.includes('panel.animate([')&&customerChatJs.includes('reduceMotion.matches')&&
+ customerChatJs.includes('Promise.allSettled(animations.map'),
+ "O modal precisa abrir e minimizar com efeitos acessíveis e ter largura até 760 px");
+assert(chat.includes('class="reply-composer-row"')&&
+ chat.includes('id="reply-submit" class="support-primary reply-send"')&&
+ chat.includes('support-composer.css?v=20260929-1')&&
+ chat.includes('support-thread.js?v=20260929-2')&&
+ composerCss.includes('#customer-reply .reply-composer-row #reply-submit')&&
+ chatJs.includes('replyField.addEventListener("keydown"')&&
+ chatJs.includes('event.shiftKey')&&chatJs.includes('sendingReply=true'),
+ "O envio da conversa deve ficar ao lado do texto com Enter, quebra de linha e proteção contra duplo envio");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),

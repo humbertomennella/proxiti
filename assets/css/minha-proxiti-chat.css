@@ -191,3 +191,54 @@ html[data-theme="dark"] .customer-support-popover:not([hidden]){
  .customer-support-popover-head .customer-chat-control{transition:none}
  .customer-support-popover-head .customer-chat-control:hover{transform:none}
 }
+
+/* Janela de conversa: mais espaço horizontal e transições contidas no modal. */
+.customer-support-popover:not([hidden]){
+ width:min(760px,calc(100vw - 28px));
+ height:min(760px,calc(100dvh - 28px));
+ border:1.5px solid color-mix(in srgb,var(--blue) 34%,var(--line));
+ border-radius:23px;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--blue) 12%,transparent),
+  0 30px 90px rgba(13,34,68,.22),0 8px 26px rgba(13,34,68,.09),
+  inset 0 1px 0 rgba(255,255,255,.44);
+ animation:customer-chat-open .32s cubic-bezier(.16,1,.3,1) both;
+}
+html[data-theme="dark"] .customer-support-popover:not([hidden]){
+ border-color:color-mix(in srgb,var(--blue) 39%,var(--line));
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--blue) 10%,transparent),
+  0 34px 100px rgba(0,0,0,.46),0 8px 26px rgba(0,0,0,.16),
+  inset 0 1px 0 rgba(255,255,255,.065);
+}
+.customer-support-popover:not([hidden])::before{
+ height:3px;
+ background:linear-gradient(90deg,#3275eb 0%,#8ab7f6 59%,#f3a579 100%);
+}
+.customer-support-popover-head{
+ min-height:78px;padding:16px 22px;
+ background:linear-gradient(115deg,var(--surface),var(--surface2));
+}
+.customer-support-popover-head>.customer-chat-actions{gap:10px}
+.customer-support-popover iframe{background:var(--surface)}
+.customer-chat-minimized:not([hidden]){
+ animation:customer-chat-pill-open .24s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes customer-chat-open{
+ from{opacity:0;scale:.945;translate:0 13px;filter:blur(2px)}
+ to{opacity:1;scale:1;translate:0 0;filter:blur(0)}
+}
+@keyframes customer-chat-pill-open{
+ from{opacity:0;scale:.9;translate:0 9px}
+ to{opacity:1;scale:1;translate:0 0}
+}
+@media(max-width:600px){
+ .customer-support-popover:not([hidden]){
+  width:calc(100vw - 18px);height:min(760px,calc(100dvh - 20px));
+  border-radius:18px;
+ }
+ .customer-support-popover-head{padding:12px 13px;min-height:68px}
+ .customer-support-popover-head>.customer-chat-actions{gap:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .customer-support-popover:not([hidden]),
+ .customer-chat-minimized:not([hidden]){animation:none;scale:1;translate:0 0;filter:none}
+}

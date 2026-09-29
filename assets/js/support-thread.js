@@ -144,15 +144,40 @@
     }catch(error){note(error.message,true);}
     finally{send.disabled=false;}
   });
+  const replyField=el("customer-reply-text"),replyButton=el("reply-submit");
+  const replyLabel=replyButton.querySelector(".reply-send-text");
+  let sendingReply=false;
+  const resizeReply=()=>{
+    replyField.style.height="auto";
+    replyField.style.height=Math.min(120,Math.max(43,replyField.scrollHeight))+"px";
+  };
+  const updateReply=()=>{
+    replyButton.disabled=sendingReply||!replyField.value.trim();
+    replyButton.dataset.sending=String(sendingReply);
+    replyButton.setAttribute("aria-label",sendingReply?"Enviando mensagem":"Enviar mensagem");
+    replyButton.title=sendingReply?"Enviando mensagem":"Enviar mensagem";
+    el("customer-reply").setAttribute("aria-busy",String(sendingReply));
+    if(replyLabel)replyLabel.textContent=sendingReply?"Enviando":"Enviar";
+  };
+  replyField.addEventListener("input",()=>{resizeReply();updateReply();});
+  replyField.addEventListener("keydown",event=>{
+    if(event.key==="Enter"&&!event.shiftKey&&!event.isComposing&&event.keyCode!==229){
+      event.preventDefault();
+      if(!replyButton.disabled)el("customer-reply").requestSubmit(replyButton);
+    }
+  });
+  resizeReply();updateReply();
   el("customer-reply").addEventListener("submit",async event=>{
-    event.preventDefault();if(!ticketId||!token)return;
-    const field=el("customer-reply-text"),msg=field.value.trim(),send=el("reply-submit");
-    if(!msg)return;void enableSound();send.disabled=true;
+    event.preventDefault();if(!ticketId||!token||sendingReply)return;
+    const msg=replyField.value.trim();
+    if(!msg){updateReply();return;}
+    void enableSound();sendingReply=true;replyField.readOnly=true;updateReply();
     try{
       await call("reply",{ticket_id:ticketId,access_token:token,message:msg});
-      field.value="";await refresh();
+      replyField.value="";resizeReply();await refresh();
+      replyField.focus({preventScroll:true});
     }catch(error){note(error.message,true);}
-    finally{send.disabled=false;}
+    finally{sendingReply=false;replyField.readOnly=false;updateReply();}
   });
   el("forget-ticket").addEventListener("click",()=>{
     if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
