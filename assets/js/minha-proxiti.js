@@ -180,12 +180,15 @@ function renderHome(){
   description.textContent="Descreva o problema e acompanhe seu atendimento por aqui.";
   heroAction.firstChild.textContent="Solicitar suporte ";
   heroAction.onclick=formRequest;
-  nextStatus.textContent=devices?"QUANDO PRECISAR":"COMECE POR AQUI";
+  nextStatus.textContent=devices?"SEUS EQUIPAMENTOS":"ORGANIZE SEU ESPAÇO";
   nextDescription.textContent=devices?
-   "Nenhum chamado em andamento. Seus equipamentos estão organizados para o próximo atendimento.":
-   "Solicite suporte quando precisar. Seu histórico e as próximas orientações ficarão aqui.";
-  nextAction.firstChild.textContent=devices?"Ver equipamentos ":"Solicitar suporte ";
-  nextAction.onclick=devices?()=>showView("equipment"):formRequest;
+   "Seus equipamentos continuam disponíveis. Consulte-os para revisar os dados antes de pedir suporte.":
+   "Cadastre seu equipamento para reunir os detalhes que ajudam no próximo atendimento.";
+  nextAction.firstChild.textContent=devices?"Ver equipamentos ":"Cadastrar equipamento ";
+  nextAction.onclick=()=>{
+   showView("equipment");
+   if(!devices)el("customer-device-label").focus();
+  };
  }
 }
 function render(){

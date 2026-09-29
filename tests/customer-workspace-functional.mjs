@@ -367,7 +367,11 @@ try{
  assert.equal(await page.locator("#customer-metric-tickets").innerText(),"0");
  assert.equal(await page.locator("#customer-metric-open").innerText(),"0");
  assert.equal(await page.locator("#customer-metric-equipment").innerText(),"0");
- assert.equal(await page.locator("#customer-next-status").innerText(),"COMECE POR AQUI");
+ assert.equal(await page.locator("#customer-next-status").innerText(),"ORGANIZE SEU ESPAÇO");
+ assert((await page.locator("#customer-next-action").innerText()).includes("Cadastrar equipamento"));
+ await page.click("#customer-next-action");
+ assert.equal(await page.locator('[data-customer-panel="equipment"]').isVisible(),true);
+ assert.equal(await page.evaluate(()=>document.activeElement?.id),"customer-device-label");
  assert.equal(await page.locator("#customer-nav").count(),0);
  assert.equal(await page.locator(".customer-nav svg").count(),6);
  assert.equal(await page.locator("#customer-mobile-menu").getAttribute("aria-expanded"),"false");
@@ -435,6 +439,27 @@ try{
  const wideDocument=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth}));
  assert(wideDocument.scroll<=wideDocument.viewport+1,
   "Layout expandido não pode criar rolagem horizontal em 1649px: "+JSON.stringify(wideDocument));
+ const polish=await page.evaluate(()=>{
+  const rect=selector=>{
+   const {x,y,width,height,right,bottom}=document.querySelector(selector).getBoundingClientRect();
+   return {x,y,width,height,right,bottom};
+  };
+  return {footer:rect(".customer-footer-inner"),
+   footerBottom:rect(".customer-footer-bottom"),
+   recent:rect("#customer-app .customer-home-bottom>.customer-card:first-child"),
+   tools:rect("#customer-app .customer-tools-card"),
+   heading:rect("#customer-home-hero-title"),
+   headingWrap:getComputedStyle(document.getElementById("customer-home-hero-title")).textWrap};
+ });
+ assert(Math.abs(polish.footer.x-wide.shell.x)<2&&
+  Math.abs(polish.footer.width-wide.shell.width)<2&&
+  Math.abs(polish.footerBottom.x-wide.shell.x)<2,
+  "O rodapé da conta deve alinhar com a largura inteira do painel: "+JSON.stringify(polish));
+ assert(polish.recent.height<polish.tools.height&&polish.recent.height<=190,
+  "A lista vazia não deve esticar com o cartão de ferramentas: "+JSON.stringify(polish));
+ assert(polish.heading.height>=35&&polish.heading.height<=130&&
+  polish.headingWrap==="balance",
+  "O título do banner não pode deixar apenas uma palavra na última linha: "+JSON.stringify(polish));
  await page.click("#customer-sidebar-toggle");
  const wideCollapsed=await measureDashboard();
  assert(wideCollapsed.sidebar.width>=74&&wideCollapsed.sidebar.width<=79&&
@@ -449,6 +474,36 @@ try{
  assert.equal(await page.locator('[data-customer-panel="profile"]').isVisible(),true,
   "O cartão de conta na barra lateral deve abrir o perfil real");
  assert.equal(await page.locator("#customer-current-view").innerText(),"Meu perfil");
+ await page.setViewportSize({width:1649,height:928});
+ const profile=await page.evaluate(()=>{
+  const rect=selector=>{
+   const {x,y,width,height,right}=document.querySelector(selector).getBoundingClientRect();
+   return {x,y,width,height,right};
+  };
+  return {profile:rect(".customer-profile-layout"),
+   details:rect(".customer-profile-card"),
+   security:rect(".customer-profile-security"),
+   name:rect("#customer-profile-name"),
+   email:rect("#customer-profile-email"),
+   footer:rect(".customer-footer-inner"),
+   shell:rect("#customer-app"),
+   viewport:innerWidth,scroll:document.documentElement.scrollWidth};
+ });
+ assert(profile.profile.width>=1320&&profile.profile.width<=1340&&
+  profile.details.width>=780&&profile.security.width>=360&&
+  profile.security.x>=profile.details.right+12,
+  "Perfil e segurança precisam ocupar colunas proporcionais: "+JSON.stringify(profile));
+ assert(Math.abs(profile.name.y-profile.email.y)<3&&
+  Math.abs(profile.footer.x-profile.shell.x)<2&&
+  profile.scroll<=profile.viewport+1,
+  "Campos e rodapé do perfil não devem deixar grande vazio ou rolagem horizontal: "+
+   JSON.stringify(profile));
+ await page.fill("#customer-profile-phone","41999998888");
+ await page.click("#customer-profile-form button[type=submit]");
+ await page.waitForFunction(()=>window.__customerFixture.account.phone==="41999998888");
+ assert.equal(await page.locator("#customer-profile-password").isVisible(),true,
+  "A ação de recuperação de senha permanece disponível");
+ await page.setViewportSize({width:1280,height:850});
  await page.click('[data-customer-view="tickets"]');
  await page.click('[data-customer-panel="tickets"] [data-open-customer-request]');
  await page.fill("#customer-request-subject","Notebook não inicia");

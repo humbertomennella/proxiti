@@ -16,7 +16,7 @@ body:has(#customer-app:not([hidden])) .customer-header-caption{
 #customer-app{
  display:grid;grid-template-columns:252px minmax(0,1fr);gap:20px;
  align-items:start;width:calc(100% - 48px);max-width:none;
- min-height:calc(100dvh - 170px);margin:22px auto 54px;
+ min-height:calc(100dvh - 170px);margin:22px auto 24px;
  background:transparent;
 }
 #customer-app .customer-sidebar{
@@ -210,7 +210,7 @@ body:has(#customer-app:not([hidden])) .customer-header-caption{
  color:#bcd5fb;font-size:.63rem;font-weight:850;letter-spacing:.11em;
 }
 #customer-app .welcome-hero h2{
- margin:7px 0 9px;max-width:31ch;
+ margin:7px 0 9px;max-width:38ch;text-wrap:balance;
  color:#fff;font-size:clamp(1.65rem,2.65vw,2.05rem);
  font-weight:800;line-height:1.18;letter-spacing:-.043em;
 }
@@ -303,7 +303,7 @@ body:has(#customer-app:not([hidden])) .customer-header-caption{
 #customer-app #customer-next-action svg{display:block;width:15px;height:15px}
 #customer-app .customer-home-bottom{
  display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr);
- gap:12px;align-items:stretch;
+ gap:12px;align-items:start;
 }
 #customer-app .customer-home-bottom>.customer-card{
  display:grid;align-content:start;gap:12px;
@@ -536,4 +536,122 @@ body:has(#customer-app:not([hidden])) .customer-header-caption{
  #customer-app .customer-nav button,
  #customer-app .sidebar-collapse,#customer-app .sidebar-mobile-toggle,
  #customer-app .customer-sidebar-bottom button{transition:none}
+}
+
+/* V3: harmonização das telas privadas sem modificar os fluxos.
+   Mantém o rodapé/login público com a largura original fora da área autenticada. */
+body:has(#customer-app:not([hidden])) .customer-footer-inner,
+body:has(#customer-app:not([hidden])) .customer-footer-bottom{
+ width:calc(100% - 48px);max-width:none;
+}
+body:has(#customer-app:not([hidden])) .customer-footer-inner{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;
+ align-items:start;gap:24px;
+}
+body:has(#customer-app:not([hidden])) .customer-footer-about{
+ min-width:0;max-width:650px;
+}
+body:has(#customer-app:not([hidden])) .customer-footer nav{
+ max-width:100%;align-content:start;
+}
+#customer-app #customer-home-tickets .customer-empty{
+ margin:0;padding:13px 15px;
+ border:1px dashed var(--line);border-radius:10px;
+ background:var(--surface2);color:var(--muted);
+ font-size:.77rem;line-height:1.6;
+}
+#customer-app .customer-home-bottom>.customer-card{
+ min-height:0;
+}
+/* Perfil: informações editáveis e segurança ficam em cartões independentes.
+   Nada muda nos IDs dos campos, no envio ou na recuperação de acesso. */
+#customer-app [data-customer-panel="profile"] .customer-profile-layout{
+ display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.85fr);
+ align-items:start;gap:16px;width:100%;min-width:0;
+}
+#customer-app .customer-profile-layout>.customer-card{
+ display:grid;align-content:start;gap:18px;
+ min-width:0;max-width:none;margin:0;padding:clamp(19px,2vw,26px);
+ border:1px solid var(--line);border-radius:15px;
+ background:var(--surface);
+}
+#customer-app .customer-profile-layout h2{
+ margin:0;color:var(--text);font-size:1.09rem;
+ font-weight:800;line-height:1.35;letter-spacing:-.024em;
+}
+#customer-app .customer-profile-card .customer-form{
+ display:grid;align-content:start;gap:19px;
+}
+#customer-app .customer-profile-fields{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ align-items:start;gap:16px 15px;min-width:0;
+}
+#customer-app .customer-profile-fields label{
+ display:grid;gap:7px;min-width:0;
+ font-size:.78rem;font-weight:730;line-height:1.5;
+ color:var(--text);
+}
+#customer-app .customer-profile-fields :is(input,select){
+ width:100%;min-width:0;min-height:46px;
+}
+#customer-app .customer-profile-fields input[readonly]{
+ cursor:default;opacity:1;color:var(--muted);
+ background:var(--surface2);
+}
+#customer-app .customer-profile-card .customer-form>button{
+ justify-self:start;min-width:160px;min-height:43px;
+ padding:10px 19px;border-radius:10px;
+ font-size:.81rem;
+}
+#customer-app .customer-profile-security{
+ gap:16px;
+}
+#customer-app .customer-security-heading{
+ display:flex;align-items:center;gap:11px;min-width:0;
+}
+#customer-app .customer-security-icon{
+ display:grid;place-items:center;flex:none;width:37px;height:37px;
+ border:1px solid color-mix(in srgb,var(--blue) 27%,var(--line));
+ border-radius:11px;background:var(--soft-blue);color:var(--blue);
+}
+#customer-app .customer-security-icon svg{display:block;width:20px;height:20px}
+#customer-app .customer-profile-security>p{
+ margin:0;max-width:56ch;color:var(--muted);
+ font-size:.82rem;line-height:1.64;overflow-wrap:anywhere;
+}
+#customer-app .customer-profile-security>button{
+ width:100%;min-height:43px;margin-top:3px;
+ padding:10px 12px;font-size:.78rem;font-weight:760;
+ white-space:normal;line-height:1.4;
+}
+@media(max-width:1180px){
+ #customer-app [data-customer-panel="profile"] .customer-profile-layout{
+  grid-template-columns:1fr;
+ }
+ #customer-app .customer-profile-security{
+  max-width:none;
+ }
+}
+@media(max-width:960px){
+ body:has(#customer-app:not([hidden])) .customer-footer-inner,
+ body:has(#customer-app:not([hidden])) .customer-footer-bottom{
+  width:calc(100% - 36px);
+ }
+ body:has(#customer-app:not([hidden])) .customer-footer-inner{
+  grid-template-columns:1fr;gap:14px;
+ }
+ body:has(#customer-app:not([hidden])) .customer-footer nav{
+  justify-content:flex-start;padding-top:0;
+ }
+}
+@media(max-width:620px){
+ body:has(#customer-app:not([hidden])) .customer-footer-inner,
+ body:has(#customer-app:not([hidden])) .customer-footer-bottom{
+  width:calc(100% - 24px);
+ }
+ #customer-app .customer-profile-fields{grid-template-columns:1fr;gap:14px}
+ #customer-app .customer-profile-layout>.customer-card{padding:18px}
+ #customer-app .customer-profile-card .customer-form>button{
+  justify-self:stretch;
+ }
 }
