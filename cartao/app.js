@@ -1,7 +1,7 @@
 'use strict';
 const card=document.querySelector('#card'),front=document.querySelector('#front'),back=document.querySelector('#back'),side=document.querySelector('#side');
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-const MAX_TILT=14,SWIPE_DISTANCE=68;
+const MAX_TILT=45,SWIPE_DISTANCE=68;
 let flat=reduced.matches,activeBack=false,angle=0,base=0,animation=0,busy=false,gesture=null,suppressClick=false;
 function a11y(b){const changed=activeBack!==b;activeBack=b;card.dataset.side=b?'back':'front';front.inert=b;back.inert=!b;front.setAttribute('aria-hidden',String(b));back.setAttribute('aria-hidden',String(!b));if(changed)side.textContent=b?'Verso do cartão':'Frente do cartão';}
 function render(){card.style.transform=`rotateY(${angle}deg)`;card.style.setProperty('--light-x',`${50+Math.sin(angle*Math.PI/180)*45}%`);card.style.setProperty('--light-y','50%');card.style.setProperty('--shine',gesture?.horizontal||busy?'.65':'.3');if(!flat)a11y(Math.cos(angle*Math.PI/180)<0);}
