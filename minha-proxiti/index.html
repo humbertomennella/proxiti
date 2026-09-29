@@ -71,7 +71,7 @@
 </section>
 <section data-customer-panel="tickets" hidden aria-labelledby="customer-tickets-title">
 <div class="section-head"><div><span class="eyebrow">ACOMPANHAMENTO</span><h1 id="customer-tickets-title">Meus atendimentos</h1><p>Histórico e conversas dos chamados vinculados à sua conta, em qualquer dispositivo após entrar.</p></div><button class="primary" data-open-customer-request type="button">Novo pedido de suporte</button></div>
-<section class="customer-card"><h2>Trazer uma conversa antiga</h2><p>Se abriu atendimento pelo chat sem login, use a chave guardada neste navegador. Só vinculamos chamados com a mesma conta de e-mail confirmado.</p><form id="customer-link-ticket-form" class="customer-form inline-form"><label>Conversa salva neste navegador<select id="customer-link-ticket" required><option value="">Selecione um chamado salvo</option></select></label><button class="secondary" type="submit">Vincular à minha conta</button></form><small>Se a conversa está em outro dispositivo, use aquele navegador para vinculá-la à conta.</small></section>
+<section class="customer-card"><h2>Trazer uma conversa antiga</h2><p>Se abriu atendimento pelo chat sem login, use a chave guardada neste navegador. Só vinculamos conversas quando você possui a chave privada do chamado e o endereço do atendimento corresponde ao da sua conta.</p><form id="customer-link-ticket-form" class="customer-form inline-form"><label>Conversa salva neste navegador<select id="customer-link-ticket" required><option value="">Selecione um chamado salvo</option></select></label><button class="secondary" type="submit">Vincular à minha conta</button></form><small>Se a conversa está em outro dispositivo, use aquele navegador para vinculá-la à conta.</small></section>
 <div id="customer-ticket-list" class="customer-card-grid"></div>
 <section id="customer-ticket-detail" class="customer-card" hidden aria-labelledby="customer-ticket-detail-title"><div class="section-head"><h2 id="customer-ticket-detail-title">Atendimento</h2><button id="customer-close-ticket" class="secondary">Voltar aos atendimentos</button></div>
 <p id="customer-thread-status" class="status" aria-live="polite"></p><div id="customer-thread" class="customer-thread" role="log" aria-label="Conversa do atendimento"></div>
@@ -108,7 +108,7 @@
 <section data-customer-panel="profile" hidden aria-labelledby="customer-profile-title"><div class="section-head"><div><span class="eyebrow">SUA CONTA</span><h1 id="customer-profile-title">Meu perfil</h1><p>Mantenha apenas as informações necessárias para o seu atendimento.</p></div></div>
 <section class="customer-card narrow"><form id="customer-profile-form" class="customer-form">
 <label>Nome<input id="customer-profile-name" minlength="2" maxlength="120" required autocomplete="name"></label>
-<label>E-mail confirmado<input id="customer-profile-email" readonly autocomplete="email"></label>
+<label>E-mail da conta<input id="customer-profile-email" readonly autocomplete="email"></label>
 <label>Telefone (opcional)<input id="customer-profile-phone" maxlength="40" autocomplete="tel"></label>
 <label>Cidade (opcional)<input id="customer-profile-city" maxlength="120" autocomplete="address-level2"></label>
 <label>Canal preferido<select id="customer-profile-channel"><option value="email">E-mail</option><option value="whatsapp">WhatsApp</option><option value="phone">Telefone</option></select></label>
