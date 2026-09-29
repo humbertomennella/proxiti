@@ -409,7 +409,7 @@ try{
  await page.click('[data-customer-view="home"]');
  assert.equal(await page.locator("#customer-metric-tickets").innerText(),"1");
  assert.equal(await page.locator("#customer-metric-open").innerText(),"1");
- assert.equal(await page.locator("#customer-next-status").innerText(),"ATENDIMENTO EM ANDAMENTO");
+ assert.equal(await page.locator("#customer-next-status").innerText(),"CHAMADO REGISTRADO");
  assert((await page.locator("#customer-next-description").innerText()).includes("Chamado #17"));
  assert.equal(await page.locator("#customer-home-action").innerText(),"Ver meus atendimentos ↗");
  await page.click("#customer-next-action");
