@@ -50,6 +50,14 @@ try{
    },
    rpc(name,args){
     fixture.rpcCalls.push({name,args});
+    if(name==="proxiti_customer_access_status")
+      return ok({active:!!fixture.account,can_activate:!fixture.account});
+    if(name==="proxiti_customer_activate"){
+      if(!args?.p_privacy_accepted)return Promise.resolve({data:null,error:{message:"Consentimento ausente"}});
+      fixture.account={display_name:"Cliente de teste",phone:"",city:"",
+       preferred_channel:"email"};
+      return ok({ok:true});
+    }
     if(name==="proxiti_customer_dashboard")return ok({
       account:fixture.account,tickets:fixture.tickets,devices:fixture.devices,
       schedule:fixture.schedule,preferences:fixture.preferences,ratings:fixture.ratings
@@ -108,13 +116,6 @@ try{
      consent:b.privacy_accepted
    });
    response={ok:true,login_ready:true};
-  }else if(b.action==="customer_access_status"){
-   response={active:!!fx.account,can_activate:!fx.account};
-  }else if(b.action==="customer_activate"){
-   if(b.privacy_accepted!==true)throw new Error("Consentimento ausente");
-   await page.evaluate(()=>{window.__customerFixture.account={
-    display_name:"Cliente de teste",phone:"",city:"",preferred_channel:"email"};});
-   response={ok:true};
   }else if(b.action==="account_open"){
    response={ok:true,id:"55555555-5555-4555-8555-555555555555",
     reference:17,status:"new",access_token:"a".repeat(64)};
