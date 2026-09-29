@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="/assets/css/support.css">
 <link rel="stylesheet" href="/assets/css/proxiti-ui.css">
 <link rel="stylesheet" href="/assets/css/support-embed-theme.css?v=20260929-1">
-<link rel="stylesheet" href="/assets/css/support-composer.css?v=20260929-1">
+<link rel="stylesheet" href="/assets/css/support-composer.css?v=20260929-2">
 <script src="/assets/js/support-config.js" defer></script>
-<script src="/assets/js/support-thread.js?v=20260929-2" defer></script>
+<script src="/assets/js/support-thread.js?v=20260929-3" defer></script>
 <script src="/assets/js/support-embed-theme.js?v=20260929-1" defer></script>
 </head>
 <body>
@@ -30,10 +30,16 @@
 <label for="support-name">Seu nome</label><input id="support-name" type="text" maxlength="120" minlength="2" autocomplete="name" required placeholder="Nome para o atendimento">
 <label for="support-email">E-mail</label><input id="support-email" type="email" maxlength="254" autocomplete="email" required placeholder="seuemail@exemplo.com">
 <label for="support-subject">Assunto</label><input id="support-subject" type="text" maxlength="160" minlength="4" required value="Atendimento pelo chat">
-<label for="support-description">Como podemos ajudar?</label><textarea id="support-description" rows="5" minlength="8" maxlength="2000" required placeholder="Conte o que aconteceu. Não informe senhas ou códigos de autenticação."></textarea>
 <div class="honeypot" aria-hidden="true"><label for="support-company">Website</label><input id="support-company" autocomplete="off" tabindex="-1"></div>
 <label class="support-consent"><input id="support-consent" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para este atendimento.</span></label>
-<button class="support-primary" type="submit" id="start-submit">Iniciar conversa <span aria-hidden="true">↗</span></button>
+<div class="support-start-composer">
+<label for="support-description" class="support-start-composer-label">Como podemos ajudar?</label>
+<div class="support-start-composer-row">
+<textarea id="support-description" rows="5" minlength="8" maxlength="2000" required placeholder="Conte o que aconteceu." aria-describedby="support-start-composer-hint"></textarea>
+<button class="support-primary support-start-send" type="submit" id="start-submit" aria-label="Iniciar conversa" title="Iniciar conversa"><span class="support-start-send-label">Iniciar</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 14-7-4.5 14-3.1-6.1L5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m11.4 12.9 7.4-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+</div>
+<small id="support-start-composer-hint" class="support-start-composer-hint">Não informe senhas nem códigos de autenticação.</small>
+</div>
 </form>
 <section id="support-conversation" hidden aria-labelledby="conversation-heading">
 <div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><div class="chat-actions"><button type="button" id="customer-sound-toggle" class="support-plain" aria-pressed="true" aria-label="Desativar alertas" title="Desativar alertas">♫ Alertas ativados</button><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div></div>
