@@ -108,6 +108,13 @@ try{
      consent:b.privacy_accepted
    });
    response={ok:true,login_ready:true};
+  }else if(b.action==="customer_access_status"){
+   response={active:!!fx.account,can_activate:!fx.account};
+  }else if(b.action==="customer_activate"){
+   if(b.privacy_accepted!==true)throw new Error("Consentimento ausente");
+   await page.evaluate(()=>{window.__customerFixture.account={
+    display_name:"Cliente de teste",phone:"",city:"",preferred_channel:"email"};});
+   response={ok:true};
   }else if(b.action==="account_open"){
    response={ok:true,id:"55555555-5555-4555-8555-555555555555",
     reference:17,status:"new",access_token:"a".repeat(64)};
@@ -199,8 +206,21 @@ try{
  await page.waitForSelector("#customer-auth:not([hidden])");
  assert.equal(await page.locator("#customer-app").isVisible(),false);
  assert.equal(await page.locator("#customer-ticket-list").innerText(),"");
+ // Conta previamente usada na Central Técnica pode ativar a área sem criar outro Auth user.
+ await page.evaluate(()=>{window.__customerFixture.account=null;});
+ await page.fill("#customer-login-email","cliente@example.com");
+ await page.fill("#customer-login-password","Teste123@ab");
+ await page.click("#customer-login-form button[type=submit]");
+ await page.waitForSelector("#customer-activate-form:not([hidden])");
+ assert.equal(await page.locator("#customer-app").isVisible(),false);
+ assert.equal(await page.locator("#customer-verify-retry").isVisible(),false);
+ await page.check("#customer-activate-privacy");
+ await page.click("#customer-activate-form button[type=submit]");
+ await page.waitForSelector("#customer-app:not([hidden])");
+ assert.equal(await page.locator("#customer-verify").isVisible(),false);
+ assert((await page.textContent("#customer-welcome")).includes("Cliente de teste"));
  assert.deepEqual(errors,[]);
  await page.close();
- console.log("PASS: cadastro separado, login, chamado real simulado, conversa, proposta, equipamento, agenda, preferência e logout sem vazamento.");
+ console.log("PASS: cadastro, ativação de conta existente, login, chamado, conversa, proposta, equipamento, agenda e logout sem vazamento.");
 }finally{await page?.close().catch(()=>{});await browser.close();
  await new Promise(resolve=>server.close(resolve));}
