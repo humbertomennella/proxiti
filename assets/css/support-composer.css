@@ -212,3 +212,43 @@ html.embedded #forget-ticket{
 @media(max-width:440px){
  html.embedded #forget-ticket{font-size:.72rem}
 }
+
+/* Encerramento do chamado sem perda do histórico. */
+html.embedded #close-ticket{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:38px;padding:8px 12px;
+ border:1px solid color-mix(in srgb,#b64d4d 34%,var(--chat-border));
+ border-radius:10px;background:var(--chat-surface2);color:var(--text);
+ font-size:.78rem;font-weight:760;line-height:1.3;
+ white-space:normal;text-align:center;
+}
+html.embedded #close-ticket:hover:not(:disabled){
+ background:color-mix(in srgb,#d95757 9%,var(--chat-surface2));
+ border-color:#b64d4d;color:var(--text);
+}
+html.embedded #close-ticket:disabled{opacity:.7;cursor:progress}
+.conversation-closed:not([hidden]){
+ display:flex;align-items:center;justify-content:space-between;
+ flex-wrap:wrap;gap:10px;
+ padding:14px 16px;margin:0 0 13px;
+ border:1px solid color-mix(in srgb,#2b9470 33%,var(--chat-border,#526a84));
+ border-radius:13px;background:var(--chat-online,#183b31);
+ color:var(--chat-online-ink,#e6faef);
+}
+.conversation-closed p{
+ margin:0!important;color:inherit!important;
+ font-size:.85rem!important;line-height:1.5!important;font-weight:650;
+}
+.conversation-closed button{
+ flex:none;min-height:38px;padding:8px 12px;
+ border:1px solid currentColor;border-radius:9px;
+ background:transparent;color:inherit;
+ font-size:.78rem;font-weight:760;white-space:normal;
+}
+.conversation-closed button:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+@media(max-width:580px){
+ html.embedded .conversation-head .chat-actions{
+  justify-content:flex-start;gap:7px;flex-wrap:wrap;
+ }
+ .conversation-closed button{width:100%}
+}
