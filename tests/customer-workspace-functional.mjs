@@ -104,7 +104,7 @@ try{
    await page.evaluate(input=>window.__customerFixture.signups.push(input),{
      email:b.email,passwordLength:b.password?.length,
      hasDigit:/[0-9]/.test(b.password||""),
-     hasSymbol:/[^\\p{L}\\p{N}\\s]/u.test(b.password||""),
+     hasSymbol:/[@#$!%&*]/.test(b.password||""),
      consent:b.privacy_accepted
    });
    response={ok:true,login_ready:true};
