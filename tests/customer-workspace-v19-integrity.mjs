@@ -32,7 +32,7 @@ assert(home.includes('href="/minha-proxiti/"')&&
  chat.includes('id="support-start"')&&chatJs.includes('call("create"'),
  "A conta é opcional e o chat anônimo continua funcionando");
 assert(js.includes('action:"customer_register"')&&js.includes('validCustomerPassword')&&
- js.includes('customer_access_status')&&js.includes('customer_activate')&&
+ js.includes('proxiti_customer_access_status')&&js.includes('proxiti_customer_activate')&&
  html.includes('id="customer-activate-privacy"')&&
  js.includes('storageKey:"proxiti-customer-session"')&&
  js.includes("proxiti_customer_link_ticket")&&js.includes("proxiti_customer_dashboard"),
