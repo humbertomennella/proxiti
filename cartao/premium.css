@@ -99,43 +99,8 @@ header>.wordmark{font-size:1.25rem;letter-spacing:-.055em}
 @media(prefers-reduced-motion:reduce){.brand-word>.brand-blue{background:none;color:#67a2ff}}
 @media(forced-colors:active){.card-brand>.brand-word,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{background:none;color:CanvasText}}
 
-/* Compact contact page: actions remain available on either side. */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-header{max-width:780px;padding:18px 24px}
-header>.quiet{display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-align:center}
-.stage{min-height:0;padding:20px 24px 26px}
-.card{min-height:0}
-.face{padding:1.75rem;gap:1rem}
-.front-copy{margin:.5rem 0}
-.front h2{font-size:2.25rem;max-width:20ch;margin:.7rem 0 1rem}
-.card-bottom,.back-links{padding-top:1rem}
-.back h2{font-size:1.65rem}
-.steps p{padding-bottom:.4rem;margin-bottom:.4rem}
+/* Secondary links stay separate from the main card action. */
+.save-contact,.site-more{text-align:center;margin:12px 20px;font-size:.875rem}
+.save-contact a,.site-more a{display:inline-flex;align-items:center;min-height:44px;color:#b7cbe0;text-decoration:underline;text-underline-offset:4px}
 .card-contact{font-size:.875rem;gap:0;overflow-wrap:anywhere}
 .card-contact a{display:flex;align-items:center;min-height:44px}
-.quick-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:748px;margin:0 auto;padding:0 24px}
-.quick-actions>.quiet{display:inline-flex;justify-content:center;align-items:center;min-height:48px;text-align:center}
-.hint{margin:18px auto 12px}
-.side{margin:12px 0 20px}
-.site-more{text-align:center;font-size:.875rem;margin:0 20px 20px}
-.site-more a{display:inline-flex;align-items:center;min-height:44px;color:#a7bfd8;text-decoration:underline;text-underline-offset:4px}
-footer{max-width:700px;margin:0 auto;padding:20px 24px}
-@media(max-width:650px){
- header{padding:14px 18px;gap:12px}
- header>.quiet{font-size:.8125rem;padding:8px 12px}
- .stage{min-height:0;padding:12px 18px 24px}
- .card{min-height:0;max-width:410px}
- .face{padding:1.25rem;gap:.8rem}
- .card-top{gap:.7rem}
- .front-copy{margin:.4rem 0}
- .front h2{font-size:1.85rem;line-height:1.15;margin:.7rem 0 .85rem}
- .front p{font-size:1rem;line-height:1.5}
- .back h2{font-size:1.5rem}
- .steps p{font-size:.9375rem;line-height:1.4}
- .back-links{gap:.25rem}
- .quick-actions{max-width:446px;display:grid;grid-template-columns:1fr 1fr;padding:0 18px}
- .quick-actions>.primary{grid-column:1/-1}
- .quick-actions>.quiet{font-size:.8125rem;padding:10px}
- .hint{margin:16px auto 12px}
- footer{margin:0 18px;padding:18px 0}
-}
