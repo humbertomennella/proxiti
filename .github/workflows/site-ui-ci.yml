@@ -33,6 +33,8 @@ jobs:
       - name: Verificar temas, framework e scripts
         run: |
           node --check assets/js/support-thread.js
+          node --check assets/js/support-embed-theme.js
+          node --check assets/js/minha-proxiti-chat.js
           node tests/site-ui.mjs
           node --check assets/js/minha-proxiti.js
           node --check assets/js/minha-proxiti-theme.js
@@ -41,7 +43,7 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Testar consulta e decisão de orçamento pelo cliente
+      - name: Confirmar chat público sem propostas e acesso ao atendimento
         run: node tests/customer-quote-functional.mjs
       - name: Simular cadastro e recursos da Minha PROXITI
         run: node tests/customer-workspace-functional.mjs

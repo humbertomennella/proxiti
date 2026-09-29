@@ -1,64 +1,92 @@
-/* Acesso institucional e conversa flutuante na Minha PROXITI. */
+/* Chat da Minha PROXITI: centralizado, acessível e com as cores do tema ativo. */
 .customer-header .customer-explore{
- display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;
  min-height:39px;padding:7px 11px;border:1px solid var(--line);
  border-radius:10px;background:var(--surface);color:var(--text);
- font-size:.74rem;font-weight:760;text-decoration:none;white-space:nowrap;
+ font-size:.76rem;font-weight:760;text-decoration:none;white-space:nowrap;
  transition:border-color .18s ease,background-color .18s ease;
 }
-.customer-header .customer-explore:hover,
-.customer-header .customer-explore:focus-visible{
+.customer-header .customer-explore:hover{
  background:var(--soft-blue);border-color:var(--blue);color:var(--text);
 }
-.customer-explore-icon{display:inline-grid;place-items:center;font-size:1.01rem;line-height:1;color:var(--blue)}
+.customer-explore-icon{font-size:1rem;line-height:1;color:var(--blue)}
 .customer-header-caption{font-size:.68rem;letter-spacing:.035em;font-weight:790}
 .customer-header-caption-secondary{letter-spacing:0;font-weight:500}
 .customer-footer nav button{
  appearance:none;border:0;background:transparent;padding:0;margin:0;
  color:var(--text);font:inherit;font-size:.77rem;font-weight:690;
- line-height:inherit;text-align:left;cursor:pointer;text-decoration:none;
+ line-height:inherit;text-align:left;cursor:pointer;
 }
 .customer-footer nav button:hover{color:var(--blue);text-decoration:underline}
-.customer-footer nav button:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:3px}
+.customer-footer nav button:focus-visible,
+.customer-chat-actions button:focus-visible,
+.customer-chat-minimized button:focus-visible{
+ outline:3px solid var(--focus);outline-offset:3px;
+}
+.customer-chat-overlay:not([hidden]){
+ display:block;position:fixed;inset:0;z-index:1199;
+ background:rgba(13,29,51,.31);backdrop-filter:blur(2px);
+}
+html[data-theme="dark"] .customer-chat-overlay:not([hidden]){background:rgba(2,8,19,.62)}
 .customer-support-popover:not([hidden]){
- position:fixed;right:max(14px,env(safe-area-inset-right));
- bottom:max(16px,env(safe-area-inset-bottom));
+ position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
  z-index:1200;display:flex;flex-direction:column;
- width:min(430px,calc(100vw - 28px));
- height:min(650px,calc(100dvh - 32px));
- overflow:hidden;border:1px solid #38506c;border-radius:17px;
- background:#0e1c2e;color:#f1f6ff;box-shadow:0 24px 75px #06152855;
+ width:min(520px,calc(100vw - 32px));height:min(690px,calc(100dvh - 40px));
+ overflow:hidden;border:1px solid var(--line);border-radius:18px;
+ background:var(--surface);color:var(--text);
+ box-shadow:0 26px 90px rgba(13,31,55,.24);
+}
+html[data-theme="dark"] .customer-support-popover:not([hidden]){
+ box-shadow:0 28px 94px rgba(0,0,0,.46);
 }
 .customer-support-popover-head{
- display:flex;align-items:center;justify-content:space-between;
- gap:12px;flex:0 0 auto;padding:13px 15px;
- border-bottom:1px solid #39506b;background:#152b44;
+ display:flex;align-items:center;justify-content:space-between;flex:0 0 auto;
+ gap:12px;padding:13px 15px;border-bottom:1px solid var(--line);
+ background:var(--surface);color:var(--text);
 }
 .customer-support-popover-head>div{display:grid;gap:2px;min-width:0}
-.customer-support-popover-head strong{font-size:.9rem;font-weight:820}
-.customer-support-popover-head small{font-size:.7rem;color:#bed0e6;line-height:1.35}
-.customer-support-popover-head button{
- display:grid;place-items:center;flex:0 0 auto;
- width:34px;height:34px;padding:0;border:1px solid #4a637f;border-radius:9px;
- background:#1b3551;color:#f4f8fe;font-size:.95rem;line-height:1;
+.customer-support-popover-head strong{font-size:.91rem;font-weight:820}
+.customer-support-popover-head small{font-size:.72rem;color:var(--muted);line-height:1.35}
+.customer-chat-actions{display:flex;gap:6px;flex:none;align-items:center}
+.customer-chat-actions button{
+ display:grid;place-items:center;width:35px;height:35px;padding:0;
+ border:1px solid var(--line);border-radius:10px;
+ background:var(--surface2);color:var(--text);font:inherit;font-size:1.08rem;line-height:1;
 }
-.customer-support-popover-head button:hover{background:#2c4b6c}
+.customer-chat-actions button:hover{border-color:var(--blue);color:var(--blue)}
 .customer-support-popover iframe{
  display:block;flex:1 1 auto;min-height:0;width:100%;border:0;
- background:#0f2033;color-scheme:dark;
+ background:var(--surface);color-scheme:inherit;
 }
-@media(max-width:740px){
- .customer-header-caption{display:none}
+.customer-chat-minimized:not([hidden]){
+ position:fixed;right:clamp(12px,3vw,26px);
+ bottom:max(18px,env(safe-area-inset-bottom));z-index:1200;
+ display:flex;align-items:stretch;gap:4px;padding:5px;
+ border:1px solid var(--line);border-radius:14px;
+ background:var(--surface);color:var(--text);
+ box-shadow:0 12px 40px rgba(14,30,51,.2);
 }
+.customer-chat-minimized button{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ border:0;border-radius:9px;padding:9px 13px;
+ background:transparent;color:var(--text);font:inherit;
+ font-size:.79rem;font-weight:750;
+}
+.customer-chat-minimized button:hover{background:var(--surface2)}
+.customer-chat-minimized button:last-child{width:34px;padding:9px}
+.customer-chat-minimized button span{color:var(--blue)}
+@media(max-width:740px){.customer-header-caption{display:none}}
 @media(max-width:600px){
  .customer-header .customer-explore{min-width:40px;width:40px;padding:7px}
  .customer-explore-label{display:none}
  .customer-support-popover:not([hidden]){
-  width:calc(100vw - 20px);right:10px;bottom:max(10px,env(safe-area-inset-bottom));
-  height:min(690px,calc(100dvh - 20px));border-radius:13px;
+  width:calc(100vw - 20px);height:calc(100dvh - 24px);
+  max-height:720px;border-radius:14px;
  }
  .customer-support-popover-head{padding:11px 12px}
+ .customer-chat-overlay:not([hidden]){backdrop-filter:none}
 }
 @media(prefers-reduced-motion:reduce){
  .customer-header .customer-explore{transition:none}
+ .customer-chat-overlay:not([hidden]){backdrop-filter:none}
 }
