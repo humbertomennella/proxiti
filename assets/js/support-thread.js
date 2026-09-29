@@ -5,7 +5,6 @@
   const params=new URLSearchParams(location.search);
   let ticketId=params.get("ticket"),token=null,seen="",timer=null;
   let soundOn=true,audio=null,seenStaff=null;
-  let quotesBusy=false,lastQuotesCheck=0,quoteSignature="",quoteEpoch=0;
   const soundPreference="proxiti-customer-alerts-v2";
   try{soundOn=localStorage.getItem(soundPreference)!=="false"}catch{}
   function soundLabel(){const b=el("customer-sound-toggle");if(b){b.textContent=soundOn?"♫ Alertas ativados":"♪ Alertas desativados";b.setAttribute("aria-pressed",String(soundOn));b.setAttribute("aria-label",soundOn?"Desativar alertas":"Ativar alertas");b.title=soundOn?"Desativar alertas":"Ativar alertas"}}
@@ -76,120 +75,6 @@
     const text=document.createElement("div");text.textContent=body;
     item.append(meta,text);return item;
   }
-  const make=(tag,text,cls)=>{
-    const node=document.createElement(tag);
-    if(text!==undefined)node.textContent=String(text);
-    if(cls)node.className=cls;
-    return node;
-  };
-  const money=value=>{
-    const cents=Number(value);
-    return Number.isSafeInteger(cents)&&cents>=0?
-      new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100):
-      "Valor indisponível";
-  };
-  const date=value=>/^\d{4}-\d\d-\d\d$/.test(String(value||""))?
-    new Date(value+"T12:00:00").toLocaleDateString("pt-BR"):"Não informada";
-  function quoteFeedback(message,error=false){
-    const node=el("customer-quotes-feedback");
-    node.textContent=message;node.classList.toggle("error",error);
-  }
-  function renderQuotes(quotes){
-    const host=el("customer-quotes-list");host.replaceChildren();
-    if(!quotes.length){
-      host.append(make("p","Nenhuma proposta emitida para este chamado. Quando a PROXITI enviar um orçamento, ele aparecerá aqui.","customer-quote-empty"));
-      return;
-    }
-    for(const [index,q] of quotes.entries()){
-      const card=make("article",undefined,"customer-quote-card");
-      const today=new Date().toISOString().slice(0,10);
-      const expired=q.status==="issued"&&q.valid_until<today;
-      const names={issued:"Aguardando sua resposta",accepted:"Aceito",declined:"Recusado",cancelled:"Cancelado"};
-      const title=make("div",undefined,"customer-quote-heading");
-      title.append(make("strong","Proposta #"+q.reference),
-        make("span",expired?"Prazo encerrado":names[q.status]||"Situação a confirmar"));
-      card.append(title);
-      if(q.parent_reference)card.append(make("small","Aditivo da proposta #"+q.parent_reference));
-      card.append(make("p","Validade: "+date(q.valid_until)));
-      const items=make("ul",undefined,"customer-quote-items");
-      for(const item of q.items||[]){
-        const li=make("li");
-        li.append(make("strong",item.title),
-          make("span",item.quantity+" × "+money(item.unit_price_cents)+
-            " / "+item.unit+" · Subtotal: "+money(item.subtotal_cents)));
-        if(item.scope)li.append(make("p",item.scope));
-        items.append(li);
-      }
-      card.append(items,make("div","Total da proposta: "+money(q.total_cents),"customer-quote-total"));
-      if(q.client_notes)card.append(make("p",q.client_notes,"customer-quote-notes"));
-      if(expired)card.append(make("p",
-        "Esta proposta venceu. Solicite uma versão atualizada antes de autorizar o serviço.",
-        "customer-quote-warning"));
-      if(q.status==="issued"&&!expired){
-        const ack=make("label",undefined,"customer-quote-ack");
-        const check=make("input");check.type="checkbox";
-        ack.append(check,make("span",
-          "Li os serviços, os valores e as condições acima e confirmo minha decisão para esta proposta."));
-        const actions=make("div",undefined,"customer-quote-actions");
-        const accept=make("button","Aceitar esta proposta","support-primary");
-        const decline=make("button","Recusar proposta","support-plain");
-        accept.type="button";decline.type="button";
-        accept.addEventListener("click",()=>void decideQuote(q,"accepted",check,[accept,decline]));
-        decline.addEventListener("click",()=>void decideQuote(q,"declined",check,[accept,decline]));
-        actions.append(accept,decline);card.append(ack,actions);
-      }
-      host.append(card);
-    }
-  }
-  async function loadQuotes(force=false){
-    if(!ticketId||!token||quotesBusy||document.hidden)return;
-    if(!force&&Date.now()-lastQuotesCheck<180000)return;
-    quotesBusy=true;lastQuotesCheck=Date.now();
-    const id=ticketId,key=token,epoch=quoteEpoch;
-    try{
-      const result=await call("quotes",{ticket_id:id,access_token:key});
-      if(epoch!==quoteEpoch||id!==ticketId||key!==token)return;
-      if(!Array.isArray(result.quotes))throw new Error("Lista de propostas indisponível.");
-      const signature=JSON.stringify(result.quotes);
-      el("customer-quotes").hidden=false;
-      if(signature!==quoteSignature){quoteSignature=signature;renderQuotes(result.quotes);}
-      quoteFeedback(result.quotes.length?
-        "Propostas consultadas no servidor. A resposta não realiza pagamentos.":
-        "Nenhuma proposta emitida para este chamado.");
-    }catch(error){
-      if(epoch===quoteEpoch&&id===ticketId){
-        el("customer-quotes").hidden=false;
-        quoteFeedback("Não foi possível atualizar as propostas. "+error.message,true);
-      }
-    }finally{if(epoch===quoteEpoch)quotesBusy=false;}
-  }
-  async function decideQuote(quote,decision,check,buttons){
-    if(!ticketId||!token||quotesBusy)return;
-    if(!check.checked){
-      quoteFeedback("Marque a confirmação de leitura antes de responder à proposta.",true);
-      check.focus();return;
-    }
-    const action=decision==="accepted"?"ACEITAR":"RECUSAR";
-    if(!window.confirm(action+" a proposta #"+quote.reference+" no valor total de "+
-      money(quote.total_cents)+"? Sua resposta será registrada no chamado e não movimentará dinheiro."))return;
-    const id=ticketId,key=token,epoch=quoteEpoch;
-    for(const button of buttons)button.disabled=true;
-    quoteFeedback("Enviando sua decisão para registro…");
-    try{
-      const result=await call("quote_decision",{ticket_id:id,access_token:key,
-        quote_id:quote.id,decision,confirmed:true});
-      if(epoch!==quoteEpoch||id!==ticketId||key!==token)return;
-      if(!result.ok||result.decision!==decision)throw new Error("Resposta não confirmada pelo servidor.");
-      quoteFeedback("Sua decisão foi registrada. Atualizando o estado da proposta…");
-      quoteSignature="";lastQuotesCheck=0;
-      await loadQuotes(true);
-    }catch(error){
-      if(epoch===quoteEpoch&&id===ticketId){
-        quoteFeedback("Não foi possível confirmar a resposta. Atualize a proposta antes de tentar novamente. "+error.message,true);
-        lastQuotesCheck=0;void loadQuotes(true);
-      }
-    }finally{for(const button of buttons)if(button.isConnected)button.disabled=false;}
-  }
   async function online(){
     try{
       const result=await call("online"),n=Number(result.online)||0;
@@ -221,11 +106,9 @@
         if(wasBottom)box.scrollTop=box.scrollHeight;
       }
       note("");
-      if(Date.now()-lastQuotesCheck>=180000)void loadQuotes();
     }catch(error){note(error.message,true);}
   }
   function showLost(){
-    quoteEpoch++;quoteSignature="";el("customer-quotes").hidden=true;
     el("support-start").hidden=true;el("support-conversation").hidden=true;
     el("support-lost").hidden=false;
   }
@@ -234,7 +117,6 @@
     token=findKey(ticketId);
     if(!token){showLost();return;}
     if(!new URLSearchParams(location.search).has("ticket"))history.replaceState(null,"","/atendimento/?ticket="+encodeURIComponent(ticketId)+(document.documentElement.classList.contains("embedded")?"&embed=1":""));
-    quoteEpoch++;quotesBusy=false;quoteSignature="";lastQuotesCheck=0;
     el("support-start").hidden=true;el("support-lost").hidden=true;
     el("support-conversation").hidden=false;
     await refresh();
@@ -275,14 +157,11 @@
   el("forget-ticket").addEventListener("click",()=>{
     if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
     for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage])try{getStorage().removeItem("proxiti_ticket_"+ticketId);}catch{}
-    quoteEpoch++;quoteSignature="";quotesBusy=false;lastQuotesCheck=0;
-    el("customer-quotes").hidden=true;el("customer-quotes-list").replaceChildren();
     token=null;ticketId=null;if(timer)clearInterval(timer);
     history.replaceState(null,"",document.documentElement.classList.contains("embedded")?"/atendimento/?embed=1":"/atendimento/");
     el("support-conversation").hidden=true;el("support-start").hidden=false;
     seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
   });
-  el("customer-quotes-refresh").addEventListener("click",()=>void loadQuotes(true));
   el("customer-sound-toggle").addEventListener("click",()=>{
     soundOn=!soundOn;
     try{localStorage.setItem(soundPreference,String(soundOn))}catch{}
