@@ -98,7 +98,7 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  html.includes('id="customer-support-popover"')&&
  html.includes('data-src="/atendimento/?chat=1&amp;embed=1"')&&
  html.includes('minha-proxiti-chat.js?v=20260929-3')&&
- html.includes('minha-proxiti-chat.css?v=20260929-4')&&
+ html.includes('minha-proxiti-chat.css?v=20260929-5')&&
  html.includes('class="customer-chat-actions" role="group"')&&
  (html.match(/class="customer-chat-control"/g)||[]).length===2&&
  html.includes('id="customer-chat-overlay"')&&
@@ -111,18 +111,24 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  embedCss.includes('html.embedded[data-theme="dark"]')&&
  embedJs.includes('event.data?.type!=="proxiti-chat-theme"'),
  "O rodapé deve abrir uma janela central, minimizável e com tema sincronizado");
-assert(customerChatCss.includes('width:min(620px,calc(100vw - 32px))')&&
+assert(customerChatCss.includes('width:min(980px,calc(100vw - 36px))')&&
+ customerChatCss.includes('border:2px solid var(--chat-window-outline)')&&
  customerChatCss.includes('.customer-support-popover-head>.customer-chat-actions')&&
  customerChatCss.includes('flex-direction:row')&&
- customerChatCss.includes('@keyframes customer-chat-reveal')&&
- customerChatCss.includes('@media(prefers-reduced-motion:reduce)'),
- "Janela do chat precisa ser mais larga, premium, acessível e ter controles horizontais");
-assert(customerChatCss.includes('width:min(760px,calc(100vw - 28px))')&&
  customerChatCss.includes('@keyframes customer-chat-open')&&
  customerChatCss.includes('@keyframes customer-chat-pill-open')&&
+ customerChatCss.includes('@media(prefers-reduced-motion:reduce)')&&
  customerChatJs.includes('panel.animate([')&&customerChatJs.includes('reduceMotion.matches')&&
  customerChatJs.includes('Promise.allSettled(animations.map'),
- "O modal precisa abrir e minimizar com efeitos acessíveis e ter largura até 760 px");
+ "Uma única regra de janela larga deve contornar os quatro lados e preservar transições");
+assert(html.includes('Manrope:wght@400')&&chat.includes('Manrope:wght@400')&&
+ html.includes('Converse com a PROXITI')&&
+ chat.includes('Vamos começar seu atendimento.')&&
+ composerCss.includes('font-family:"Manrope"')&&
+ composerCss.includes('font-size:16px;line-height:1.6;')&&
+ composerCss.includes('margin:0;padding:0;border:0;border-radius:0;background:transparent;')&&
+ composerCss.includes('border:1.5px solid var(--chat-border,var(--line,#58728f))!important'),
+ "Tipografia legível, grafia revisada e campo de texto com borda independente do botão");
 assert(chat.includes('class="support-start-composer-row"')&&
  chat.includes('id="start-submit" aria-label="Iniciar conversa"')&&
  chat.includes('id="support-consent" type="checkbox" required')&&
@@ -132,7 +138,7 @@ assert(chat.includes('class="support-start-composer-row"')&&
  "Primeira tela deve ter botão Iniciar ao lado da descrição e manter privacidade e envio único");
 assert(chat.includes('class="reply-composer-row"')&&
  chat.includes('id="reply-submit" class="support-primary reply-send"')&&
- chat.includes('support-composer.css?v=20260929-2')&&
+ chat.includes('support-composer.css?v=20260929-3')&&
  chat.includes('support-thread.js?v=20260929-3')&&
  composerCss.includes('#customer-reply .reply-composer-row #reply-submit')&&
  chatJs.includes('replyField.addEventListener("keydown"')&&
