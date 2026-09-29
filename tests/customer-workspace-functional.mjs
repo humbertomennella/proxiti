@@ -156,6 +156,8 @@ try{
  const loginUrl=page.url();
  await page.click("#customer-footer-chat");
  await page.waitForSelector("#customer-support-popover:not([hidden])");
+ await page.waitForFunction(()=>document.getElementById("customer-support-popover")
+  .getAnimations().every(animation=>animation.playState!=="running"));
  assert.equal(page.url(),loginUrl,"Abrir conversa não deve sair do login");
  assert.equal(await page.locator("#customer-footer-chat").getAttribute("aria-expanded"),"true");
  assert.equal(await page.locator("#customer-chat-overlay").isVisible(),true);
@@ -185,8 +187,13 @@ try{
  assert.equal(await page.locator(".customer-chat-actions svg").count(),2);
  await page.setViewportSize({width:1280,height:850});
  const desktop=await headerGeometry();
- assert(desktop.panel.width>=600&&desktop.panel.width<=630,
-  "A janela no desktop precisa ser mais larga que a versão anterior");
+ assert(desktop.panel.width>=740&&desktop.panel.width<=780,
+  "Janela mais larga no desktop, sem ultrapassar o viewport");
+ assert.equal(await page.locator("#customer-support-popover").evaluate(
+  el=>getComputedStyle(el).borderTopStyle),"solid");
+ assert.equal(await page.locator("#customer-support-popover").evaluate(
+  el=>getComputedStyle(el).animationName),"customer-chat-open");
+
  assert(Math.abs(desktop.min.y-desktop.close.y)<2&&desktop.min.right+6<=desktop.close.x,
   "Controles do chat devem permanecer lado a lado no desktop");
  assert(Math.abs(desktop.panel.x+desktop.panel.width/2-640)<2,
@@ -201,7 +208,7 @@ try{
  assert.equal(await page.frameLocator("#customer-support-frame").locator("#customer-quotes").count(),0);
  assert.equal(await page.frameLocator("#customer-support-frame").locator(".support-account-invite").isVisible(),false);
  await page.click("#customer-support-minimize");
- assert.equal(await page.locator("#customer-support-popover").isVisible(),false);
+ await page.locator("#customer-support-popover").waitFor({state:"hidden"});
  assert.equal(await page.locator("#customer-chat-overlay").isVisible(),false);
  assert.equal(await page.locator("#customer-chat-minimized").isVisible(),true);
  await page.click("#customer-theme-toggle");
@@ -211,16 +218,19 @@ try{
  await page.waitForFunction(()=>document.querySelector("#customer-support-frame")?.contentDocument?.documentElement.dataset.theme==="dark");
  assert.equal(await page.frameLocator("#customer-support-frame").locator("html").getAttribute("data-theme"),"dark");
  await page.click("#customer-support-minimize");
+ await page.locator("#customer-support-popover").waitFor({state:"hidden"});
  await page.click("#customer-theme-toggle");
  await page.click("#customer-chat-restore");
  await page.waitForFunction(()=>document.querySelector("#customer-support-frame")?.contentDocument?.documentElement.dataset.theme==="light");
  await page.click("#customer-support-close");
+ await page.locator("#customer-support-popover").waitFor({state:"hidden"});
  assert.equal(await page.locator("#customer-support-popover").isVisible(),false);
  assert.equal(await page.locator("#customer-chat-minimized").isVisible(),false);
  assert.equal(await page.locator("#customer-footer-chat").getAttribute("aria-expanded"),"false");
  assert.equal(await page.evaluate(()=>document.activeElement?.id),"customer-footer-chat");
  await page.click("#customer-footer-chat");
  await page.keyboard.press("Escape");
+ await page.locator("#customer-support-popover").waitFor({state:"hidden"});
  assert.equal(await page.locator("#customer-support-popover").isVisible(),false);
  assert.equal(page.url(),loginUrl);
  await page.click(".customer-header .customer-brand");
