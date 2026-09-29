@@ -405,6 +405,14 @@ el("customer-signup-form").addEventListener("submit",async event=>{
   });
   let result;try{result=await response.json();}
   catch{throw new Error("O servidor não respondeu corretamente.");}
+  if(response.status===409){
+   el("customer-signup-password").value="";
+   el("customer-signup-confirm").value="";
+   formMode("login");el("customer-login-email").value=email;
+   notify("Este e-mail já pode estar cadastrado na PROXITI. Entre com a senha da conta existente e ative sua área de cliente. Se esqueceu a senha, use Recuperar acesso.",
+    true,"customer-auth-status");
+   return;
+  }
   if(!response.ok||!result?.ok||!result.login_ready)
    throw new Error(result?.error||"Cadastro não confirmado. Tente novamente.");
   const {data:login,error:loginError}=await db.auth.signInWithPassword({email,password});
