@@ -170,11 +170,14 @@ try{
    return {x:box.x,y:box.y,width:box.width,height:box.height,right:box.right};};
   const panel=document.getElementById("customer-support-popover");
   const actions=document.querySelector(".customer-support-popover-head>.customer-chat-actions");
+  const style=getComputedStyle(panel);
   return {min:rect("customer-support-minimize"),close:rect("customer-support-close"),
    panel:rect("customer-support-popover"),display:getComputedStyle(actions).display,
    direction:getComputedStyle(actions).flexDirection,
-   radius:parseFloat(getComputedStyle(panel).borderTopLeftRadius),
-   border:getComputedStyle(panel).borderTopWidth};
+   radius:parseFloat(style.borderTopLeftRadius),
+   edges:[style.borderTopWidth,style.borderRightWidth,
+    style.borderBottomWidth,style.borderLeftWidth],
+   outline:style.borderLeftColor,lettering:style.fontFamily};
  });
  const mobile=await headerGeometry();
  assert(mobile.display.includes("flex")&&mobile.direction==="row",
@@ -183,12 +186,19 @@ try{
   "Minimizar e fechar devem aparecer lado a lado, sem sobreposição no celular");
  assert(mobile.min.width>=35&&mobile.close.width>=35&&mobile.radius>=16,
   "Controles e janela precisam ter tamanho e cantos acessíveis");
- assert(mobile.border!=="0px","Janela precisa ter borda visível");
+ assert(mobile.edges.every(edge=>parseFloat(edge)>=2),
+  "A borda precisa contornar a janela inteira no celular");
+ assert(mobile.lettering.includes("Manrope"),"A janela precisa usar a nova tipografia");
  assert.equal(await page.locator(".customer-chat-actions svg").count(),2);
  await page.setViewportSize({width:1280,height:850});
  const desktop=await headerGeometry();
- assert(desktop.panel.width>=740&&desktop.panel.width<=780,
-  "Janela mais larga no desktop, sem ultrapassar o viewport");
+ assert(desktop.panel.width>=950&&desktop.panel.width<=1000,
+  "A janela precisa ficar significativamente mais larga no desktop");
+ assert(desktop.edges.every(edge=>parseFloat(edge)>=2),
+  "As quatro bordas devem estar visíveis no desktop");
+ assert(desktop.outline==="rgb(98, 136, 206)",
+  "Borda externa precisa ter cor sólida e visível no tema claro");
+ assert.equal(await page.locator("#customer-support-title").innerText(),"Converse com a PROXITI");
  assert.equal(await page.locator("#customer-support-popover").evaluate(
   el=>getComputedStyle(el).borderTopStyle),"solid");
  assert.equal(await page.locator("#customer-support-popover").evaluate(
@@ -207,20 +217,28 @@ try{
  const firstChatLayout=()=>page.frameLocator("#customer-support-frame").locator("body").evaluate(()=>{
   const box=id=>{const r=document.getElementById(id).getBoundingClientRect();
    return {left:r.left,right:r.right,width:r.width,top:r.top,bottom:r.bottom};};
+  const row=getComputedStyle(document.querySelector(".support-start-composer-row"));
+  const field=getComputedStyle(document.getElementById("support-description"));
   return {textarea:box("support-description"),send:box("start-submit"),
-   privacy:box("support-consent"),viewport:innerWidth};
+   privacy:box("support-consent"),viewport:innerWidth,
+   rowBorder:row.borderTopWidth,fieldBorder:field.borderRightWidth,
+   font:field.fontFamily,bodySize:getComputedStyle(document.body).fontSize};
  });
  let initialChat=await firstChatLayout();
- assert(initialChat.send.left>=initialChat.textarea.right+3&&
-  initialChat.send.right<=initialChat.viewport&&initialChat.send.width>=44,
-  "Na primeira tela do chat, Iniciar deve ficar ao lado da descrição no celular");
+ assert(initialChat.send.left>=initialChat.textarea.right+8&&
+  initialChat.send.right<=initialChat.viewport&&initialChat.send.width>=48,
+  "No celular, o botão deve ficar fora da borda do campo de texto");
+ assert(initialChat.rowBorder==="0px"&&parseFloat(initialChat.fieldBorder)>=1,
+  "Somente o campo deve ter borda, não o conjunto campo e botão");
+ assert(initialChat.font.includes("Manrope")&&parseFloat(initialChat.bodySize)>=16,
+  "Tipografia da conversa precisa ser legível e corresponder à janela");
  assert(initialChat.privacy.bottom<=initialChat.textarea.top,
   "Consentimento deve permanecer disponível antes do envio");
  await page.setViewportSize({width:1280,height:850});
  initialChat=await firstChatLayout();
- assert(initialChat.send.left>=initialChat.textarea.right+3&&
+ assert(initialChat.send.left>=initialChat.textarea.right+12&&
   initialChat.send.right<=initialChat.viewport&&initialChat.send.width>=120,
-  "Na primeira tela do chat, Iniciar deve ficar ao lado da descrição no desktop");
+  "No desktop, Iniciar deve ficar fora do campo, separado por espaço visível");
  await page.setViewportSize({width:390,height:800});
  assert.equal(await page.frameLocator("#customer-support-frame").locator("html").getAttribute("data-theme"),"light");
  assert.equal(await page.frameLocator("#customer-support-frame").locator("#customer-quotes").count(),0);

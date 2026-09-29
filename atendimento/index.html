@@ -6,11 +6,14 @@
 <meta name="description" content="Atendimento e conversa privada com a equipe PROXITI.">
 <script>if(new URLSearchParams(location.search).get("embed")==="1"){document.documentElement.classList.add("embedded");document.documentElement.dataset.theme=new URLSearchParams(location.search).get("theme")==="dark"?"dark":"light"}</script>
 <title>Atendimento e chat | PROXITI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/support.css">
 <link rel="stylesheet" href="/assets/css/proxiti-ui.css">
 <link rel="stylesheet" href="/assets/css/support-embed-theme.css?v=20260929-1">
-<link rel="stylesheet" href="/assets/css/support-composer.css?v=20260929-2">
+<link rel="stylesheet" href="/assets/css/support-composer.css?v=20260929-3">
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/support-thread.js?v=20260929-3" defer></script>
 <script src="/assets/js/support-embed-theme.js?v=20260929-1" defer></script>
@@ -26,7 +29,7 @@
 <section class="support-card" aria-label="Solicitação ou conversa">
 <div id="online-status" class="availability" role="status">Verificando a disponibilidade da equipe…</div>
 <form id="support-start" novalidate>
-<h2>Iniciar atendimento</h2><p>Se houver um profissional disponível, sua mensagem será encaminhada para ele. Caso contrário, permanecerá na fila de chamados.</p>
+<h2>Vamos começar seu atendimento.</h2><p>Descreva o problema. Se a equipe estiver ocupada, seu chamado fica na fila.</p>
 <label for="support-name">Seu nome</label><input id="support-name" type="text" maxlength="120" minlength="2" autocomplete="name" required placeholder="Nome para o atendimento">
 <label for="support-email">E-mail</label><input id="support-email" type="email" maxlength="254" autocomplete="email" required placeholder="seuemail@exemplo.com">
 <label for="support-subject">Assunto</label><input id="support-subject" type="text" maxlength="160" minlength="4" required value="Atendimento pelo chat">
@@ -35,7 +38,7 @@
 <div class="support-start-composer">
 <label for="support-description" class="support-start-composer-label">Como podemos ajudar?</label>
 <div class="support-start-composer-row">
-<textarea id="support-description" rows="5" minlength="8" maxlength="2000" required placeholder="Conte o que aconteceu." aria-describedby="support-start-composer-hint"></textarea>
+<textarea id="support-description" rows="5" minlength="8" maxlength="2000" required placeholder="Conte o que aconteceu com seu equipamento ou acesso." aria-describedby="support-start-composer-hint"></textarea>
 <button class="support-primary support-start-send" type="submit" id="start-submit" aria-label="Iniciar conversa" title="Iniciar conversa"><span class="support-start-send-label">Iniciar</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 14-7-4.5 14-3.1-6.1L5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m11.4 12.9 7.4-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 </div>
 <small id="support-start-composer-hint" class="support-start-composer-hint">Não informe senhas nem códigos de autenticação.</small>
