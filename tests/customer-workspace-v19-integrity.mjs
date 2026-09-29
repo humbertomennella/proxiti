@@ -98,7 +98,7 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  html.includes('id="customer-support-popover"')&&
  html.includes('data-src="/atendimento/?chat=1&amp;embed=1"')&&
  html.includes('minha-proxiti-chat.js?v=20260929-3')&&
- html.includes('minha-proxiti-chat.css?v=20260929-5')&&
+ html.includes('minha-proxiti-chat.css?v=20260929-6')&&
  html.includes('class="customer-chat-actions" role="group"')&&
  (html.match(/class="customer-chat-control"/g)||[]).length===2&&
  html.includes('id="customer-chat-overlay"')&&
@@ -122,7 +122,10 @@ assert(customerChatCss.includes('width:min(980px,calc(100vw - 36px))')&&
  customerChatJs.includes('Promise.allSettled(animations.map'),
  "Uma única regra de janela larga deve contornar os quatro lados e preservar transições");
 assert(html.includes('Manrope:wght@400')&&chat.includes('Manrope:wght@400')&&
- html.includes('Converse com a PROXITI')&&
+ html.includes('id="customer-support-title">Converse com a <span>PROXITI</span></strong><small>Seu suporte, com contexto e continuidade.</small>')&&
+ html.includes('family=Inter:wght@400;500;600;700;800')&&
+ customerChatCss.includes('.customer-support-popover-head strong span{color:var(--blue)}')&&
+ customerChatCss.includes('font-size:clamp(1.6rem,2.5vw,2.15rem)')&&
  chat.includes('Vamos começar seu atendimento.')&&
  composerCss.includes('font-family:"Manrope"')&&
  composerCss.includes('font-size:16px;line-height:1.6;')&&
