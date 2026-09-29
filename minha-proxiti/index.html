@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti-redesign.css?v=20260929-1">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-central-login.css?v=20260929-2">
 <link rel="stylesheet" href="/assets/css/minha-proxiti-portal.css?v=20260929-3">
-<link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-2">
+<link rel="stylesheet" href="/assets/css/minha-proxiti-chat.css?v=20260929-3">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
 <script src="/assets/js/minha-proxiti-theme.js?v=20260929-2" defer></script>
@@ -149,7 +149,10 @@
 <div id="customer-chat-overlay" class="customer-chat-overlay" hidden></div>
 <section id="customer-support-popover" class="customer-support-popover" role="dialog" aria-modal="true" aria-labelledby="customer-support-title" hidden>
 <header class="customer-support-popover-head"><div><strong id="customer-support-title">Conversa com a PROXITI</strong><small>Suporte direto, com contexto.</small></div>
-<div class="customer-chat-actions"><button type="button" id="customer-support-minimize" aria-label="Minimizar conversa" title="Minimizar conversa">−</button><button type="button" id="customer-support-close" aria-label="Fechar conversa" title="Fechar conversa">✕</button></div></header>
+<div class="customer-chat-actions" role="group" aria-label="Controles da janela de conversa">
+<button class="customer-chat-control" type="button" id="customer-support-minimize" aria-label="Minimizar conversa" title="Minimizar conversa"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+<button class="customer-chat-control" type="button" id="customer-support-close" aria-label="Fechar conversa" title="Fechar conversa"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+</div></header>
 <iframe id="customer-support-frame" title="Chat com a equipe PROXITI" data-src="/atendimento/?chat=1&amp;embed=1" loading="lazy"></iframe>
 </section>
 <div id="customer-chat-minimized" class="customer-chat-minimized" hidden>
