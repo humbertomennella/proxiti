@@ -33,6 +33,7 @@ assert(privateJs.includes('api("account_quotes"')&&
  "Consulta e aprovação de propostas continuam na conta autenticada");
 let page;
 const calls=[],messages=[],errors=[];
+let ticketStatus="triage";
 try{
  const context=await browser.newContext({viewport:{width:390,height:800}});
  await context.addInitScript(({ticket,token})=>{
@@ -50,14 +51,21 @@ try{
   if(b.action==="online")result={online:0};
   else if(b.action==="create"){
    if(!b.privacy_accepted||!b.name||!b.description){status=400;result={error:"Dados incompletos"};}
-   else result={id:ticket,access_token:token};
+   else{ticketStatus="triage";result={id:ticket,access_token:token};}
   }else if(b.ticket_id!==ticket||b.access_token!==token){
    status=404;result={error:"Acesso não confirmado"};
   }else if(b.action==="conversation")result={ticket:{
-   reference:12,subject:"Notebook não inicia",status:"triage",online:false},
+   reference:12,subject:"Notebook não inicia",status:ticketStatus,online:false},
    messages:[{id:"m1",sender_kind:"staff",body:"Vamos verificar o problema.",
     created_at:"2026-09-29T00:00:00Z"}]};
-  else if(b.action==="reply"){messages.push(b.message);result={ok:true};}
+  else if(b.action==="reply"){
+   if(ticketStatus==="closed"){status=409;result={error:"Chamado encerrado"};}
+   else{messages.push(b.message);result={ok:true};}
+  }else if(b.action==="close"){
+   if(b.confirmed!==true){status=400;result={error:"Confirme o encerramento"};}
+   else if(ticketStatus==="closed")result={ok:true,status:"closed",already_closed:true};
+   else{ticketStatus="closed";result={ok:true,status:"closed",already_closed:false};}
+  }
   else{status=400;result={error:"Ação desativada no chat público"};}
   await route.fulfill({status,contentType:"application/json",
    headers:{"access-control-allow-origin":base},body:JSON.stringify(result)});
@@ -114,9 +122,37 @@ try{
   assert(sizes.textRight+3<sizes.buttonLeft&&sizes.buttonRight<=sizes.viewport,
    "Campo e botão lateral devem caber no chat: "+JSON.stringify(sizes));
  }
- await page.getByRole("button",{name:"Esquecer acesso"}).click();
- assert.equal(await page.evaluate(id=>localStorage.getItem("proxiti_ticket_"+id),ticket),null);
+ const contrast=await page.evaluate(()=>{
+  const field=document.getElementById("customer-reply-text");
+  const label=document.querySelector(".reply-composer-label");
+  const style=getComputedStyle(field);
+  return {background:style.backgroundColor,border:style.borderTopWidth,
+   borderColor:style.borderTopColor,placeholder:getComputedStyle(field,"::placeholder").color,
+   label:getComputedStyle(label).color};
+ });
+ assert.equal(contrast.background,"rgb(247, 250, 255)");
+ assert(parseFloat(contrast.border)>=2&&contrast.borderColor==="rgb(138, 165, 209)",
+  "Campo Sua mensagem deve ter borda visível no tema claro: "+JSON.stringify(contrast));
+ assert.equal(contrast.placeholder,"rgb(66, 86, 114)");
+ assert.equal(contrast.label,"rgb(21, 39, 64)");
+ assert.equal(await page.locator("#close-ticket").innerText(),"Encerrar chamado");
+ assert(await page.evaluate(id=>!!localStorage.getItem("proxiti_ticket_"+id),ticket));
+ await page.getByRole("button",{name:"Encerrar chamado"}).click();
+ await page.locator("#conversation-closed").waitFor({state:"visible"});
+ assert.equal(calls.filter(action=>action==="close").length,1);
+ assert.equal(ticketStatus,"closed");
+ assert.equal(await page.locator("#customer-reply").isVisible(),false);
+ assert.equal(await page.locator("#close-ticket").isVisible(),false);
+ assert(await page.evaluate(id=>!!localStorage.getItem("proxiti_ticket_"+id),ticket),
+  "Encerrar chamado preserva a chave para consultar o histórico");
+ assert((await page.locator("#customer-messages").innerText()).includes("Vamos verificar"));
+ await page.reload({waitUntil:"domcontentloaded"});
+ await page.locator("#conversation-closed").waitFor({state:"visible"});
+ assert.equal(await page.locator("#customer-reply").isVisible(),false);
+ await page.getByRole("button",{name:"Iniciar outro atendimento"}).click();
  assert.equal(await page.locator("#support-start").isVisible(),true);
+ assert(await page.evaluate(id=>!!localStorage.getItem("proxiti_ticket_"+id),ticket),
+  "O novo atendimento não deve apagar o histórico anterior");
  assert(!calls.includes("quotes")&&!calls.includes("quote_decision"),
   "Propostas não podem ser consultadas ao abrir o chat público");
  // Esta é a primeira tela do chat, exibida ANTES de abrir o chamado.

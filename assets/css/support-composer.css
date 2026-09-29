@@ -177,3 +177,78 @@ html.embedded[data-theme="dark"] #customer-reply #reply-submit{color:#091626}
  #support-start .support-start-composer-row #start-submit:not(:disabled):hover svg,
  #customer-reply .reply-composer-row #reply-submit:not(:disabled):hover svg{transform:none}
 }
+
+/* Contraste do campo de resposta no tema claro: o componente deve permanecer
+   legível sem foco, com texto, placeholder e contorno próprios. */
+html.embedded[data-theme="light"] #customer-reply .reply-composer-label{
+ color:#152740;font-size:.96rem;font-weight:800;letter-spacing:-.012em;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text{
+ background:#f7faff!important;color:#132844!important;
+ border:2px solid #8aa5d1!important;
+ box-shadow:0 1px 4px rgba(28,66,117,.075)!important;
+ font-size:1rem;font-weight:550;caret-color:#245de0;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text::placeholder{
+ color:#425672!important;opacity:1!important;font-weight:500;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #customer-reply-text:focus{
+ background:#fff!important;border-color:#245de0!important;
+ box-shadow:0 0 0 3px rgba(47,109,246,.19),
+ 0 1px 4px rgba(28,66,117,.08)!important;
+ outline:0!important;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-hint{
+ color:#435670;font-size:.81rem;font-weight:550;
+}
+html.embedded[data-theme="light"] #customer-reply .reply-composer-row #reply-submit:disabled{
+ opacity:1;background:#b8cbed;color:#24466d;
+ border-color:#9fbbe5;box-shadow:none;
+}
+html.embedded #forget-ticket{
+ max-width:100%;white-space:normal;text-align:center;
+ font-size:.76rem;line-height:1.35;
+}
+@media(max-width:440px){
+ html.embedded #forget-ticket{font-size:.72rem}
+}
+
+/* Encerramento do chamado sem perda do histórico. */
+html.embedded #close-ticket{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:38px;padding:8px 12px;
+ border:1px solid color-mix(in srgb,#b64d4d 34%,var(--chat-border));
+ border-radius:10px;background:var(--chat-surface2);color:var(--text);
+ font-size:.78rem;font-weight:760;line-height:1.3;
+ white-space:normal;text-align:center;
+}
+html.embedded #close-ticket:hover:not(:disabled){
+ background:color-mix(in srgb,#d95757 9%,var(--chat-surface2));
+ border-color:#b64d4d;color:var(--text);
+}
+html.embedded #close-ticket:disabled{opacity:.7;cursor:progress}
+.conversation-closed:not([hidden]){
+ display:flex;align-items:center;justify-content:space-between;
+ flex-wrap:wrap;gap:10px;
+ padding:14px 16px;margin:0 0 13px;
+ border:1px solid color-mix(in srgb,#2b9470 33%,var(--chat-border,#526a84));
+ border-radius:13px;background:var(--chat-online,#183b31);
+ color:var(--chat-online-ink,#e6faef);
+}
+.conversation-closed p{
+ margin:0!important;color:inherit!important;
+ font-size:.85rem!important;line-height:1.5!important;font-weight:650;
+}
+.conversation-closed button{
+ flex:none;min-height:38px;padding:8px 12px;
+ border:1px solid currentColor;border-radius:9px;
+ background:transparent;color:inherit;
+ font-size:.78rem;font-weight:760;white-space:normal;
+}
+.conversation-closed button:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+@media(max-width:580px){
+ html.embedded .conversation-head .chat-actions{
+  justify-content:flex-start;gap:7px;flex-wrap:wrap;
+ }
+ .conversation-closed button{width:100%}
+}

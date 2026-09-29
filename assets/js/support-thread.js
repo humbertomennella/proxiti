@@ -3,7 +3,7 @@
   const el=id=>document.getElementById(id),cfg=window.PROXITI_SUPPORT;
   const endpoint=cfg?.url+"/functions/v1/proxiti-support";
   const params=new URLSearchParams(location.search);
-  let ticketId=params.get("ticket"),token=null,seen="",timer=null;
+  let ticketId=params.get("ticket"),token=null,seen="",timer=null,ticketClosed=false;
   let soundOn=true,audio=null,seenStaff=null;
   const soundPreference="proxiti-customer-alerts-v2";
   try{soundOn=localStorage.getItem(soundPreference)!=="false"}catch{}
@@ -93,9 +93,13 @@
       el("conversation-heading").textContent=data.ticket.subject;
       const statusNames={new:"Novo",triage:"Em triagem",in_progress:"Em atendimento",
         waiting_customer:"Aguardando cliente",resolved:"Resolvido",closed:"Encerrado"};
+      ticketClosed=data.ticket.status==="closed";
       el("conversation-status").textContent="Situação: "+(statusNames[data.ticket.status]||data.ticket.status)+
-        (data.ticket.online?" · Técnico designado":" · Aguardando técnico");
-      el("customer-reply").hidden=data.ticket.status==="closed";
+        (ticketClosed?"":data.ticket.online?" · Técnico designado":" · Aguardando técnico");
+      el("customer-reply").hidden=ticketClosed;
+      el("close-ticket").hidden=ticketClosed;
+      el("conversation-closed").hidden=!ticketClosed;
+      if(ticketClosed&&timer){clearInterval(timer);timer=null;}
       const currentStaff=new Set(data.messages.filter(m=>m.sender_kind==="staff").map(m=>m.id));
       if(seenStaff&&data.messages.some(m=>m.sender_kind==="staff"&&!seenStaff.has(m.id)))sound();
       seenStaff=currentStaff;
@@ -121,7 +125,7 @@
     el("support-conversation").hidden=false;
     await refresh();
     if(timer)clearInterval(timer);
-    timer=setInterval(()=>void refresh(),4000);
+    if(!ticketClosed)timer=setInterval(()=>void refresh(),4000);
   }
   el("support-start").addEventListener("submit",async event=>{
     event.preventDefault();const form=event.currentTarget,send=el("start-submit");
@@ -178,7 +182,7 @@
   });
   resizeReply();updateReply();
   el("customer-reply").addEventListener("submit",async event=>{
-    event.preventDefault();if(!ticketId||!token||sendingReply)return;
+    event.preventDefault();if(!ticketId||!token||ticketClosed||sendingReply)return;
     const msg=replyField.value.trim();
     if(!msg){updateReply();return;}
     void enableSound();sendingReply=true;replyField.readOnly=true;updateReply();
@@ -189,13 +193,34 @@
     }catch(error){note(error.message,true);}
     finally{sendingReply=false;replyField.readOnly=false;updateReply();}
   });
-  el("forget-ticket").addEventListener("click",()=>{
-    if(!window.confirm("Apagar a chave de acesso a esta conversa deste navegador? Você poderá perder o acesso ao histórico."))return;
-    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage])try{getStorage().removeItem("proxiti_ticket_"+ticketId);}catch{}
-    token=null;ticketId=null;if(timer)clearInterval(timer);
-    history.replaceState(null,"",document.documentElement.classList.contains("embedded")?"/atendimento/?embed=1":"/atendimento/");
-    el("support-conversation").hidden=true;el("support-start").hidden=false;
-    seen="";seenStaff=null;note("O acesso a esta conversa foi apagado deste navegador.");
+  el("close-ticket").addEventListener("click",async()=>{
+    if(!ticketId||!token||ticketClosed)return;
+    const label=el("conversation-ref").textContent.trim();
+    if(!window.confirm("Encerrar "+label+"? Depois do encerramento, não será possível enviar novas mensagens neste chamado. O histórico será mantido para consulta. Esta ação não pode ser desfeita pelo chat."))return;
+    const button=el("close-ticket");
+    button.disabled=true;button.textContent="Encerrando…";
+    try{
+      await call("close",{ticket_id:ticketId,access_token:token,confirmed:true});
+      ticketClosed=true;
+      if(timer){clearInterval(timer);timer=null;}
+      el("customer-reply").hidden=true;
+      el("conversation-closed").hidden=false;
+      button.hidden=true;
+      await refresh();
+      note("Chamado encerrado. O histórico continua disponível para consulta.");
+    }catch(error){note(error.message,true);}
+    finally{button.disabled=false;button.textContent="Encerrar chamado";}
+  });
+  el("customer-new-chat").addEventListener("click",()=>{
+    if(!ticketClosed)return;
+    // Mantém o acesso ao chamado anterior guardado neste navegador.
+    ticketId=null;token=null;ticketClosed=false;seen="";seenStaff=null;
+    if(timer){clearInterval(timer);timer=null;}
+    const query=document.documentElement.classList.contains("embedded")?
+      "/atendimento/?embed=1":"/atendimento/";
+    history.replaceState(null,"",query);
+    el("support-conversation").hidden=true;el("conversation-closed").hidden=true;
+    el("support-start").hidden=false;el("support-start").reset();note("");
   });
   el("customer-sound-toggle").addEventListener("click",()=>{
     soundOn=!soundOn;
