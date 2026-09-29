@@ -191,7 +191,7 @@ assert(html.includes('id="customer-sidebar-account"')&&
  html.includes('class="sidebar-brand customer-brand brand"')&&
  html.includes('id="customer-current-view"')&&
  !html.includes('customer-home-private')&&
- dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-header{\\n width:calc(100% - 48px)')&&
+ dashboardCss.includes('body:has(#customer-app:not([hidden])) .customer-header{\n width:calc(100% - 48px)')&&
  dashboardCss.includes('align-items:start;width:calc(100% - 48px);max-width:none;')&&
  dashboardCss.includes('grid-template-columns:252px minmax(0,1fr)')&&
  dashboardCss.includes('grid-template-columns:76px minmax(0,1fr)')&&
