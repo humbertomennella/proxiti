@@ -37,6 +37,15 @@ function showArea(area){
  el("customer-verify").hidden=area!=="verify";
  el("customer-app").hidden=area!=="app";
 }
+function showAccess(title,message,canActivate=false){
+ el("customer-verify-title").textContent=title;
+ el("customer-verify-message").textContent=message;
+ el("customer-activate-form").hidden=!canActivate;
+ el("customer-verify-retry").hidden=canActivate;
+ el("customer-activate-privacy").checked=false;
+ notify("",false,"customer-verify-status");
+ showArea("verify");
+}
 function stopPolling(){if(ticketPolling)clearInterval(ticketPolling);ticketPolling=null;}
 function resetPrivate(){
  refreshId++;user=null;dashboard=null;partners=[];activeTicket=null;quotesAt.clear();stopPolling();
@@ -233,8 +242,9 @@ async function reload(message=""){
   notify(message||"Dados atualizados.");
  }catch(e){
   if(id!==refreshId)return;
-  dashboard=null;el("customer-app").hidden=true;el("customer-verify").hidden=false;
-  notify("Não foi possível acessar sua conta. Atualize a página ou use o chat sem login para pedir ajuda.",true);
+  dashboard=null;
+  showAccess("Não foi possível abrir sua área.",
+   "O servidor não conseguiu carregar seus dados. Tente novamente ou use o chat sem login.");
  }
 }
 async function authorize(session){
@@ -245,7 +255,27 @@ async function authorize(session){
  if(id!==refreshId)return;
  if(error||!data.user){resetPrivate();return;}
  user=data.user;
- if(!user.email_confirmed_at){showArea("verify");return;}
+ if(!user.email_confirmed_at){
+  showAccess("Não foi possível validar seu acesso.",
+   "Sua conta ainda não está habilitada para login. Use o chat sem login para solicitar ajuda.");
+  return;
+ }
+ try{
+  const access=await api("customer_access_status");
+  if(id!==refreshId||uid!==user?.id)return;
+  if(!access.active){
+   if(access.can_activate)showAccess("Ative sua área de cliente.",
+    "Você já possui uma conta PROXITI. Para usar a Minha PROXITI com o mesmo acesso, confirme a Política de Privacidade abaixo.",true);
+   else showAccess("Sua área de cliente está indisponível.",
+    "Esta conta não está habilitada para a área de cliente. Use o chat sem login para solicitar ajuda.");
+   return;
+  }
+ }catch(e){
+  if(id!==refreshId)return;
+  showAccess("Não foi possível verificar seu acesso.",
+   "O servidor não respondeu corretamente. Tente novamente ou use o chat sem login.");
+  return;
+ }
  showArea("app");await reload();
  showView(view);
 }
@@ -419,8 +449,29 @@ el("customer-reset-form").addEventListener("submit",async event=>{
  }catch(e){notify(err(e),true,"customer-auth-status");}
  finally{setBusy(false);}
 });
+el("customer-activate-form").addEventListener("submit",async event=>{
+ event.preventDefault();
+ if(busy||!db||!user||!event.currentTarget.reportValidity())return;
+ setBusy(true);
+ try{
+  const result=await api("customer_activate",{privacy_accepted:true});
+  if(!result.ok)throw new Error("Não foi possível ativar sua área.");
+  const {data,error}=await db.auth.getSession();
+  if(error)throw error;
+  await authorize(data.session);
+ }catch(e){
+  notify("Não foi possível ativar sua área: "+err(e),true,"customer-verify-status");
+ }finally{setBusy(false);}
+});
 el("customer-verify-retry").addEventListener("click",async()=>{
- const {data:{session}}=await db.auth.refreshSession();await authorize(session);
+ try{
+  const {data,error}=await db.auth.refreshSession();
+  if(error)throw error;
+  await authorize(data.session);
+ }catch{
+  showAccess("Não foi possível verificar seu acesso.",
+   "Tente novamente ou use o chat sem login para solicitar ajuda.");
+ }
 });
 for(const id of ["customer-logout","customer-verify-logout"])
  el(id).addEventListener("click",async()=>{await db?.auth.signOut();resetPrivate();formMode("login");});
