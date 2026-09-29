@@ -145,20 +145,28 @@ function renderHome(){
  const priority=[...open].sort((a,b)=>rank(a)-rank(b)||
   ((Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0)))[0];
  if(priority){
-  title.firstChild.textContent="Seu suporte continua. ";
-  accent.textContent="Acompanhe cada etapa.";
-  description.textContent=open.length===1?
-   "Você tem um atendimento em andamento. Acompanhe a conversa e os próximos passos.":
-   "Seus atendimentos estão organizados. Acompanhe o histórico e as respostas da equipe.";
+  const justRegistered=priority.status==="new";
+  title.firstChild.textContent=justRegistered?"Seu pedido está registrado. ":
+   priority.status==="waiting_customer"?"A equipe aguarda você. ":"Seu suporte continua. ";
+  accent.textContent=justRegistered?"Acompanhe o próximo passo.":"Acompanhe cada etapa.";
+  description.textContent=justRegistered?
+   "Sua solicitação está registrada. Você pode acompanhar o histórico e a resposta da equipe.":
+   open.length===1?
+    "Você tem um atendimento em andamento. Acompanhe a conversa e os próximos passos.":
+    "Seus atendimentos estão organizados. Acompanhe o histórico e as respostas da equipe.";
   heroAction.firstChild.textContent="Ver meus atendimentos ";
   heroAction.onclick=()=>showView("tickets");
   nextStatus.textContent=priority.status==="waiting_customer"?
-   "SUA RESPOSTA É O PRÓXIMO PASSO":"ATENDIMENTO EM ANDAMENTO";
+   "SUA RESPOSTA É O PRÓXIMO PASSO":priority.status==="new"?
+   "CHAMADO REGISTRADO":priority.status==="triage"?
+   "EM TRIAGEM":"ATENDIMENTO EM ANDAMENTO";
   const reference=priority.reference?"Chamado #"+priority.reference:"Seu atendimento";
   nextDescription.textContent=priority.status==="waiting_customer"?
    reference+" aguarda sua resposta. Abra a conversa para continuar.":
-   reference+" · "+(statuses[priority.status]||"Em acompanhamento")+
-   ". Acompanhe a conversa e as orientações da equipe.";
+   priority.status==="new"?
+    reference+" foi registrado. Acompanhe a conversa e as atualizações da equipe.":
+    reference+" · "+(statuses[priority.status]||"Em acompanhamento")+
+    ". Acompanhe a conversa e as orientações da equipe.";
   nextAction.firstChild.textContent=priority.status==="waiting_customer"?
    "Responder à equipe ":"Ver atendimento ";
   nextAction.onclick=()=>void openTicket(priority.id);
