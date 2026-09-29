@@ -8,6 +8,7 @@ const read=p=>readFileSync(resolve(root,p),"utf8");
 const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"),
  css=read("assets/css/minha-proxiti.css"),
  redesign=read("assets/css/minha-proxiti-redesign.css"),
+ centralLogin=read("assets/css/minha-proxiti-central-login.css"),
  theme=read("assets/js/minha-proxiti-theme.js"),home=read("index.html"),
  chat=read("atendimento/index.html"),chatJs=read("assets/js/support-thread.js");
 new Script(js,{filename:"minha-proxiti.js"});new Script(chatJs,{filename:"support-thread.js"});
@@ -54,7 +55,12 @@ assert(html.includes('id="customer-signup-password" type="password" minlength="1
  html.includes('id="customer-reset-password" type="password" minlength="10"')&&
  html.includes('id="customer-password-rules"')&&
  html.includes('id="customer-theme-toggle"')&&
- html.includes('class="auth-preview"')&&
+ html.includes('class="auth-visual customer-auth-hero"')&&
+ html.includes('class="customer-auth-photo"')&&
+ html.includes("IDENTIFICAÇÃO SEGURA")&&
+ html.includes('id="customer-theme-label"')&&
+ existsSync(resolve(root,"assets/photos/minha-proxiti-hero.webp"))&&
+ !html.includes('class="auth-preview"')&&
  html.includes('>Entrar</button>')&&
  !html.includes("Não pedimos CPF")&&
  !html.includes("pelo menos 12 caracteres"),
@@ -63,6 +69,14 @@ assert(js.includes('db.auth.signInWithPassword({email,password})')&&
  !js.includes("db.auth.signUp("), "O cadastro facilitado deve entrar pela função protegida.");
 assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length);
 assert.equal((redesign.match(/{/g)||[]).length,(redesign.match(/}/g)||[]).length);
+assert.equal((centralLogin.match(/{/g)||[]).length,(centralLogin.match(/}/g)||[]).length);
+assert(centralLogin.includes('grid-template-columns:minmax(0,1.23fr)')&&
+ centralLogin.includes(".customer-auth-hero")&&
+ centralLogin.includes('html[data-theme="dark"]'),
+ "O acesso precisa manter layout em duas colunas e temas no padrão da Central Técnica");
+const photo=readFileSync(resolve(root,"assets/photos/minha-proxiti-hero.webp"));
+assert.equal(photo.subarray(0,4).toString(),"RIFF");
+assert.equal(photo.subarray(8,12).toString(),"WEBP");
 assert(home.includes('class="header-account"')&&home.includes("Entrar ou criar conta"),
  "O site precisa destacar o acesso do cliente no cabeçalho");
 assert(html.includes('class="brand-mark"')&&chat.includes('class="brand-mark"'),
