@@ -9,6 +9,7 @@ const html=read("minha-proxiti/index.html"),js=read("assets/js/minha-proxiti.js"
  css=read("assets/css/minha-proxiti.css"),
  redesign=read("assets/css/minha-proxiti-redesign.css"),
  centralLogin=read("assets/css/minha-proxiti-central-login.css"),
+ portal=read("assets/css/minha-proxiti-portal.css"),
  theme=read("assets/js/minha-proxiti-theme.js"),home=read("index.html"),
  chat=read("atendimento/index.html"),chatJs=read("assets/js/support-thread.js");
 new Script(js,{filename:"minha-proxiti.js"});new Script(chatJs,{filename:"support-thread.js"});
@@ -56,10 +57,14 @@ assert(html.includes('id="customer-signup-password" type="password" minlength="1
  html.includes('id="customer-password-rules"')&&
  html.includes('id="customer-theme-toggle"')&&
  html.includes('class="auth-visual customer-auth-hero"')&&
- html.includes('class="customer-auth-photo"')&&
+ html.includes('class="customer-portal-art"')&&
+ html.includes('id="customer-auth-panel" data-auth-mode="login"')&&
+ html.includes('id="customer-auth-viewport" class="auth-slider-viewport"')&&
+ html.includes('class="auth-pane auth-pane-signup"')&&
  html.includes("IDENTIFICAÇÃO SEGURA")&&
  html.includes('id="customer-theme-label"')&&
- existsSync(resolve(root,"assets/photos/minha-proxiti-hero.webp"))&&
+ existsSync(resolve(root,"assets/illustrations/customer-portal-access.svg"))&&
+ !html.includes('class="customer-auth-photo"')&&
  !html.includes('class="auth-preview"')&&
  html.includes('>Entrar</button>')&&
  !html.includes("Não pedimos CPF")&&
@@ -70,13 +75,15 @@ assert(js.includes('db.auth.signInWithPassword({email,password})')&&
 assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length);
 assert.equal((redesign.match(/{/g)||[]).length,(redesign.match(/}/g)||[]).length);
 assert.equal((centralLogin.match(/{/g)||[]).length,(centralLogin.match(/}/g)||[]).length);
-assert(centralLogin.includes('grid-template-columns:minmax(0,1.23fr)')&&
- centralLogin.includes(".customer-auth-hero")&&
- centralLogin.includes('html[data-theme="dark"]'),
- "O acesso precisa manter layout em duas colunas e temas no padrão da Central Técnica");
-const photo=readFileSync(resolve(root,"assets/photos/minha-proxiti-hero.webp"));
-assert.equal(photo.subarray(0,4).toString(),"RIFF");
-assert.equal(photo.subarray(8,12).toString(),"WEBP");
+assert.equal((portal.match(/{/g)||[]).length,(portal.match(/}/g)||[]).length);
+assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
+ portal.includes("prefers-reduced-motion")&&
+ js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
+ "A tela deve ter layout estático, slide acessível e movimento reduzido");
+const illustration=read("assets/illustrations/customer-portal-access.svg");
+assert(illustration.startsWith("<svg ")&&illustration.includes("</svg>")&&
+ illustration.includes("ACESSO")&&illustration.includes("ATENDIMENTO"),
+ "A ilustração original deve representar acesso ao portal e histórico do cliente");
 assert(home.includes('class="header-account"')&&home.includes("Entrar ou criar conta"),
  "O site precisa destacar o acesso do cliente no cabeçalho");
 assert(html.includes('class="brand-mark"')&&chat.includes('class="brand-mark"'),
