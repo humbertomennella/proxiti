@@ -90,3 +90,104 @@ html[data-theme="dark"] .customer-support-popover:not([hidden]){
  .customer-header .customer-explore{transition:none}
  .customer-chat-overlay:not([hidden]){backdrop-filter:none}
 }
+
+/* Acabamento do modal. O grupo de ações é um div irmão do título: a regra
+   .customer-support-popover-head>div aplicava grid aos botões e os empilhava. */
+.customer-support-popover:not([hidden]){
+ width:min(620px,calc(100vw - 32px));
+ height:min(720px,calc(100dvh - 32px));
+ border:1px solid color-mix(in srgb,var(--blue) 24%,var(--line));
+ border-radius:21px;
+ box-shadow:0 28px 88px rgba(14,34,65,.24),0 5px 22px rgba(14,34,65,.085),
+  inset 0 1px 0 rgba(255,255,255,.45);
+ animation:customer-chat-reveal .24s cubic-bezier(.2,.75,.2,1) both;
+ scale:1;
+}
+.customer-support-popover:not([hidden])::before{
+ content:"";position:absolute;top:0;left:0;right:0;height:2px;z-index:2;
+ background:linear-gradient(90deg,#3374e8 0%,#82b6ff 66%,#f4a06b 100%);
+ pointer-events:none;
+}
+html[data-theme="dark"] .customer-support-popover:not([hidden]){
+ border-color:color-mix(in srgb,var(--blue) 30%,var(--line));
+ box-shadow:0 30px 96px rgba(0,0,0,.48),0 5px 21px rgba(0,0,0,.17),
+  inset 0 1px 0 rgba(255,255,255,.055);
+}
+.customer-chat-overlay:not([hidden]){animation:customer-chat-fade .18s ease-out both}
+.customer-support-popover-head{
+ min-height:77px;gap:16px;padding:16px 20px;
+ background:linear-gradient(125deg,var(--surface),var(--surface2));
+ border-bottom:1px solid var(--line);
+}
+.customer-support-popover-head>div:not(.customer-chat-actions){
+ display:grid;gap:3px;flex:1 1 auto;min-width:0;
+}
+.customer-support-popover-head strong{
+ display:block;max-width:100%;font-size:.97rem;font-weight:830;
+ line-height:1.28;letter-spacing:-.018em;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis;
+}
+.customer-support-popover-head small{
+ display:block;max-width:100%;font-size:.73rem;color:var(--muted);
+ line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.customer-support-popover-head>.customer-chat-actions{
+ display:inline-flex;flex-direction:row;flex-wrap:nowrap;
+ align-items:center;justify-content:flex-end;gap:9px;
+ flex:0 0 auto;width:auto;min-width:max-content;margin:0;
+}
+.customer-support-popover-head .customer-chat-control{
+ appearance:none;display:inline-flex;align-items:center;justify-content:center;
+ flex:0 0 40px;width:40px;height:40px;min-width:40px;min-height:40px;
+ margin:0;padding:0;aspect-ratio:1;
+ border:1px solid var(--line);border-radius:12px;
+ background:var(--surface);color:var(--text);
+ box-shadow:0 2px 5px rgba(15,35,68,.045);
+ line-height:1;cursor:pointer;
+ transition:background-color .16s ease,border-color .16s ease,
+  color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.customer-support-popover-head .customer-chat-control svg{
+ display:block;width:18px;height:18px;flex:none;
+}
+.customer-support-popover-head .customer-chat-control:hover{
+ transform:translateY(-1px);border-color:var(--blue);
+ color:var(--blue);background:var(--soft-blue);
+ box-shadow:0 4px 12px rgba(34,91,185,.1);
+}
+.customer-support-popover-head .customer-chat-control:active{
+ transform:translateY(0);box-shadow:none;
+}
+.customer-support-popover-head #customer-support-close:hover{
+ border-color:color-mix(in srgb,#d85757 38%,var(--line));
+ background:color-mix(in srgb,#d85757 10%,var(--surface));
+ color:color-mix(in srgb,#ce4646 82%,var(--text));
+}
+.customer-support-popover iframe{background:var(--surface)}
+@keyframes customer-chat-reveal{
+ from{opacity:0;scale:.975}to{opacity:1;scale:1}
+}
+@keyframes customer-chat-fade{
+ from{opacity:0}to{opacity:1}
+}
+@media(max-width:600px){
+ .customer-support-popover:not([hidden]){
+  width:calc(100vw - 20px);
+  height:min(720px,calc(100dvh - 24px));
+  border-radius:17px;
+ }
+ .customer-support-popover-head{padding:12px 13px;min-height:67px;gap:8px}
+ .customer-support-popover-head>.customer-chat-actions{gap:7px}
+ .customer-support-popover-head .customer-chat-control{
+  flex-basis:38px;width:38px;height:38px;min-width:38px;min-height:38px;
+  border-radius:11px;
+ }
+ .customer-support-popover-head strong{font-size:.89rem}
+ .customer-support-popover-head small{font-size:.68rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .customer-support-popover:not([hidden]),
+ .customer-chat-overlay:not([hidden]){animation:none;scale:1}
+ .customer-support-popover-head .customer-chat-control{transition:none}
+ .customer-support-popover-head .customer-chat-control:hover{transform:none}
+}
