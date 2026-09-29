@@ -98,9 +98,3 @@ header>.wordmark{font-size:1.25rem;letter-spacing:-.055em}
 .flat .brand-word>.brand-blue{background:none;color:#67a2ff}
 @media(prefers-reduced-motion:reduce){.brand-word>.brand-blue{background:none;color:#67a2ff}}
 @media(forced-colors:active){.card-brand>.brand-word,.back-top .wordmark>.brand-word,.brand-word>.brand-blue{background:none;color:CanvasText}}
-
-/* Secondary links stay separate from the main card action. */
-.save-contact,.site-more{text-align:center;margin:12px 20px;font-size:.875rem}
-.save-contact a,.site-more a{display:inline-flex;align-items:center;min-height:44px;color:#b7cbe0;text-decoration:underline;text-underline-offset:4px}
-.card-contact{font-size:.875rem;gap:0;overflow-wrap:anywhere}
-.card-contact a{display:flex;align-items:center;min-height:44px}
