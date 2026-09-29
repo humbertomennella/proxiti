@@ -77,6 +77,11 @@ function resetPrivate(){
  "customer-schedule-list","customer-partner-directory","customer-thread","customer-detail-quotes"])
   el(id).replaceChildren();
  el("customer-ticket-detail").hidden=true;notify("");
+ el("customer-welcome").textContent="Cliente PROXITI";
+ el("customer-email").textContent="";
+ el("customer-home-first-name").textContent="você";
+ for(const id of ["customer-metric-tickets","customer-metric-open","customer-metric-equipment"])
+  el(id).textContent="0";
  showArea("auth");
 }
 function showView(next){
@@ -116,6 +121,61 @@ function formRequest(){
  el("customer-request-dialog").scrollIntoView({behavior:"smooth",block:"start"});
  el("customer-request-subject").focus();
 }
+function renderHome(){
+ const account=dashboard.account||{},all=tickets(),open=openTickets(),devices=(dashboard.devices||[]).length;
+ el("customer-home-first-name").textContent=String(account.display_name||"").trim().split(/\s+/)[0]||"você";
+ el("customer-metric-tickets").textContent=String(all.length);
+ el("customer-metric-open").textContent=String(open.length);
+ el("customer-metric-equipment").textContent=String(devices);
+ el("customer-metric-tickets-note").textContent=all.length===0?
+  "Seu histórico de suporte":all.length===1?"1 solicitação registrada":"Solicitações registradas";
+ el("customer-metric-open-note").textContent=open.length===0?
+  "Nenhum atendimento aberto":open.length===1?"1 atendimento aberto":"Atendimentos abertos";
+ el("customer-metric-equipment-note").textContent=devices===0?
+  "Cadastre o que você usa":devices===1?"1 dispositivo cadastrado":"Dispositivos cadastrados";
+ const title=el("customer-home-hero-title"),accent=el("customer-home-hero-accent"),
+  description=el("customer-home-hero-description"),heroAction=el("customer-home-action"),
+  nextStatus=el("customer-next-status"),nextDescription=el("customer-next-description"),
+  nextAction=el("customer-next-action"),recent=el("customer-home-tickets");
+ recent.replaceChildren();
+ const sorted=[...all].sort((a,b)=>(Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0));
+ for(const t of sorted.slice(0,3))recent.append(ticketCard(t,true));
+ if(!all.length)empty(recent,"Quando solicitar suporte, seus atendimentos aparecerão aqui.");
+ const rank=t=>t.status==="waiting_customer"?0:t.status==="in_progress"?1:t.status==="triage"?2:3;
+ const priority=[...open].sort((a,b)=>rank(a)-rank(b)||
+  ((Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0)))[0];
+ if(priority){
+  title.firstChild.textContent="Seu suporte continua. ";
+  accent.textContent="Acompanhe cada etapa.";
+  description.textContent=open.length===1?
+   "Você tem um atendimento em andamento. Acompanhe a conversa e os próximos passos.":
+   "Seus atendimentos estão organizados. Acompanhe o histórico e as respostas da equipe.";
+  heroAction.firstChild.textContent="Ver meus atendimentos ";
+  heroAction.onclick=()=>showView("tickets");
+  nextStatus.textContent=priority.status==="waiting_customer"?
+   "SUA RESPOSTA É O PRÓXIMO PASSO":"ATENDIMENTO EM ANDAMENTO";
+  const reference=priority.reference?"Chamado #"+priority.reference:"Seu atendimento";
+  nextDescription.textContent=priority.status==="waiting_customer"?
+   reference+" aguarda sua resposta. Abra a conversa para continuar.":
+   reference+" · "+(statuses[priority.status]||"Em acompanhamento")+
+   ". Acompanhe a conversa e as orientações da equipe.";
+  nextAction.firstChild.textContent=priority.status==="waiting_customer"?
+   "Responder à equipe ":"Ver atendimento ";
+  nextAction.onclick=()=>void openTicket(priority.id);
+ }else{
+  title.firstChild.textContent="Precisou de ajuda? ";
+  accent.textContent="A gente cuida do próximo passo.";
+  description.textContent="Descreva o problema e acompanhe seu atendimento por aqui.";
+  heroAction.firstChild.textContent="Solicitar suporte ";
+  heroAction.onclick=formRequest;
+  nextStatus.textContent=devices?"QUANDO PRECISAR":"COMECE POR AQUI";
+  nextDescription.textContent=devices?
+   "Nenhum chamado em andamento. Seus equipamentos estão organizados para o próximo atendimento.":
+   "Solicite suporte quando precisar. Seu histórico e as próximas orientações ficarão aqui.";
+  nextAction.firstChild.textContent=devices?"Ver equipamentos ":"Solicitar suporte ";
+  nextAction.onclick=devices?()=>showView("equipment"):formRequest;
+ }
+}
 function render(){
  if(!authenticated())return;
  const account=dashboard.account||{};
@@ -126,14 +186,7 @@ function render(){
  el("customer-profile-phone").value=account.phone||"";
  el("customer-profile-city").value=account.city||"";
  el("customer-profile-channel").value=account.preferred_channel||"email";
- const total=tickets().length,open=openTickets().length,devices=(dashboard.devices||[]).length;
- const metrics=el("customer-home-metrics");metrics.replaceChildren();
- for(const [label,value] of [["Atendimentos",total],["Em andamento",open],["Equipamentos",devices]]){
-  const item=make("article");item.append(make("span",label),make("strong",String(value)));metrics.append(item);
- }
- const home=el("customer-home-tickets");home.replaceChildren();
- for(const t of tickets().slice(0,3))home.append(ticketCard(t,true));
- if(!tickets().length)empty(home,"Seus chamados aparecerão aqui. Você pode começar pelo chat ou pedir suporte na sua conta.");
+ renderHome();
  const list=el("customer-ticket-list");list.replaceChildren();
  for(const t of tickets())list.append(ticketCard(t,false));
  if(!tickets().length)empty(list,"Nenhum atendimento vinculado por enquanto.");
@@ -513,6 +566,8 @@ for(const button of document.querySelectorAll("[data-customer-view]"))
  button.addEventListener("click",()=>showView(button.dataset.customerView));
 for(const button of document.querySelectorAll("[data-open-customer-request]"))
  button.addEventListener("click",formRequest);
+for(const button of document.querySelectorAll("[data-customer-shortcut]"))
+ button.addEventListener("click",()=>showView(button.dataset.customerShortcut));
 el("customer-refresh").addEventListener("click",()=>void reload());
 el("customer-close-ticket").addEventListener("click",()=>{
  activeTicket=null;stopPolling();el("customer-ticket-detail").hidden=true;
