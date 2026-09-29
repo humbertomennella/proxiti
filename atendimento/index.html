@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="/assets/css/support.css">
 <link rel="stylesheet" href="/assets/css/proxiti-ui.css">
 <link rel="stylesheet" href="/assets/css/support-embed-theme.css?v=20260929-1">
+<link rel="stylesheet" href="/assets/css/support-composer.css?v=20260929-1">
 <script src="/assets/js/support-config.js" defer></script>
-<script src="/assets/js/support-thread.js" defer></script>
+<script src="/assets/js/support-thread.js?v=20260929-2" defer></script>
 <script src="/assets/js/support-embed-theme.js?v=20260929-1" defer></script>
 </head>
 <body>
@@ -37,7 +38,17 @@
 <section id="support-conversation" hidden aria-labelledby="conversation-heading">
 <div class="conversation-head"><div><span class="support-kicker" id="conversation-ref">CHAMADO</span><h2 id="conversation-heading">Sua conversa com a PROXITI</h2><p id="conversation-status"></p></div><div class="chat-actions"><button type="button" id="customer-sound-toggle" class="support-plain" aria-pressed="true" aria-label="Desativar alertas" title="Desativar alertas">♫ Alertas ativados</button><button type="button" id="forget-ticket" class="support-plain" title="Apagar o acesso deste navegador">Esquecer acesso</button></div></div>
 <div id="customer-messages" class="customer-messages" role="log" aria-live="polite" aria-label="Histórico da conversa"></div>
-<form id="customer-reply"><label for="customer-reply-text">Enviar mensagem</label><textarea id="customer-reply-text" rows="3" minlength="1" maxlength="2000" required placeholder="Sua mensagem para a equipe."></textarea><button type="submit" id="reply-submit" class="support-primary">Enviar mensagem <span aria-hidden="true">↗</span></button></form>
+<form id="customer-reply" class="reply-composer" aria-label="Escrever mensagem">
+<label for="customer-reply-text" class="reply-composer-label">Sua mensagem</label>
+<div class="reply-composer-row">
+<textarea id="customer-reply-text" rows="2" minlength="1" maxlength="2000" required placeholder="Escreva sua mensagem…" aria-describedby="reply-composer-hint"></textarea>
+<button type="submit" id="reply-submit" class="support-primary reply-send" aria-label="Enviar mensagem" title="Enviar mensagem" disabled>
+<span class="reply-send-text">Enviar</span>
+<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 14-7-4.5 14-3.1-6.1L5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m11.4 12.9 7.4-7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</button>
+</div>
+<small id="reply-composer-hint" class="reply-composer-hint">Enter envia · Shift+Enter quebra a linha</small>
+</form>
 </section>
 <section id="support-lost" class="support-lost" hidden><h2>Acesso à conversa indisponível neste navegador</h2><p>O link do chamado não contém sua chave privada. Utilize o mesmo navegador em que abriu o atendimento ou entre em contato diretamente para solicitar orientação.</p><a href="mailto:contato.proxiti@gmail.com">contato.proxiti@gmail.com</a><p><a href="/#pre-diagnostico">Abrir uma nova solicitação</a></p></section>
 <div id="support-feedback" class="support-feedback" role="status" aria-live="polite" hidden></div>
