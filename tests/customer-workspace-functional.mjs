@@ -24,7 +24,7 @@ let page;
 try{
  const context=await browser.newContext({viewport:{width:390,height:800}});
  await context.addInitScript(()=>{
-  const fixture={session:null,callback:null,signups:[],rpcCalls:[],requests:[],
+  const fixture={session:null,callback:null,signups:[],rpcCalls:[],requests:[],quoteDecisions:[],
     account:{display_name:"Cliente de teste",phone:"",city:"Curitiba",preferred_channel:"email"},
     tickets:[],devices:[],schedule:[],preferences:[],ratings:[],partners:[
      {id:"11111111-1111-4111-8111-111111111111",name:"Parceiro autorizado",
@@ -132,6 +132,8 @@ try{
     items:[{title:"Suporte remoto",quantity:1,unit_price_cents:4000,
      subtotal_cents:4000,scope:"Diagnóstico remoto orientado."}]}]};
   }else if(b.action==="account_quote_decision"){
+   await page.evaluate(input=>window.__customerFixture.quoteDecisions.push(input),{
+    ticket_id:b.ticket_id,quote_id:b.quote_id,decision:b.decision,confirmed:b.confirmed});
    response={ok:true,decision:b.decision,reference:2,already_recorded:false};
   }else if(b.action==="account_reply")response={ok:true};
   else return route.fulfill({status:400,contentType:"application/json",
@@ -279,6 +281,15 @@ try{
  await page.waitForFunction(()=>document.querySelector("#customer-detail-quotes")?.textContent.includes("Suporte remoto"),{timeout:10000});
  assert((await page.textContent("#customer-detail-quotes")).includes("R$ 40,00")||
   (await page.textContent("#customer-detail-quotes")).includes("R$ 40,00"));
+ assert((await page.textContent("#customer-detail-quotes")).includes("Propostas deste atendimento"));
+ await page.getByRole("button",{name:"Aceitar proposta",exact:true}).click();
+ assert.equal(await page.evaluate(()=>window.__customerFixture.quoteDecisions.length),0,
+  "O cliente precisa confirmar leitura antes de aceitar na área privada");
+ await page.locator("#customer-detail-quotes .customer-quote-check input").check();
+ await page.getByRole("button",{name:"Aceitar proposta",exact:true}).click();
+ await page.waitForFunction(()=>window.__customerFixture.quoteDecisions.length===1);
+ assert.equal(await page.evaluate(()=>window.__customerFixture.quoteDecisions[0].confirmed),true);
+ assert.equal(await page.evaluate(()=>window.__customerFixture.quoteDecisions[0].decision),"accepted");
  await page.click('[data-customer-view="equipment"]');
  await page.fill("#customer-device-label","Meu notebook");
  await page.click("#customer-device-form button[type=submit]");
