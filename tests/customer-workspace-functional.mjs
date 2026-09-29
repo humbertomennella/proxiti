@@ -50,6 +50,14 @@ try{
    },
    rpc(name,args){
     fixture.rpcCalls.push({name,args});
+    if(name==="proxiti_customer_access_status")
+      return ok({active:!!fixture.account,can_activate:!fixture.account});
+    if(name==="proxiti_customer_activate"){
+      if(!args?.p_privacy_accepted)return Promise.resolve({data:null,error:{message:"Consentimento ausente"}});
+      fixture.account={display_name:"Cliente de teste",phone:"",city:"",
+       preferred_channel:"email"};
+      return ok({ok:true});
+    }
     if(name==="proxiti_customer_dashboard")return ok({
       account:fixture.account,tickets:fixture.tickets,devices:fixture.devices,
       schedule:fixture.schedule,preferences:fixture.preferences,ratings:fixture.ratings
@@ -199,8 +207,21 @@ try{
  await page.waitForSelector("#customer-auth:not([hidden])");
  assert.equal(await page.locator("#customer-app").isVisible(),false);
  assert.equal(await page.locator("#customer-ticket-list").innerText(),"");
+ // Conta previamente usada na Central Técnica pode ativar a área sem criar outro Auth user.
+ await page.evaluate(()=>{window.__customerFixture.account=null;});
+ await page.fill("#customer-login-email","cliente@example.com");
+ await page.fill("#customer-login-password","Teste123@ab");
+ await page.click("#customer-login-form button[type=submit]");
+ await page.waitForSelector("#customer-activate-form:not([hidden])");
+ assert.equal(await page.locator("#customer-app").isVisible(),false);
+ assert.equal(await page.locator("#customer-verify-retry").isVisible(),false);
+ await page.check("#customer-activate-privacy");
+ await page.click("#customer-activate-form button[type=submit]");
+ await page.waitForSelector("#customer-app:not([hidden])");
+ assert.equal(await page.locator("#customer-verify").isVisible(),false);
+ assert((await page.textContent("#customer-welcome")).includes("Cliente de teste"));
  assert.deepEqual(errors,[]);
  await page.close();
- console.log("PASS: cadastro separado, login, chamado real simulado, conversa, proposta, equipamento, agenda, preferência e logout sem vazamento.");
+ console.log("PASS: cadastro, ativação de conta existente, login, chamado, conversa, proposta, equipamento, agenda e logout sem vazamento.");
 }finally{await page?.close().catch(()=>{});await browser.close();
  await new Promise(resolve=>server.close(resolve));}

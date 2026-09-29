@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/assets/css/minha-proxiti.css?v=20260928-1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
 <script src="/assets/js/support-config.js" defer></script>
-<script src="/assets/js/minha-proxiti.js?v=20260928-2" defer></script>
+<script src="/assets/js/minha-proxiti.js?v=20260928-3" defer></script>
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="customer-header"><a class="customer-brand" href="/" aria-label="PROXITI: página inicial"><span class="customer-logo">P</span><strong>PROXI<span>TI</span></strong></a>
@@ -47,7 +47,7 @@
 <p id="customer-auth-status" class="status" role="status" aria-live="polite"></p>
 <p class="auth-foot">Precisa de ajuda agora? <a href="/atendimento/">O chat continua disponível sem login ↗</a></p>
 </div></section>
-<section id="customer-verify" class="customer-verify" hidden><h1>Precisamos revisar seu acesso.</h1><p>Não foi possível liberar sua área neste momento. Você pode tentar novamente ou usar nosso chat sem login, que continua disponível.</p><button id="customer-verify-retry" class="secondary">Tentar novamente</button><a class="secondary customer-link" href="/atendimento/">Conversar sem login</a><button id="customer-verify-logout" class="text-button">Sair</button></section>
+<section id="customer-verify" class="customer-verify" hidden><h1 id="customer-verify-title">Precisamos revisar seu acesso.</h1><p id="customer-verify-message">Não foi possível liberar sua área neste momento. Você pode tentar novamente ou usar nosso chat sem login, que continua disponível.</p><form id="customer-activate-form" class="customer-form" hidden><label class="check"><input id="customer-activate-privacy" type="checkbox" required><span>Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos meus dados para criar minha área de cliente.</span></label><button class="primary" type="submit">Ativar minha área de cliente</button></form><p id="customer-verify-status" class="status" role="status" aria-live="polite"></p><button id="customer-verify-retry" class="secondary">Tentar novamente</button><a class="secondary customer-link" href="/atendimento/">Conversar sem login</a><button id="customer-verify-logout" class="text-button">Sair</button></section>
 <div id="customer-app" class="customer-app" hidden>
 <aside class="customer-sidebar" aria-label="Navegação da Minha PROXITI">
 <div class="sidebar-name"><small>OLÁ,</small><strong id="customer-welcome">Cliente PROXITI</strong><span id="customer-email"></span></div>
