@@ -96,6 +96,9 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  html.includes('id="customer-support-popover"')&&
  html.includes('data-src="/atendimento/?chat=1&amp;embed=1"')&&
  html.includes('minha-proxiti-chat.js?v=20260929-2')&&
+ html.includes('minha-proxiti-chat.css?v=20260929-3')&&
+ html.includes('class="customer-chat-actions" role="group"')&&
+ (html.match(/class="customer-chat-control"/g)||[]).length===2&&
  html.includes('id="customer-chat-overlay"')&&
  html.includes('id="customer-chat-minimized"')&&
  html.includes('id="customer-support-minimize"')&&
@@ -106,6 +109,12 @@ assert(!html.includes('<p class="auth-foot">Precisa de suporte agora?')&&
  embedCss.includes('html.embedded[data-theme="dark"]')&&
  embedJs.includes('event.data?.type!=="proxiti-chat-theme"'),
  "O rodapé deve abrir uma janela central, minimizável e com tema sincronizado");
+assert(customerChatCss.includes('width:min(620px,calc(100vw - 32px))')&&
+ customerChatCss.includes('.customer-support-popover-head>.customer-chat-actions')&&
+ customerChatCss.includes('flex-direction:row')&&
+ customerChatCss.includes('@keyframes customer-chat-reveal')&&
+ customerChatCss.includes('@media(prefers-reduced-motion:reduce)'),
+ "Janela do chat precisa ser mais larga, premium, acessível e ter controles horizontais");
 assert(portal.includes("auth-slider-track")&&portal.includes("height:690px")&&
  portal.includes("prefers-reduced-motion")&&
  js.includes('pane.inert=key!==mode')&&js.includes('viewport.hidden=!sliding'),
