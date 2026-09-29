@@ -104,4 +104,4 @@ html.embedded #customer-reply-text{min-height:65px}
 .support-brand{display:inline-flex;align-items:center;gap:11px;font-size:.98rem;letter-spacing:.11em;font-weight:880;color:var(--text)}
 .support-brand .brand-mark{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:12px;background:#0b1220;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
 .support-brand .brand-mark span{background:linear-gradient(135deg,#67a2ff,#f28c45);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.35rem;font-weight:900;letter-spacing:-.06em}
-.support-brand .brand-name{display:inline-flex}.support-brand .brand-ti{color:#8bb8ff}
+.support-brand .brand-name{display:inline-flex}.support-brand .brand-ti{color:#67a2ff}
