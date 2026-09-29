@@ -156,11 +156,36 @@ try{
  await page.waitForSelector("#customer-support-popover:not([hidden])");
  assert.equal(page.url(),loginUrl,"Abrir conversa não deve sair do login");
  assert.equal(await page.locator("#customer-footer-chat").getAttribute("aria-expanded"),"true");
- assert.equal(await page.locator("#customer-support-frame").getAttribute("src"),
-  "/atendimento/?chat=1&embed=1");
+ assert.equal(await page.locator("#customer-chat-overlay").isVisible(),true);
+ const popupRect=await page.locator("#customer-support-popover").boundingBox();
+ assert(Math.abs(popupRect.x+popupRect.width/2-195)<2 &&
+   Math.abs(popupRect.y+popupRect.height/2-400)<2,
+   "Chat deve aparecer no centro da tela, inclusive no celular");
+ const chatUrl=new URL(await page.locator("#customer-support-frame").getAttribute("src"),base);
+ assert.equal(chatUrl.pathname,"/atendimento/");
+ assert.equal(chatUrl.searchParams.get("embed"),"1");
+ assert.equal(chatUrl.searchParams.get("theme"),"light");
  await page.frameLocator("#customer-support-frame").locator("#support-start").waitFor({state:"attached"});
+ assert.equal(await page.frameLocator("#customer-support-frame").locator("html").getAttribute("data-theme"),"light");
+ assert.equal(await page.frameLocator("#customer-support-frame").locator("#customer-quotes").count(),0);
+ assert.equal(await page.frameLocator("#customer-support-frame").locator(".support-account-invite").isVisible(),false);
+ await page.click("#customer-support-minimize");
+ assert.equal(await page.locator("#customer-support-popover").isVisible(),false);
+ assert.equal(await page.locator("#customer-chat-overlay").isVisible(),false);
+ assert.equal(await page.locator("#customer-chat-minimized").isVisible(),true);
+ await page.click("#customer-theme-toggle");
+ assert.equal(await page.locator('html').getAttribute("data-theme"),"dark");
+ await page.click("#customer-chat-restore");
+ await page.waitForSelector("#customer-support-popover:not([hidden])");
+ await page.waitForFunction(()=>document.querySelector("#customer-support-frame")?.contentDocument?.documentElement.dataset.theme==="dark");
+ assert.equal(await page.frameLocator("#customer-support-frame").locator("html").getAttribute("data-theme"),"dark");
+ await page.click("#customer-support-minimize");
+ await page.click("#customer-theme-toggle");
+ await page.click("#customer-chat-restore");
+ await page.waitForFunction(()=>document.querySelector("#customer-support-frame")?.contentDocument?.documentElement.dataset.theme==="light");
  await page.click("#customer-support-close");
  assert.equal(await page.locator("#customer-support-popover").isVisible(),false);
+ assert.equal(await page.locator("#customer-chat-minimized").isVisible(),false);
  assert.equal(await page.locator("#customer-footer-chat").getAttribute("aria-expanded"),"false");
  assert.equal(await page.evaluate(()=>document.activeElement?.id),"customer-footer-chat");
  await page.click("#customer-footer-chat");
