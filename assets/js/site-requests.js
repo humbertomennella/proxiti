@@ -17,7 +17,6 @@
     event.preventDefault();
     if(!form.reportValidity())return;
     const stash=storage();
-    if(!stash){tell("Ative o armazenamento do navegador para acompanhar o chamado ou utilize o contato direto por e-mail.");return;}
     const data=new FormData(form),send=form.querySelector('button[type="submit"]');
     if(!cfg?.url||!cfg?.publishableKey){tell("Sistema temporariamente indisponível. Entre em contato por e-mail.");return;}
     const body={
@@ -38,11 +37,13 @@
       const result=await response.json();
       if(!response.ok||!result.id||!result.access_token)
         throw new Error(result.error||"Não foi possível registrar o atendimento.");
-      stash.setItem("proxiti_ticket_"+result.id,
-        JSON.stringify({token:result.access_token,savedAt:Date.now()}));
-      tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar o checkup…");
+      if(stash){
+        try{stash.setItem("proxiti_ticket_"+result.id,JSON.stringify({token:result.access_token,savedAt:Date.now()}));}
+        catch{ /* O registro remoto não deve falhar por restrições de armazenamento local. */ }
+      }
+      tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar a avaliação inicial…");
       const commercialMessage=[
-        "Olá! Solicitei um Checkup Gratuito de Vulnerabilidade da Proxiti.",
+        "Olá! Solicitei uma avaliação inicial gratuita de TI da Proxiti.",
         "Empresa: "+String(data.get("empresa")||""),
         "Responsável: "+String(data.get("nome")||"")+" ("+String(data.get("cargo")||"")+")",
         "Estações: "+String(data.get("equipamento")||""),
