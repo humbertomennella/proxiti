@@ -26,9 +26,7 @@
       phone:String(data.get("telefone")||"").trim(),company_website:String(data.get("company_website")||""),
       customer_type:"Micro ou pequeno negócio",service_type:String(data.get("area")||""),
       impact:String(data.get("impacto")||""),subject:"Checkup B2B: "+String(data.get("empresa")||"Empresa")+" — "+String(data.get("area")||"Gestão de TI"),
-      description:"Perfil: "+String(data.get("perfil")||"")+"\nEquipamento ou ambiente: "+
-        String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+
-        "\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
+      description:"Perfil: Micro ou pequeno negócio\nEmpresa: "+String(data.get("empresa")||"Não informada")+"\nCargo: "+String(data.get("cargo")||"Não informado")+"\nEstações de trabalho: "+String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+"\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
       privacy_accepted:data.get("privacidade")==="on"
     };
     send.disabled=true;tell("Registrando sua solicitação com segurança…");
