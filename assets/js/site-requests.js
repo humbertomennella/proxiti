@@ -40,8 +40,16 @@
         throw new Error(result.error||"Não foi possível registrar o atendimento.");
       stash.setItem("proxiti_ticket_"+result.id,
         JSON.stringify({token:result.access_token,savedAt:Date.now()}));
-      tell("Chamado #"+result.reference+" registrado. Abrindo sua conversa…");
-      window.location.assign("/atendimento/?ticket="+encodeURIComponent(result.id));
+      tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar o checkup…");
+      const commercialMessage=[
+        "Olá! Solicitei um Checkup Gratuito de Vulnerabilidade da Proxiti.",
+        "Empresa: "+String(data.get("empresa")||""),
+        "Responsável: "+String(data.get("nome")||"")+" ("+String(data.get("cargo")||"")+")",
+        "Estações: "+String(data.get("equipamento")||""),
+        "Principal necessidade: "+String(data.get("area")||""),
+        "Referência da solicitação: "+String(result.reference||"")
+      ].join("\n");
+      window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(commercialMessage));
     }catch(error){
       tell((error.message||"Falha de conexão.")+
         " Se necessário, utilize o e-mail de contato exibido no rodapé.");
