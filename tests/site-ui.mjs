@@ -132,3 +132,15 @@ assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digit
 assert(!read("assets/js/main.js").includes("data-checkout"));
 assert(!read("assets/css/style.css").includes("pc-mini-gallery"));
 assert(!home.includes("/assets/products/"));
+
+/* Consistência dos pilares comerciais: títulos e descrições não podem divergir. */
+const servicePanels=[...home.matchAll(/<article class="service-panel reveal">[\\s\\S]*?<\\/article>/g)].map(m=>m[0]);
+assert.equal(servicePanels.length,4,"A home deve apresentar quatro pilares de serviço.");
+assert(servicePanels[1].includes("Segurança &amp; Proteção contra Ransomware"));
+assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
+assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
+assert(servicePanels[2].includes("revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
+assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
+assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
+assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
+assert(!notfound.includes("catálogo de produtos"));
