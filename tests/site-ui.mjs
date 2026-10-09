@@ -117,6 +117,7 @@ assert(home.includes('A equipe confirmará o horário pelo WhatsApp') || home.in
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
+const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
 assert(services.includes("<h2>Consultoria, infraestrutura e segurança preventiva</h2>"));
 
