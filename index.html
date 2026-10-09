@@ -65,7 +65,7 @@
         <a href="#cenarios">Cenários</a>
         <a href="#servicos">Serviços</a>
         <a href="#como-funciona">Como funciona</a>
-        <a href="/produtos/">Produtos</a>
+
         <a href="#sobre">Sobre</a>
         <a href="#contato">Contato</a>
       </nav>
@@ -93,7 +93,7 @@
       <a href="#servicos">Serviços</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#pre-diagnostico">Solicitar avaliação</a>
-      <a href="/produtos/">Produtos</a>
+
       <a href="/minha-proxiti/" class="mobile-account-link">Minha PROXITI · Entrar ou criar conta</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
@@ -408,93 +408,22 @@
             </div>
           </div>
 
-          <form class="triage-form" id="pre-diagnostico-form">\n            <input type="hidden" name="perfil" value="Micro ou pequeno negócio">
-            <div class="field"><label for="solicitante-nome">Nome do responsável</label><input id="solicitante-nome" name="nome" type="text" autocomplete="name" maxlength="120" required placeholder="Nome completo"></div>\n            <div class="field"><label for="cargo">Cargo</label><input id="cargo" name="cargo" type="text" maxlength="100" required placeholder="Ex.: Sócio, gerente, administrativo"></div>\n            <div class="field"><label for="empresa">Nome da empresa</label><input id="empresa" name="empresa" type="text" maxlength="160" required autocomplete="organization" placeholder="Razão social ou nome comercial"></div>
-            <div class="field"><label for="solicitante-email">Seu e-mail</label><input id="solicitante-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="seuemail@exemplo.com"></div>
-            <div class="field"><label for="solicitante-telefone">Telefone (opcional)</label><input id="solicitante-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="40" placeholder="DDD + número"></div>
+          <form class="triage-form" id="pre-diagnostico-form">
+            <input type="hidden" name="perfil" value="Micro ou pequeno negócio">
+            <div class="field"><label for="solicitante-nome">Nome do responsável</label><input id="solicitante-nome" name="nome" type="text" autocomplete="name" maxlength="120" required placeholder="Nome completo"></div>
+            <div class="field"><label for="cargo">Cargo</label><input id="cargo" name="cargo" type="text" maxlength="100" required placeholder="Ex.: Sócio, gerente, administrativo"></div>
+            <div class="field"><label for="empresa">Nome da empresa</label><input id="empresa" name="empresa" type="text" maxlength="160" required autocomplete="organization" placeholder="Razão social ou nome comercial"></div>
+            <div class="field"><label for="solicitante-email">E-mail corporativo</label><input id="solicitante-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="voce@empresa.com.br"></div>
+            <div class="field"><label for="solicitante-telefone">Telefone para contato</label><input id="solicitante-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="40" required placeholder="DDD + número"></div>
             <div class="hp-field" aria-hidden="true"><label for="solicitante-site">Website</label><input id="solicitante-site" name="company_website" type="text" autocomplete="off" tabindex="-1"></div>
-            <div class="field">
-              <label for="perfil">Perfil</label>
-              <select id="perfil" name="perfil" required>
-                <option value="">Selecione</option>
-                <option>Residencial</option>
-                <option>Micro ou pequeno negócio</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="area">Área</label>
-              <select id="area" name="area" required>
-                <option value="">Selecione</option>
-                <option>Computador ou notebook</option>
-                <option>Rede ou Wi-Fi</option>
-                <option>Impressora ou periférico</option>
-                <option>Sistema ou programa</option>
-                <option>Backup ou acesso</option>
-                <option>Segurança preventiva</option>
-                <option>Outro</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="equipamento">Equipamento ou ambiente</label>
-              <input id="equipamento" name="equipamento" type="text" maxlength="120" placeholder="Ex.: notebook, roteador, 3 computadores">
-            </div>
-            <div class="field">
-              <label for="impacto">Impacto</label>
-              <select id="impacto" name="impacto" required>
-                <option value="">Selecione</option>
-                <option>Incômodo, mas ainda consigo usar</option>
-                <option>Prejudica trabalho ou estudo</option>
-                <option>Impede o uso do equipamento ou da rede</option>
-              </select>
-            </div>
-            <div class="field field-full">
-              <label for="sintoma">O que está acontecendo?</label>
-              <textarea id="sintoma" name="sintoma" maxlength="700" required placeholder="Descreva o ambiente da empresa, sistemas essenciais e o que precisa melhorar."></textarea>
-            </div>
-            <div class="field field-full request-consent"><label><input name="privacidade" type="checkbox" required> Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para esta solicitação.</label></div>
-            <div class="form-actions">
-              <button class="button button-accent" type="submit">Solicitar checkup gratuito de 20 minutos</button>
-              <p class="form-status" id="triage-status" aria-live="polite"></p>
-            </div>
+            <div class="field"><label for="equipamento">Quantidade de computadores/estações de trabalho</label><select id="equipamento" name="equipamento" required><option value="">Selecione</option><option>1-5</option><option>6-15</option><option>16-30</option><option>30+</option></select></div>
+            <div class="field"><label for="area">Principal dor atual</label><select id="area" name="area" required><option value="">Selecione</option><option>Backup/Segurança</option><option>Computadores lentos/travando</option><option>Sem suporte técnico rápido</option><option>Quero organizar minha infraestrutura</option></select></div>
+            <div class="field"><label for="impacto">Impacto na operação</label><select id="impacto" name="impacto" required><option value="">Selecione</option><option>Baixo: sem interrupção atual</option><option>Médio: produtividade afetada</option><option>Alto: operação ou dados em risco</option></select></div>
+            <div class="field field-full"><label for="sintoma">Contexto da empresa</label><textarea id="sintoma" name="sintoma" maxlength="700" required placeholder="Descreva os sistemas essenciais, os riscos percebidos e o que precisa melhorar."></textarea></div>
+            <div class="field field-full request-consent"><label><input name="privacidade" type="checkbox" required> Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para esta solicitação comercial.</label></div>
+            <div class="form-actions"><button class="button button-accent" type="submit">Solicitar checkup gratuito de 20 minutos</button><p class="form-status" id="triage-status" aria-live="polite"></p></div>
           </form>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="produtos" aria-labelledby="produtos-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-label">Produtos digitais</span>
-            <h2 id="produtos-title">Orientação prática para quando você não precisa de atendimento.</h2>
-          </div>
-          <p>Os materiais digitais da PROXITI têm escopo próprio, explicam os limites do que ensinam e servem como referência de consulta.</p>
-        </div>
-
-        <article class="product-feature reveal">
-          <div class="product-copy">
-            <span class="tag tag-orange">PC Seguro · edição 2.2 Premium</span>
-            <h3>Um guia para entender. Quatro ferramentas para aplicar.</h3>
-            <p>O PC Seguro continua sendo um único produto: o guia de 29 páginas explica a segurança digital, enquanto quatro PDFs ampliados ajudam a fazer o check-up, seguir o plano, revisar a rotina e organizar a recuperação.</p>
-            <p class="kit-inline-explainer">Os arquivos são separados para facilitar o preenchimento, a impressão e a consulta. Todos estão incluídos nos mesmos R$ 29,90.</p>
-            <div class="product-meta">
-              <span class="tag">1 compra · 5 PDFs</span>
-              <span class="tag">Guia · 29 páginas</span>
-              <span class="tag">4 ferramentas práticas</span>
-              <span class="tag">Uso individual</span>
-            </div>
-            <div class="product-actions">
-              <a class="button button-primary" href="/produtos/pc-seguro/">Conhecer o PC Seguro</a>
-              <a class="button button-accent" href="https://pay.kiwify.com.br/vHyqcmj" target="_blank" rel="noopener noreferrer" data-checkout="pc-seguro" data-ready-label="Comprar por R$ 29,90" data-fallback-label="Consultar disponibilidade" data-unavailable-label="Venda indisponível">Comprar por R$ 29,90</a>
-              <span class="product-price">R$ 29,90</span>
-            </div>
-          </div>
-          <div class="pc-mini-gallery" aria-label="Ilustrações do PC Seguro 2.2 Premium">
-            <img src="/assets/products/pc-seguro-2-2-capa.svg" width="280" height="396" loading="lazy" decoding="async" alt="Ilustração da capa do PC Seguro 2.2 Premium, com notebook e escudo de segurança.">
-            <img src="/assets/products/pc-seguro-2-2-phishing.svg" width="280" height="230" loading="lazy" decoding="async" alt="Ilustração do módulo de phishing e golpes do PC Seguro.">
-            <img src="/assets/products/pc-seguro-2-2-checklist.svg" width="280" height="230" loading="lazy" decoding="async" alt="Ilustração do checklist mensal de segurança.">
-          </div>
-        </article>
       </div>
     </section>
 
@@ -503,7 +432,7 @@
         <div class="about-copy reveal">
           <span class="section-label">Sobre a PROXITI</span>
           <h2 id="sobre-title">Atuação focada no essencial, sem inflar o portfólio.</h2>
-          <p>A PROXITI concentra a operação em suporte, conectividade, backup, acessos e segurança preventiva para cenários residenciais e pequenos negócios.</p>
+          <p>A Proxiti concentra sua operação em suporte gerenciado, continuidade, segurança, backup e infraestrutura para micro e pequenas empresas.</p>
           <p>O atendimento é conduzido com foco em suporte e infraestrutura, apoiado por formação em Segurança da TI. Áreas avançadas que exigem outra estrutura, como SOC, Red Team, forense digital e pentest profissional, não são anunciadas como serviço atual.</p>
         </div>
         <div class="about-facts reveal">
@@ -579,7 +508,7 @@
         <nav class="footer-nav" aria-label="Navegação do rodapé">
           <a href="/servicos/">Serviços</a>
           <a href="#como-funciona">Como funciona</a>
-          <a href="/produtos/">Produtos</a>
+
         <a href="/minha-proxiti/">Minha PROXITI</a>
           <a href="#sobre">Sobre</a>
           <a href="#contato">Contato</a>
