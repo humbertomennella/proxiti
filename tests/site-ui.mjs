@@ -93,8 +93,9 @@ for(const cssPath of ["assets/css/proxiti-ui.css","assets/css/site-refine.css"])
 /* Contratos comerciais: o site público é exclusivamente B2B e a captura exige dados da empresa. */
 assert(home.includes("Gestão de TI, Suporte e Segurança para Micro e Pequenas Empresas"));
 assert(home.includes("A TI da sua empresa sem interrupções, riscos ou custos de equipe interna."));
-assert(home.includes("Solicitar Checkup Gratuito de Vulnerabilidade"));
+assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
+assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
 for(const required of ["Essencial","Profissional","Enterprise","R$ 500/mês","Escritórios de Contabilidade e Advocacia","Clínicas de Saúde e Laboratórios","Corretoras de Seguros e Financeiras","Serviços e Comércio Geral","name=\"empresa\"","name=\"cargo\"","1-5","6-15","16-30","30+","Backup/Segurança","Computadores lentos/travando","Sem suporte técnico rápido","Quero organizar minha infraestrutura"])
  assert(home.includes(required),"Página inicial: conteúdo B2B ausente: "+required);
@@ -113,9 +114,12 @@ console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção d
 assert(home.includes('data-open-checkup'));
 assert(home.includes('<dialog class="checkup-modal" id="checkup-modal"'));
 assert(home.includes('id="checkup-modal-content"'));
-assert(home.includes('A equipe confirmará o horário pelo WhatsApp') || home.includes('confirmará o horário pelo WhatsApp'));
+assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.includes('combinará o horário pelo WhatsApp'));
+assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
+assert(!requests.includes('if(!stash){tell('), "A falta de armazenamento local não pode bloquear o registro remoto.");
+assert(requests.includes("if(stash){") && requests.includes("O registro remoto não deve falhar por restrições de armazenamento local."), "Falha ao salvar localmente não deve cancelar uma solicitação registrada.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
@@ -127,6 +131,10 @@ for(const page of ["404.html","privacidade/index.html","termos/index.html","cont
  assert(!html.includes('href="/produtos/"'),page+": link para catálogo B2C removido do site público.");
 }
 assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digitais."));
+const card=read("cartao/index.html");
+assert(card.includes("Gestão de TI para pequenas empresas"));
+assert(card.includes("Atendimento para micro e pequenas empresas."));
+assert(!/residências|em casa ou no seu negócio|atendimento para residências/i.test(card), "Cartão público ainda comunica oferta B2C.");
 
 /* Os scripts e visuais do antigo produto B2C não devem voltar a ser referenciados. */
 assert(!read("assets/js/main.js").includes("data-checkout"));
@@ -143,6 +151,8 @@ assert(servicePanels[2].includes("Revisões periódicas")&&servicePanels[2].incl
 assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
+assert(services.includes("Planejamento e organização de cópias de segurança, recuperação de dados e acessos essenciais"));
+assert(!services.includes("<li>Quedas de conexão, lentidão ou cobertura inadequada no ambiente empresarial.</li><li>Quedas, oscilação ou dispositivos que perdem conexão.</li>"));
 assert(!read("404.html").includes("catálogo de produtos"));
 
 /* SEO institucional e remoção de textos B2C históricos. */
