@@ -107,3 +107,23 @@ assert(requests.includes('String(data.get("empresa")||"Não informada")'));
 assert(requests.includes('String(data.get("cargo")||"Não informado")'));
 assert(requests.includes("Estações de trabalho"));
 console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");
+
+
+/* Checkup B2B: CTA abre modal real e o formulário mantém confirmação honesta de agenda. */
+assert(home.includes('data-open-checkup'));
+assert(home.includes('<dialog class="checkup-modal" id="checkup-modal"'));
+assert(home.includes('id="checkup-modal-content"'));
+assert(home.includes('A equipe confirmará o horário pelo WhatsApp') || home.includes('confirmará o horário pelo WhatsApp'));
+const checkupScript=read("assets/js/checkup-modal.js");
+new Script(checkupScript,{filename:"checkup-modal.js"});
+assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
+const services=read("servicos/index.html");
+assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
+assert(services.includes("<h2>Consultoria, infraestrutura e segurança preventiva</h2>"));
+
+/* Limpeza das rotas B2C em páginas institucionais. */
+for(const page of ["404.html","privacidade/index.html","termos/index.html","contato-seguranca/index.html","seja-parceiro/index.html"]){
+ const html=read(page);
+ assert(!html.includes('href="/produtos/"'),page+": link para catálogo B2C removido do site público.");
+}
+assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digitais."));

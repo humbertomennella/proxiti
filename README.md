@@ -8,8 +8,6 @@ Site institucional e comercial da PROXITI, operação de suporte técnico, redes
 
 - `/` — home comercial, cenários, serviços, processo e pré-diagnóstico.
 - `/servicos/` — escopo detalhado de atuação.
-- `/produtos/` — catálogo de produtos digitais.
-- `/produtos/pc-seguro/` — página comercial do PC Seguro.
 - `/privacidade/` — política de privacidade.
 - `/termos/` — termos gerais de atendimento.
 - `/.well-known/security.txt` — canal de contato para assuntos de segurança.
@@ -30,16 +28,6 @@ O site evita métricas, SLAs, depoimentos, garantias e selos que não possam ser
 ## Pré-diagnóstico
 
 O formulário da home envia a solicitação para a Edge Function `proxiti-support`, que registra o chamado no Supabase e direciona o cliente à página de acompanhamento. O chat público continua disponível sem login. Não solicitar senhas, códigos de autenticação ou documentos sigilosos no pré-diagnóstico.
-
-## Produto digital
-
-O primeiro produto é o **PC Seguro**, guia prático de segurança digital para usuários comuns.
-
-A URL de checkout automático permanece centralizada em:
-
-`assets/js/product-config.js`
-
-**Situação em 29/09/2026:** o checkout Kiwify está habilitado no front-end (`readyForSales: true`). Isso **não comprova** que o comprador recebe os cinco PDFs corretos: a confirmação do produto, do pagamento, da entrega e das proteções exige teste autorizado na Kiwify. Consulte `docs/pc-seguro-checkout-operacao.md`. Arquivos pagos, senhas de proprietário e dados pessoais não devem ser publicados no repositório nem no GitHub Pages.
 
 ## Tecnologia
 
@@ -64,3 +52,7 @@ A URL de checkout automático permanece centralizada em:
 - Telefone / WhatsApp: **+55 41 8823-5598**
 - E-mail: **contato.proxiti@gmail.com**
 - Área principal: **Curitiba/PR**
+
+## Posicionamento comercial atual
+
+A oferta pública está focada em gestão de TI B2B para micro e pequenas empresas. Páginas e links de produtos digitais voltados ao consumidor final foram retirados da navegação pública durante o pivot para MSP.
