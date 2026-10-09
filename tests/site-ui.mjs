@@ -131,6 +131,10 @@ for(const page of ["404.html","privacidade/index.html","termos/index.html","cont
  assert(!html.includes('href="/produtos/"'),page+": link para catálogo B2C removido do site público.");
 }
 assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digitais."));
+const card=read("cartao/index.html");
+assert(card.includes("Gestão de TI para pequenas empresas"));
+assert(card.includes("Atendimento para micro e pequenas empresas."));
+assert(!/residências|em casa ou no seu negócio|atendimento para residências/i.test(card), "Cartão público ainda comunica oferta B2C.");
 
 /* Os scripts e visuais do antigo produto B2C não devem voltar a ser referenciados. */
 assert(!read("assets/js/main.js").includes("data-checkout"));
