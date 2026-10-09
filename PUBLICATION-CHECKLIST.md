@@ -35,7 +35,7 @@
 - [ ] Testar 320 px, 768 px, 1024 px e desktop amplo.
 - [ ] Testar zoom de 200%.
 - [ ] Verificar console do navegador.
-- [ ] Validar canonical, metadados e sitemap.
+- [x] Canonical, metadados sociais e sitemap revisados no pivot B2B de 09/10/2026.
 - [ ] Verificar ausência de afirmações não comprovadas.
 
 ## Evolução comercial
@@ -43,7 +43,7 @@
 - [ ] Substituir compra assistida por checkout automático quando a plataforma estiver configurada.
 - [ ] Adicionar avaliações apenas quando forem reais e publicáveis.
 - [ ] Adicionar cases apenas com contexto verificável e autorização adequada.
-- [ ] Adicionar novos produtos somente quando o conteúdo e a entrega estiverem prontos.
+- [x] Navegação e materiais públicos focados na oferta B2B de gestão de TI.
 
 ## Pivot B2B MSP (outubro de 2026)
 
@@ -51,3 +51,14 @@
 - [x] Formulário empresarial de pré-diagnóstico com confirmação manual de horário.
 - [x] CTA principal abre modal acessível de checkup.
 - [ ] Confirmar publicação e funcionamento no domínio de produção após o merge.
+
+
+## Fechamento B2B MSP — 09/10/2026
+
+- [x] CTA de checkup abre modal acessível com confirmação manual via WhatsApp descrita com transparência.
+- [x] Quatro pilares da home revisados para que títulos, descrições e próximos passos correspondam.
+- [x] Página de serviços revisada para separar conectividade, backup e segurança/infraestrutura.
+- [x] Texto B2C antigo removido da página 404 e dos termos públicos.
+- [x] Metadados Open Graph/Twitter adicionados às páginas institucionais que não os tinham.
+- [x] Sitemap atualizado para as páginas públicas atuais.
+- [ ] Confirmar sucesso dos workflows de integridade e publicação após o merge.

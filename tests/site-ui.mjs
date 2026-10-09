@@ -119,7 +119,7 @@ new Script(checkupScript,{filename:"checkup-modal.js"});
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
-assert(services.includes("<h2>Consultoria, infraestrutura e segurança preventiva</h2>"));
+assert(services.includes("<h2>Consultoria, infraestrutura em nuvem e segurança preventiva</h2>"));
 
 /* Limpeza das rotas B2C em páginas institucionais. */
 for(const page of ["404.html","privacidade/index.html","termos/index.html","contato-seguranca/index.html","seja-parceiro/index.html"]){
@@ -132,3 +132,31 @@ assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digit
 assert(!read("assets/js/main.js").includes("data-checkout"));
 assert(!read("assets/css/style.css").includes("pc-mini-gallery"));
 assert(!home.includes("/assets/products/"));
+
+/* Consistência dos pilares comerciais: títulos e descrições não podem divergir. */
+const servicePanels=home.split('<article class="service-panel reveal">').slice(1).map(part=>part.split("</article>")[0]);
+assert.equal(servicePanels.length,4,"A home deve apresentar quatro pilares de serviço.");
+assert(servicePanels[1].includes("Segurança &amp; Proteção contra Ransomware"));
+assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
+assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
+assert(servicePanels[2].includes("Revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
+assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
+assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
+assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
+assert(!read("404.html").includes("catálogo de produtos"));
+
+/* SEO institucional e remoção de textos B2C históricos. */
+for(const [page,url] of [
+ ["privacidade/index.html","https://proxiti.com.br/privacidade/"],
+ ["termos/index.html","https://proxiti.com.br/termos/"],
+ ["contato-seguranca/index.html","https://proxiti.com.br/contato-seguranca/"],
+ ["servicos/index.html","https://proxiti.com.br/servicos/"]
+]){
+ const html=read(page);
+ assert(html.includes('rel="canonical" href="'+url+'"'),page+": canonical ausente");
+ assert(html.includes('property="og:title"')&&html.includes('property="og:description"')&&html.includes('property="og:image"'),page+": metadados sociais incompletos");
+ assert(html.includes('name="twitter:card"'),page+": Twitter card ausente");
+}
+assert(!read("termos/index.html").includes("Produtos digitais"));
+assert(!read("404.html").includes("catálogo de produtos"));
+assert(read("sitemap.xml").includes("<lastmod>2026-10-09</lastmod>"));
