@@ -108,7 +108,7 @@
           <h1 id="hero-title">A TI da sua empresa sem interrupções, riscos ou custos de equipe interna.</h1>
           <p>Garantimos a continuidade, segurança e suporte técnico da sua pequena empresa com um modelo de assinatura mensal sob medida.</p>
           <div class="hero-actions px-cluster">
-            <a class="button button-accent px-button" href="#pre-diagnostico">Solicitar Checkup Gratuito de Vulnerabilidade</a>
+            <a class="button button-accent px-button" href="#pre-diagnostico" data-open-checkup>Solicitar Checkup Gratuito de Vulnerabilidade</a>
             <a class="button button-secondary px-button" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20gest%C3%A3o%20de%20TI%20para%20minha%20empresa" target="_blank" rel="noopener noreferrer">Falar com um Especialista no WhatsApp</a>
           </div>
           <div class="hero-facts" aria-label="Informações do atendimento">
@@ -481,6 +481,15 @@
     </section>
   </main>
 
+  <dialog class="checkup-modal" id="checkup-modal" aria-labelledby="checkup-modal-title" aria-describedby="checkup-modal-description">
+    <div class="checkup-modal-header">
+      <div><span class="section-label">Checkup empresarial</span><h2 id="checkup-modal-title">Solicite seu checkup gratuito de 20 minutos</h2></div>
+      <button class="checkup-modal-close" type="button" data-close-checkup aria-label="Fechar janela">×</button>
+    </div>
+    <p id="checkup-modal-description" class="checkup-modal-description">Preencha os dados da empresa. A solicitação será registrada e a equipe confirmará o horário pelo WhatsApp. Este formulário não reserva automaticamente um horário em calendário.</p>
+    <div class="checkup-modal-content" id="checkup-modal-content"></div>
+  </dialog>
+
   <section id="support-widget" class="support-widget" role="dialog" aria-label="Chat da PROXITI" hidden>
     <header class="support-widget-head"><div><strong>Chat PROXITI</strong><small>Atendimento e acompanhamento</small></div><button id="support-widget-close" type="button" aria-label="Minimizar chat" title="Minimizar chat">−</button></header>
     <iframe id="support-widget-frame" title="Conversa com a equipe PROXITI" data-src="/atendimento/?chat=1&amp;embed=1" loading="lazy"></iframe>
@@ -525,6 +534,7 @@
   <script src="/assets/js/support-config.js" defer></script>
   <script src="/assets/js/site-cms.js" defer></script>
   <script src="/assets/js/site-requests.js" defer></script>
+  <script src="/assets/js/checkup-modal.js" defer></script>
   <script src="/assets/js/chat-widget.js" defer></script>
 </body>
 </html>
