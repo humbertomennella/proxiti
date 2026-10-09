@@ -139,7 +139,7 @@ assert.equal(servicePanels.length,4,"A home deve apresentar quatro pilares de se
 assert(servicePanels[1].includes("Segurança &amp; Proteção contra Ransomware"));
 assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
 assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
-assert(servicePanels[2].includes("revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
+assert(servicePanels[2].includes("Revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
 assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
