@@ -117,6 +117,8 @@ assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.inc
 assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
+assert(!requests.includes('if(!stash){tell('), "A falta de armazenamento local não pode bloquear o registro remoto.");
+assert(requests.includes("if(stash){") && requests.includes("O registro remoto não deve falhar por restrições de armazenamento local."), "Falha ao salvar localmente não deve cancelar uma solicitação registrada.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
