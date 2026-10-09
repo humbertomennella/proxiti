@@ -144,3 +144,19 @@ assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
 assert(!notfound.includes("catálogo de produtos"));
+
+/* SEO institucional e remoção de textos B2C históricos. */
+for(const [page,url] of [
+ ["privacidade/index.html","https://proxiti.com.br/privacidade/"],
+ ["termos/index.html","https://proxiti.com.br/termos/"],
+ ["contato-seguranca/index.html","https://proxiti.com.br/contato-seguranca/"],
+ ["servicos/index.html","https://proxiti.com.br/servicos/"]
+]){
+ const html=read(page);
+ assert(html.includes('rel="canonical" href="'+url+'"'),page+": canonical ausente");
+ assert(html.includes('property="og:title"')&&html.includes('property="og:description"')&&html.includes('property="og:image"'),page+": metadados sociais incompletos");
+ assert(html.includes('name="twitter:card"'),page+": Twitter card ausente");
+}
+assert(!read("termos/index.html").includes("Produtos digitais"));
+assert(!read("404.html").includes("catálogo de produtos"));
+assert(read("sitemap.xml").includes("<lastmod>2026-10-09</lastmod>"));
