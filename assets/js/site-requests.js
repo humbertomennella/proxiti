@@ -24,8 +24,8 @@
       action:"create",source:"form",
       name:String(data.get("nome")||"").trim(),email:String(data.get("email")||"").trim(),
       phone:String(data.get("telefone")||"").trim(),company_website:String(data.get("company_website")||""),
-      customer_type:String(data.get("perfil")||""),service_type:String(data.get("area")||""),
-      impact:String(data.get("impacto")||""),subject:"Solicitação: "+String(data.get("area")||"Atendimento"),
+      customer_type:"Micro ou pequeno negócio",service_type:String(data.get("area")||""),
+      impact:String(data.get("impacto")||""),subject:"Checkup B2B: "+String(data.get("empresa")||"Empresa")+" — "+String(data.get("area")||"Gestão de TI"),
       description:"Perfil: "+String(data.get("perfil")||"")+"\nEquipamento ou ambiente: "+
         String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+
         "\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
