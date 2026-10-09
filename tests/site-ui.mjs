@@ -2,17 +2,16 @@ import assert from "node:assert/strict";
 import {readFileSync,existsSync} from "node:fs";
 import {Script} from "node:vm";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
-const pages=["404.html","index.html","servicos/index.html","produtos/index.html",
- "produtos/pc-seguro/index.html","seja-parceiro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
+const pages=["404.html","index.html","servicos/index.html","seja-parceiro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
  "privacidade/index.html","termos/index.html","contato-seguranca/index.html"];
 for(const page of pages)assert(read(page).includes("/assets/css/proxiti-ui.css"),
   page+" não carrega o framework compartilhado");
 for(const path of ["assets/css/style.css","assets/css/proxiti-ui.css","assets/css/site-refine.css",
-  "assets/illustrations/diagnostico-proxiti.svg"])
+  "assets/illustrations/hero-operations.svg"])
  assert(existsSync(new URL("../"+path,import.meta.url)),path+" ausente");
 const home=read("index.html");
-assert(home.includes("/assets/illustrations/diagnostico-proxiti.svg"));
-assert(!home.includes("/assets/illustrations/hero-operations.svg"));
+assert(home.includes("/assets/illustrations/hero-operations.svg"));
+assert(!home.includes("/assets/illustrations/diagnostico-proxiti.svg"));
 assert(!home.includes('class="hero-note"'));
 assert.equal((home.match(/class="entry-card reveal px-card"/g)||[]).length,3);
 assert(home.includes('class="hero-actions px-cluster"'));
@@ -60,8 +59,7 @@ assert(legacy.includes('http-equiv="refresh" content="0; url=/seja-parceiro/"')&
 assert(sitemap.includes("https://proxiti.com.br/seja-parceiro/")&&
   !sitemap.includes("https://proxiti.com.br/trabalhe-conosco/"),
   "Sitemap não acompanha a nova rota.");
-for(const page of ["index.html","servicos/index.html","produtos/index.html",
-  "produtos/pc-seguro/index.html","privacidade/index.html",
+for(const page of ["index.html","servicos/index.html","privacidade/index.html",
   "termos/index.html","contato-seguranca/index.html","seja-parceiro/index.html"]){
   const html=read(page);
   assert(html.includes('href="/seja-parceiro/"')&&
@@ -92,21 +90,20 @@ for(const cssPath of ["assets/css/proxiti-ui.css","assets/css/site-refine.css"])
  const css=read(cssPath);
  assert.equal((css.match(/{/g)||[]).length,(css.match(/}/g)||[]).length,cssPath+" possui CSS incompleto");
 }
-/* O documento comercial não pode contradizer a configuração efetivamente publicada. */
-const productConfig=read("assets/js/product-config.js");
-const checkoutDoc=read("docs/pc-seguro-checkout-operacao.md");
-const siteReadme=read("README.md");
-const active=/readyForSales:\s*true\b/.test(productConfig);
-const url=productConfig.match(/checkoutUrl:\s*"(https:\/\/pay\.kiwify\.com\.br\/[A-Za-z0-9]+)"/)?.[1];
-assert(url,"PC Seguro: URL de checkout HTTPS no domínio oficial ausente");
-for(const page of ["index.html","produtos/index.html","produtos/pc-seguro/index.html"])
- assert(read(page).includes('href="'+url+'"')&&read(page).includes('data-checkout="pc-seguro"'),
-  page+": CTA e configuração de checkout divergentes");
-assert.equal(checkoutDoc.includes("**Checkout do site: habilitado.**"),active,
- "Documentação do PC Seguro diverge do estado real do checkout no site");
-assert(checkoutDoc.includes("**Entrega Kiwify: não homologada nesta auditoria.**")&&
- checkoutDoc.includes("Não foi realizada compra.")&&
- siteReadme.includes("não comprova")&&
- siteReadme.includes("proxiti-support"),
- "Não confundir link de compra publicado com entrega ou pré-diagnóstico sem backend");
-console.log("PROXITI: framework compartilhado, temas, arte de diagnóstico e scripts validados.");
+/* Contratos comerciais: o site público é exclusivamente B2B e a captura exige dados da empresa. */
+assert(home.includes("Gestão de TI, Suporte e Segurança para Micro e Pequenas Empresas"));
+assert(home.includes("A TI da sua empresa sem interrupções, riscos ou custos de equipe interna."));
+assert(home.includes("Solicitar Checkup Gratuito de Vulnerabilidade"));
+assert(home.includes("Falar com um Especialista no WhatsApp"));
+assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
+for(const required of ["Essencial","Profissional","Enterprise","R$ 500/mês","Escritórios de Contabilidade e Advocacia","Clínicas de Saúde e Laboratórios","Corretoras de Seguros e Financeiras","Serviços e Comércio Geral","name=\"empresa\"","name=\"cargo\"","1-5","6-15","16-30","30+","Backup/Segurança","Computadores lentos/travando","Sem suporte técnico rápido","Quero organizar minha infraestrutura"])
+ assert(home.includes(required),"Página inicial: conteúdo B2B ausente: "+required);
+assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(home),"Página inicial ainda apresenta oferta B2C/residencial.");
+assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
+assert(!sitemap.includes("/produtos/"),"Sitemap ainda indexa páginas B2C.");
+const requests=read("assets/js/site-requests.js");
+new Script(requests,{filename:"site-requests.js"});
+assert(requests.includes('String(data.get("empresa")||"Não informada")'));
+assert(requests.includes('String(data.get("cargo")||"Não informado")'));
+assert(requests.includes("Estações de trabalho"));
+console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");

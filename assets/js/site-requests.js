@@ -24,11 +24,9 @@
       action:"create",source:"form",
       name:String(data.get("nome")||"").trim(),email:String(data.get("email")||"").trim(),
       phone:String(data.get("telefone")||"").trim(),company_website:String(data.get("company_website")||""),
-      customer_type:String(data.get("perfil")||""),service_type:String(data.get("area")||""),
-      impact:String(data.get("impacto")||""),subject:"Solicitação: "+String(data.get("area")||"Atendimento"),
-      description:"Perfil: "+String(data.get("perfil")||"")+"\nEquipamento ou ambiente: "+
-        String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+
-        "\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
+      customer_type:"Micro ou pequeno negócio",service_type:String(data.get("area")||""),
+      impact:String(data.get("impacto")||""),subject:"Checkup B2B: "+String(data.get("empresa")||"Empresa")+" — "+String(data.get("area")||"Gestão de TI"),
+      description:"Perfil: Micro ou pequeno negócio\nEmpresa: "+String(data.get("empresa")||"Não informada")+"\nCargo: "+String(data.get("cargo")||"Não informado")+"\nEstações de trabalho: "+String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+"\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
       privacy_accepted:data.get("privacidade")==="on"
     };
     send.disabled=true;tell("Registrando sua solicitação com segurança…");
@@ -42,8 +40,16 @@
         throw new Error(result.error||"Não foi possível registrar o atendimento.");
       stash.setItem("proxiti_ticket_"+result.id,
         JSON.stringify({token:result.access_token,savedAt:Date.now()}));
-      tell("Chamado #"+result.reference+" registrado. Abrindo sua conversa…");
-      window.location.assign("/atendimento/?ticket="+encodeURIComponent(result.id));
+      tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar o checkup…");
+      const commercialMessage=[
+        "Olá! Solicitei um Checkup Gratuito de Vulnerabilidade da Proxiti.",
+        "Empresa: "+String(data.get("empresa")||""),
+        "Responsável: "+String(data.get("nome")||"")+" ("+String(data.get("cargo")||"")+")",
+        "Estações: "+String(data.get("equipamento")||""),
+        "Principal necessidade: "+String(data.get("area")||""),
+        "Referência da solicitação: "+String(result.reference||"")
+      ].join("\n");
+      window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(commercialMessage));
     }catch(error){
       tell((error.message||"Falha de conexão.")+
         " Se necessário, utilize o e-mail de contato exibido no rodapé.");
