@@ -8,7 +8,6 @@ on:
       - "404.html"
       - "assets/**"
       - "tests/**"
-      - "docs/pc-seguro-checkout-operacao.md"
       - "README.md"
       - ".github/workflows/site-ui-ci.yml"
   pull_request:
