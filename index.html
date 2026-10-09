@@ -108,7 +108,7 @@
           <h1 id="hero-title">A TI da sua empresa sem interrupções, riscos ou custos de equipe interna.</h1>
           <p>Garantimos a continuidade, segurança e suporte técnico da sua pequena empresa com um modelo de assinatura mensal sob medida.</p>
           <div class="hero-actions px-cluster">
-            <a class="button button-accent px-button" href="#pre-diagnostico" data-open-checkup>Solicitar Checkup Gratuito de Vulnerabilidade</a>
+            <a class="button button-accent px-button" href="#pre-diagnostico" data-open-checkup>Solicitar avaliação inicial de TI</a>
             <a class="button button-secondary px-button" href="https://wa.me/554188235598?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20gest%C3%A3o%20de%20TI%20para%20minha%20empresa" target="_blank" rel="noopener noreferrer">Falar com um Especialista no WhatsApp</a>
           </div>
           <div class="hero-facts" aria-label="Informações do atendimento">
@@ -417,7 +417,7 @@
             <div class="field"><label for="impacto">Impacto na operação</label><select id="impacto" name="impacto" required><option value="">Selecione</option><option>Baixo: sem interrupção atual</option><option>Médio: produtividade afetada</option><option>Alto: operação ou dados em risco</option></select></div>
             <div class="field field-full"><label for="sintoma">Contexto da empresa</label><textarea id="sintoma" name="sintoma" maxlength="700" required placeholder="Descreva os sistemas essenciais, os riscos percebidos e o que precisa melhorar."></textarea></div>
             <div class="field field-full request-consent"><label><input name="privacidade" type="checkbox" required> Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para esta solicitação comercial.</label></div>
-            <div class="form-actions"><button class="button button-accent" type="submit">Solicitar checkup gratuito de 20 minutos</button><p class="form-status" id="triage-status" aria-live="polite"></p></div>
+            <div class="form-actions"><button class="button button-accent" type="submit">Solicitar avaliação inicial gratuita (20 min)</button><p class="form-status" id="triage-status" aria-live="polite"></p></div>
           </form>
         </div>
       </div>
@@ -483,10 +483,10 @@
 
   <dialog class="checkup-modal" id="checkup-modal" aria-labelledby="checkup-modal-title" aria-describedby="checkup-modal-description">
     <div class="checkup-modal-header">
-      <div><span class="section-label">Checkup empresarial</span><h2 id="checkup-modal-title">Solicite seu checkup gratuito de 20 minutos</h2></div>
+      <div><span class="section-label">Avaliação empresarial</span><h2 id="checkup-modal-title">Solicite uma avaliação inicial gratuita de 20 minutos</h2></div>
       <button class="checkup-modal-close" type="button" data-close-checkup aria-label="Fechar janela">×</button>
     </div>
-    <p id="checkup-modal-description" class="checkup-modal-description">Preencha os dados da empresa. A solicitação será registrada e a equipe confirmará o horário pelo WhatsApp. Este formulário não reserva automaticamente um horário em calendário.</p>
+    <p id="checkup-modal-description" class="checkup-modal-description">Preencha os dados da empresa. A solicitação será registrada e a equipe combinará o horário pelo WhatsApp. A conversa inicial ajuda a priorizar necessidades e riscos; não é uma varredura automatizada, pentest ou laudo de segurança.</p>
     <div class="checkup-modal-content" id="checkup-modal-content"></div>
   </dialog>
 
