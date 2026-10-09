@@ -4,12 +4,9 @@
 
 - [x] Telefone/WhatsApp oficial: `+55 41 8823-5598`.
 - [x] E-mail oficial: `contato.proxiti@gmail.com`.
-- [x] Home com três rotas comerciais: problema atual, melhoria planejada e produto digital.
+- [x] Home comercial focada em gestão de TI B2B e pré-diagnóstico empresarial.
 - [x] Página de serviços publicada em `/servicos/`.
 - [x] Pré-diagnóstico processado localmente no navegador.
-- [x] Catálogo em `/produtos/`.
-- [x] PC Seguro em `/produtos/pc-seguro/`.
-- [x] Compra assistida do PC Seguro pelo WhatsApp.
 - [x] PDF pago fora do GitHub Pages.
 - [x] Política de Privacidade e Termos em páginas próprias.
 - [x] Nenhuma métrica, SLA, depoimento ou garantia sem evidência.
@@ -47,3 +44,10 @@
 - [ ] Adicionar avaliações apenas quando forem reais e publicáveis.
 - [ ] Adicionar cases apenas com contexto verificável e autorização adequada.
 - [ ] Adicionar novos produtos somente quando o conteúdo e a entrega estiverem prontos.
+
+## Pivot B2B MSP (outubro de 2026)
+
+- [x] Navegação pública sem links para o antigo catálogo B2C.
+- [x] Formulário empresarial de pré-diagnóstico com confirmação manual de horário.
+- [x] CTA principal abre modal acessível de checkup.
+- [ ] Confirmar publicação e funcionamento no domínio de produção após o merge.
