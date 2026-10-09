@@ -121,7 +121,7 @@ assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
 assert(services.includes("<h2>Consultoria, infraestrutura e segurança preventiva</h2>"));
 
 /* Limpeza das rotas B2C em páginas institucionais. */
-for(const page of ["404.html","privacidade/index.html","termos/index.html","contato-seguranca/index.html"]){
+for(const page of ["404.html","privacidade/index.html","termos/index.html","contato-seguranca/index.html","seja-parceiro/index.html"]){
  const html=read(page);
  assert(!html.includes('href="/produtos/"'),page+": link para catálogo B2C removido do site público.");
 }
