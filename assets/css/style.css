@@ -261,9 +261,6 @@ p:last-child{margin-bottom:0}
 .pc-preview-checklist{z-index:1;right:6%;bottom:24px;width:43%;transform:rotate(4deg)}
 .pc-preview-badge{position:absolute;z-index:5;left:22px;top:20px;padding:7px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(11,18,32,.78);color:#dce6f5;font-size:.67rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(8px)}
 .pc-preview-note{position:absolute;z-index:5;right:22px;bottom:18px;padding:8px 11px;border-radius:9px;background:rgba(11,18,32,.82);color:#b9c5d6;font-size:.68rem;backdrop-filter:blur(8px)}
-.pc-mini-gallery{display:grid;grid-template-columns:.82fr 1fr 1fr;gap:10px;align-items:end;padding:20px;border:1px solid var(--line);border-radius:20px;background:var(--paper-2)}
-.pc-mini-gallery img{width:100%;border-radius:10px;background:#fff;box-shadow:0 14px 32px rgba(11,18,32,.12)}
-.pc-mini-gallery img:first-child{transform:translateY(-10px)}
 .preview-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .preview-card{padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow-sm)}
 .preview-card img{width:100%;border-radius:11px;background:#fff;border:1px solid var(--line)}
@@ -420,10 +417,6 @@ p:last-child{margin-bottom:0}
   .catalog-grid{grid-template-columns:1fr}
   .service-detail{grid-template-columns:1fr}.service-detail-side{padding-right:0;padding-bottom:18px;border-right:0;border-bottom:1px solid var(--line)}
 
-  .pc-mini-gallery{grid-template-columns:1fr 1fr;gap:12px;padding:16px;align-items:start}
-  .pc-mini-gallery img{width:100%;height:auto;object-fit:contain;transform:none!important}
-  .pc-mini-gallery img:first-child{grid-column:1/-1;width:min(42vw,170px);margin:0 auto;transform:none!important}
-  .pc-mini-gallery img:not(:first-child){max-height:210px;object-fit:cover;object-position:top}
 
   .pc-preview-stage{min-height:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:76px 18px 68px;align-items:start}
   .pc-preview-stage::before{pointer-events:none}
@@ -457,9 +450,6 @@ p:last-child{margin-bottom:0}
   .pc-preview-phishing,.pc-preview-checklist{max-height:190px}
   .pc-preview-badge{left:12px;top:12px;font-size:.62rem}
   .pc-preview-note{left:12px;right:12px;bottom:10px;font-size:.64rem}
-  .pc-mini-gallery{padding:14px;gap:10px;border-radius:16px}
-  .pc-mini-gallery img:first-child{width:min(40vw,145px)}
-  .pc-mini-gallery img:not(:first-child){max-height:175px}
   .footer-nav,.footer-legal{grid-template-columns:1fr}
   .footer-main{gap:18px}
   .service-cta{align-items:flex-start;flex-direction:column}
@@ -637,17 +627,6 @@ p:last-child{margin-bottom:0}
 .support-widget footer{padding:10px 15px;border-top:1px solid #395676;text-align:center;font-size:.72rem;background:#14253a}.support-widget footer a{color:#b9daf9;text-decoration:none}.support-widget footer a:hover{text-decoration:underline}
 button.floating-chat{font:inherit;cursor:pointer}.floating-chat[aria-expanded=true]{background:#235983;box-shadow:0 0 0 3px #7fbeff44,0 11px 33px #05162966}
 @media(max-width:650px){.support-widget{right:8px;bottom:70px;width:calc(100vw - 16px);height:min(650px,calc(100dvh - 82px));border-radius:15px}.support-widget-head{padding:10px 13px}}
-/* Vitrines de documentos: todas as miniaturas no mesmo formato, sem cortes ou distorção. */
-@media(min-width:761px){
-.page-hero .pc-mini-gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:12px;padding:17px;min-height:330px}
-.page-hero .pc-mini-gallery img{display:block;box-sizing:border-box;width:100%;height:286px;aspect-ratio:auto;object-fit:contain;object-position:center;padding:12px;margin:0;transform:none!important;background:#fff;border:1px solid #e0e6ef;border-radius:13px;box-shadow:0 11px 28px #0c182022}
-.page-hero .pc-mini-gallery img:first-child{height:286px;grid-column:auto;transform:none!important}
-.catalog-card .pc-mini-gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:10px}
-.catalog-card .pc-mini-gallery img{display:block;width:100%;height:240px;object-fit:contain;object-position:center;padding:8px;background:#fff;border-radius:12px;transform:none!important}
-}
-@media(min-width:761px) and (max-width:1100px){.page-hero .pc-mini-gallery{min-height:280px}.page-hero .pc-mini-gallery img{height:228px}.page-hero .pc-mini-gallery img:first-child{height:228px}}
-
-
 /* Pivot B2B MSP: comparação de planos recorrentes. */
 .plan-grid .check-list{margin-top:18px}
 .plan-featured{border-color:#2f6df6;box-shadow:0 14px 34px rgba(47,109,246,.12)}

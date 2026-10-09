@@ -359,43 +359,6 @@
     start();
   });
 
-  document.querySelectorAll("[data-checkout]").forEach((link) => {
-    const key = link.dataset.checkout;
-    const product = window.PROXITI_PRODUCT_CONFIG?.[key] || {};
-    const checkoutUrl = product.checkoutUrl?.trim() || "";
-    const fallbackUrl = product.fallbackUrl?.trim() || "";
-    // URL só é ativa depois de validar o fluxo completo (pagamento + entrega).
-    // Não basta colar um link HTTPS: um domínio errado pode receber pagamentos.
-    let approvedCheckout = false;
-    if (product.readyForSales === true && product.provider === "kiwify") {
-      try {
-        const url = new URL(checkoutUrl);
-        approvedCheckout = url.protocol === "https:" &&
-          url.hostname === "pay.kiwify.com.br" &&
-          /^\/[A-Za-z0-9_-]+\/?$/.test(url.pathname) &&
-          !url.username && !url.password && !url.port;
-      } catch (_) {
-        approvedCheckout = false;
-      }
-    }
-    const target = approvedCheckout ? checkoutUrl
-      : (/^https:\/\//i.test(fallbackUrl) ? fallbackUrl : "");
-
-    if (target) {
-      link.href = target;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.removeAttribute("aria-disabled");
-      link.textContent = approvedCheckout
-        ? (link.dataset.readyLabel || "Comprar agora")
-        : (link.dataset.fallbackLabel || "Comprar pelo WhatsApp");
-    } else {
-      link.removeAttribute("href");
-      link.setAttribute("aria-disabled","true");
-      link.textContent = link.dataset.unavailableLabel || "Venda temporariamente indisponível";
-    }
-  });
-
   // A solicitação de atendimento é registrada por site-requests.js.
 
   if (year) year.textContent = new Date().getFullYear();

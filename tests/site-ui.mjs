@@ -127,3 +127,8 @@ for(const page of ["404.html","privacidade/index.html","termos/index.html","cont
  assert(!html.includes('href="/produtos/"'),page+": link para catálogo B2C removido do site público.");
 }
 assert(!read("README.md").includes("`/produtos/` — catálogo de produtos digitais."));
+
+/* Os scripts e visuais do antigo produto B2C não devem voltar a ser referenciados. */
+assert(!read("assets/js/main.js").includes("data-checkout"));
+assert(!read("assets/css/style.css").includes("pc-mini-gallery"));
+assert(!home.includes("/assets/products/"));
