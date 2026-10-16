@@ -3,57 +3,34 @@
   const form=document.querySelector("#pre-diagnostico-form");
   if(!form)return;
   const status=document.querySelector("#triage-status");
-  const cfg=window.PROXITI_SUPPORT;
-  const endpoint=cfg?.url+"/functions/v1/proxiti-support";
-  const tell=(msg)=>{if(status)status.textContent=msg;};
-  function storage(){
-    for(const getStorage of [()=>window.localStorage,()=>window.sessionStorage]){
-      try{const item=getStorage();item.setItem("__proxiti_storage_check","1");item.removeItem("__proxiti_storage_check");return item;}
-      catch{/* tenta armazenamento de sessão */}
-    }
-    return null;
-  }
-  form.addEventListener("submit",async event=>{
+  const tell=message=>{if(status)status.textContent=message;};
+  // Mitigação temporária: não chama o Supabase, não armazena dados nem cria chamado.
+  const send=form.querySelector('button[type="submit"]');
+  form.addEventListener("submit",event=>{
     event.preventDefault();
     if(!form.reportValidity())return;
-    const stash=storage();
-    const data=new FormData(form),send=form.querySelector('button[type="submit"]');
-    if(!cfg?.url||!cfg?.publishableKey){tell("Sistema temporariamente indisponível. Entre em contato por e-mail.");return;}
-    const body={
-      action:"create",source:"form",
-      name:String(data.get("nome")||"").trim(),email:String(data.get("email")||"").trim(),
-      phone:String(data.get("telefone")||"").trim(),company_website:String(data.get("company_website")||""),
-      customer_type:"Micro ou pequeno negócio",service_type:String(data.get("area")||""),
-      impact:String(data.get("impacto")||""),subject:"Checkup B2B: "+String(data.get("empresa")||"Empresa")+" — "+String(data.get("area")||"Gestão de TI"),
-      description:"Perfil: Micro ou pequeno negócio\nEmpresa: "+String(data.get("empresa")||"Não informada")+"\nCargo: "+String(data.get("cargo")||"Não informado")+"\nEstações de trabalho: "+String(data.get("equipamento")||"Não informado")+"\nImpacto: "+String(data.get("impacto")||"")+"\n\nContexto:\n"+String(data.get("sintoma")||"").trim(),
-      privacy_accepted:data.get("privacidade")==="on"
-    };
-    send.disabled=true;tell("Registrando sua solicitação com segurança…");
+    const data=new FormData(form);
+    if(String(data.get("company_website")||"").trim())return;
+    if(data.get("privacidade")!=="on"){
+      tell("Leia a Política de Privacidade e confirme sua autorização antes de continuar.");
+      return;
+    }
+    const value=(name,limit)=>String(data.get(name)||"").trim().slice(0,limit);
+    const message=[
+      "Olá! Quero conversar sobre uma avaliação inicial de TI da PROXITI.",
+      "Empresa: "+value("empresa",160),
+      "Responsável: "+value("nome",120)+" ("+value("cargo",100)+")",
+      "Estações: "+value("equipamento",20),
+      "Principal necessidade: "+value("area",100),
+      "Impacto: "+value("impacto",100),
+      "Gostaria de combinar um horário com a equipe."
+    ].join("\n");
+    if(send)send.disabled=true;
+    tell("Abrindo o WhatsApp com um resumo para você revisar e enviar. Nenhum chamado foi registrado; o horário depende de confirmação da equipe.");
     try{
-      const response=await fetch(endpoint,{
-        method:"POST",headers:{"content-type":"application/json",apikey:cfg.publishableKey},
-        body:JSON.stringify(body)
-      });
-      const result=await response.json();
-      if(!response.ok||!result.id||!result.access_token)
-        throw new Error(result.error||"Não foi possível registrar o atendimento.");
-      if(stash){
-        try{stash.setItem("proxiti_ticket_"+result.id,JSON.stringify({token:result.access_token,savedAt:Date.now()}));}
-        catch{ /* O registro remoto não deve falhar por restrições de armazenamento local. */ }
-      }
-      tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar a avaliação inicial…");
-      const commercialMessage=[
-        "Olá! Solicitei uma avaliação inicial gratuita de TI da Proxiti.",
-        "Empresa: "+String(data.get("empresa")||""),
-        "Responsável: "+String(data.get("nome")||"")+" ("+String(data.get("cargo")||"")+")",
-        "Estações: "+String(data.get("equipamento")||""),
-        "Principal necessidade: "+String(data.get("area")||""),
-        "Referência da solicitação: "+String(result.reference||"")
-      ].join("\n");
-      window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(commercialMessage));
-    }catch(error){
-      tell((error.message||"Falha de conexão.")+
-        " Se necessário, utilize o e-mail de contato exibido no rodapé.");
-    }finally{send.disabled=false;}
+      window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(message));
+    }catch{
+      tell("Não foi possível abrir o WhatsApp. Use o link direto abaixo ou o e-mail de contato. Nenhum chamado foi registrado.");
+    }finally{if(send)send.disabled=false;}
   });
 })();
