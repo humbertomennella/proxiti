@@ -104,9 +104,9 @@ assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos 
 assert(!sitemap.includes("/produtos/"),"Sitemap ainda indexa páginas B2C.");
 const requests=read("assets/js/site-requests.js");
 new Script(requests,{filename:"site-requests.js"});
-assert(requests.includes('String(data.get("empresa")||"Não informada")'));
-assert(requests.includes('String(data.get("cargo")||"Não informado")'));
-assert(requests.includes("Estações de trabalho"));
+assert(requests.includes('value("empresa",160)'));
+assert(requests.includes('value("cargo",100)'));
+assert(requests.includes("Estações:"));
 console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");
 
 
@@ -118,8 +118,8 @@ assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.inc
 assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
-assert(!requests.includes('if(!stash){tell('), "A falta de armazenamento local não pode bloquear o registro remoto.");
-assert(requests.includes("if(stash){") && requests.includes("O registro remoto não deve falhar por restrições de armazenamento local."), "Falha ao salvar localmente não deve cancelar uma solicitação registrada.");
+assert(!/fetch\(|localStorage|sessionStorage/.test(requests), "Modo temporário não pode depender de rede ou armazenamento.");
+assert(requests.includes("Nenhum chamado foi registrado"), "O modo temporário não pode prometer registro remoto.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
