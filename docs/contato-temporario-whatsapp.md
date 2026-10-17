@@ -1,29 +1,20 @@
-# Contato temporário pelo WhatsApp: RASCUNHO BLOQUEADO
+# Rascunho bloqueado: contato temporário
 
-Esta proposta NÃO está pronta para merge nem publicação.
+NÃO fazer merge nem publicar.
 
-## O que já está aplicado na branch
-- Script do formulário sem Supabase, rede ou armazenamento local.
-- Mensagem preparada no número público existente, com revisão e envio manual pelo visitante.
-- Testes do modo temporário.
+O envio da página completa falha com `Malformed RPC request (could not parse JSON)`. A verificação confirmou que a branch anterior já continha `index.html` reduzido ao literal `@work/proxiti/index.html`, não ao HTML real. O pacote local e a main estão intactos. Git local sem credencial de push e navegador sem sessão autenticada.
 
-## Bloqueio concreto
-O envio de `index.html` completo falha na integração com `Malformed RPC request (could not parse JSON)`. O navegador não tem sessão GitHub autenticada e o Git local não possui credencial para push. Portanto a página da branch ainda não contém os avisos, minimização e textos compatíveis com o novo script. Os testes completos da branch não devem ser tratados como aprovados.
-
-## Alteração preservada e revisável
-`patches/temporary-whatsapp-index.patch` contém exatamente o diff pendente da página, contra a base bf1bf50ce6a83ef19cc6be2bfdfc9e659d11bf25. O pacote local `proxiti-correcao-temporaria.zip` está intacto. Nenhuma alteração foi enviada à main.
-
-Em checkout isolado desta branch:
+O script do formulário e os testes foram alinhados ao pacote validado. A página correta está preservada como patch e pode ser reconstruída em checkout isolado:
 
 ```sh
-git apply --check patches/temporary-whatsapp-index.patch
-git apply patches/temporary-whatsapp-index.patch
+python3 scripts/prepare-temporary-homepage.py
 node tests/site-requests-direct.mjs
 node tests/site-ui.mjs
 git diff --check
 ```
 
-Antes de considerar pronta: incorporar a página, remover o patch auxiliar se desejado, testar o modal e a abertura da mensagem em celular e conferir o destino público. Não enviar mensagem real sem autorização. Chat, Minha PROXITI e painel permanecem fora do escopo. Não há registro de chamado nem confirmação de horário por este formulário.
+O script restaura a base exata bf1bf50ce6a83ef19cc6be2bfdfc9e659d11bf25 e aplica o patch. Preserva o conteúdo anterior, recusa conteúdo inesperado e verifica SHA-256. Não faz commit, push ou publicação. A página resultante ainda precisa ser incorporada à proposta com acesso de escrita. Os testes da branch SEM essa reconstrução não estão aprovados.
 
-## Reversão
-Reverter apenas os commits desta proposta. O fluxo anterior depende do Supabase; verificar sua recuperação separadamente antes de reverter. Nunca fazer merge ou deploy sem nova autorização.
+A mensagem abre no WhatsApp público existente para revisão e envio manual. Não registra chamado nem confirma horário. Chat, Minha PROXITI e painel continuam fora do escopo. Antes de publicar, testar em celular e confirmar o destino público. Não houve mensagem real.
+
+Reversão: reverter somente os commits desta proposta. O fluxo antigo volta a depender do Supabase. Nenhum merge ou deploy sem nova autorização.
