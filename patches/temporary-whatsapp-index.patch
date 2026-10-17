@@ -1,0 +1,75 @@
+diff --git a/index.html b/index.html
+index f931b88..c6ac5aa 100644
+--- a/index.html
++++ b/index.html
+@@ -397,27 +397,27 @@
+           <div class="triage-copy">
+             <span class="section-label">Pré-diagnóstico</span>
+             <h2 id="triagem-title">Envie contexto útil no primeiro contato.</h2>
+-            <p data-proxiti-content="home.triage.intro">Agende um checkup inicial de 20 minutos para mapear riscos e prioridades. O formulário registra sua solicitação comercial B2B. Não envie senhas nem dados sigilosos.</p>
++            <p>Prepare um resumo da empresa para revisar e enviar pelo WhatsApp. A avaliação inicial e o horário dependem de confirmação da equipe. Este formulário temporário não registra chamado nem armazena os dados na Central Técnica. Não envie senhas nem dados sigilosos.</p>
+             <div class="privacy-note">
+               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.6 3.2 7.8 8 9 4.8-1.2 8-4.4 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.8"/></svg>
+-              <span>Os dados informados são enviados para a Central Técnica e armazenados para atendimento, conforme nossa Política de Privacidade. Não informe senhas ou documentos sigilosos.</span>
++              <span>O resumo será aberto no WhatsApp para sua revisão. Só envie se concordar em compartilhar esses dados com a PROXITI pelo WhatsApp, conforme nossa Política de Privacidade. Não informe senhas ou documentos sigilosos.</span>
+             </div>
+           </div>
+ 
+-          <form class="triage-form" id="pre-diagnostico-form">
++          <form class="triage-form" id="pre-diagnostico-form" aria-describedby="temporary-contact-notice">
++            <p class="field field-full" id="temporary-contact-notice">Atendimento temporário pelo WhatsApp. Ao continuar, você poderá revisar o resumo antes de enviá-lo. Este formulário não registra chamado nem confirma agendamento. Não informe senhas ou dados sigilosos.</p>
+             <input type="hidden" name="perfil" value="Micro ou pequeno negócio">
+             <div class="field"><label for="solicitante-nome">Nome do responsável</label><input id="solicitante-nome" name="nome" type="text" autocomplete="name" maxlength="120" required placeholder="Nome completo"></div>
+             <div class="field"><label for="cargo">Cargo</label><input id="cargo" name="cargo" type="text" maxlength="100" required placeholder="Ex.: Sócio, gerente, administrativo"></div>
+             <div class="field"><label for="empresa">Nome da empresa</label><input id="empresa" name="empresa" type="text" maxlength="160" required autocomplete="organization" placeholder="Razão social ou nome comercial"></div>
+-            <div class="field"><label for="solicitante-email">E-mail corporativo</label><input id="solicitante-email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="voce@empresa.com.br"></div>
+-            <div class="field"><label for="solicitante-telefone">Telefone para contato</label><input id="solicitante-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="40" required placeholder="DDD + número"></div>
+             <div class="hp-field" aria-hidden="true"><label for="solicitante-site">Website</label><input id="solicitante-site" name="company_website" type="text" autocomplete="off" tabindex="-1"></div>
+             <div class="field"><label for="equipamento">Quantidade de computadores/estações de trabalho</label><select id="equipamento" name="equipamento" required><option value="">Selecione</option><option>1-5</option><option>6-15</option><option>16-30</option><option>30+</option></select></div>
+             <div class="field"><label for="area">Principal dor atual</label><select id="area" name="area" required><option value="">Selecione</option><option>Backup/Segurança</option><option>Computadores lentos/travando</option><option>Sem suporte técnico rápido</option><option>Quero organizar minha infraestrutura</option></select></div>
+             <div class="field"><label for="impacto">Impacto na operação</label><select id="impacto" name="impacto" required><option value="">Selecione</option><option>Baixo: sem interrupção atual</option><option>Médio: produtividade afetada</option><option>Alto: operação ou dados em risco</option></select></div>
+-            <div class="field field-full"><label for="sintoma">Contexto da empresa</label><textarea id="sintoma" name="sintoma" maxlength="700" required placeholder="Descreva os sistemas essenciais, os riscos percebidos e o que precisa melhorar."></textarea></div>
+             <div class="field field-full request-consent"><label><input name="privacidade" type="checkbox" required> Li a <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> e autorizo o uso dos dados para esta solicitação comercial.</label></div>
+-            <div class="form-actions"><button class="button button-accent" type="submit">Solicitar avaliação inicial gratuita (20 min)</button><p class="form-status" id="triage-status" aria-live="polite"></p></div>
++            <div class="form-actions"><button class="button button-accent" type="submit">Continuar no WhatsApp</button><p class="form-status" id="triage-status" aria-live="polite"></p></div>
++            <p class="field field-full"><a href="https://wa.me/554188235598" target="_blank" rel="noopener noreferrer">Abrir WhatsApp sem preencher</a> · <a href="mailto:contato.proxiti@gmail.com">Contato por e-mail</a></p>
++            <noscript><p>JavaScript está desativado. Utilize o link direto do WhatsApp ou o e-mail acima; não envie este formulário.</p><style>#pre-diagnostico-form button[type="submit"]{display:none}</style></noscript>
+           </form>
+         </div>
+       </div>
+@@ -452,7 +452,7 @@
+           <details class="faq-item reveal"><summary>A PROXITI atende empresas?</summary><div class="faq-answer">Sim, com foco em micro e pequenos negócios dentro do escopo anunciado: computadores, rede local, Wi-Fi, equipamentos, backup, acessos e segurança preventiva.</div></details>
+           <details class="faq-item reveal"><summary>Vocês fazem pentest, SOC ou perícia digital?</summary><div class="faq-answer">Não. Essas áreas não fazem parte do escopo atual anunciado pela PROXITI.</div></details>
+           <details class="faq-item reveal"><summary>A PROXITI instala software pirata ou ativadores?</summary><div class="faq-answer">Não. Instalações dependem de software e licenças obtidos por meios legítimos e autorizados pelo titular.</div></details>
+-          <details class="faq-item reveal"><summary>Como começo um atendimento?</summary><div class="faq-answer">Abra um chamado pelo formulário desta página ou utilize o chat para conversar com um técnico disponível. O contato direto por telefone e e-mail permanece disponível.</div></details>
++          <details class="faq-item reveal"><summary>Como começo um atendimento?</summary><div class="faq-answer">Temporariamente, use o formulário para preparar uma mensagem e enviá-la pelo WhatsApp. Ele não registra chamado nem confirma agendamento. O contato direto por telefone e e-mail permanece disponível; o chat não é coberto por esta alternativa.</div></details>
+         </div>
+       </div>
+     </section>
+@@ -465,7 +465,7 @@
+             <h2 id="contato-title">Vamos entender a operação antes de propor a solução.</h2>
+             <p data-proxiti-content="home.contact.intro">Conte como a TI afeta a rotina da empresa, quantas estações estão envolvidas e qual risco ou gargalo mais preocupa.</p>
+             <div class="contact-actions">
+-              <a class="button button-accent" href="/#pre-diagnostico">Abrir chamado</a>
++              <a class="button button-accent" href="/#pre-diagnostico">Preparar contato pelo WhatsApp</a>
+               <a class="button button-secondary" href="/atendimento/?chat=1" data-open-chat>Chat com a equipe</a>
+               <a class="button button-secondary" href="mailto:contato.proxiti@gmail.com?subject=Solicita%C3%A7%C3%A3o%20de%20atendimento">Enviar e-mail</a>
+             </div>
+@@ -486,7 +486,7 @@
+       <div><span class="section-label">Avaliação empresarial</span><h2 id="checkup-modal-title">Solicite uma avaliação inicial gratuita de 20 minutos</h2></div>
+       <button class="checkup-modal-close" type="button" data-close-checkup aria-label="Fechar janela">×</button>
+     </div>
+-    <p id="checkup-modal-description" class="checkup-modal-description">Preencha os dados da empresa. A solicitação será registrada e a equipe combinará o horário pelo WhatsApp. A conversa inicial ajuda a priorizar necessidades e riscos; não é uma varredura automatizada, pentest ou laudo de segurança.</p>
++    <p id="checkup-modal-description" class="checkup-modal-description">Preencha um resumo da empresa para revisar e enviar pelo WhatsApp. Nenhum chamado será registrado por este formulário; a equipe combinará o horário pelo WhatsApp. A conversa inicial ajuda a priorizar necessidades e riscos; não é uma varredura automatizada, pentest ou laudo de segurança.</p>
+     <div class="checkup-modal-content" id="checkup-modal-content"></div>
+   </dialog>
+ 
+@@ -533,7 +533,7 @@
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.1/dist/umd/supabase.js" defer></script>
+   <script src="/assets/js/support-config.js" defer></script>
+   <script src="/assets/js/site-cms.js" defer></script>
+-  <script src="/assets/js/site-requests.js" defer></script>
++  <script src="/assets/js/site-requests.js?v=temporary-direct-20261016" defer></script>
+   <script src="/assets/js/checkup-modal.js" defer></script>
+   <script src="/assets/js/chat-widget.js" defer></script>
+ </body>

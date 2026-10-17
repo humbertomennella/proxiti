@@ -39,6 +39,7 @@ jobs:
           node --check assets/js/support-embed-theme.js
           node --check assets/js/minha-proxiti-chat.js
           node tests/site-ui.mjs
+          node tests/site-requests-direct.mjs
           node --check assets/js/minha-proxiti.js
           node --check assets/js/minha-proxiti-theme.js
           node tests/customer-workspace-v19-integrity.mjs
