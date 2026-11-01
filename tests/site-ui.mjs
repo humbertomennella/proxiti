@@ -99,7 +99,7 @@ assert(home.includes("Falar com um Especialista no WhatsApp"));
 assert(!/20\s*minutos?|gratuita de 20/i.test(home), "A avaliação não pode prometer duração fixa ou gratuidade não aprovada.");
 assert(!home.includes("Solicitar avaliação inicial gratuita"), "O CTA não pode anunciar gratuidade sem aprovação comercial.");
 const requests = read("assets/js/site-requests.js");
-assert(!/avaliação inicial gratuita|20\\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
+assert(!/avaliação inicial gratuita|20\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
 for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
