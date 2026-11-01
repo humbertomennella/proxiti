@@ -173,4 +173,8 @@ for(const [page,url] of [
 }
 assert(!read("termos/index.html").includes("Produtos digitais"));
 assert(!read("404.html").includes("catálogo de produtos"));
-assert(read("sitemap.xml").includes("<lastmod>2026-10-09</lastmod>"));
+assert(sitemap.includes("<loc>https://proxiti.com.br/</loc><lastmod>2026-11-01</lastmod>"),"Sitemap: data da home deve refletir a revisão comercial de 01/11/2026.");
+assert(sitemap.includes("<loc>https://proxiti.com.br/servicos/</loc><lastmod>2026-11-01</lastmod>"),"Sitemap: data da página de serviços deve refletir a revisão comercial de 01/11/2026.");
+assert(!services.includes("R$ 500/mês"),"Serviços ainda publica preço mensal não aprovado.");
+assert(!services.includes("suporte remoto e presencial ágil"),"Serviços ainda promete agilidade sem prazo ou capacidade aprovados.");
+assert(!services.includes("backup gerenciado"),"Serviços ainda promete backup gerenciado sem escopo aprovado.");
