@@ -150,12 +150,12 @@ assert(home.includes("Monitoramento não está incluído por padrão."));
 assert(!home.includes("Backup gerenciado e rotina de recuperação."));
 assert(!home.includes("R$ 500/mês"));
 assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
-assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
+assert(servicePanels[2].includes("Manutenção Preventiva e Revisões conforme Escopo"));
 assert(servicePanels[2].includes("Revisões preventivas conforme o contrato")&&servicePanels[2].includes("Monitoramento não está incluído por padrão."));
 assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
-assert(services.includes("Planejamento e organização de cópias de segurança, recuperação de dados e acessos essenciais"));
+assert(services.includes("Avaliação e organização de cópias de segurança, possibilidades de recuperação e acessos essenciais"));
 assert(!services.includes("<li>Quedas de conexão, lentidão ou cobertura inadequada no ambiente empresarial.</li><li>Quedas, oscilação ou dispositivos que perdem conexão.</li>"));
 assert(!read("404.html").includes("catálogo de produtos"));
 
