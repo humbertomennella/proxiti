@@ -128,13 +128,13 @@ function htmlFiles(dir="."){
     .flatMap(name=>{
       const path=(dir==="."?"":dir+"/")+name;
       const full=new URL("../"+path,import.meta.url);
-      if(statSync(full).isDirectory())return htmlFiles(path);
+      if(statSync(full).isDirectory())return name.startsWith(".")||name==="node_modules"?[]:htmlFiles(path);
       return path.endsWith(".html")?[path]:[];
     });
 }
 for(const page of htmlFiles()){
   const html=read(page);
-  assert(!/suporte\\s+ilimitado|preço\\s+fixo\\s+sem\\s+escopo|avaliação\\s+inicial\\s+gratuita|gratuita\\s+de\\s+20|20\\s*minutos?/i.test(html),
+  assert(!/suporte\s+ilimitado|preço\s+fixo\s+sem\s+escopo|avaliação\s+inicial\s+gratuita|gratuita\s+de\s+20|20\s*minutos?/i.test(html),
     page+": promessa comercial antiga ou não aprovada.");
 }
 console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");
