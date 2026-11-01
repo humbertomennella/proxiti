@@ -6,10 +6,10 @@
 - [x] E-mail oficial: `contato.proxiti@gmail.com`.
 - [x] Home comercial focada em gestão de TI B2B e pré-diagnóstico empresarial.
 - [x] Página de serviços publicada em `/servicos/`.
-- [x] Pré-diagnóstico processado localmente no navegador.
+- [x] Pré-diagnóstico enviado à Edge Function `proxiti-support` para registro no Supabase (confirmar em teste de produção antes de marcar como validado).
 - [x] PDF pago fora do GitHub Pages.
 - [x] Política de Privacidade e Termos em páginas próprias.
-- [x] Nenhuma métrica, SLA, depoimento ou garantia sem evidência.
+- [ ] Revisar promessas comerciais: monitoramento, backup, suporte ilimitado, SLA e garantias precisam de escopo aprovado e evidência.
 
 ## Visual e UX
 
@@ -51,6 +51,10 @@
 - [x] Formulário empresarial de pré-diagnóstico com confirmação manual de horário.
 - [x] CTA principal abre modal acessível de checkup.
 - [ ] Confirmar publicação e funcionamento no domínio de produção após o merge.
+- [ ] Validar fluxo completo de envio, criação do chamado, recuperação segura do acesso e encaminhamento ao WhatsApp.
+- [ ] Confirmar que abrir WhatsApp não é apresentado como confirmação de mensagem enviada ou horário agendado.
+- [ ] Revisar Política de Privacidade com dados da entidade responsável, critérios de retenção e fornecedores efetivamente utilizados.
+- [ ] Revisar os cinco documentos operacionais em `docs/` e aprovar antes de uso comercial.
 
 
 ## Fechamento B2B MSP — 09/10/2026
