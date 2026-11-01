@@ -37,7 +37,7 @@
 ## Cálculo e aprovação
 Calcular horas × custo/hora, ferramentas, licenças, armazenamento, fornecedores, deslocamento, materiais, taxas, impostos conforme orientação contábil, contingência e margem. Registrar aprovador, versão, data e revisão contábil/fiscal.
 
-O site anuncia planos a partir de R$ 500/mês; isso não valida o valor. Suspender ou revisar essa alegação até aprovar escopo e cálculo de custos.
+O site público não deve anunciar um preço fixo enquanto escopo, custos, limites e margem não estiverem aprovados. Qualquer material antigo que cite R$ 500/mês deve ser considerado obsoleto e não aprovado.
 
 - Responsável pelo cálculo: [PENDENTE]
 - Aprovador comercial: [PENDENTE]
