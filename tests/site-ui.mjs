@@ -98,7 +98,7 @@ assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
-for(const required of ["Essencial","Profissional","Enterprise","Planos e valores são definidos após avaliação do ambiente","Escritórios de Contabilidade e Advocacia","Clínicas de Saúde e Laboratórios","Corretoras de Seguros e Financeiras","Serviços e Comércio Geral","name=\\"empresa\\"","name=\\"cargo\\"","1-5","6-15","16-30","30+","Backup/Segurança","Computadores lentos/travando","Sem suporte técnico rápido","Quero organizar minha infraestrutura"])
+for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
  assert(home.includes(required),"Página inicial: conteúdo B2B ausente: "+required);
 assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(home),"Página inicial ainda apresenta oferta B2C/residencial.");
 assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
