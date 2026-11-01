@@ -43,7 +43,7 @@
       }
       tell("Solicitação comercial #"+result.reference+" registrada. Abrindo o WhatsApp para combinar a avaliação inicial…");
       const commercialMessage=[
-        "Olá! Solicitei uma avaliação inicial gratuita de TI da Proxiti.",
+        "Olá! Solicitei uma avaliação inicial de TI da Proxiti.",
         "Empresa: "+String(data.get("empresa")||""),
         "Responsável: "+String(data.get("nome")||"")+" ("+String(data.get("cargo")||"")+")",
         "Estações: "+String(data.get("equipamento")||""),
