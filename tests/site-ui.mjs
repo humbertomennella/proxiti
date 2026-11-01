@@ -96,6 +96,8 @@ assert(home.includes("Mais controle sobre a TI da sua empresa, com escopo claro 
 assert(!home.includes("sem interrupções, riscos ou custos de equipe interna"));
 assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
+assert(!/20\s*minutos?|gratuita de 20/i.test(home), "A avaliação não pode prometer duração fixa ou gratuidade não aprovada.");
+assert(!home.includes("Solicitar avaliação inicial gratuita"), "O CTA não pode anunciar gratuidade sem aprovação comercial.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
 for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
