@@ -31,12 +31,21 @@
     send.disabled=true;tell("Registrando sua solicitação com segurança…");
     try{
       const response=await fetch(endpoint,{
-        method:"POST",headers:{"content-type":"application/json",apikey:cfg.publishableKey},
+        method:"POST",
+        headers:{
+          accept:"application/json",
+          "content-type":"application/json",
+          apikey:cfg.publishableKey
+        },
         body:JSON.stringify(body)
       });
-      const result=await response.json();
-      if(!response.ok||!result.id||!result.access_token)
-        throw new Error(result.error||"Não foi possível registrar o atendimento.");
+      const responseText=await response.text();
+      let result=null;
+      try{result=JSON.parse(responseText);}catch{/* resposta não JSON: erro tratado abaixo */}
+      if(!response.ok)
+        throw new Error(result?.error||"Serviço indisponível (HTTP "+response.status+").");
+      if(!result?.id||!result?.access_token)
+        throw new Error(result?.error||"Resposta inválida ao registrar o atendimento.");
       if(stash){
         try{stash.setItem("proxiti_ticket_"+result.id,JSON.stringify({token:result.access_token,savedAt:Date.now()}));}
         catch{ /* O registro remoto não deve falhar por restrições de armazenamento local. */ }
