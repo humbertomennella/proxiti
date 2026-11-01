@@ -46,6 +46,13 @@ O formulário da home envia a solicitação para a Edge Function `proxiti-suppor
 - `DESIGN-SYSTEM.md` — sistema visual e editorial.
 - `MARKETING-RESEARCH.md` — pesquisa de referências e decisões comerciais.
 - `PUBLICATION-CHECKLIST.md` — checklist de manutenção.
+- `docs/SALES-SCRIPT.md` — roteiro comercial em rascunho.
+- `docs/PROPOSAL-TEMPLATE.md` — modelo de proposta em rascunho.
+- `docs/PRICING-MATRIX.md` — matriz de preços não aprovada.
+- `docs/OPERATIONAL-CHECKLIST.md` — checklist operacional em rascunho.
+- `docs/TECHNICAL-REPORT-TEMPLATE.md` — modelo de relatório técnico em rascunho.
+
+Os documentos em `docs/` são rascunhos para revisão interna. Não representam aprovação de preços, SLA, garantias, condições fiscais ou capacidade operacional.
 
 ## Contato
 

@@ -92,12 +92,13 @@ for(const cssPath of ["assets/css/proxiti-ui.css","assets/css/site-refine.css"])
 }
 /* Contratos comerciais: o site público é exclusivamente B2B e a captura exige dados da empresa. */
 assert(home.includes("Gestão de TI, Suporte e Segurança para Micro e Pequenas Empresas"));
-assert(home.includes("A TI da sua empresa sem interrupções, riscos ou custos de equipe interna."));
+assert(home.includes("Mais controle sobre a TI da sua empresa, com escopo claro e prevenção de falhas."));
+assert(!home.includes("sem interrupções, riscos ou custos de equipe interna"));
 assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
-for(const required of ["Essencial","Profissional","Enterprise","R$ 500/mês","Escritórios de Contabilidade e Advocacia","Clínicas de Saúde e Laboratórios","Corretoras de Seguros e Financeiras","Serviços e Comércio Geral","name=\"empresa\"","name=\"cargo\"","1-5","6-15","16-30","30+","Backup/Segurança","Computadores lentos/travando","Sem suporte técnico rápido","Quero organizar minha infraestrutura"])
+for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
  assert(home.includes(required),"Página inicial: conteúdo B2B ausente: "+required);
 assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(home),"Página inicial ainda apresenta oferta B2C/residencial.");
 assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
@@ -145,13 +146,16 @@ assert(!home.includes("/assets/products/"));
 const servicePanels=home.split('<article class="service-panel reveal">').slice(1).map(part=>part.split("</article>")[0]);
 assert.equal(servicePanels.length,4,"A home deve apresentar quatro pilares de serviço.");
 assert(servicePanels[1].includes("Segurança &amp; Proteção contra Ransomware"));
+assert(home.includes("Monitoramento não está incluído por padrão."));
+assert(!home.includes("Backup gerenciado e rotina de recuperação."));
+assert(!home.includes("R$ 500/mês"));
 assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
-assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
-assert(servicePanels[2].includes("Revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
+assert(servicePanels[2].includes("Manutenção Preventiva e Revisões conforme Escopo"));
+assert(servicePanels[2].includes("Revisões preventivas conforme o contrato")&&servicePanels[2].includes("Monitoramento não está incluído por padrão."));
 assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
-assert(services.includes("Planejamento e organização de cópias de segurança, recuperação de dados e acessos essenciais"));
+assert(services.includes("Avaliação e organização de cópias de segurança, possibilidades de recuperação e acessos essenciais"));
 assert(!services.includes("<li>Quedas de conexão, lentidão ou cobertura inadequada no ambiente empresarial.</li><li>Quedas, oscilação ou dispositivos que perdem conexão.</li>"));
 assert(!read("404.html").includes("catálogo de produtos"));
 
