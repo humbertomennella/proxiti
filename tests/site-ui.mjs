@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {readFileSync,existsSync} from "node:fs";
+import {readFileSync,existsSync,readdirSync,statSync} from "node:fs";
 import {Script} from "node:vm";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 const pages=["404.html","index.html","servicos/index.html","seja-parceiro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
@@ -98,8 +98,19 @@ assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
 assert(!/20\s*minutos?|gratuita de 20/i.test(home), "A avaliação não pode prometer duração fixa ou gratuidade não aprovada.");
 assert(!home.includes("Solicitar avaliação inicial gratuita"), "O CTA não pode anunciar gratuidade sem aprovação comercial.");
+assert(home.includes('<h2 id="checkup-modal-title">Solicite uma avaliação inicial para sua empresa</h2>'),
+  "O modal deve refletir a avaliação empresarial sem gratuidade ou duração fixa.");
+assert(home.includes('<button class="button button-accent" type="submit">Solicitar avaliação inicial</button>'),
+  "O formulário deve usar o CTA comercial atualizado.");
+assert(!home.includes("Solicitar avaliação inicial gratuita (20 min)"));
 const requests = read("assets/js/site-requests.js");
 assert(!/avaliação inicial gratuita|20\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
+assert(requests.includes('accept:"application/json"')&&requests.includes('"content-type":"application/json"')&&requests.includes('apikey:cfg.publishableKey'),
+  "A Edge Function deve receber Accept, Content-Type e a chave pública via apikey.");
+assert(requests.includes('String(data.get("empresa")||"Não informada")')&&
+  requests.includes('String(data.get("equipamento")||"Não informado")')&&
+  requests.includes('String(data.get("area")||"")'),
+  "O payload B2B deve incluir empresa, estações e necessidade principal.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
 for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
@@ -107,11 +118,25 @@ for(const required of ['Essencial','Profissional','Enterprise','Planos e valores
 assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(home),"Página inicial ainda apresenta oferta B2C/residencial.");
 assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
 assert(!sitemap.includes("/produtos/"),"Sitemap ainda indexa páginas B2C.");
-const requests=read("assets/js/site-requests.js");
 new Script(requests,{filename:"site-requests.js"});
 assert(requests.includes('String(data.get("empresa")||"Não informada")'));
 assert(requests.includes('String(data.get("cargo")||"Não informado")'));
 assert(requests.includes("Estações de trabalho"));
+/* Varredura editorial de todas as páginas HTML publicáveis. */
+function htmlFiles(dir="."){
+  return readdirSync(new URL("../"+dir+"/",import.meta.url))
+    .flatMap(name=>{
+      const path=(dir==="."?"":dir+"/")+name;
+      const full=new URL("../"+path,import.meta.url);
+      if(statSync(full).isDirectory())return htmlFiles(path);
+      return path.endsWith(".html")?[path]:[];
+    });
+}
+for(const page of htmlFiles()){
+  const html=read(page);
+  assert(!/suporte\\s+ilimitado|preço\\s+fixo\\s+sem\\s+escopo|avaliação\\s+inicial\\s+gratuita|gratuita\\s+de\\s+20|20\\s*minutos?/i.test(html),
+    page+": promessa comercial antiga ou não aprovada.");
+}
 console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");
 
 
