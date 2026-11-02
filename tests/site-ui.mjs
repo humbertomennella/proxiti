@@ -207,3 +207,22 @@ assert(sitemap.includes("<loc>https://proxiti.com.br/servicos/</loc><lastmod>202
 assert(!services.includes("R$ 500/mês"),"Serviços ainda publica preço mensal não aprovado.");
 assert(!services.includes("suporte remoto e presencial ágil"),"Serviços ainda promete agilidade sem prazo ou capacidade aprovados.");
 assert(!services.includes("backup gerenciado"),"Serviços ainda promete backup gerenciado sem escopo aprovado.");
+
+
+/* Regression checks for the November 2026 visual consistency pass. */
+const visualCss=read("assets/css/visual-consistency.css");
+assert(home.includes('href="/assets/css/visual-consistency.css"'),
+  "Homepage must load the visual consistency stylesheet.");
+assert.equal((visualCss.match(/{/g)||[]).length,(visualCss.match(/}/g)||[]).length,
+  "Visual consistency stylesheet has unbalanced CSS blocks.");
+for(const required of [
+  ".service-flow-row strong{display:block",
+  ".service-flow-row span{display:block",
+  ".plan-grid .plan-card{height:100%",
+  ".faq-item summary:focus-visible",
+  "@media(max-width:1000px)",
+  ".menu-button{display:grid}",
+  "@media(max-width:660px)",
+  "prefers-reduced-motion:reduce"
+]) assert(visualCss.includes(required),
+  "Visual consistency stylesheet is missing a required responsive/accessibility rule: "+required);
