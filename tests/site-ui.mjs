@@ -100,17 +100,17 @@ assert(!/20\s*minutos?|gratuita de 20/i.test(home), "A avaliação não pode pro
 assert(!home.includes("Solicitar avaliação inicial gratuita"), "O CTA não pode anunciar gratuidade sem aprovação comercial.");
 assert(home.includes('<h2 id="checkup-modal-title">Solicite uma avaliação inicial para sua empresa</h2>'),
   "O modal deve refletir a avaliação empresarial sem gratuidade ou duração fixa.");
-assert(home.includes('<button class="button button-accent" type="submit">Solicitar avaliação inicial</button>'),
-  "O formulário deve usar o CTA comercial atualizado.");
+assert(home.includes('<button class="button button-accent" type="submit">Preparar mensagem no WhatsApp</button>'),
+  "O formulário deve usar o CTA temporário de contato pelo WhatsApp.");
+assert(home.includes('id="temporary-contact-notice"'));
+assert(home.includes('mailto:contato.proxiti@gmail.com'));
 assert(!home.includes("Solicitar avaliação inicial gratuita (20 min)"));
 const requests = read("assets/js/site-requests.js");
 assert(!/avaliação inicial gratuita|20\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
-assert(requests.includes('accept:"application/json"')&&requests.includes('"content-type":"application/json"')&&requests.includes('apikey:cfg.publishableKey'),
-  "A Edge Function deve receber Accept, Content-Type e a chave pública via apikey.");
-assert(requests.includes('String(data.get("empresa")||"Não informada")')&&
-  requests.includes('String(data.get("equipamento")||"Não informado")')&&
-  requests.includes('String(data.get("area")||"")'),
-  "O payload B2B deve incluir empresa, estações e necessidade principal.");
+assert(requests.includes('window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(message))'));
+assert(requests.includes('value("empresa",160)')&&requests.includes('value("equipamento",20)')&&requests.includes('value("area",100)'));
+assert(!/fetch\\s*\\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
+  "O fluxo temporário não pode acessar backend ou armazenamento local.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
 for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
@@ -119,9 +119,9 @@ assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(h
 assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
 assert(!sitemap.includes("/produtos/"),"Sitemap ainda indexa páginas B2C.");
 new Script(requests,{filename:"site-requests.js"});
-assert(requests.includes('String(data.get("empresa")||"Não informada")'));
-assert(requests.includes('String(data.get("cargo")||"Não informado")'));
-assert(requests.includes("Estações de trabalho"));
+assert(requests.includes('value("empresa",160)'));
+assert(requests.includes('value("cargo",100)'));
+assert(requests.includes('"Estações: "+value("equipamento",20)'));
 /* Varredura editorial de todas as páginas HTML publicáveis. */
 function htmlFiles(dir="."){
   return readdirSync(new URL("../"+dir+"/",import.meta.url))
@@ -148,8 +148,8 @@ assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.inc
 assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
-assert(!requests.includes('if(!stash){tell('), "A falta de armazenamento local não pode bloquear o registro remoto.");
-assert(requests.includes("if(stash){") && requests.includes("O registro remoto não deve falhar por restrições de armazenamento local."), "Falha ao salvar localmente não deve cancelar uma solicitação registrada.");
+assert(!/fetch\\s*\\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
+  "A contingência WhatsApp não pode criar tickets, chamar Supabase ou armazenar dados.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
