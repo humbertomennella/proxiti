@@ -4,8 +4,6 @@
   if(!form)return;
   const status=document.querySelector("#triage-status");
   const tell=message=>{if(status)status.textContent=message;};
-  // Mitigação temporária: não chama o Supabase, não armazena dados nem cria chamado.
-  const send=form.querySelector('button[type="submit"]');
   form.addEventListener("submit",event=>{
     event.preventDefault();
     if(!form.reportValidity())return;
@@ -25,12 +23,7 @@
       "Impacto: "+value("impacto",100),
       "Gostaria de combinar um horário com a equipe."
     ].join("\n");
-    if(send)send.disabled=true;
     tell("Abrindo o WhatsApp com um resumo para você revisar e enviar. Nenhum chamado foi registrado; o horário depende de confirmação da equipe.");
-    try{
-      window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(message));
-    }catch{
-      tell("Não foi possível abrir o WhatsApp. Use o link direto abaixo ou o e-mail de contato. Nenhum chamado foi registrado.");
-    }finally{if(send)send.disabled=false;}
+    window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(message));
   });
 })();
