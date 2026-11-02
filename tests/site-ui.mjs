@@ -109,7 +109,7 @@ const requests = read("assets/js/site-requests.js");
 assert(!/avaliação inicial gratuita|20\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
 assert(requests.includes('window.location.assign("https://wa.me/554188235598?text="+encodeURIComponent(message))'));
 assert(requests.includes('value("empresa",160)')&&requests.includes('value("equipamento",20)')&&requests.includes('value("area",100)'));
-assert(!/fetch\\s*\\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
+assert(!/fetch\s*\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
   "O fluxo temporário não pode acessar backend ou armazenamento local.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
@@ -148,7 +148,7 @@ assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.inc
 assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
-assert(!/fetch\\s*\\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
+assert(!/fetch\s*\(|localStorage|sessionStorage|PROXITI_SUPPORT/.test(requests),
   "A contingência WhatsApp não pode criar tickets, chamar Supabase ou armazenar dados.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
