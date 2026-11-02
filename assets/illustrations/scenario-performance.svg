@@ -1,9 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-labelledby="t"><title id="t">Diagnóstico de computador e notebook</title>
-<rect width="760" height="440" rx="28" fill="#EEF1F5"/>
-<circle cx="620" cy="60" r="170" fill="#DDE7FF"/><circle cx="650" cy="70" r="100" fill="#FBE3D1"/>
-<rect x="90" y="78" width="420" height="248" rx="24" fill="#0B1220"/><rect x="112" y="102" width="376" height="190" rx="14" fill="#172033"/>
-<path d="M144 242h70l40-100 48 122 46-84 28 62h74" fill="none" stroke="#2F6DF6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="163" cy="133" r="8" fill="#F28C45"/><circle cx="190" cy="133" r="8" fill="#2F6DF6"/><circle cx="217" cy="133" r="8" fill="#5B6475"/>
-<path d="M230 326h140l28 46H202z" fill="#C8D1DD"/>
-<g transform="translate(510 224)"><rect width="160" height="120" rx="22" fill="#FFF" stroke="#C9D0DC" stroke-width="2"/><path d="m45 60 24 24 48-56" fill="none" stroke="#F28C45" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" role="img" aria-labelledby="title desc">
+<title id="title">Diagnóstico de estações de trabalho</title><desc id="desc">Estação de trabalho corporativa com gráficos de desempenho, diagnóstico de sistema e componentes organizados.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#142b47"/><stop offset="1" stop-color="#0b1729"/></linearGradient>
+ <linearGradient id="screen" x2="1" y2="1"><stop stop-color="#1d3d61"/><stop offset="1" stop-color="#10243d"/></linearGradient>
+ <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#80b8ff"/><stop offset="1" stop-color="#3b78d9"/></linearGradient>
+ <linearGradient id="cyan" x2="1" y2="0"><stop stop-color="#4fc4d8"/><stop offset="1" stop-color="#9be4e9"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
+ </defs>
+<rect width="920" height="620" rx="30" fill="url(#bg)"/>
+<g opacity=".12" stroke="#9dc4ee"><path d="M0 100H920M0 200H920M0 300H920M0 400H920M0 500H920"/><path d="M100 0V620M200 0V620M300 0V620M400 0V620M500 0V620M600 0V620M700 0V620M800 0V620"/></g>
+<circle cx="730" cy="110" r="190" fill="#3674c8" opacity=".14"/><circle cx="170" cy="490" r="160" fill="#55c7d8" opacity=".07"/>
+<ellipse cx="434" cy="526" rx="300" ry="34" fill="#000" opacity=".28" filter="url(#shadow)"/>
+<g transform="translate(92 80)">
+ <rect width="560" height="354" rx="24" fill="#07111f" stroke="#456789" stroke-width="3"/>
+ <rect x="15" y="15" width="530" height="324" rx="14" fill="url(#screen)"/>
+ <rect x="34" y="34" width="492" height="36" rx="8" fill="#0b1a2c"/>
+ <circle cx="54" cy="52" r="5" fill="#f1a36b"/><circle cx="73" cy="52" r="5" fill="#5bc6d8"/><circle cx="92" cy="52" r="5" fill="#7e9ab9"/>
+ <rect x="116" y="46" width="155" height="11" rx="5" fill="#8ea9c8" opacity=".5"/>
+ <rect x="34" y="88" width="220" height="112" rx="12" fill="#122c49" stroke="#355a80"/>
+ <text x="52" y="116" fill="#a9c2df" font-family="Arial,sans-serif" font-size="12">DESEMPENHO DO SISTEMA</text>
+ <path d="M52 172H82L101 147L123 162L146 126L169 157L191 139L215 146L236 116" fill="none" stroke="url(#cyan)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M52 180H236" stroke="#6f8eaf" opacity=".35"/>
+ <rect x="272" y="88" width="254" height="112" rx="12" fill="#122c49" stroke="#355a80"/>
+ <text x="290" y="116" fill="#a9c2df" font-family="Arial,sans-serif" font-size="12">RECURSOS</text>
+ <g font-family="Arial,sans-serif" font-size="11" fill="#d7e7f8">
+  <text x="290" y="145">CPU</text><rect x="330" y="135" width="150" height="9" rx="4" fill="#284767"/><rect x="330" y="135" width="76" height="9" rx="4" fill="#5bc6d8"/>
+  <text x="290" y="170">RAM</text><rect x="330" y="160" width="150" height="9" rx="4" fill="#284767"/><rect x="330" y="160" width="105" height="9" rx="4" fill="#80b8ff"/>
+  </g>
+ <rect x="34" y="216" width="492" height="104" rx="12" fill="#10243b" stroke="#355a80"/>
+ <text x="52" y="242" fill="#a9c2df" font-family="Arial,sans-serif" font-size="12">VERIFICAÇÕES</text>
+ <g font-family="Arial,sans-serif" font-size="12" fill="#d9e7f6">
+  <circle cx="60" cy="270" r="7" fill="#56c7d8"/><path d="m56 270 3 3 5-6" stroke="#0b2235" stroke-width="2" fill="none"/><text x="76" y="274">Inicialização</text>
+  <circle cx="222" cy="270" r="7" fill="#56c7d8"/><path d="m218 270 3 3 5-6" stroke="#0b2235" stroke-width="2" fill="none"/><text x="238" y="274">Armazenamento</text>
+  <circle cx="408" cy="270" r="7" fill="#56c7d8"/><path d="m404 270 3 3 5-6" stroke="#0b2235" stroke-width="2" fill="none"/><text x="424" y="274">Atualizações</text>
+ </g>
+ <path d="M250 354H310L328 410H232Z" fill="#47627f"/><path d="M210 410H350L376 425H184Z" fill="#7890aa"/>
+</g>
+<g transform="translate(638 294)">
+ <rect width="196" height="150" rx="20" fill="#183653" stroke="#5c88b6" stroke-width="2"/>
+ <rect x="18" y="18" width="160" height="114" rx="13" fill="#10243a"/>
+ <path d="M50 78 72 100 121 49" fill="none" stroke="#65d0d9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+ <text x="98" y="119" text-anchor="middle" fill="#bcd4ee" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.5">DIAGNÓSTICO</text>
+</g>
+<g transform="translate(690 92)"><circle cx="54" cy="54" r="54" fill="#1d4267" stroke="#4d81b7"/><path d="M54 23v31l22 14" fill="none" stroke="#a6cefa" stroke-width="6" stroke-linecap="round"/><circle cx="54" cy="54" r="34" fill="none" stroke="#4fc4d8" stroke-width="3" stroke-dasharray="8 8"/></g>
 </svg>
