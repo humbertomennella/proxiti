@@ -37,7 +37,7 @@
 @media(max-width:650px){.checkup-modal{width:calc(100vw - 16px);max-height:94dvh;padding:18px;border-radius:16px}.checkup-modal-header{gap:10px}.checkup-modal-close{width:38px;height:38px}.checkup-modal-content .triage-form{grid-template-columns:1fr}}
 
 
-/* Correção temporária do formulário: legibilidade e fluxo WhatsApp. */
+/* Contato temporário: legibilidade, contraste e fluxo móvel. */
 #pre-diagnostico .privacy-note,
 #pre-diagnostico .temporary-contact-notice,
 #pre-diagnostico .temporary-contact-links { line-height:1.65; overflow-wrap:anywhere; }
