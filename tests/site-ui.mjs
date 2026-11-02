@@ -209,20 +209,34 @@ assert(!services.includes("suporte remoto e presencial ágil"),"Serviços ainda 
 assert(!services.includes("backup gerenciado"),"Serviços ainda promete backup gerenciado sem escopo aprovado.");
 
 
-/* Regression checks for the November 2026 visual consistency pass. */
+/* Regression checks for the November 2026 premium visual redesign. */
 const visualCss=read("assets/css/visual-consistency.css");
 assert(home.includes('href="/assets/css/visual-consistency.css"'),
-  "Homepage must load the visual consistency stylesheet.");
+  "Homepage must load the premium visual stylesheet.");
+assert(home.includes('fonts.googleapis.com/css2?family=Inter')&&home.includes('family=Manrope'),
+  "Homepage must load the new Inter + Manrope typography.");
 assert.equal((visualCss.match(/{/g)||[]).length,(visualCss.match(/}/g)||[]).length,
-  "Visual consistency stylesheet has unbalanced CSS blocks.");
+  "Premium visual stylesheet has unbalanced CSS blocks.");
 for(const required of [
-  ".service-flow-row strong{display:block",
-  ".service-flow-row span{display:block",
-  ".plan-grid .plan-card{height:100%",
-  ".faq-item summary:focus-visible",
-  "@media(max-width:1000px)",
-  ".menu-button{display:grid}",
-  "@media(max-width:660px)",
-  "prefers-reduced-motion:reduce"
+  '--px-font-display:"Manrope"',
+  '.site-header{height:82px',
+  '.hero{padding-top:calc(var(--header-h) + clamp(76px',
+  '.scenario-card{grid-template-columns:minmax(0,1fr) minmax(0,.92fr)',
+  '.entry-card:hover{transform:translateY(-6px)',
+  '@media(max-width:1120px)',
+  '@media(max-width:860px)',
+  '@media(max-width:660px)',
+  'prefers-reduced-motion:reduce'
 ]) assert(visualCss.includes(required),
-  "Visual consistency stylesheet is missing a required responsive/accessibility rule: "+required);
+  "Premium visual stylesheet is missing a required design/responsive rule: "+required);
+for(const [path,alt] of [
+  ["assets/illustrations/scenario-performance.svg","Diagnóstico de estações de trabalho"],
+  ["assets/illustrations/scenario-network.svg","Infraestrutura de rede empresarial"],
+  ["assets/illustrations/scenario-security.svg","Proteção de dados, backup e acessos"]
+]){
+  const art=read(path);
+  assert(art.includes('<svg')&&art.includes('<title')&&art.includes(alt),
+    path+" must be a detailed, accessible SVG illustration.");
+  assert(art.includes('viewBox="0 0 920 620"'),
+    path+" must use the updated carousel artwork dimensions.");
+}
