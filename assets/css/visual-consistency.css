@@ -16,6 +16,7 @@
   --px-section:clamp(76px,8vw,116px);
   --px-font-body:"Inter",ui-sans-serif,system-ui,sans-serif;
   --px-font-display:"Manrope","Inter",ui-sans-serif,sans-serif;
+  --header-h:82px;
 }
 html{scroll-padding-top:100px}
 body{font-family:var(--px-font-body);font-size:15.5px;line-height:1.72;letter-spacing:-.012em;background:var(--px-paper);color:var(--px-ink)}
@@ -35,8 +36,10 @@ p{max-width:68ch}
 .button-primary:hover{background:var(--px-blue-deep)}
 .button-accent,.header-cta{background:#f3a36d;color:#172338;box-shadow:0 10px 24px rgba(243,163,109,.2)}
 .button-accent:hover,.header-cta:hover{background:#f6b17f;color:#172338}
-.button-secondary{border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.07);color:#f3f7fc}
-.button-secondary:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff}
+.button-secondary{border-color:#cdd8e6;background:#fff;color:#243044}
+.button-secondary:hover{border-color:var(--px-blue);background:#f4f8ff;color:var(--px-blue-deep)}
+.hero .button-secondary,.section-dark .button-secondary{border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.07);color:#f3f7fc}
+.hero .button-secondary:hover,.section-dark .button-secondary:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff}
 .text-link{font-family:var(--px-font-display);font-size:.82rem;font-weight:800}
 :where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #f0a36c;outline-offset:4px}
 
