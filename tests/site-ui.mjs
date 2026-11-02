@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {readFileSync,existsSync} from "node:fs";
+import {readFileSync,existsSync,readdirSync,statSync} from "node:fs";
 import {Script} from "node:vm";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 const pages=["404.html","index.html","servicos/index.html","seja-parceiro/index.html","trabalhe-conosco/index.html","atendimento/index.html",
@@ -92,21 +92,51 @@ for(const cssPath of ["assets/css/proxiti-ui.css","assets/css/site-refine.css"])
 }
 /* Contratos comerciais: o site público é exclusivamente B2B e a captura exige dados da empresa. */
 assert(home.includes("Gestão de TI, Suporte e Segurança para Micro e Pequenas Empresas"));
-assert(home.includes("A TI da sua empresa sem interrupções, riscos ou custos de equipe interna."));
+assert(home.includes("Mais controle sobre a TI da sua empresa, com escopo claro e prevenção de falhas."));
+assert(!home.includes("sem interrupções, riscos ou custos de equipe interna"));
 assert(home.includes("Solicitar avaliação inicial de TI"));
 assert(home.includes("Falar com um Especialista no WhatsApp"));
+assert(!/20\s*minutos?|gratuita de 20/i.test(home), "A avaliação não pode prometer duração fixa ou gratuidade não aprovada.");
+assert(!home.includes("Solicitar avaliação inicial gratuita"), "O CTA não pode anunciar gratuidade sem aprovação comercial.");
+assert(home.includes('<h2 id="checkup-modal-title">Solicite uma avaliação inicial para sua empresa</h2>'),
+  "O modal deve refletir a avaliação empresarial sem gratuidade ou duração fixa.");
+assert(home.includes('<button class="button button-accent" type="submit">Solicitar avaliação inicial</button>'),
+  "O formulário deve usar o CTA comercial atualizado.");
+assert(!home.includes("Solicitar avaliação inicial gratuita (20 min)"));
+const requests = read("assets/js/site-requests.js");
+assert(!/avaliação inicial gratuita|20\s*minutos?/i.test(requests), "A mensagem de WhatsApp não pode prometer gratuidade ou duração não aprovada.");
+assert(requests.includes('accept:"application/json"')&&requests.includes('"content-type":"application/json"')&&requests.includes('apikey:cfg.publishableKey'),
+  "A Edge Function deve receber Accept, Content-Type e a chave pública via apikey.");
+assert(requests.includes('String(data.get("empresa")||"Não informada")')&&
+  requests.includes('String(data.get("equipamento")||"Não informado")')&&
+  requests.includes('String(data.get("area")||"")'),
+  "O payload B2B deve incluir empresa, estações e necessidade principal.");
 assert(home.includes('href="/atendimento/?chat=1" data-open-chat'), "O botão de chat precisa ter um destino funcional sem JavaScript.");
 assert(home.includes('id="planos"')&&home.includes("Plano Essencial")===false);
-for(const required of ["Essencial","Profissional","Enterprise","R$ 500/mês","Escritórios de Contabilidade e Advocacia","Clínicas de Saúde e Laboratórios","Corretoras de Seguros e Financeiras","Serviços e Comércio Geral","name=\"empresa\"","name=\"cargo\"","1-5","6-15","16-30","30+","Backup/Segurança","Computadores lentos/travando","Sem suporte técnico rápido","Quero organizar minha infraestrutura"])
+for(const required of ['Essencial','Profissional','Enterprise','Planos e valores são definidos após avaliação do ambiente','Escritórios de Contabilidade e Advocacia','Clínicas de Saúde e Laboratórios','Corretoras de Seguros e Financeiras','Serviços e Comércio Geral','name="empresa"','name="cargo"','1-5','6-15','16-30','30+','Backup/Segurança','Computadores lentos/travando','Sem suporte técnico rápido','Quero organizar minha infraestrutura'])
  assert(home.includes(required),"Página inicial: conteúdo B2B ausente: "+required);
 assert(!/Residências|Residencial|uso pessoal|atendimento em domicílio/i.test(home),"Página inicial ainda apresenta oferta B2C/residencial.");
 assert(!home.includes("/produtos/"),"Página inicial ainda aponta para produtos B2C.");
 assert(!sitemap.includes("/produtos/"),"Sitemap ainda indexa páginas B2C.");
-const requests=read("assets/js/site-requests.js");
 new Script(requests,{filename:"site-requests.js"});
-assert(requests.includes('value("empresa",160)'));
-assert(requests.includes('value("cargo",100)'));
-assert(requests.includes("Estações:"));
+assert(requests.includes('String(data.get("empresa")||"Não informada")'));
+assert(requests.includes('String(data.get("cargo")||"Não informado")'));
+assert(requests.includes("Estações de trabalho"));
+/* Varredura editorial de todas as páginas HTML publicáveis. */
+function htmlFiles(dir="."){
+  return readdirSync(new URL("../"+dir+"/",import.meta.url))
+    .flatMap(name=>{
+      const path=(dir==="."?"":dir+"/")+name;
+      const full=new URL("../"+path,import.meta.url);
+      if(statSync(full).isDirectory())return name.startsWith(".")||name==="node_modules"?[]:htmlFiles(path);
+      return path.endsWith(".html")?[path]:[];
+    });
+}
+for(const page of htmlFiles()){
+  const html=read(page);
+  assert(!/suporte\s+ilimitado|preço\s+fixo\s+sem\s+escopo|avaliação\s+inicial\s+gratuita|gratuita\s+de\s+20|20\s*minutos?/i.test(html),
+    page+": promessa comercial antiga ou não aprovada.");
+}
 console.log("PROXITI: temas, scripts, formulário B2B, planos, SEO e remoção de rotas B2C validados.");
 
 
@@ -118,8 +148,8 @@ assert(home.includes('a equipe combinará o horário pelo WhatsApp') || home.inc
 assert(home.includes('não é uma varredura automatizada, pentest ou laudo de segurança'));
 const checkupScript=read("assets/js/checkup-modal.js");
 new Script(checkupScript,{filename:"checkup-modal.js"});
-assert(!/fetch\(|localStorage|sessionStorage/.test(requests), "Modo temporário não pode depender de rede ou armazenamento.");
-assert(requests.includes("Nenhum chamado foi registrado"), "O modo temporário não pode prometer registro remoto.");
+assert(!requests.includes('if(!stash){tell('), "A falta de armazenamento local não pode bloquear o registro remoto.");
+assert(requests.includes("if(stash){") && requests.includes("O registro remoto não deve falhar por restrições de armazenamento local."), "Falha ao salvar localmente não deve cancelar uma solicitação registrada.");
 assert(checkupScript.includes("showModal()")&&checkupScript.includes("close()"));
 const services=read("servicos/index.html");
 assert(services.includes("<h2>Redes e conectividade empresarial</h2>"));
@@ -145,13 +175,16 @@ assert(!home.includes("/assets/products/"));
 const servicePanels=home.split('<article class="service-panel reveal">').slice(1).map(part=>part.split("</article>")[0]);
 assert.equal(servicePanels.length,4,"A home deve apresentar quatro pilares de serviço.");
 assert(servicePanels[1].includes("Segurança &amp; Proteção contra Ransomware"));
+assert(home.includes("Monitoramento não está incluído por padrão."));
+assert(!home.includes("Backup gerenciado e rotina de recuperação."));
+assert(!home.includes("R$ 500/mês"));
 assert(servicePanels[1].includes("phishing")&&servicePanels[1].includes("autenticação"));
-assert(servicePanels[2].includes("Manutenção Preventiva &amp; Monitoramento"));
-assert(servicePanels[2].includes("Revisões periódicas")&&servicePanels[2].includes("Rotina preventiva"));
+assert(servicePanels[2].includes("Manutenção Preventiva e Revisões conforme Escopo"));
+assert(servicePanels[2].includes("Revisões preventivas conforme o contrato")&&servicePanels[2].includes("Monitoramento não está incluído por padrão."));
 assert(servicePanels[3].includes("Consultoria e Infraestrutura em Nuvem"));
 assert(servicePanels[3].includes("servidores")&&servicePanels[3].includes("serviços em nuvem"));
 assert(services.includes("<h2>Backup, recuperação e organização de acessos</h2>"));
-assert(services.includes("Planejamento e organização de cópias de segurança, recuperação de dados e acessos essenciais"));
+assert(services.includes("Avaliação e organização de cópias de segurança, possibilidades de recuperação e acessos essenciais"));
 assert(!services.includes("<li>Quedas de conexão, lentidão ou cobertura inadequada no ambiente empresarial.</li><li>Quedas, oscilação ou dispositivos que perdem conexão.</li>"));
 assert(!read("404.html").includes("catálogo de produtos"));
 
@@ -169,4 +202,41 @@ for(const [page,url] of [
 }
 assert(!read("termos/index.html").includes("Produtos digitais"));
 assert(!read("404.html").includes("catálogo de produtos"));
-assert(read("sitemap.xml").includes("<lastmod>2026-10-09</lastmod>"));
+assert(sitemap.includes("<loc>https://proxiti.com.br/</loc><lastmod>2026-11-01</lastmod>"),"Sitemap: data da home deve refletir a revisão comercial de 01/11/2026.");
+assert(sitemap.includes("<loc>https://proxiti.com.br/servicos/</loc><lastmod>2026-11-01</lastmod>"),"Sitemap: data da página de serviços deve refletir a revisão comercial de 01/11/2026.");
+assert(!services.includes("R$ 500/mês"),"Serviços ainda publica preço mensal não aprovado.");
+assert(!services.includes("suporte remoto e presencial ágil"),"Serviços ainda promete agilidade sem prazo ou capacidade aprovados.");
+assert(!services.includes("backup gerenciado"),"Serviços ainda promete backup gerenciado sem escopo aprovado.");
+
+
+/* Regression checks for the November 2026 premium visual redesign. */
+const visualCss=read("assets/css/visual-consistency.css");
+assert(home.includes('href="/assets/css/visual-consistency.css"'),
+  "Homepage must load the premium visual stylesheet.");
+assert(home.includes('fonts.googleapis.com/css2?family=Inter')&&home.includes('family=Manrope'),
+  "Homepage must load the new Inter + Manrope typography.");
+assert.equal((visualCss.match(/{/g)||[]).length,(visualCss.match(/}/g)||[]).length,
+  "Premium visual stylesheet has unbalanced CSS blocks.");
+for(const required of [
+  '--px-font-display:"Manrope"',
+  '.site-header{height:82px',
+  '.hero{padding-top:calc(var(--header-h) + clamp(76px',
+  '.scenario-card{grid-template-columns:minmax(0,1fr) minmax(0,.92fr)',
+  '.entry-card:hover{transform:translateY(-6px)',
+  '@media(max-width:1120px)',
+  '@media(max-width:860px)',
+  '@media(max-width:660px)',
+  'prefers-reduced-motion:reduce'
+]) assert(visualCss.includes(required),
+  "Premium visual stylesheet is missing a required design/responsive rule: "+required);
+for(const [path,alt] of [
+  ["assets/illustrations/scenario-performance.svg","Diagnóstico de estações de trabalho"],
+  ["assets/illustrations/scenario-network.svg","Infraestrutura de rede empresarial"],
+  ["assets/illustrations/scenario-security.svg","Proteção de dados, backup e acessos"]
+]){
+  const art=read(path);
+  assert(art.includes('<svg')&&art.includes('<title')&&art.includes(alt),
+    path+" must be a detailed, accessible SVG illustration.");
+  assert(art.includes('viewBox="0 0 920 620"'),
+    path+" must use the updated carousel artwork dimensions.");
+}
